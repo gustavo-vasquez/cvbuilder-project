@@ -6,3 +6,8 @@
 /CVBuilder/CVBuilder/bin
 /CVBuilder/CVBuilder/obj/Debug
 /CVBuilder/packages
+/CVBuilder/CVBuilder.Data/bin/Debug
+/CVBuilder/CVBuilder.Data/obj/Debug
+/CVBuilder/CVBuilder.Domain/obj/Debug
+/CVBuilder/CVBuilder.Services/bin/Debug
+/CVBuilder/CVBuilder.Services/obj/Debug

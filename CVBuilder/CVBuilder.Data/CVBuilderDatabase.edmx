@@ -1,0 +1,890 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CVBuilderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Certificates">
+          <Key>
+            <PropertyRef Name="CertificateID" />
+          </Key>
+          <Property Name="CertificateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Institute" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OnlineMode" Type="bit" Nullable="false" />
+          <Property Name="InProgress" Type="bit" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Curriculum">
+          <Key>
+            <PropertyRef Name="CurriculumID" />
+          </Key>
+          <Property Name="CurriculumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdentityCard" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PostalCode" Type="int" />
+          <Property Name="AreaCodeLP" Type="smallint" />
+          <Property Name="LinePhone" Type="int" />
+          <Property Name="AreaCodeMP" Type="smallint" />
+          <Property Name="MobilePhone" Type="int" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="100" />
+          <Property Name="Summary" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="SummaryCustomTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="SummaryIsVisible" Type="bit" Nullable="false" />
+          <Property Name="WebPage" Type="nvarchar" MaxLength="300" />
+          <Property Name="LinkedInUrl" Type="nvarchar" MaxLength="300" />
+          <Property Name="Github" Type="nvarchar" MaxLength="300" />
+          <Property Name="Facebook" Type="nvarchar" MaxLength="300" />
+          <Property Name="Twitter" Type="nvarchar" MaxLength="300" />
+          <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="ID_Template" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomSections">
+          <Key>
+            <PropertyRef Name="CustomSectionID" />
+          </Key>
+          <Property Name="CustomSectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interests">
+          <Key>
+            <PropertyRef Name="InterestID" />
+          </Key>
+          <Property Name="InterestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Level" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonalReferences">
+          <Key>
+            <PropertyRef Name="PersonalReferenceID" />
+          </Key>
+          <Property Name="PersonalReferenceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="AreaCode" Type="smallint" />
+          <Property Name="Telephone" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="SkillID" />
+          </Key>
+          <Property Name="SkillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Level" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Studies">
+          <Key>
+            <PropertyRef Name="StudyID" />
+          </Key>
+          <Property Name="StudyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Institute" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StartMonth" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartYear" Type="int" />
+          <Property Name="EndMonth" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EndYear" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Templates">
+          <Key>
+            <PropertyRef Name="TemplateID" />
+          </Key>
+          <Property Name="TemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AccentColor" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdentityCard" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="PostalCode" Type="int" />
+          <Property Name="AreaCodeLP" Type="smallint" />
+          <Property Name="LinePhone" Type="int" />
+          <Property Name="AreaCodeMP" Type="smallint" />
+          <Property Name="MobilePhone" Type="int" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="WorkExperiences">
+          <Key>
+            <PropertyRef Name="WorkExperienceID" />
+          </Key>
+          <Property Name="WorkExperienceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Job" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StartMonth" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartYear" Type="int" />
+          <Property Name="EndMonth" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EndYear" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Certificates_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="Certificates" Type="Self.Certificates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="Certificates">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curriculum_Templates">
+          <End Role="Templates" Type="Self.Templates" Multiplicity="1" />
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="TemplateID" />
+            </Principal>
+            <Dependent Role="Curriculum">
+              <PropertyRef Name="ID_Template" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curriculum_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Curriculum">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomSections_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="CustomSections" Type="Self.CustomSections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="CustomSections">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Interests_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="Interests" Type="Self.Interests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="Interests">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Languages_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="Languages" Type="Self.Languages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="Languages">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonalReferences_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="PersonalReferences" Type="Self.PersonalReferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="PersonalReferences">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Skills_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="Skills" Type="Self.Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="Skills">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Studies_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="Studies" Type="Self.Studies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="Studies">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkExperiences_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="WorkExperiences" Type="Self.WorkExperiences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="WorkExperiences">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CVBuilderModelStoreContainer">
+          <EntitySet Name="Certificates" EntityType="Self.Certificates" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="Curriculum" EntityType="Self.Curriculum" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="CustomSections" EntityType="Self.CustomSections" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="Interests" EntityType="Self.Interests" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="PersonalReferences" EntityType="Self.PersonalReferences" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="Studies" EntityType="Self.Studies" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="Templates" EntityType="Self.Templates" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="WorkExperiences" EntityType="Self.WorkExperiences" Schema="cvbuilder" store:Type="Tables" />
+          <AssociationSet Name="FK_Certificates_Curriculum" Association="Self.FK_Certificates_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="Certificates" EntitySet="Certificates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curriculum_Templates" Association="Self.FK_Curriculum_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="Curriculum" EntitySet="Curriculum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curriculum_Users" Association="Self.FK_Curriculum_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Curriculum" EntitySet="Curriculum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomSections_Curriculum" Association="Self.FK_CustomSections_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="CustomSections" EntitySet="CustomSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Interests_Curriculum" Association="Self.FK_Interests_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="Interests" EntitySet="Interests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Languages_Curriculum" Association="Self.FK_Languages_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="Languages" EntitySet="Languages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonalReferences_Curriculum" Association="Self.FK_PersonalReferences_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="PersonalReferences" EntitySet="PersonalReferences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Skills_Curriculum" Association="Self.FK_Skills_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="Skills" EntitySet="Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Studies_Curriculum" Association="Self.FK_Studies_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="Studies" EntitySet="Studies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkExperiences_Curriculum" Association="Self.FK_WorkExperiences_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="WorkExperiences" EntitySet="WorkExperiences" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CVBuilderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Certificates">
+          <Key>
+            <PropertyRef Name="CertificateID" />
+          </Key>
+          <Property Name="CertificateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Institute" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OnlineMode" Type="Boolean" Nullable="false" />
+          <Property Name="InProgress" Type="Boolean" Nullable="false" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Certificates_Curriculum" FromRole="Certificates" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="Curriculum">
+          <Key>
+            <PropertyRef Name="CurriculumID" />
+          </Key>
+          <Property Name="CurriculumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdentityCard" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostalCode" Type="Int32" />
+          <Property Name="AreaCodeLP" Type="Int16" />
+          <Property Name="LinePhone" Type="Int32" />
+          <Property Name="AreaCodeMP" Type="Int16" />
+          <Property Name="MobilePhone" Type="Int32" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="Nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Summary" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SummaryCustomTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SummaryIsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="WebPage" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="LinkedInUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Github" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Facebook" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="ID_Template" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Certificates" Relationship="Self.FK_Certificates_Curriculum" FromRole="Curriculum" ToRole="Certificates" />
+          <NavigationProperty Name="Templates" Relationship="Self.FK_Curriculum_Templates" FromRole="Curriculum" ToRole="Templates" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Curriculum_Users" FromRole="Curriculum" ToRole="Users" />
+          <NavigationProperty Name="CustomSections" Relationship="Self.FK_CustomSections_Curriculum" FromRole="Curriculum" ToRole="CustomSections" />
+          <NavigationProperty Name="Interests" Relationship="Self.FK_Interests_Curriculum" FromRole="Curriculum" ToRole="Interests" />
+          <NavigationProperty Name="Languages" Relationship="Self.FK_Languages_Curriculum" FromRole="Curriculum" ToRole="Languages" />
+          <NavigationProperty Name="PersonalReferences" Relationship="Self.FK_PersonalReferences_Curriculum" FromRole="Curriculum" ToRole="PersonalReferences" />
+          <NavigationProperty Name="Skills" Relationship="Self.FK_Skills_Curriculum" FromRole="Curriculum" ToRole="Skills" />
+          <NavigationProperty Name="Studies" Relationship="Self.FK_Studies_Curriculum" FromRole="Curriculum" ToRole="Studies" />
+          <NavigationProperty Name="WorkExperiences" Relationship="Self.FK_WorkExperiences_Curriculum" FromRole="Curriculum" ToRole="WorkExperiences" />
+        </EntityType>
+        <EntityType Name="CustomSections">
+          <Key>
+            <PropertyRef Name="CustomSectionID" />
+          </Key>
+          <Property Name="CustomSectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_CustomSections_Curriculum" FromRole="CustomSections" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="Interests">
+          <Key>
+            <PropertyRef Name="InterestID" />
+          </Key>
+          <Property Name="InterestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Interests_Curriculum" FromRole="Interests" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Languages_Curriculum" FromRole="Languages" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="PersonalReferences">
+          <Key>
+            <PropertyRef Name="PersonalReferenceID" />
+          </Key>
+          <Property Name="PersonalReferenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AreaCode" Type="Int16" />
+          <Property Name="Telephone" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_PersonalReferences_Curriculum" FromRole="PersonalReferences" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="SkillID" />
+          </Key>
+          <Property Name="SkillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Skills_Curriculum" FromRole="Skills" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="Studies">
+          <Key>
+            <PropertyRef Name="StudyID" />
+          </Key>
+          <Property Name="StudyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Institute" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartYear" Type="Int32" />
+          <Property Name="EndMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EndYear" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Studies_Curriculum" FromRole="Studies" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="Templates">
+          <Key>
+            <PropertyRef Name="TemplateID" />
+          </Key>
+          <Property Name="TemplateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccentColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Curriculum_Templates" FromRole="Templates" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdentityCard" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="Int32" />
+          <Property Name="AreaCodeLP" Type="Int16" />
+          <Property Name="LinePhone" Type="Int32" />
+          <Property Name="AreaCodeMP" Type="Int16" />
+          <Property Name="MobilePhone" Type="Int32" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="Nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Curriculum_Users" FromRole="Users" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="WorkExperiences">
+          <Key>
+            <PropertyRef Name="WorkExperienceID" />
+          </Key>
+          <Property Name="WorkExperienceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Job" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Company" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartYear" Type="Int32" />
+          <Property Name="EndMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EndYear" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_WorkExperiences_Curriculum" FromRole="WorkExperiences" ToRole="Curriculum" />
+        </EntityType>
+        <Association Name="FK_Certificates_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="Certificates" Type="Self.Certificates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="Certificates">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curriculum_Templates">
+          <End Role="Templates" Type="Self.Templates" Multiplicity="1" />
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="TemplateID" />
+            </Principal>
+            <Dependent Role="Curriculum">
+              <PropertyRef Name="ID_Template" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curriculum_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Curriculum">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomSections_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="CustomSections" Type="Self.CustomSections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="CustomSections">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Interests_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="Interests" Type="Self.Interests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="Interests">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Languages_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="Languages" Type="Self.Languages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="Languages">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonalReferences_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="PersonalReferences" Type="Self.PersonalReferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="PersonalReferences">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Skills_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="Skills" Type="Self.Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="Skills">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Studies_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="Studies" Type="Self.Studies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="Studies">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkExperiences_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="WorkExperiences" Type="Self.WorkExperiences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="WorkExperiences">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CVBuilderEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Certificates" EntityType="Self.Certificates" />
+          <EntitySet Name="Curriculum" EntityType="Self.Curriculum" />
+          <EntitySet Name="CustomSections" EntityType="Self.CustomSections" />
+          <EntitySet Name="Interests" EntityType="Self.Interests" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" />
+          <EntitySet Name="PersonalReferences" EntityType="Self.PersonalReferences" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" />
+          <EntitySet Name="Studies" EntityType="Self.Studies" />
+          <EntitySet Name="Templates" EntityType="Self.Templates" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="WorkExperiences" EntityType="Self.WorkExperiences" />
+          <AssociationSet Name="FK_Certificates_Curriculum" Association="Self.FK_Certificates_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="Certificates" EntitySet="Certificates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curriculum_Templates" Association="Self.FK_Curriculum_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="Curriculum" EntitySet="Curriculum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curriculum_Users" Association="Self.FK_Curriculum_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Curriculum" EntitySet="Curriculum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomSections_Curriculum" Association="Self.FK_CustomSections_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="CustomSections" EntitySet="CustomSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Interests_Curriculum" Association="Self.FK_Interests_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="Interests" EntitySet="Interests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Languages_Curriculum" Association="Self.FK_Languages_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="Languages" EntitySet="Languages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonalReferences_Curriculum" Association="Self.FK_PersonalReferences_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="PersonalReferences" EntitySet="PersonalReferences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Skills_Curriculum" Association="Self.FK_Skills_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="Skills" EntitySet="Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Studies_Curriculum" Association="Self.FK_Studies_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="Studies" EntitySet="Studies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkExperiences_Curriculum" Association="Self.FK_WorkExperiences_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="WorkExperiences" EntitySet="WorkExperiences" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CVBuilderModelStoreContainer" CdmEntityContainer="CVBuilderEntities">
+          <EntitySetMapping Name="Certificates">
+            <EntityTypeMapping TypeName="CVBuilderModel.Certificates">
+              <MappingFragment StoreEntitySet="Certificates">
+                <ScalarProperty Name="CertificateID" ColumnName="CertificateID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Institute" ColumnName="Institute" />
+                <ScalarProperty Name="OnlineMode" ColumnName="OnlineMode" />
+                <ScalarProperty Name="InProgress" ColumnName="InProgress" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="ID_Curriculum" ColumnName="ID_Curriculum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Curriculum">
+            <EntityTypeMapping TypeName="CVBuilderModel.Curriculum">
+              <MappingFragment StoreEntitySet="Curriculum">
+                <ScalarProperty Name="CurriculumID" ColumnName="CurriculumID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="AreaCodeLP" ColumnName="AreaCodeLP" />
+                <ScalarProperty Name="LinePhone" ColumnName="LinePhone" />
+                <ScalarProperty Name="AreaCodeMP" ColumnName="AreaCodeMP" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="SummaryCustomTitle" ColumnName="SummaryCustomTitle" />
+                <ScalarProperty Name="SummaryIsVisible" ColumnName="SummaryIsVisible" />
+                <ScalarProperty Name="WebPage" ColumnName="WebPage" />
+                <ScalarProperty Name="LinkedInUrl" ColumnName="LinkedInUrl" />
+                <ScalarProperty Name="Github" ColumnName="Github" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="ID_Template" ColumnName="ID_Template" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomSections">
+            <EntityTypeMapping TypeName="CVBuilderModel.CustomSections">
+              <MappingFragment StoreEntitySet="CustomSections">
+                <ScalarProperty Name="CustomSectionID" ColumnName="CustomSectionID" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="ID_Curriculum" ColumnName="ID_Curriculum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interests">
+            <EntityTypeMapping TypeName="CVBuilderModel.Interests">
+              <MappingFragment StoreEntitySet="Interests">
+                <ScalarProperty Name="InterestID" ColumnName="InterestID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="ID_Curriculum" ColumnName="ID_Curriculum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="CVBuilderModel.Languages">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="ID_Curriculum" ColumnName="ID_Curriculum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonalReferences">
+            <EntityTypeMapping TypeName="CVBuilderModel.PersonalReferences">
+              <MappingFragment StoreEntitySet="PersonalReferences">
+                <ScalarProperty Name="PersonalReferenceID" ColumnName="PersonalReferenceID" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="AreaCode" ColumnName="AreaCode" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="ID_Curriculum" ColumnName="ID_Curriculum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="CVBuilderModel.Skills">
+              <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="ID_Curriculum" ColumnName="ID_Curriculum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Studies">
+            <EntityTypeMapping TypeName="CVBuilderModel.Studies">
+              <MappingFragment StoreEntitySet="Studies">
+                <ScalarProperty Name="StudyID" ColumnName="StudyID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Institute" ColumnName="Institute" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StartMonth" ColumnName="StartMonth" />
+                <ScalarProperty Name="StartYear" ColumnName="StartYear" />
+                <ScalarProperty Name="EndMonth" ColumnName="EndMonth" />
+                <ScalarProperty Name="EndYear" ColumnName="EndYear" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="ID_Curriculum" ColumnName="ID_Curriculum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="CVBuilderModel.Templates">
+              <MappingFragment StoreEntitySet="Templates">
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AccentColor" ColumnName="AccentColor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CVBuilderModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="AreaCodeLP" ColumnName="AreaCodeLP" />
+                <ScalarProperty Name="LinePhone" ColumnName="LinePhone" />
+                <ScalarProperty Name="AreaCodeMP" ColumnName="AreaCodeMP" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkExperiences">
+            <EntityTypeMapping TypeName="CVBuilderModel.WorkExperiences">
+              <MappingFragment StoreEntitySet="WorkExperiences">
+                <ScalarProperty Name="WorkExperienceID" ColumnName="WorkExperienceID" />
+                <ScalarProperty Name="Job" ColumnName="Job" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="StartMonth" ColumnName="StartMonth" />
+                <ScalarProperty Name="StartYear" ColumnName="StartYear" />
+                <ScalarProperty Name="EndMonth" ColumnName="EndMonth" />
+                <ScalarProperty Name="EndYear" ColumnName="EndYear" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="ID_Curriculum" ColumnName="ID_Curriculum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVBuilder", "CVBuilder\CVBuilder.csproj", "{72B96677-1547-49B5-925B-6C7915F2E3D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVBuilder.Web", "CVBuilder\CVBuilder.Web.csproj", "{72B96677-1547-49B5-925B-6C7915F2E3D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVBuilder.Data", "CVBuilder.Data\CVBuilder.Data.csproj", "{CEE0D49A-BCF0-4990-B466-C0F4857F6F57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVBuilder.Services", "CVBuilder.Services\CVBuilder.Services.csproj", "{3BEC9A61-D1AF-477A-BC58-9984504AD86D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{72B96677-1547-49B5-925B-6C7915F2E3D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72B96677-1547-49B5-925B-6C7915F2E3D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72B96677-1547-49B5-925B-6C7915F2E3D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEE0D49A-BCF0-4990-B466-C0F4857F6F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEE0D49A-BCF0-4990-B466-C0F4857F6F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEE0D49A-BCF0-4990-B466-C0F4857F6F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEE0D49A-BCF0-4990-B466-C0F4857F6F57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BEC9A61-D1AF-477A-BC58-9984504AD86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BEC9A61-D1AF-477A-BC58-9984504AD86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BEC9A61-D1AF-477A-BC58-9984504AD86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BEC9A61-D1AF-477A-BC58-9984504AD86D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
