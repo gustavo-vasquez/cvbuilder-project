@@ -40,11 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="CurriculumSL.cs" />
+    <Compile Include="DTOs\CertificatesDTO.cs" />
+    <Compile Include="DTOs\CustomSectionsDTO.cs" />
+    <Compile Include="DTOs\InterestsDTO.cs" />
+    <Compile Include="DTOs\LanguagesDTO.cs" />
+    <Compile Include="DTOs\PersonalDetailsDTO.cs" />
+    <Compile Include="DTOs\PersonalReferencesDTO.cs" />
+    <Compile Include="DTOs\SkillsDTO.cs" />
+    <Compile Include="DTOs\StudiesDTO.cs" />
+    <Compile Include="DTOs\WorkExperiencesDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="DTOs\" />
+    <ProjectReference Include="..\CVBuilder.Data\CVBuilder.Data.csproj">
+      <Project>{cee0d49a-bcf0-4990-b466-c0f4857f6f57}</Project>
+      <Name>CVBuilder.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

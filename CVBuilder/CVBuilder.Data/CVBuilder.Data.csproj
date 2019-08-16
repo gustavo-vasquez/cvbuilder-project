@@ -57,6 +57,7 @@
     <Compile Include="Curriculum.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="CurriculumDL.cs" />
     <Compile Include="CustomSections.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
@@ -75,6 +76,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CVBuilderDatabase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseConnection.cs" />
+    <Compile Include="IDatabaseConnection.cs" />
     <Compile Include="Interests.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>

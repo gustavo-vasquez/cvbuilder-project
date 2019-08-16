@@ -88,6 +88,24 @@ div[id$="_section"] {
 	border-style: dashed;
 }
 
+@media (min-width: 576px) {
+  .list-group-row {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .list-group-row {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-group-row {
+    display: none;
+  }
+}
+
 @-webkit-keyframes slideLeft {
   0% {
     transform: translateX(100%);

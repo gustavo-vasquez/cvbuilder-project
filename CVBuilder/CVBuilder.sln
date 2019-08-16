@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVBuilder.Web", "CVBuilder\CVBuilder.Web.csproj", "{72B96677-1547-49B5-925B-6C7915F2E3D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVBuilder", "CVBuilder\CVBuilder.csproj", "{72B96677-1547-49B5-925B-6C7915F2E3D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVBuilder.Data", "CVBuilder.Data\CVBuilder.Data.csproj", "{CEE0D49A-BCF0-4990-B466-C0F4857F6F57}"
 EndProject

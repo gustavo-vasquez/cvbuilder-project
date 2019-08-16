@@ -1,4 +1,5 @@
-﻿
+﻿@model CVBuilder.ViewModels.Curriculum.BuildViewModel
+
 @{
     ViewBag.Title = "Elabore su curriculum profesional";
 }
@@ -9,7 +10,25 @@
 <section class="building-cv">
 
     <div class="container">
-        <div class="row">
+        <div class="row list-group-row">
+            <div class="col">
+                <div class="list-group tabs-group mb-3">
+                    <button class="list-group-item list-group-item-action active" data-value="personal_details_section">
+                        Detalles personales
+                    </button>
+                    <button class="list-group-item list-group-item-action" data-value="studies_experiencies_section">
+                        Estudios y experiencias laborales
+                    </button>
+                    <button class="list-group-item list-group-item-action" data-value="other_information_section">
+                        Otra información
+                    </button>
+                    <button class="list-group-item list-group-item-action" data-value="custom_fields_section">
+                        Campos personalizados
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row btn-group-row">
             <div class="col">
                 <div class="btn-group tabs-group mb-3" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-outline-success active" data-value="personal_details_section">Detalles personales</button>
@@ -41,16 +60,17 @@
                                     <div class="col-lg-7">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Nombre completo</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            @Html.TextBoxFor(m => m.PersonalDetails.Email, new { @class = "form-control" })
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Apellido(s)</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                            @Html.PasswordFor(m => m.PersonalDetails.Password, new { @class = "form-control" })
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group text-center">
-                                            <button class="btn btn-outline-success profile-photo"></button>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.Photo, new { type = "file", @class = "d-none" })
+                                            <button type="button" class="btn btn-outline-success profile-photo"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -59,10 +79,10 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="exampleTextarea">Resumen profesional <span class="badge badge-secondary rename-title ml-2" title="Renombrar"><i class="fas fa-pencil-alt"></i></span></label>
-                                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Máximo 300 caracteres..."></textarea>
+                                            @Html.TextAreaFor(m => m.PersonalDetails.Summary, new { @class = "form-control", rows = "3", placeholder = "Máximo 300 caracteres..." })
                                             <div class="col-lg-5 custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                                <label class="custom-control-label" for="customSwitch1">Visible</label>
+                                                @Html.CheckBoxFor(m => m.PersonalDetails.SummaryIsVisible, new { @class = "custom-control-input", @checked = "checked" })
+                                                <label class="custom-control-label" for="PersonalDetails_SummaryIsVisible">Visible</label>
                                             </div>
                                         </div>
                                     </div>
