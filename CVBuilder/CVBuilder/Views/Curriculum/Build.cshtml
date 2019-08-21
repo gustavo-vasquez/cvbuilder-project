@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row flex-column-reverse flex-lg-row">
             <div class="col-lg-3">
                 <div class="card cv-preview border-success mb-3">
                     <img class="img-fluid" src="https://enhancv.com/static/d1b75ac8b27c53faa5fc6540def8013c/b8c04/marissa-mayer-resume.jpg">
@@ -51,7 +51,9 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                <form id="create_cv_form">
+                @using (Html.BeginForm("Build", "Curriculum", FormMethod.Post, new { id = "create_cv_form" }))
+                {
+                    @Html.AntiForgeryToken()
                     <div class="card border-success mb-3">
                         <div id="personal_details_section" class="card-body">
                             <fieldset>
@@ -59,12 +61,14 @@
                                 <div class="row">
                                     <div class="col-lg-7">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Nombre completo</label>
-                                            @Html.TextBoxFor(m => m.PersonalDetails.Email, new { @class = "form-control" })
+                                            <label>Nombre completo</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.Name, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.Name, null, new { @class = "text-danger" })
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Apellido(s)</label>
-                                            @Html.PasswordFor(m => m.PersonalDetails.Password, new { @class = "form-control" })
+                                            <label>Apellido(s)</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.LastName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.LastName, null, new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
@@ -78,8 +82,9 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="exampleTextarea">Resumen profesional <span class="badge badge-secondary rename-title ml-2" title="Renombrar"><i class="fas fa-pencil-alt"></i></span></label>
+                                            <label>Resumen profesional <span class="badge badge-secondary rename-title ml-2" title="Renombrar"><i class="fas fa-pencil-alt"></i></span></label>
                                             @Html.TextAreaFor(m => m.PersonalDetails.Summary, new { @class = "form-control", rows = "3", placeholder = "Máximo 300 caracteres..." })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.Summary, null, new { @class = "text-danger" })
                                             <div class="col-lg-5 custom-control custom-switch">
                                                 @Html.CheckBoxFor(m => m.PersonalDetails.SummaryIsVisible, new { @class = "custom-control-input", @checked = "checked" })
                                                 <label class="custom-control-label" for="PersonalDetails_SummaryIsVisible">Visible</label>
@@ -91,22 +96,25 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Correo electrónico</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                            <label>Correo electrónico</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.Email, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.Email, null, new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Teléfono fijo</label>
+                                            <label>Teléfono fijo</label>
                                             <div class="row">
                                                 <div class="input-group col-lg-5">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><b>+</b></span>
                                                     </div>
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Cod. área">
+                                                    @Html.TextBoxFor(m => m.PersonalDetails.AreaCodeLP, new { @class = "form-control", placeholder = "Cod. área" })
+                                                    @Html.ValidationMessageFor(m => m.PersonalDetails.AreaCodeLP, null, new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-lg-7">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                                    @Html.TextBoxFor(m => m.PersonalDetails.LinePhone, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.PersonalDetails.LinePhone, null, new { @class = "text-danger" })
                                                 </div>
                                             </div>
                                         </div>
@@ -116,24 +124,27 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Teléfono celular</label>
+                                            <label>Teléfono celular</label>
                                             <div class="row">
                                                 <div class="input-group col-lg-5">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><b>+</b></span>
                                                     </div>
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Cod. área">
+                                                    @Html.TextBoxFor(m => m.PersonalDetails.AreaCodeMP, new { @class = "form-control", placeholder = "Cod. área" })
+                                                    @Html.ValidationMessageFor(m => m.PersonalDetails.AreaCodeMP, null, new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-lg-7">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                                    @Html.TextBoxFor(m => m.PersonalDetails.MobilePhone, new { @class = "form-control", placeholder = "Cod. área" })
+                                                    @Html.ValidationMessageFor(m => m.PersonalDetails.MobilePhone, null, new { @class = "text-danger" })
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Dirección</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                            <label>Dirección</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.Address, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.Address, null, new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
@@ -141,14 +152,16 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Ciudad/localidad</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                            <label>Ciudad / localidad</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.City, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.City, null, new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Código postal</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                            <label>Código postal</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.PostalCode, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.PostalCode, null, new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +169,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Fecha de nacimiento</label>
+                                            <label>Fecha de nacimiento</label>
                                             <div class="row">
                                                 <div class="col-lg-3">
                                                     <select class="form-control" id="exampleSelect1">
@@ -190,9 +203,9 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Nº documento de identidad</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Sin puntos ni letras.</small>
+                                            <label>Nº documento de identidad</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.IdentityCard, new { @class = "form-control" })
+                                            <small class="form-text text-muted">Sin puntos ni letras.</small>
                                         </div>
                                     </div>
                                 </div>
@@ -200,32 +213,17 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Nacionalidad</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                            <label>Nacionalidad</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.Country, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.Country, null, new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Páginas web</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Si hay más de uno, separar con coma (300 caract. max.)</small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">LinkedIn</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Si hay más de uno, separar con coma (300 caract. max.)</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Github</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Si hay más de uno, separar con coma (300 caract. max.)</small>
+                                            <label>Páginas web</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.WebPageUrl, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.WebPageUrl, null, new { @class = "text-danger" })
+                                            <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
                                         </div>
                                     </div>
                                 </div>
@@ -233,16 +231,37 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Facebook</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Si hay más de uno, separar con coma (300 caract. max.)</small>
+                                            <label>LinkedIn</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.LinkedInUrl, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.LinkedInUrl, null, new { @class = "text-danger" })
+                                            <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Github</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.GithubUrl, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.GithubUrl, null, new { @class = "text-danger" })
+                                            <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Facebook</label>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.FacebookUrl, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.FacebookUrl, null, new { @class = "text-danger" })
+                                            <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Twitter</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Si hay más de uno, separar con coma (300 caract. max.)</small>
+                                            @Html.TextBoxFor(m => m.PersonalDetails.TwitterUrl, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PersonalDetails.TwitterUrl, null, new { @class = "text-danger" })
+                                            <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
                                         </div>
                                     </div>
                                 </div>
@@ -270,8 +289,8 @@
                                                         <h5>Licenciatura en relaciones públicas (2013-2015)</h5>
                                                     </div>
                                                     <div class="col-lg-4 text-right">
-                                                        <button type="submit" class="btn btn-sm" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-                                                        <button type="submit" class="btn btn-sm" title="Eliminar"><i class="far fa-trash-alt"></i></button>
+                                                        <button type="button" class="btn btn-sm" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                                                        <button type="button" class="btn btn-sm" title="Eliminar"><i class="far fa-trash-alt"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -995,19 +1014,20 @@
                             </fieldset>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button id="previous_page" type="button" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i> Paso anterior</button>
-                                <button id="next_page" type="button" class="btn btn-success">Paso siguiente <i class="fas fa-arrow-alt-circle-right"></i></button>
+                    <div id="form_actions_wrapper">
+                        <div id="form_actions" class="row">
+                            <div class="col-lg-7 col-sm-3">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button id="previous_page" type="button" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i> Anterior</button>
+                                    <button id="next_page" type="button" class="btn btn-success">Siguiente <i class="fas fa-arrow-alt-circle-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-sm-9 text-right">
+                                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar CV</button>
                             </div>
                         </div>
-                        <div class="col-lg-4 text-right">
-                            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar cambios</button>
-                        </div>
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>

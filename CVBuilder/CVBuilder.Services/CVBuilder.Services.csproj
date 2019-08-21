@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CurriculumSL.cs" />
+    <Compile Include="PersonalDetailsSL.cs" />
     <Compile Include="DTOs\CertificatesDTO.cs" />
+    <Compile Include="DTOs\CurriculumDTO.cs" />
     <Compile Include="DTOs\CustomSectionsDTO.cs" />
     <Compile Include="DTOs\InterestsDTO.cs" />
     <Compile Include="DTOs\LanguagesDTO.cs" />

@@ -10,29 +10,68 @@ namespace CVBuilder.ViewModels.Curriculum
     public class PersonalDetailsViewModel
     {
         [Required(ErrorMessage = "Completar este campo.")]
-        public string Email { get; set; }
+        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Completar este campo.")]
-        public string Name { get; set; }
+        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string LastName { get; set; }
-        public int IdentityCard { get; set; }
+
+        [Required(ErrorMessage = "Completar este campo.")]
+        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        public string Email { get; set; }
+        
         public byte[] Photo { get; set; }
+
+        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string Address { get; set; }
+
+        //[Required(ErrorMessage = "Completar este campo.")]
+        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string City { get; set; }
-        public int PostalCode { get; set; }
-        public short AreaCodeLP { get; set; }
-        public int LinePhone { get; set; }
-        public short AreaCodeMP { get; set; }
-        public int MobilePhone { get; set; }
+
+        [DataType(DataType.PostalCode)]
+        [MaxLength(5, ErrorMessage = "Cod. postal no válido.")]
+        public int? PostalCode { get; set; }
+
+        [MaxLength(4, ErrorMessage = "Cod. área no válido.")]
+        public short? AreaCodeLP { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [MaxLength(10, ErrorMessage = "Máximo 10 números.")]
+        public int? LinePhone { get; set; }
+
+        [MaxLength(4, ErrorMessage = "Cod. área no válido.")]
+        public short? AreaCodeMP { get; set; }
+
+        [MaxLength(10, ErrorMessage = "Máximo 10 números.")]
+        public int? MobilePhone { get; set; }
         public DateTime BirthDate { get; set; }
-        public string Nationality { get; set; }
+        public int? IdentityCard { get; set; }
+
+        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        public string Country { get; set; }
+
+        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
         public string Summary { get; set; }
+
+        [MaxLength(50, ErrorMessage = "Máximo 50 caracteres.")]
         public string SummaryCustomTitle { get; set; }
         public bool SummaryIsVisible { get; set; }
-        public string WebPage { get; set; }
+
+        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        public string WebPageUrl { get; set; }
+
+        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
         public string LinkedInUrl { get; set; }
-        public string Github { get; set; }
-        public string Facebook { get; set; }
-        public string Twitter { get; set; }
+
+        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        public string GithubUrl { get; set; }
+
+        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        public string FacebookUrl { get; set; }
+
+        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        public string TwitterUrl { get; set; }
     }
 }

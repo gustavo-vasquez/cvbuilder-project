@@ -30,10 +30,14 @@ $(document).ready(function () {
 
 				switch(i) {
 					case 0:
-						$('#previous_page').prop('disabled', true);
+					    $('#previous_page').prop('disabled', true);
+					    if ($('#next_page').prop('disabled'))
+					        $('#next_page').prop('disabled', false);
 						break;
 					case 3:
-						$('#next_page').prop('disabled', true);
+					    $('#next_page').prop('disabled', true);
+					    if ($('#previous_page').prop('disabled'))
+					        $('#previous_page').prop('disabled', false);
 						break;
 					default:
 						$('#previous_page').prop('disabled', false);
@@ -63,6 +67,9 @@ $(document).ready(function () {
 			$('div[id$="_section"]').css({'animation-name': 'slideRight', '-webkit-animation-name': 'slideRight'});
 			$('#' + tabs.sections[currentPosition]).removeClass('d-none');
 			tabs.active = currentPosition;
+
+			$('.tabs-group button').removeClass('active');
+			$('.tabs-group button[data-value=' + tabs.sections[currentPosition] + ']').addClass('active');
 		}
 	});
 
@@ -78,39 +85,73 @@ $(document).ready(function () {
 
 			if(currentPosition == tabs.sections.length - 1)
 				$(this).prop('disabled', true);
-
-			// var elements = document.getElementsByTagName("style");
-
-			// if(elements.length > 0)
-			// 	for (var i = elements.length - 1; i >= 0; i--) {
-			// 		if(elements[i] !== undefined && elements[i].textContent == "")
-	  //   				elements[i].parentNode.removeChild(elements[i]);
-			// 	}
 			
 			$('div[id$="_section"]').css({'animation-name': 'slideLeft', '-webkit-animation-name': 'slideLeft'});
 			$('#' + tabs.sections[currentPosition]).removeClass('d-none');
 			tabs.active = currentPosition;
+
+			$('.tabs-group button').removeClass('active');
+			$('.tabs-group button[data-value=' + tabs.sections[currentPosition] + ']').addClass('active');
+
+			window.location.href = window.location.pathname + "#page-top";
 		}
 	});
 
-	// function slideTo() {
-	// 	var style = document.documentElement.appendChild(document.createElement("style")),
-	// 	rule = " anim {\
-	// 	    0% {\
-	// 	        transform: translateX(-100%);\
-	// 	    }\
-	// 	    14.28% {\
-	// 	        transform: translateX(0);\
-	// 	    }\
-	// 	    85.71% {\
-	// 	        transform: translateX(0);\
-	// 	    }\
-	// 	}";
+	$(window).scrollStopped(function (ev) {
+	    //console.log(ev);
+	    isFormActionsWrapperInView();
+	});
 
-	// 	if (CSSRule.KEYFRAMES_RULE) { // W3C
-	// 	    style.sheet.insertRule("@keyframes" + rule, 0);
-	// 	} else if (CSSRule.WEBKIT_KEYFRAMES_RULE) { // WebKit
-	// 	    style.sheet.insertRule("@-webkit-keyframes" + rule, 0);
-	// 	}
-	// }
+	isFormActionsWrapperInView();
 });
+
+function isScrolledIntoView(elem) {
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
+
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
+function Utils() { }
+
+Utils.prototype = {
+    constructor: Utils,
+    isElementInView: function (element, fullyInView) {
+        var pageTop = $(window).scrollTop();
+        var pageBottom = pageTop + $(window).height();
+        var elementTop = $(element).offset().top;
+        var elementBottom = elementTop + $(element).height();
+
+        if (fullyInView === true) {
+            return ((pageTop < elementTop) && (pageBottom > elementBottom));
+        } else {
+            return ((elementTop <= pageBottom) && (elementBottom >= pageTop));
+        }
+    }
+};
+
+var Utils = new Utils();
+
+$.fn.scrollStopped = function (callback) {
+    var that = this, $this = $(that);
+    $this.scroll(function (ev) {
+        clearTimeout($this.data('scrollTimeout'));
+        $this.data('scrollTimeout', setTimeout(callback.bind(that), 150, ev));
+    });
+};
+
+function isFormActionsWrapperInView() {
+    var $element = $('#form_actions');
+    var isElementInView = Utils.isElementInView($('#form_actions_wrapper'), false);
+
+    if (isElementInView) {
+        if ($element.hasClass('form-actions-fixed'))
+            $element.removeClass('form-actions-fixed');
+    } else {
+        if (!$element.hasClass('form-actions-fixed'))
+            $element.addClass('form-actions-fixed');
+    }
+}

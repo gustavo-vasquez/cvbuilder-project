@@ -21,6 +21,7 @@ namespace CVBuilder.Data
             this.CustomSections = new HashSet<CustomSections>();
             this.Interests = new HashSet<Interests>();
             this.Languages = new HashSet<Languages>();
+            this.PersonalDetails = new HashSet<PersonalDetails>();
             this.PersonalReferences = new HashSet<PersonalReferences>();
             this.Skills = new HashSet<Skills>();
             this.Studies = new HashSet<Studies>();
@@ -28,28 +29,6 @@ namespace CVBuilder.Data
         }
     
         public int CurriculumID { get; set; }
-        public string Email { get; set; }
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        public Nullable<int> IdentityCard { get; set; }
-        public byte[] Photo { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public Nullable<int> PostalCode { get; set; }
-        public Nullable<short> AreaCodeLP { get; set; }
-        public Nullable<int> LinePhone { get; set; }
-        public Nullable<short> AreaCodeMP { get; set; }
-        public Nullable<int> MobilePhone { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public string Nationality { get; set; }
-        public string Summary { get; set; }
-        public string SummaryCustomTitle { get; set; }
-        public bool SummaryIsVisible { get; set; }
-        public string WebPage { get; set; }
-        public string LinkedInUrl { get; set; }
-        public string Github { get; set; }
-        public string Facebook { get; set; }
-        public string Twitter { get; set; }
         public int ID_User { get; set; }
         public int ID_Template { get; set; }
     
@@ -63,6 +42,8 @@ namespace CVBuilder.Data
         public virtual ICollection<Interests> Interests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Languages> Languages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PersonalDetails> PersonalDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PersonalReferences> PersonalReferences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

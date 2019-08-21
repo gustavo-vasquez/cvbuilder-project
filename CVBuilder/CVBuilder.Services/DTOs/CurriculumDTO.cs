@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CVBuilder.Services
+namespace CVBuilder.Services.DTOs
 {
-    public class CurriculumSL
+    class CurriculumDTO
     {
     }
 }

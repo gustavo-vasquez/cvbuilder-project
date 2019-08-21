@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CVBuilderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CVBuilderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Certificates">
           <Key>
             <PropertyRef Name="CertificateID" />
@@ -24,28 +24,6 @@
             <PropertyRef Name="CurriculumID" />
           </Key>
           <Property Name="CurriculumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="IdentityCard" Type="int" />
-          <Property Name="Photo" Type="varbinary(max)" />
-          <Property Name="Address" Type="nvarchar" MaxLength="100" />
-          <Property Name="City" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="PostalCode" Type="int" />
-          <Property Name="AreaCodeLP" Type="smallint" />
-          <Property Name="LinePhone" Type="int" />
-          <Property Name="AreaCodeMP" Type="smallint" />
-          <Property Name="MobilePhone" Type="int" />
-          <Property Name="BirthDate" Type="datetime" />
-          <Property Name="Nationality" Type="nvarchar" MaxLength="100" />
-          <Property Name="Summary" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="SummaryCustomTitle" Type="nvarchar" MaxLength="50" />
-          <Property Name="SummaryIsVisible" Type="bit" Nullable="false" />
-          <Property Name="WebPage" Type="nvarchar" MaxLength="300" />
-          <Property Name="LinkedInUrl" Type="nvarchar" MaxLength="300" />
-          <Property Name="Github" Type="nvarchar" MaxLength="300" />
-          <Property Name="Facebook" Type="nvarchar" MaxLength="300" />
-          <Property Name="Twitter" Type="nvarchar" MaxLength="300" />
           <Property Name="ID_User" Type="int" Nullable="false" />
           <Property Name="ID_Template" Type="int" Nullable="false" />
         </EntityType>
@@ -76,6 +54,35 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Level" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonalDetails">
+          <Key>
+            <PropertyRef Name="PersonalDetailsID" />
+          </Key>
+          <Property Name="PersonalDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PostalCode" Type="int" />
+          <Property Name="AreaCodeLP" Type="smallint" />
+          <Property Name="LinePhone" Type="int" />
+          <Property Name="AreaCodeMP" Type="smallint" />
+          <Property Name="MobilePhone" Type="int" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="IdentityCard" Type="int" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" />
+          <Property Name="Summary" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="SummaryCustomTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="SummaryIsVisible" Type="bit" Nullable="false" />
+          <Property Name="WebPageUrl" Type="nvarchar" MaxLength="300" />
+          <Property Name="LinkedInUrl" Type="nvarchar" MaxLength="300" />
+          <Property Name="GithubUrl" Type="nvarchar" MaxLength="300" />
+          <Property Name="FacebookUrl" Type="nvarchar" MaxLength="300" />
+          <Property Name="TwitterUrl" Type="nvarchar" MaxLength="300" />
           <Property Name="ID_Curriculum" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PersonalReferences">
@@ -234,6 +241,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PersonalDetails_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="PersonalDetails" Type="Self.PersonalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="PersonalDetails">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PersonalReferences_Curriculum">
           <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
           <End Role="PersonalReferences" Type="Self.PersonalReferences" Multiplicity="*" />
@@ -282,12 +301,231 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="usp_Certificates_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="institute" Type="nvarchar" Mode="In" />
+          <Parameter Name="onlineMode" Type="bit" Mode="In" />
+          <Parameter Name="inProgress" Type="bit" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Certificates_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Certificates_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="institute" Type="nvarchar" Mode="In" />
+          <Parameter Name="onlineMode" Type="bit" Mode="In" />
+          <Parameter Name="inProgress" Type="bit" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_CustomSections_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sectionName" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_CustomSections_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_CustomSections_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="sectionName" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Interests_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Interests_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Interests_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Languages_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="level" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Languages_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Languages_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="level" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PersonalDetails_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="lastname" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="photo" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+          <Parameter Name="postalCode" Type="int" Mode="In" />
+          <Parameter Name="areaCodeLP" Type="smallint" Mode="In" />
+          <Parameter Name="linePhone" Type="int" Mode="In" />
+          <Parameter Name="areaCodeMP" Type="smallint" Mode="In" />
+          <Parameter Name="mobilePhone" Type="int" Mode="In" />
+          <Parameter Name="birthDate" Type="datetime" Mode="In" />
+          <Parameter Name="identityCard" Type="int" Mode="In" />
+          <Parameter Name="country" Type="nvarchar" Mode="In" />
+          <Parameter Name="summary" Type="nvarchar" Mode="In" />
+          <Parameter Name="summaryCustomTitle" Type="nvarchar" Mode="In" />
+          <Parameter Name="summaryIsVisible" Type="bit" Mode="In" />
+          <Parameter Name="webPageUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="linkedInUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="githubUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="facebookUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="twitterUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PersonalDetails_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PersonalDetails_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="lastname" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="photo" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+          <Parameter Name="postalCode" Type="int" Mode="In" />
+          <Parameter Name="areaCodeLP" Type="smallint" Mode="In" />
+          <Parameter Name="linePhone" Type="int" Mode="In" />
+          <Parameter Name="areaCodeMP" Type="smallint" Mode="In" />
+          <Parameter Name="mobilePhone" Type="int" Mode="In" />
+          <Parameter Name="birthDate" Type="datetime" Mode="In" />
+          <Parameter Name="identityCard" Type="int" Mode="In" />
+          <Parameter Name="country" Type="nvarchar" Mode="In" />
+          <Parameter Name="summary" Type="nvarchar" Mode="In" />
+          <Parameter Name="summaryCustomTitle" Type="nvarchar" Mode="In" />
+          <Parameter Name="summaryIsVisible" Type="bit" Mode="In" />
+          <Parameter Name="webPageUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="linkedInUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="githubUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="facebookUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="twitterUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PersonalReferences_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="company" Type="nvarchar" Mode="In" />
+          <Parameter Name="contactPerson" Type="nvarchar" Mode="In" />
+          <Parameter Name="areaCode" Type="smallint" Mode="In" />
+          <Parameter Name="telephone" Type="int" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PersonalReferences_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PersonalReferences_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="company" Type="nvarchar" Mode="In" />
+          <Parameter Name="contactPerson" Type="nvarchar" Mode="In" />
+          <Parameter Name="areaCode" Type="smallint" Mode="In" />
+          <Parameter Name="telephone" Type="int" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Skills_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="level" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Skills_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Skills_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="level" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Studies_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="institute" Type="nvarchar" Mode="In" />
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+          <Parameter Name="startMonth" Type="nvarchar" Mode="In" />
+          <Parameter Name="startYear" Type="int" Mode="In" />
+          <Parameter Name="endMonth" Type="nvarchar" Mode="In" />
+          <Parameter Name="endYear" Type="int" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Studies_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Studies_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="institute" Type="nvarchar" Mode="In" />
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+          <Parameter Name="startMonth" Type="nvarchar" Mode="In" />
+          <Parameter Name="startYear" Type="int" Mode="In" />
+          <Parameter Name="endMonth" Type="nvarchar" Mode="In" />
+          <Parameter Name="endYear" Type="int" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_WorkExperiences_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="job" Type="nvarchar" Mode="In" />
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+          <Parameter Name="company" Type="nvarchar" Mode="In" />
+          <Parameter Name="startMonth" Type="nvarchar" Mode="In" />
+          <Parameter Name="startYear" Type="int" Mode="In" />
+          <Parameter Name="endMonth" Type="nvarchar" Mode="In" />
+          <Parameter Name="endYear" Type="int" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_WorkExperiences_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_WorkExperiences_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="job" Type="nvarchar" Mode="In" />
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+          <Parameter Name="company" Type="nvarchar" Mode="In" />
+          <Parameter Name="startMonth" Type="nvarchar" Mode="In" />
+          <Parameter Name="startYear" Type="int" Mode="In" />
+          <Parameter Name="endMonth" Type="nvarchar" Mode="In" />
+          <Parameter Name="endYear" Type="int" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="isVisible" Type="bit" Mode="In" />
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="CVBuilderModelStoreContainer">
           <EntitySet Name="Certificates" EntityType="Self.Certificates" Schema="cvbuilder" store:Type="Tables" />
           <EntitySet Name="Curriculum" EntityType="Self.Curriculum" Schema="cvbuilder" store:Type="Tables" />
           <EntitySet Name="CustomSections" EntityType="Self.CustomSections" Schema="cvbuilder" store:Type="Tables" />
           <EntitySet Name="Interests" EntityType="Self.Interests" Schema="cvbuilder" store:Type="Tables" />
           <EntitySet Name="Languages" EntityType="Self.Languages" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="PersonalDetails" EntityType="Self.PersonalDetails" Schema="cvbuilder" store:Type="Tables" />
           <EntitySet Name="PersonalReferences" EntityType="Self.PersonalReferences" Schema="cvbuilder" store:Type="Tables" />
           <EntitySet Name="Skills" EntityType="Self.Skills" Schema="cvbuilder" store:Type="Tables" />
           <EntitySet Name="Studies" EntityType="Self.Studies" Schema="cvbuilder" store:Type="Tables" />
@@ -318,6 +556,10 @@
             <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="Languages" EntitySet="Languages" />
           </AssociationSet>
+          <AssociationSet Name="FK_PersonalDetails_Curriculum" Association="Self.FK_PersonalDetails_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="PersonalDetails" EntitySet="PersonalDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_PersonalReferences_Curriculum" Association="Self.FK_PersonalReferences_Curriculum">
             <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="PersonalReferences" EntitySet="PersonalReferences" />
@@ -335,8 +577,7 @@
             <End Role="WorkExperiences" EntitySet="WorkExperiences" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CVBuilderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -360,28 +601,6 @@
             <PropertyRef Name="CurriculumID" />
           </Key>
           <Property Name="CurriculumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdentityCard" Type="Int32" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PostalCode" Type="Int32" />
-          <Property Name="AreaCodeLP" Type="Int16" />
-          <Property Name="LinePhone" Type="Int32" />
-          <Property Name="AreaCodeMP" Type="Int16" />
-          <Property Name="MobilePhone" Type="Int32" />
-          <Property Name="BirthDate" Type="DateTime" Precision="3" />
-          <Property Name="Nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Summary" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SummaryCustomTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SummaryIsVisible" Type="Boolean" Nullable="false" />
-          <Property Name="WebPage" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="LinkedInUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Github" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Facebook" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Twitter" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="ID_User" Type="Int32" Nullable="false" />
           <Property Name="ID_Template" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Certificates" Relationship="Self.FK_Certificates_Curriculum" FromRole="Curriculum" ToRole="Certificates" />
@@ -390,6 +609,7 @@
           <NavigationProperty Name="CustomSections" Relationship="Self.FK_CustomSections_Curriculum" FromRole="Curriculum" ToRole="CustomSections" />
           <NavigationProperty Name="Interests" Relationship="Self.FK_Interests_Curriculum" FromRole="Curriculum" ToRole="Interests" />
           <NavigationProperty Name="Languages" Relationship="Self.FK_Languages_Curriculum" FromRole="Curriculum" ToRole="Languages" />
+          <NavigationProperty Name="PersonalDetails" Relationship="Self.FK_PersonalDetails_Curriculum" FromRole="Curriculum" ToRole="PersonalDetails" />
           <NavigationProperty Name="PersonalReferences" Relationship="Self.FK_PersonalReferences_Curriculum" FromRole="Curriculum" ToRole="PersonalReferences" />
           <NavigationProperty Name="Skills" Relationship="Self.FK_Skills_Curriculum" FromRole="Curriculum" ToRole="Skills" />
           <NavigationProperty Name="Studies" Relationship="Self.FK_Studies_Curriculum" FromRole="Curriculum" ToRole="Studies" />
@@ -426,6 +646,36 @@
           <Property Name="IsVisible" Type="Boolean" Nullable="false" />
           <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Curriculum" Relationship="Self.FK_Languages_Curriculum" FromRole="Languages" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="PersonalDetails">
+          <Key>
+            <PropertyRef Name="PersonalDetailsID" />
+          </Key>
+          <Property Name="PersonalDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostalCode" Type="Int32" />
+          <Property Name="AreaCodeLP" Type="Int16" />
+          <Property Name="LinePhone" Type="Int32" />
+          <Property Name="AreaCodeMP" Type="Int16" />
+          <Property Name="MobilePhone" Type="Int32" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="IdentityCard" Type="Int32" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Summary" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SummaryCustomTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SummaryIsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="WebPageUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="LinkedInUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="GithubUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_PersonalDetails_Curriculum" FromRole="PersonalDetails" ToRole="Curriculum" />
         </EntityType>
         <EntityType Name="PersonalReferences">
           <Key>
@@ -589,6 +839,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PersonalDetails_Curriculum">
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
+          <End Role="PersonalDetails" Type="Self.PersonalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curriculum">
+              <PropertyRef Name="CurriculumID" />
+            </Principal>
+            <Dependent Role="PersonalDetails">
+              <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PersonalReferences_Curriculum">
           <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
           <End Role="PersonalReferences" Type="Self.PersonalReferences" Multiplicity="*" />
@@ -643,6 +905,7 @@
           <EntitySet Name="CustomSections" EntityType="Self.CustomSections" />
           <EntitySet Name="Interests" EntityType="Self.Interests" />
           <EntitySet Name="Languages" EntityType="Self.Languages" />
+          <EntitySet Name="PersonalDetails" EntityType="Self.PersonalDetails" />
           <EntitySet Name="PersonalReferences" EntityType="Self.PersonalReferences" />
           <EntitySet Name="Skills" EntityType="Self.Skills" />
           <EntitySet Name="Studies" EntityType="Self.Studies" />
@@ -673,6 +936,10 @@
             <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="Languages" EntitySet="Languages" />
           </AssociationSet>
+          <AssociationSet Name="FK_PersonalDetails_Curriculum" Association="Self.FK_PersonalDetails_Curriculum">
+            <End Role="Curriculum" EntitySet="Curriculum" />
+            <End Role="PersonalDetails" EntitySet="PersonalDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_PersonalReferences_Curriculum" Association="Self.FK_PersonalReferences_Curriculum">
             <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="PersonalReferences" EntitySet="PersonalReferences" />
@@ -689,6 +956,224 @@
             <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="WorkExperiences" EntitySet="WorkExperiences" />
           </AssociationSet>
+          <FunctionImport Name="usp_PersonalDetails_Create">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="lastname" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="photo" Mode="In" Type="Binary" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="postalCode" Mode="In" Type="Int32" />
+            <Parameter Name="areaCodeLP" Mode="In" Type="Int16" />
+            <Parameter Name="linePhone" Mode="In" Type="Int32" />
+            <Parameter Name="areaCodeMP" Mode="In" Type="Int16" />
+            <Parameter Name="mobilePhone" Mode="In" Type="Int32" />
+            <Parameter Name="birthDate" Mode="In" Type="DateTime" />
+            <Parameter Name="identityCard" Mode="In" Type="Int32" />
+            <Parameter Name="country" Mode="In" Type="String" />
+            <Parameter Name="summary" Mode="In" Type="String" />
+            <Parameter Name="summaryCustomTitle" Mode="In" Type="String" />
+            <Parameter Name="summaryIsVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="webPageUrl" Mode="In" Type="String" />
+            <Parameter Name="linkedInUrl" Mode="In" Type="String" />
+            <Parameter Name="githubUrl" Mode="In" Type="String" />
+            <Parameter Name="facebookUrl" Mode="In" Type="String" />
+            <Parameter Name="twitterUrl" Mode="In" Type="String" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Certificates_Create">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="institute" Mode="In" Type="String" />
+            <Parameter Name="onlineMode" Mode="In" Type="Boolean" />
+            <Parameter Name="inProgress" Mode="In" Type="Boolean" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Certificates_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Certificates_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="institute" Mode="In" Type="String" />
+            <Parameter Name="onlineMode" Mode="In" Type="Boolean" />
+            <Parameter Name="inProgress" Mode="In" Type="Boolean" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CustomSections_Create">
+            <Parameter Name="sectionName" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CustomSections_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CustomSections_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="sectionName" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Interests_Create">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Interests_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Interests_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Languages_Create">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="level" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Languages_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Languages_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="level" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PersonalDetails_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PersonalDetails_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="lastname" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="photo" Mode="In" Type="Binary" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="postalCode" Mode="In" Type="Int32" />
+            <Parameter Name="areaCodeLP" Mode="In" Type="Int16" />
+            <Parameter Name="linePhone" Mode="In" Type="Int32" />
+            <Parameter Name="areaCodeMP" Mode="In" Type="Int16" />
+            <Parameter Name="mobilePhone" Mode="In" Type="Int32" />
+            <Parameter Name="birthDate" Mode="In" Type="DateTime" />
+            <Parameter Name="identityCard" Mode="In" Type="Int32" />
+            <Parameter Name="country" Mode="In" Type="String" />
+            <Parameter Name="summary" Mode="In" Type="String" />
+            <Parameter Name="summaryCustomTitle" Mode="In" Type="String" />
+            <Parameter Name="summaryIsVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="webPageUrl" Mode="In" Type="String" />
+            <Parameter Name="linkedInUrl" Mode="In" Type="String" />
+            <Parameter Name="githubUrl" Mode="In" Type="String" />
+            <Parameter Name="facebookUrl" Mode="In" Type="String" />
+            <Parameter Name="twitterUrl" Mode="In" Type="String" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PersonalReferences_Create">
+            <Parameter Name="company" Mode="In" Type="String" />
+            <Parameter Name="contactPerson" Mode="In" Type="String" />
+            <Parameter Name="areaCode" Mode="In" Type="Int16" />
+            <Parameter Name="telephone" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PersonalReferences_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PersonalReferences_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="company" Mode="In" Type="String" />
+            <Parameter Name="contactPerson" Mode="In" Type="String" />
+            <Parameter Name="areaCode" Mode="In" Type="Int16" />
+            <Parameter Name="telephone" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Skills_Create">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="level" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Skills_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Skills_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="level" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Studies_Create">
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="institute" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="startMonth" Mode="In" Type="String" />
+            <Parameter Name="startYear" Mode="In" Type="Int32" />
+            <Parameter Name="endMonth" Mode="In" Type="String" />
+            <Parameter Name="endYear" Mode="In" Type="Int32" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Studies_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Studies_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="institute" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="startMonth" Mode="In" Type="String" />
+            <Parameter Name="startYear" Mode="In" Type="Int32" />
+            <Parameter Name="endMonth" Mode="In" Type="String" />
+            <Parameter Name="endYear" Mode="In" Type="Int32" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_WorkExperiences_Create">
+            <Parameter Name="job" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="company" Mode="In" Type="String" />
+            <Parameter Name="startMonth" Mode="In" Type="String" />
+            <Parameter Name="startYear" Mode="In" Type="Int32" />
+            <Parameter Name="endMonth" Mode="In" Type="String" />
+            <Parameter Name="endYear" Mode="In" Type="Int32" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_WorkExperiences_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_WorkExperiences_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="job" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="company" Mode="In" Type="String" />
+            <Parameter Name="startMonth" Mode="In" Type="String" />
+            <Parameter Name="startYear" Mode="In" Type="Int32" />
+            <Parameter Name="endMonth" Mode="In" Type="String" />
+            <Parameter Name="endYear" Mode="In" Type="Int32" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -715,28 +1200,6 @@
             <EntityTypeMapping TypeName="CVBuilderModel.Curriculum">
               <MappingFragment StoreEntitySet="Curriculum">
                 <ScalarProperty Name="CurriculumID" ColumnName="CurriculumID" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="AreaCodeLP" ColumnName="AreaCodeLP" />
-                <ScalarProperty Name="LinePhone" ColumnName="LinePhone" />
-                <ScalarProperty Name="AreaCodeMP" ColumnName="AreaCodeMP" />
-                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="SummaryCustomTitle" ColumnName="SummaryCustomTitle" />
-                <ScalarProperty Name="SummaryIsVisible" ColumnName="SummaryIsVisible" />
-                <ScalarProperty Name="WebPage" ColumnName="WebPage" />
-                <ScalarProperty Name="LinkedInUrl" ColumnName="LinkedInUrl" />
-                <ScalarProperty Name="Github" ColumnName="Github" />
-                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
-                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
                 <ScalarProperty Name="ID_Template" ColumnName="ID_Template" />
               </MappingFragment>
@@ -770,6 +1233,36 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Level" ColumnName="Level" />
                 <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="ID_Curriculum" ColumnName="ID_Curriculum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonalDetails">
+            <EntityTypeMapping TypeName="CVBuilderModel.PersonalDetails">
+              <MappingFragment StoreEntitySet="PersonalDetails">
+                <ScalarProperty Name="PersonalDetailsID" ColumnName="PersonalDetailsID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="AreaCodeLP" ColumnName="AreaCodeLP" />
+                <ScalarProperty Name="LinePhone" ColumnName="LinePhone" />
+                <ScalarProperty Name="AreaCodeMP" ColumnName="AreaCodeMP" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="SummaryCustomTitle" ColumnName="SummaryCustomTitle" />
+                <ScalarProperty Name="SummaryIsVisible" ColumnName="SummaryIsVisible" />
+                <ScalarProperty Name="WebPageUrl" ColumnName="WebPageUrl" />
+                <ScalarProperty Name="LinkedInUrl" ColumnName="LinkedInUrl" />
+                <ScalarProperty Name="GithubUrl" ColumnName="GithubUrl" />
+                <ScalarProperty Name="FacebookUrl" ColumnName="FacebookUrl" />
+                <ScalarProperty Name="TwitterUrl" ColumnName="TwitterUrl" />
                 <ScalarProperty Name="ID_Curriculum" ColumnName="ID_Curriculum" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -864,6 +1357,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_PersonalDetails_Create" FunctionName="CVBuilderModel.Store.usp_PersonalDetails_Create" />
+          <FunctionImportMapping FunctionImportName="usp_Certificates_Create" FunctionName="CVBuilderModel.Store.usp_Certificates_Create" />
+          <FunctionImportMapping FunctionImportName="usp_Certificates_Delete" FunctionName="CVBuilderModel.Store.usp_Certificates_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_Certificates_Update" FunctionName="CVBuilderModel.Store.usp_Certificates_Update" />
+          <FunctionImportMapping FunctionImportName="usp_CustomSections_Create" FunctionName="CVBuilderModel.Store.usp_CustomSections_Create" />
+          <FunctionImportMapping FunctionImportName="usp_CustomSections_Delete" FunctionName="CVBuilderModel.Store.usp_CustomSections_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_CustomSections_Update" FunctionName="CVBuilderModel.Store.usp_CustomSections_Update" />
+          <FunctionImportMapping FunctionImportName="usp_Interests_Create" FunctionName="CVBuilderModel.Store.usp_Interests_Create" />
+          <FunctionImportMapping FunctionImportName="usp_Interests_Delete" FunctionName="CVBuilderModel.Store.usp_Interests_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_Interests_Update" FunctionName="CVBuilderModel.Store.usp_Interests_Update" />
+          <FunctionImportMapping FunctionImportName="usp_Languages_Create" FunctionName="CVBuilderModel.Store.usp_Languages_Create" />
+          <FunctionImportMapping FunctionImportName="usp_Languages_Delete" FunctionName="CVBuilderModel.Store.usp_Languages_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_Languages_Update" FunctionName="CVBuilderModel.Store.usp_Languages_Update" />
+          <FunctionImportMapping FunctionImportName="usp_PersonalDetails_Delete" FunctionName="CVBuilderModel.Store.usp_PersonalDetails_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_PersonalDetails_Update" FunctionName="CVBuilderModel.Store.usp_PersonalDetails_Update" />
+          <FunctionImportMapping FunctionImportName="usp_PersonalReferences_Create" FunctionName="CVBuilderModel.Store.usp_PersonalReferences_Create" />
+          <FunctionImportMapping FunctionImportName="usp_PersonalReferences_Delete" FunctionName="CVBuilderModel.Store.usp_PersonalReferences_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_PersonalReferences_Update" FunctionName="CVBuilderModel.Store.usp_PersonalReferences_Update" />
+          <FunctionImportMapping FunctionImportName="usp_Skills_Create" FunctionName="CVBuilderModel.Store.usp_Skills_Create" />
+          <FunctionImportMapping FunctionImportName="usp_Skills_Delete" FunctionName="CVBuilderModel.Store.usp_Skills_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_Skills_Update" FunctionName="CVBuilderModel.Store.usp_Skills_Update" />
+          <FunctionImportMapping FunctionImportName="usp_Studies_Create" FunctionName="CVBuilderModel.Store.usp_Studies_Create" />
+          <FunctionImportMapping FunctionImportName="usp_Studies_Delete" FunctionName="CVBuilderModel.Store.usp_Studies_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_Studies_Update" FunctionName="CVBuilderModel.Store.usp_Studies_Update" />
+          <FunctionImportMapping FunctionImportName="usp_WorkExperiences_Create" FunctionName="CVBuilderModel.Store.usp_WorkExperiences_Create" />
+          <FunctionImportMapping FunctionImportName="usp_WorkExperiences_Delete" FunctionName="CVBuilderModel.Store.usp_WorkExperiences_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_WorkExperiences_Update" FunctionName="CVBuilderModel.Store.usp_WorkExperiences_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

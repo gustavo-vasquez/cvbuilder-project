@@ -10,6 +10,11 @@ namespace CVBuilder.Data
     {
         public CVBuilderEntities Context { get; set; }
 
+        public DatabaseConnection()
+        {
+            OpenDb();
+        }
+
         public void OpenDb()
         {
             Context = new CVBuilderEntities();

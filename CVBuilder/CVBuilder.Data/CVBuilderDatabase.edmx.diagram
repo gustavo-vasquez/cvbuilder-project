@@ -4,24 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fb3bf685829146dba6ae42cd1e8f2764" Name="Diagram1">
-        <EntityTypeShape EntityType="CVBuilderModel.Certificates" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVBuilderModel.Curriculum" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVBuilderModel.CustomSections" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVBuilderModel.Interests" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVBuilderModel.Languages" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVBuilderModel.PersonalReferences" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVBuilderModel.Skills" Width="1.5" PointX="5.25" PointY="17.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVBuilderModel.Studies" Width="1.5" PointX="5.25" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVBuilderModel.Templates" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVBuilderModel.Users" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVBuilderModel.WorkExperiences" Width="1.5" PointX="5.25" PointY="24.875" IsExpanded="true" />
+      <Diagram DiagramId="e7803539ce6c400e94ea1a459a5643e8" Name="Diagram1">
+        <EntityTypeShape EntityType="CVBuilderModel.Certificates" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.Curriculum" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.CustomSections" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.Interests" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.Languages" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.PersonalDetails" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.PersonalReferences" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.Skills" Width="1.5" PointX="5.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.Studies" Width="1.5" PointX="5.25" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.Templates" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.Users" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVBuilderModel.WorkExperiences" Width="1.5" PointX="5.25" PointY="31.75" IsExpanded="true" />
         <AssociationConnector Association="CVBuilderModel.FK_Certificates_Curriculum" ManuallyRouted="false" />
         <AssociationConnector Association="CVBuilderModel.FK_Curriculum_Templates" ManuallyRouted="false" />
         <AssociationConnector Association="CVBuilderModel.FK_Curriculum_Users" ManuallyRouted="false" />
         <AssociationConnector Association="CVBuilderModel.FK_CustomSections_Curriculum" ManuallyRouted="false" />
         <AssociationConnector Association="CVBuilderModel.FK_Interests_Curriculum" ManuallyRouted="false" />
         <AssociationConnector Association="CVBuilderModel.FK_Languages_Curriculum" ManuallyRouted="false" />
+        <AssociationConnector Association="CVBuilderModel.FK_PersonalDetails_Curriculum" ManuallyRouted="false" />
         <AssociationConnector Association="CVBuilderModel.FK_PersonalReferences_Curriculum" ManuallyRouted="false" />
         <AssociationConnector Association="CVBuilderModel.FK_Skills_Curriculum" ManuallyRouted="false" />
         <AssociationConnector Association="CVBuilderModel.FK_Studies_Curriculum" ManuallyRouted="false" />

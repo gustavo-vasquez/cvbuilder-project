@@ -12,6 +12,8 @@ namespace CVBuilder.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class CVBuilderEntities : DbContext
     {
@@ -30,11 +32,803 @@ namespace CVBuilder.Data
         public virtual DbSet<CustomSections> CustomSections { get; set; }
         public virtual DbSet<Interests> Interests { get; set; }
         public virtual DbSet<Languages> Languages { get; set; }
+        public virtual DbSet<PersonalDetails> PersonalDetails { get; set; }
         public virtual DbSet<PersonalReferences> PersonalReferences { get; set; }
         public virtual DbSet<Skills> Skills { get; set; }
         public virtual DbSet<Studies> Studies { get; set; }
         public virtual DbSet<Templates> Templates { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<WorkExperiences> WorkExperiences { get; set; }
+    
+        public virtual int usp_PersonalDetails_Create(string name, string lastname, string email, byte[] photo, string address, string city, Nullable<int> postalCode, Nullable<short> areaCodeLP, Nullable<int> linePhone, Nullable<short> areaCodeMP, Nullable<int> mobilePhone, Nullable<System.DateTime> birthDate, Nullable<int> identityCard, string country, string summary, string summaryCustomTitle, Nullable<bool> summaryIsVisible, string webPageUrl, string linkedInUrl, string githubUrl, string facebookUrl, string twitterUrl, Nullable<int> id_curriculum)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var lastnameParameter = lastname != null ?
+                new ObjectParameter("lastname", lastname) :
+                new ObjectParameter("lastname", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var photoParameter = photo != null ?
+                new ObjectParameter("photo", photo) :
+                new ObjectParameter("photo", typeof(byte[]));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("address", address) :
+                new ObjectParameter("address", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var postalCodeParameter = postalCode.HasValue ?
+                new ObjectParameter("postalCode", postalCode) :
+                new ObjectParameter("postalCode", typeof(int));
+    
+            var areaCodeLPParameter = areaCodeLP.HasValue ?
+                new ObjectParameter("areaCodeLP", areaCodeLP) :
+                new ObjectParameter("areaCodeLP", typeof(short));
+    
+            var linePhoneParameter = linePhone.HasValue ?
+                new ObjectParameter("linePhone", linePhone) :
+                new ObjectParameter("linePhone", typeof(int));
+    
+            var areaCodeMPParameter = areaCodeMP.HasValue ?
+                new ObjectParameter("areaCodeMP", areaCodeMP) :
+                new ObjectParameter("areaCodeMP", typeof(short));
+    
+            var mobilePhoneParameter = mobilePhone.HasValue ?
+                new ObjectParameter("mobilePhone", mobilePhone) :
+                new ObjectParameter("mobilePhone", typeof(int));
+    
+            var birthDateParameter = birthDate.HasValue ?
+                new ObjectParameter("birthDate", birthDate) :
+                new ObjectParameter("birthDate", typeof(System.DateTime));
+    
+            var identityCardParameter = identityCard.HasValue ?
+                new ObjectParameter("identityCard", identityCard) :
+                new ObjectParameter("identityCard", typeof(int));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("country", country) :
+                new ObjectParameter("country", typeof(string));
+    
+            var summaryParameter = summary != null ?
+                new ObjectParameter("summary", summary) :
+                new ObjectParameter("summary", typeof(string));
+    
+            var summaryCustomTitleParameter = summaryCustomTitle != null ?
+                new ObjectParameter("summaryCustomTitle", summaryCustomTitle) :
+                new ObjectParameter("summaryCustomTitle", typeof(string));
+    
+            var summaryIsVisibleParameter = summaryIsVisible.HasValue ?
+                new ObjectParameter("summaryIsVisible", summaryIsVisible) :
+                new ObjectParameter("summaryIsVisible", typeof(bool));
+    
+            var webPageUrlParameter = webPageUrl != null ?
+                new ObjectParameter("webPageUrl", webPageUrl) :
+                new ObjectParameter("webPageUrl", typeof(string));
+    
+            var linkedInUrlParameter = linkedInUrl != null ?
+                new ObjectParameter("linkedInUrl", linkedInUrl) :
+                new ObjectParameter("linkedInUrl", typeof(string));
+    
+            var githubUrlParameter = githubUrl != null ?
+                new ObjectParameter("githubUrl", githubUrl) :
+                new ObjectParameter("githubUrl", typeof(string));
+    
+            var facebookUrlParameter = facebookUrl != null ?
+                new ObjectParameter("facebookUrl", facebookUrl) :
+                new ObjectParameter("facebookUrl", typeof(string));
+    
+            var twitterUrlParameter = twitterUrl != null ?
+                new ObjectParameter("twitterUrl", twitterUrl) :
+                new ObjectParameter("twitterUrl", typeof(string));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalDetails_Create", nameParameter, lastnameParameter, emailParameter, photoParameter, addressParameter, cityParameter, postalCodeParameter, areaCodeLPParameter, linePhoneParameter, areaCodeMPParameter, mobilePhoneParameter, birthDateParameter, identityCardParameter, countryParameter, summaryParameter, summaryCustomTitleParameter, summaryIsVisibleParameter, webPageUrlParameter, linkedInUrlParameter, githubUrlParameter, facebookUrlParameter, twitterUrlParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Certificates_Create(string name, string institute, Nullable<bool> onlineMode, Nullable<bool> inProgress, Nullable<int> year, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var instituteParameter = institute != null ?
+                new ObjectParameter("institute", institute) :
+                new ObjectParameter("institute", typeof(string));
+    
+            var onlineModeParameter = onlineMode.HasValue ?
+                new ObjectParameter("onlineMode", onlineMode) :
+                new ObjectParameter("onlineMode", typeof(bool));
+    
+            var inProgressParameter = inProgress.HasValue ?
+                new ObjectParameter("inProgress", inProgress) :
+                new ObjectParameter("inProgress", typeof(bool));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Certificates_Create", nameParameter, instituteParameter, onlineModeParameter, inProgressParameter, yearParameter, descriptionParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Certificates_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Certificates_Delete", idParameter);
+        }
+    
+        public virtual int usp_Certificates_Update(Nullable<int> id, string name, string institute, Nullable<bool> onlineMode, Nullable<bool> inProgress, Nullable<int> year, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var instituteParameter = institute != null ?
+                new ObjectParameter("institute", institute) :
+                new ObjectParameter("institute", typeof(string));
+    
+            var onlineModeParameter = onlineMode.HasValue ?
+                new ObjectParameter("onlineMode", onlineMode) :
+                new ObjectParameter("onlineMode", typeof(bool));
+    
+            var inProgressParameter = inProgress.HasValue ?
+                new ObjectParameter("inProgress", inProgress) :
+                new ObjectParameter("inProgress", typeof(bool));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Certificates_Update", idParameter, nameParameter, instituteParameter, onlineModeParameter, inProgressParameter, yearParameter, descriptionParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_CustomSections_Create(string sectionName, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var sectionNameParameter = sectionName != null ?
+                new ObjectParameter("sectionName", sectionName) :
+                new ObjectParameter("sectionName", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_CustomSections_Create", sectionNameParameter, descriptionParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_CustomSections_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_CustomSections_Delete", idParameter);
+        }
+    
+        public virtual int usp_CustomSections_Update(Nullable<int> id, string sectionName, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var sectionNameParameter = sectionName != null ?
+                new ObjectParameter("sectionName", sectionName) :
+                new ObjectParameter("sectionName", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_CustomSections_Update", idParameter, sectionNameParameter, descriptionParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Interests_Create(string name, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Interests_Create", nameParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Interests_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Interests_Delete", idParameter);
+        }
+    
+        public virtual int usp_Interests_Update(Nullable<int> id, string name, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Interests_Update", idParameter, nameParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Languages_Create(string name, string level, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var levelParameter = level != null ?
+                new ObjectParameter("level", level) :
+                new ObjectParameter("level", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Languages_Create", nameParameter, levelParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Languages_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Languages_Delete", idParameter);
+        }
+    
+        public virtual int usp_Languages_Update(Nullable<int> id, string name, string level, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var levelParameter = level != null ?
+                new ObjectParameter("level", level) :
+                new ObjectParameter("level", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Languages_Update", idParameter, nameParameter, levelParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_PersonalDetails_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalDetails_Delete", idParameter);
+        }
+    
+        public virtual int usp_PersonalDetails_Update(Nullable<int> id, string name, string lastname, string email, byte[] photo, string address, string city, Nullable<int> postalCode, Nullable<short> areaCodeLP, Nullable<int> linePhone, Nullable<short> areaCodeMP, Nullable<int> mobilePhone, Nullable<System.DateTime> birthDate, Nullable<int> identityCard, string country, string summary, string summaryCustomTitle, Nullable<bool> summaryIsVisible, string webPageUrl, string linkedInUrl, string githubUrl, string facebookUrl, string twitterUrl, Nullable<int> id_curriculum)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var lastnameParameter = lastname != null ?
+                new ObjectParameter("lastname", lastname) :
+                new ObjectParameter("lastname", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var photoParameter = photo != null ?
+                new ObjectParameter("photo", photo) :
+                new ObjectParameter("photo", typeof(byte[]));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("address", address) :
+                new ObjectParameter("address", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var postalCodeParameter = postalCode.HasValue ?
+                new ObjectParameter("postalCode", postalCode) :
+                new ObjectParameter("postalCode", typeof(int));
+    
+            var areaCodeLPParameter = areaCodeLP.HasValue ?
+                new ObjectParameter("areaCodeLP", areaCodeLP) :
+                new ObjectParameter("areaCodeLP", typeof(short));
+    
+            var linePhoneParameter = linePhone.HasValue ?
+                new ObjectParameter("linePhone", linePhone) :
+                new ObjectParameter("linePhone", typeof(int));
+    
+            var areaCodeMPParameter = areaCodeMP.HasValue ?
+                new ObjectParameter("areaCodeMP", areaCodeMP) :
+                new ObjectParameter("areaCodeMP", typeof(short));
+    
+            var mobilePhoneParameter = mobilePhone.HasValue ?
+                new ObjectParameter("mobilePhone", mobilePhone) :
+                new ObjectParameter("mobilePhone", typeof(int));
+    
+            var birthDateParameter = birthDate.HasValue ?
+                new ObjectParameter("birthDate", birthDate) :
+                new ObjectParameter("birthDate", typeof(System.DateTime));
+    
+            var identityCardParameter = identityCard.HasValue ?
+                new ObjectParameter("identityCard", identityCard) :
+                new ObjectParameter("identityCard", typeof(int));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("country", country) :
+                new ObjectParameter("country", typeof(string));
+    
+            var summaryParameter = summary != null ?
+                new ObjectParameter("summary", summary) :
+                new ObjectParameter("summary", typeof(string));
+    
+            var summaryCustomTitleParameter = summaryCustomTitle != null ?
+                new ObjectParameter("summaryCustomTitle", summaryCustomTitle) :
+                new ObjectParameter("summaryCustomTitle", typeof(string));
+    
+            var summaryIsVisibleParameter = summaryIsVisible.HasValue ?
+                new ObjectParameter("summaryIsVisible", summaryIsVisible) :
+                new ObjectParameter("summaryIsVisible", typeof(bool));
+    
+            var webPageUrlParameter = webPageUrl != null ?
+                new ObjectParameter("webPageUrl", webPageUrl) :
+                new ObjectParameter("webPageUrl", typeof(string));
+    
+            var linkedInUrlParameter = linkedInUrl != null ?
+                new ObjectParameter("linkedInUrl", linkedInUrl) :
+                new ObjectParameter("linkedInUrl", typeof(string));
+    
+            var githubUrlParameter = githubUrl != null ?
+                new ObjectParameter("githubUrl", githubUrl) :
+                new ObjectParameter("githubUrl", typeof(string));
+    
+            var facebookUrlParameter = facebookUrl != null ?
+                new ObjectParameter("facebookUrl", facebookUrl) :
+                new ObjectParameter("facebookUrl", typeof(string));
+    
+            var twitterUrlParameter = twitterUrl != null ?
+                new ObjectParameter("twitterUrl", twitterUrl) :
+                new ObjectParameter("twitterUrl", typeof(string));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalDetails_Update", idParameter, nameParameter, lastnameParameter, emailParameter, photoParameter, addressParameter, cityParameter, postalCodeParameter, areaCodeLPParameter, linePhoneParameter, areaCodeMPParameter, mobilePhoneParameter, birthDateParameter, identityCardParameter, countryParameter, summaryParameter, summaryCustomTitleParameter, summaryIsVisibleParameter, webPageUrlParameter, linkedInUrlParameter, githubUrlParameter, facebookUrlParameter, twitterUrlParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_PersonalReferences_Create(string company, string contactPerson, Nullable<short> areaCode, Nullable<int> telephone, string email, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var companyParameter = company != null ?
+                new ObjectParameter("company", company) :
+                new ObjectParameter("company", typeof(string));
+    
+            var contactPersonParameter = contactPerson != null ?
+                new ObjectParameter("contactPerson", contactPerson) :
+                new ObjectParameter("contactPerson", typeof(string));
+    
+            var areaCodeParameter = areaCode.HasValue ?
+                new ObjectParameter("areaCode", areaCode) :
+                new ObjectParameter("areaCode", typeof(short));
+    
+            var telephoneParameter = telephone.HasValue ?
+                new ObjectParameter("telephone", telephone) :
+                new ObjectParameter("telephone", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalReferences_Create", companyParameter, contactPersonParameter, areaCodeParameter, telephoneParameter, emailParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_PersonalReferences_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalReferences_Delete", idParameter);
+        }
+    
+        public virtual int usp_PersonalReferences_Update(Nullable<int> id, string company, string contactPerson, Nullable<short> areaCode, Nullable<int> telephone, string email, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var companyParameter = company != null ?
+                new ObjectParameter("company", company) :
+                new ObjectParameter("company", typeof(string));
+    
+            var contactPersonParameter = contactPerson != null ?
+                new ObjectParameter("contactPerson", contactPerson) :
+                new ObjectParameter("contactPerson", typeof(string));
+    
+            var areaCodeParameter = areaCode.HasValue ?
+                new ObjectParameter("areaCode", areaCode) :
+                new ObjectParameter("areaCode", typeof(short));
+    
+            var telephoneParameter = telephone.HasValue ?
+                new ObjectParameter("telephone", telephone) :
+                new ObjectParameter("telephone", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalReferences_Update", idParameter, companyParameter, contactPersonParameter, areaCodeParameter, telephoneParameter, emailParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Skills_Create(string name, string level, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var levelParameter = level != null ?
+                new ObjectParameter("level", level) :
+                new ObjectParameter("level", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Skills_Create", nameParameter, levelParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Skills_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Skills_Delete", idParameter);
+        }
+    
+        public virtual int usp_Skills_Update(Nullable<int> id, string name, string level, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var levelParameter = level != null ?
+                new ObjectParameter("level", level) :
+                new ObjectParameter("level", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Skills_Update", idParameter, nameParameter, levelParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Studies_Create(string title, string institute, string city, string startMonth, Nullable<int> startYear, string endMonth, Nullable<int> endYear, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var titleParameter = title != null ?
+                new ObjectParameter("title", title) :
+                new ObjectParameter("title", typeof(string));
+    
+            var instituteParameter = institute != null ?
+                new ObjectParameter("institute", institute) :
+                new ObjectParameter("institute", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var startMonthParameter = startMonth != null ?
+                new ObjectParameter("startMonth", startMonth) :
+                new ObjectParameter("startMonth", typeof(string));
+    
+            var startYearParameter = startYear.HasValue ?
+                new ObjectParameter("startYear", startYear) :
+                new ObjectParameter("startYear", typeof(int));
+    
+            var endMonthParameter = endMonth != null ?
+                new ObjectParameter("endMonth", endMonth) :
+                new ObjectParameter("endMonth", typeof(string));
+    
+            var endYearParameter = endYear.HasValue ?
+                new ObjectParameter("endYear", endYear) :
+                new ObjectParameter("endYear", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Studies_Create", titleParameter, instituteParameter, cityParameter, startMonthParameter, startYearParameter, endMonthParameter, endYearParameter, descriptionParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Studies_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Studies_Delete", idParameter);
+        }
+    
+        public virtual int usp_Studies_Update(Nullable<int> id, string title, string institute, string city, string startMonth, Nullable<int> startYear, string endMonth, Nullable<int> endYear, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("title", title) :
+                new ObjectParameter("title", typeof(string));
+    
+            var instituteParameter = institute != null ?
+                new ObjectParameter("institute", institute) :
+                new ObjectParameter("institute", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var startMonthParameter = startMonth != null ?
+                new ObjectParameter("startMonth", startMonth) :
+                new ObjectParameter("startMonth", typeof(string));
+    
+            var startYearParameter = startYear.HasValue ?
+                new ObjectParameter("startYear", startYear) :
+                new ObjectParameter("startYear", typeof(int));
+    
+            var endMonthParameter = endMonth != null ?
+                new ObjectParameter("endMonth", endMonth) :
+                new ObjectParameter("endMonth", typeof(string));
+    
+            var endYearParameter = endYear.HasValue ?
+                new ObjectParameter("endYear", endYear) :
+                new ObjectParameter("endYear", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Studies_Update", idParameter, titleParameter, instituteParameter, cityParameter, startMonthParameter, startYearParameter, endMonthParameter, endYearParameter, descriptionParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_WorkExperiences_Create(string job, string city, string company, string startMonth, Nullable<int> startYear, string endMonth, Nullable<int> endYear, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var jobParameter = job != null ?
+                new ObjectParameter("job", job) :
+                new ObjectParameter("job", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var companyParameter = company != null ?
+                new ObjectParameter("company", company) :
+                new ObjectParameter("company", typeof(string));
+    
+            var startMonthParameter = startMonth != null ?
+                new ObjectParameter("startMonth", startMonth) :
+                new ObjectParameter("startMonth", typeof(string));
+    
+            var startYearParameter = startYear.HasValue ?
+                new ObjectParameter("startYear", startYear) :
+                new ObjectParameter("startYear", typeof(int));
+    
+            var endMonthParameter = endMonth != null ?
+                new ObjectParameter("endMonth", endMonth) :
+                new ObjectParameter("endMonth", typeof(string));
+    
+            var endYearParameter = endYear.HasValue ?
+                new ObjectParameter("endYear", endYear) :
+                new ObjectParameter("endYear", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WorkExperiences_Create", jobParameter, cityParameter, companyParameter, startMonthParameter, startYearParameter, endMonthParameter, endYearParameter, descriptionParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_WorkExperiences_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WorkExperiences_Delete", idParameter);
+        }
+    
+        public virtual int usp_WorkExperiences_Update(Nullable<int> id, string job, string city, string company, string startMonth, Nullable<int> startYear, string endMonth, Nullable<int> endYear, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var jobParameter = job != null ?
+                new ObjectParameter("job", job) :
+                new ObjectParameter("job", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var companyParameter = company != null ?
+                new ObjectParameter("company", company) :
+                new ObjectParameter("company", typeof(string));
+    
+            var startMonthParameter = startMonth != null ?
+                new ObjectParameter("startMonth", startMonth) :
+                new ObjectParameter("startMonth", typeof(string));
+    
+            var startYearParameter = startYear.HasValue ?
+                new ObjectParameter("startYear", startYear) :
+                new ObjectParameter("startYear", typeof(int));
+    
+            var endMonthParameter = endMonth != null ?
+                new ObjectParameter("endMonth", endMonth) :
+                new ObjectParameter("endMonth", typeof(string));
+    
+            var endYearParameter = endYear.HasValue ?
+                new ObjectParameter("endYear", endYear) :
+                new ObjectParameter("endYear", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var isVisibleParameter = isVisible.HasValue ?
+                new ObjectParameter("isVisible", isVisible) :
+                new ObjectParameter("isVisible", typeof(bool));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WorkExperiences_Update", idParameter, jobParameter, cityParameter, companyParameter, startMonthParameter, startYearParameter, endMonthParameter, endYearParameter, descriptionParameter, isVisibleParameter, id_curriculumParameter);
+        }
     }
 }
