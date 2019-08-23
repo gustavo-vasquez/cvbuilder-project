@@ -12,6 +12,12 @@ namespace CVBuilder
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapMvcAttributeRoutes();
+            //routes.MapRoute(
+            //    name: "Curriculum",
+            //    url: "{controller}/{action}/{section}",
+            //    defaults: new { controller = "Curriculum", action = "Build", section = UrlParameter.Optional }
+            //);
 
             routes.MapRoute(
                 name: "Default",

@@ -26,7 +26,7 @@ namespace CVBuilder.ViewModels.Curriculum
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string Address { get; set; }
 
-        //[Required(ErrorMessage = "Completar este campo.")]
+        [Required(ErrorMessage = "Completar este campo.")]
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string City { get; set; }
 
@@ -52,6 +52,7 @@ namespace CVBuilder.ViewModels.Curriculum
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string Country { get; set; }
 
+        [Required(ErrorMessage = "Completar este campo.")]
         [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
         public string Summary { get; set; }
 

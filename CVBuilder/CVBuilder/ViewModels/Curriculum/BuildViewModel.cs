@@ -17,5 +17,18 @@ namespace CVBuilder.ViewModels.Curriculum
         public List<InterestsViewModel> Interests { get; set; }
         public List<PersonalReferencesViewModel> PersonalReferences { get; set; }
         public List<CustomSectionsViewModel> CustomSections { get; set; }
+
+        public BuildViewModel()
+        {
+            PersonalDetails = new PersonalDetailsViewModel();
+            Studies = new List<StudiesViewModel>();
+            Certificates = new List<CertificatesViewModel>();
+            WorkExperiences = new List<WorkExperiencesViewModel>();
+            Languages = new List<LanguagesViewModel>();
+            Skills = new List<SkillsViewModel>();
+            Interests = new List<InterestsViewModel>();
+            PersonalReferences = new List<PersonalReferencesViewModel>();
+            CustomSections = new List<CustomSectionsViewModel>();
+        }
     }
 }

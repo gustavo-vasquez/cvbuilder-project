@@ -1,21 +1,22 @@
+var tabs = {
+    "active": 0,
+    "sections": [
+               "personal_details",
+               "studies_experiencies",
+               "other_information",
+               "custom_fields"
+    ]
+};
+
 $(document).ready(function () {
+    loadCVSection(getQsParameterByName("section"));
+
 	$('.cv-preview').on('mouseenter', function() {
 		$(this).append('<div class="overlay"></div>');
 		$(this).append('<button class="btn btn-sm btn-success">Cambiar plantilla</button>');
 	}).on('mouseleave', function() {
-		//$(this).children().last().remove();
 		$('.cv-preview div[class="overlay"], .cv-preview button').remove();
 	});
-
-	var tabs = {
-	 "active": 0,
-	 "sections": [
-	 			"personal_details_section",
-	 			"studies_experiencies_section",
-	 			"other_information_section",
-	 			"custom_fields_section"
- 			]
-	};
 
 	$('.tabs-group').on('click', 'button', function() {
 		$('.tabs-group button').removeClass('active');
@@ -24,7 +25,7 @@ $(document).ready(function () {
 			if($(this).data("value") == tabs.sections[i]) {
 				tabs.active = i;
 
-				$('div[id$="_section"]').css({'animation-name': 'slideDown', '-webkit-animation-name': 'slideDown'});
+				$('form[id$="_form"]').css({'animation-name': 'slideDown', '-webkit-animation-name': 'slideDown'});
 				$('#' + tabs.sections[i]).removeClass('d-none');
 				$(this).addClass('active');
 
@@ -64,7 +65,7 @@ $(document).ready(function () {
 			if(currentPosition == 0)
 				$(this).prop('disabled', true);
 
-			$('div[id$="_section"]').css({'animation-name': 'slideRight', '-webkit-animation-name': 'slideRight'});
+			$('form[id$="_form"]').css({'animation-name': 'slideRight', '-webkit-animation-name': 'slideRight'});
 			$('#' + tabs.sections[currentPosition]).removeClass('d-none');
 			tabs.active = currentPosition;
 
@@ -73,8 +74,9 @@ $(document).ready(function () {
 		}
 	});
 
-	$('#next_page').on('click', function() {
-		var currentPosition = tabs.active;
+	$('#next_page').on('click', function () {
+	    var currentPosition = tabs.active;
+	    $('#' + tabs.sections[currentPosition] + '_form').trigger('submit');
 
 		if(currentPosition >= 0 && currentPosition < tabs.sections.length) {
 			$('#' + tabs.sections[currentPosition]).addClass('d-none');
@@ -86,14 +88,15 @@ $(document).ready(function () {
 			if(currentPosition == tabs.sections.length - 1)
 				$(this).prop('disabled', true);
 			
-			$('div[id$="_section"]').css({'animation-name': 'slideLeft', '-webkit-animation-name': 'slideLeft'});
+			$('form[id$="_form"]').css({'animation-name': 'slideLeft', '-webkit-animation-name': 'slideLeft'});
 			$('#' + tabs.sections[currentPosition]).removeClass('d-none');
 			tabs.active = currentPosition;
 
 			$('.tabs-group button').removeClass('active');
 			$('.tabs-group button[data-value=' + tabs.sections[currentPosition] + ']').addClass('active');
 
-			window.location.href = window.location.pathname + "#page-top";
+		    //window.location.href = window.location.pathname + "#page-top";
+			
 		}
 	});
 
@@ -104,6 +107,41 @@ $(document).ready(function () {
 
 	isFormActionsWrapperInView();
 });
+
+// FUNCIONES
+
+function getQsParameterByName(name) {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        return urlParams.get('section');
+    }
+    catch (err) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(window.location.href);
+        if (!results) return null;
+        if (!results[2]) return '';
+
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+}
+
+function loadCVSection(sectionName) {
+    for (var i = 0; i < tabs.sections.length; i++) {
+        if (sectionName == tabs.sections[i]) {
+            tabs.active = i;
+            $('.tabs-group button[data-value=' + tabs.sections[i] + ']').addClass('active');
+
+            if (i === 1) $('#previous_page').prop('disabled', true);
+            else if (i === 3) $('#next_page').prop('disabled', true);
+            $('#' + sectionName).removeClass('d-none');
+        }
+    }
+    $('#' + tabs.sections[tabs.active]).removeClass('d-none');
+    $('.tabs-group button[data-value=' + tabs.sections[tabs.active] + ']').addClass('active');
+    $('#previous_page').prop('disabled', true);
+}
 
 function isScrolledIntoView(elem) {
     var docViewTop = $(window).scrollTop();
