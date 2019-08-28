@@ -1,0 +1,63 @@
+﻿@model CVBuilder.ViewModels.Curriculum.PersonalReferencesViewModel
+
+@using (Ajax.BeginForm("PersonalReferences", "Curriculum", new AjaxOptions() { HttpMethod = "POST" }, new { id = "personal_references_form" }))
+{
+    <fieldset>
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Nombre y apellido del contacto</label>
+                    @Html.TextBoxFor(m => m.ContactPerson, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ContactPerson, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Empresa</label>
+                    @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Company, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Correo electrónico</label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Teléfono fijo / móvil</label>
+                    <div class="row">
+                        <div class="input-group col-lg-5">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><b>+</b></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.AreaCode, new { @class = "form-control", placeholder = "Cod. área" })
+                            @Html.ValidationMessageFor(m => m.AreaCode, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-7">
+                            @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Telephone, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="row mb-4">
+        <div class="col-lg-8">
+            <div class="btn-group">
+                <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
+            </div>
+        </div>
+        <div class="col-lg-4 text-right">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
+        </div>
+    </fieldset>
+}

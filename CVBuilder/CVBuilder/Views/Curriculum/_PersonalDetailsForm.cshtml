@@ -2,218 +2,220 @@
 
 @using (Ajax.BeginForm("PersonalDetails", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST" }, new { id = "personal_details_form" }))
 {
-    @Html.AntiForgeryToken()
-    <div id="personal_details" class="card-body d-none">
-        <fieldset>
-            <legend class="mb-4">Detalles personales</legend>
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="form-group">
-                        <label>Nombre completo</label>
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label>Apellido(s)</label>
-                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })
-                    </div>
+    <fieldset>
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="form-group">
+                    <label>Nombre completo</label>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
                 </div>
-                <div class="col-lg-5">
-                    <div class="form-group text-center">
-                        @Html.TextBoxFor(m => m.Photo, new { type = "file", @class = "d-none" })
-                        <button type="button" class="btn btn-outline-success profile-photo"></button>
+                <div class="form-group">
+                    <label>Apellido(s)</label>
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="form-group text-center">
+                    @Html.TextBoxFor(m => m.Photo, new { type = "file", @class = "d-none" })
+                    <button type="button" class="btn btn-outline-success profile-photo"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Resumen profesional <span class="badge badge-secondary rename-title ml-2" title="Renombrar"><i class="fas fa-pencil-alt"></i></span></label>
+                    @Html.TextAreaFor(m => m.Summary, new { @class = "form-control", rows = "3", placeholder = "Máximo 300 caracteres..." })
+                    @Html.ValidationMessageFor(m => m.Summary, null, new { @class = "text-danger" })
+                    <div class="col-lg-5 custom-control custom-switch">
+                        @Html.CheckBoxFor(m => m.SummaryIsVisible, new { @class = "custom-control-input", @checked = "checked" })
+                        <label class="custom-control-label" for="PersonalDetails_SummaryIsVisible">Visible</label>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label>Resumen profesional <span class="badge badge-secondary rename-title ml-2" title="Renombrar"><i class="fas fa-pencil-alt"></i></span></label>
-                        @Html.TextAreaFor(m => m.Summary, new { @class = "form-control", rows = "3", placeholder = "Máximo 300 caracteres..." })
-                        @Html.ValidationMessageFor(m => m.Summary, null, new { @class = "text-danger" })
-                        <div class="col-lg-5 custom-control custom-switch">
-                            @Html.CheckBoxFor(m => m.SummaryIsVisible, new { @class = "custom-control-input", @checked = "checked" })
-                            <label class="custom-control-label" for="PersonalDetails_SummaryIsVisible">Visible</label>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Correo electrónico</label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Teléfono fijo</label>
+                    <div class="row">
+                        <div class="input-group col-lg-5">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><b>+</b></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.AreaCodeLP, new { @class = "form-control", placeholder = "Cod. área" })
+                            @Html.ValidationMessageFor(m => m.AreaCodeLP, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-7">
+                            @Html.TextBoxFor(m => m.LinePhone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LinePhone, null, new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Correo electrónico</label>
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Teléfono fijo</label>
-                        <div class="row">
-                            <div class="input-group col-lg-5">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><b>+</b></span>
-                                </div>
-                                @Html.TextBoxFor(m => m.AreaCodeLP, new { @class = "form-control", placeholder = "Cod. área" })
-                                @Html.ValidationMessageFor(m => m.AreaCodeLP, null, new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Teléfono celular</label>
+                    <div class="row">
+                        <div class="input-group col-lg-5">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><b>+</b></span>
                             </div>
-                            <div class="col-lg-7">
-                                @Html.TextBoxFor(m => m.LinePhone, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.LinePhone, null, new { @class = "text-danger" })
-                            </div>
+                            @Html.TextBoxFor(m => m.AreaCodeMP, new { @class = "form-control", placeholder = "Cod. área" })
+                            @Html.ValidationMessageFor(m => m.AreaCodeMP, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-7">
+                            @Html.TextBoxFor(m => m.MobilePhone, new { @class = "form-control", placeholder = "Cod. área" })
+                            @Html.ValidationMessageFor(m => m.MobilePhone, null, new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Dirección</label>
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Teléfono celular</label>
-                        <div class="row">
-                            <div class="input-group col-lg-5">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><b>+</b></span>
-                                </div>
-                                @Html.TextBoxFor(m => m.AreaCodeMP, new { @class = "form-control", placeholder = "Cod. área" })
-                                @Html.ValidationMessageFor(m => m.AreaCodeMP, null, new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-7">
-                                @Html.TextBoxFor(m => m.MobilePhone, new { @class = "form-control", placeholder = "Cod. área" })
-                                @Html.ValidationMessageFor(m => m.MobilePhone, null, new { @class = "text-danger" })
-                            </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Ciudad / localidad</label>
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.City, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Código postal</label>
+                    @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PostalCode, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Fecha de nacimiento</label>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <select class="form-control" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <select class="form-control" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3">
+                            <select class="form-control" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Dirección</label>
-                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })
-                    </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Nº documento de identidad</label>
+                    @Html.TextBoxFor(m => m.IdentityCard, new { @class = "form-control" })
+                    <small class="form-text text-muted">Sin puntos ni letras.</small>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Ciudad / localidad</label>
-                        @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.City, null, new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Código postal</label>
-                        @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.PostalCode, null, new { @class = "text-danger" })
-                    </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Nacionalidad</label>
+                    @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Country, null, new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Páginas web</label>
+                    @Html.TextBoxFor(m => m.WebPageUrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.WebPageUrl, null, new { @class = "text-danger" })
+                    <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
+                </div>
+            </div>
+        </div>
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Fecha de nacimiento</label>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6">
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-3">
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Nº documento de identidad</label>
-                        @Html.TextBoxFor(m => m.IdentityCard, new { @class = "form-control" })
-                        <small class="form-text text-muted">Sin puntos ni letras.</small>
-                    </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>LinkedIn</label>
+                    @Html.TextBoxFor(m => m.LinkedInUrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LinkedInUrl, null, new { @class = "text-danger" })
+                    <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
                 </div>
             </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Github</label>
+                    @Html.TextBoxFor(m => m.GithubUrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.GithubUrl, null, new { @class = "text-danger" })
+                    <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
+                </div>
+            </div>
+        </div>
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Nacionalidad</label>
-                        @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Country, null, new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Páginas web</label>
-                        @Html.TextBoxFor(m => m.WebPageUrl, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.WebPageUrl, null, new { @class = "text-danger" })
-                        <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
-                    </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Facebook</label>
+                    @Html.TextBoxFor(m => m.FacebookUrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FacebookUrl, null, new { @class = "text-danger" })
+                    <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>LinkedIn</label>
-                        @Html.TextBoxFor(m => m.LinkedInUrl, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.LinkedInUrl, null, new { @class = "text-danger" })
-                        <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Github</label>
-                        @Html.TextBoxFor(m => m.GithubUrl, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.GithubUrl, null, new { @class = "text-danger" })
-                        <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
-                    </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Twitter</label>
+                    @Html.TextBoxFor(m => m.TwitterUrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.TwitterUrl, null, new { @class = "text-danger" })
+                    <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Facebook</label>
-                        @Html.TextBoxFor(m => m.FacebookUrl, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.FacebookUrl, null, new { @class = "text-danger" })
-                        <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Twitter</label>
-                        @Html.TextBoxFor(m => m.TwitterUrl, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.TwitterUrl, null, new { @class = "text-danger" })
-                        <small class="form-text text-muted">Si hay más de uno, separar con coma.</small>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <button type="submit" class="d-none">Guardar</button>
-    </div>
+        </div>
+    </fieldset>
+    <fieldset class="row">
+        <div class="col text-center">
+            <button type="submit" class="btn btn-success">Guardar cambios</button>
+        </div>
+    </fieldset>
 }

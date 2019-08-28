@@ -21,7 +21,7 @@ namespace CVBuilder.Data
             //command.Parameters.Add(new SqlParameter("@name", data.Name));
             //command.Parameters.Add(new SqlParameter("@lastname", data.LastName));
             //return command.ExecuteNonQuery();
-            int rowsAffected = _db.Context.usp_PersonalDetails_Create(
+            int result = _db.Context.usp_PersonalDetails_Create(
                             data.Name,
                             data.LastName,
                             data.Email,
@@ -47,7 +47,7 @@ namespace CVBuilder.Data
                             data.ID_Curriculum
                     );
             _db.Context.SaveChanges();
-            return rowsAffected;
+            return result;
         }
     }
 }

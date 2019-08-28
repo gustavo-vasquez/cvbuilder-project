@@ -11,7 +11,7 @@ namespace CVBuilder.Controllers
 {
     public class CurriculumController : Controller
     {
-        private PersonalDetailsSL serviceLayer = new PersonalDetailsSL();
+        private PersonalDetailsSL _serviceLayer = new PersonalDetailsSL();
 
         // GET: Curriculum
         [HttpGet]
@@ -35,7 +35,7 @@ namespace CVBuilder.Controllers
             dto.Summary = model.PersonalDetails.Summary;
             dto.SummaryIsVisible = true;
 
-            int rowsAffected = serviceLayer.Create(dto);
+            int rowsAffected = _serviceLayer.Create(dto);
             if (rowsAffected > 0)
                 return RedirectToAction("Index", "Home");
             else
@@ -61,11 +61,16 @@ namespace CVBuilder.Controllers
             dto.Summary = model.Summary;
             dto.SummaryIsVisible = true;
 
-            int rowsAffected = serviceLayer.Create(dto);
-            if (rowsAffected > 0)
+            if (_serviceLayer.Create(dto) > 0)
                 return RedirectToAction("Index", "Home");
             else
                 return RedirectToAction("SignIn", "Account");
+        }
+
+        [HttpGet]
+        public PartialViewResult GetSectionForm()
+        {
+            return PartialView("_StudiesForm", new StudiesViewModel());
         }
     }
 }

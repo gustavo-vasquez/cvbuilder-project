@@ -1,0 +1,105 @@
+﻿@model CVBuilder.ViewModels.Curriculum.StudiesViewModel
+
+@using (Ajax.BeginForm("Studies", "Curriculum", new AjaxOptions() { HttpMethod = "POST" }, new { id = "studies_form" }))
+{
+    <fieldset>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Título académico</label>
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control", autofocus = "true" })
+                    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Instituto</label>
+                    @Html.TextBoxFor(m => m.Institute, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Institute, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Ciudad</label>
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.City, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Fecha de ingreso</label>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <select class="form-control" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4">
+                            <select class="form-control" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Fecha de finalización</label>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <select class="form-control" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4">
+                            <select class="form-control" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Información adicional</label>
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "3", placeholder = "Máximo 300 caracteres..." })
+                    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
+        </div>
+        <div class="col-lg-4 text-right">
+            <button type="button" class="btn btn-sm btn-danger remove-block"><i class="far fa-trash-alt"></i> Eliminar</button>
+        </div>
+    </div>
+}

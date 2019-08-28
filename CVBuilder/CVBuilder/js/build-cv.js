@@ -9,7 +9,7 @@ var tabs = {
 };
 
 $(document).ready(function () {
-    loadCVSection(getQsParameterByName("section"));
+    displaySection(getQsParameterByName("section"));
 
 	$('.cv-preview').on('mouseenter', function() {
 		$(this).append('<div class="overlay"></div>');
@@ -25,7 +25,7 @@ $(document).ready(function () {
 			if($(this).data("value") == tabs.sections[i]) {
 				tabs.active = i;
 
-				$('form[id$="_form"]').css({'animation-name': 'slideDown', '-webkit-animation-name': 'slideDown'});
+				$('.cv-sections .card-body').css({ 'animation-name': 'slideDown', '-webkit-animation-name': 'slideDown' });
 				$('#' + tabs.sections[i]).removeClass('d-none');
 				$(this).addClass('active');
 
@@ -52,6 +52,8 @@ $(document).ready(function () {
 		}
 	});
 
+	$('.add-block').on('click', getSectionForm);
+
 	$('#previous_page').on('click', function() {
 		var currentPosition = tabs.active;
 
@@ -65,7 +67,7 @@ $(document).ready(function () {
 			if(currentPosition == 0)
 				$(this).prop('disabled', true);
 
-			$('form[id$="_form"]').css({'animation-name': 'slideRight', '-webkit-animation-name': 'slideRight'});
+		    $('.cv-sections .card-body').css({ 'animation-name': 'slideRight', '-webkit-animation-name': 'slideRight' });
 			$('#' + tabs.sections[currentPosition]).removeClass('d-none');
 			tabs.active = currentPosition;
 
@@ -76,7 +78,6 @@ $(document).ready(function () {
 
 	$('#next_page').on('click', function () {
 	    var currentPosition = tabs.active;
-	    $('#' + tabs.sections[currentPosition] + '_form').trigger('submit');
 
 		if(currentPosition >= 0 && currentPosition < tabs.sections.length) {
 			$('#' + tabs.sections[currentPosition]).addClass('d-none');
@@ -88,7 +89,7 @@ $(document).ready(function () {
 			if(currentPosition == tabs.sections.length - 1)
 				$(this).prop('disabled', true);
 			
-			$('form[id$="_form"]').css({'animation-name': 'slideLeft', '-webkit-animation-name': 'slideLeft'});
+		    $('.cv-sections .card-body').css({ 'animation-name': 'slideLeft', '-webkit-animation-name': 'slideLeft' });
 			$('#' + tabs.sections[currentPosition]).removeClass('d-none');
 			tabs.active = currentPosition;
 
@@ -102,10 +103,10 @@ $(document).ready(function () {
 
 	$(window).scrollStopped(function (ev) {
 	    //console.log(ev);
-	    isFormActionsWrapperInView();
+	    navigationButtonsWrapperInView();
 	});
 
-	isFormActionsWrapperInView();
+	navigationButtonsWrapperInView();
 });
 
 // FUNCIONES
@@ -127,7 +128,7 @@ function getQsParameterByName(name) {
     }
 }
 
-function loadCVSection(sectionName) {
+function displaySection(sectionName) {
     for (var i = 0; i < tabs.sections.length; i++) {
         if (sectionName == tabs.sections[i]) {
             tabs.active = i;
@@ -181,15 +182,36 @@ $.fn.scrollStopped = function (callback) {
     });
 };
 
-function isFormActionsWrapperInView() {
-    var $element = $('#form_actions');
-    var isElementInView = Utils.isElementInView($('#form_actions_wrapper'), false);
+function navigationButtonsWrapperInView() {
+    var $element = $('#navigation_buttons');
+    var isElementInView = Utils.isElementInView($('#navigation_buttons_wrapper'), false);
 
     if (isElementInView) {
-        if ($element.hasClass('form-actions-fixed'))
-            $element.removeClass('form-actions-fixed');
+        if ($element.hasClass('navigation-buttons-fixed'))
+            $element.removeClass('navigation-buttons-fixed');
     } else {
-        if (!$element.hasClass('form-actions-fixed'))
-            $element.addClass('form-actions-fixed');
+        if (!$element.hasClass('navigation-buttons-fixed'))
+            $element.addClass('navigation-buttons-fixed');
     }
+}
+
+function getSectionForm() {
+    var $addBlockButton = $(this);
+
+    $.ajax({
+        url: "/Curriculum/GetSectionForm",
+        type: "GET",
+        contentType: "application/x-www-form-urlencoded",
+        dataType: "html",
+        success: function (result, status, xhr) {
+            $('#' + $addBlockButton.data('value')).append(result);
+            $addBlockButton.toggleClass('d-none');
+            $('.remove-block').on('click', { addBlockButton: $addBlockButton }, deleteSectionBlock);
+        }
+    });
+}
+
+function deleteSectionBlock(e) {
+    $(this).closest('form').remove();
+    e.data.addBlockButton.toggleClass('d-none');
 }

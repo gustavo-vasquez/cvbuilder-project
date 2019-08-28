@@ -1,0 +1,29 @@
+﻿@model CVBuilder.ViewModels.Curriculum.InterestsViewModel
+
+@using (Ajax.BeginForm("Interests", "Curriculum", new AjaxOptions() { HttpMethod = "POST" }, new { id = "interests_form" }))
+{
+    <fieldset>
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Nombre de la actividad</label>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Ej: Jugar" })
+                    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="row mb-4">
+        <div class="col-lg-8">
+            <div class="btn-group">
+                <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
+            </div>
+        </div>
+        <div class="col-lg-4 text-right">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
+        </div>
+    </fieldset>
+    
+}

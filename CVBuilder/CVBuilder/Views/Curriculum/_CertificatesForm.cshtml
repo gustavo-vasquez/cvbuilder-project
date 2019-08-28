@@ -1,0 +1,75 @@
+﻿@model CVBuilder.ViewModels.Curriculum.CertificatesViewModel
+
+@using (Ajax.BeginForm("Certificates", "Curriculum", new AjaxOptions() { HttpMethod = "POST" }, new { id = "certificates_form" }))
+{
+    <fieldset>
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Nombre del certificado</label>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Instituto / establecimiento</label>
+                    @Html.TextBoxFor(m => m.Institute, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Institute, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                        <label class="custom-control-label" for="customCheck1">Por internet</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                <label class="custom-control-label" for="customCheck1">En la actualidad</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <select class="form-control" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Información adicional</label>
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "3", placeholder = "Máximo 300 caracteres..." })
+                    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="row mb-4">
+        <div class="col-lg-8">
+            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
+        </div>
+        <div class="col-lg-4 text-right">
+            <button type="button" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
+        </div>
+    </fieldset>
+}

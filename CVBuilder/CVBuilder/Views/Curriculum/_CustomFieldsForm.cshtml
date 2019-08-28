@@ -1,0 +1,36 @@
+﻿@model CVBuilder.ViewModels.Curriculum.CustomFieldsViewModel
+
+@using (Ajax.BeginForm("CustomFields", "Curriculum", new AjaxOptions() { HttpMethod = "POST" }, new { id = "custom_fields_form" }))
+{
+    <fieldset>
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Nombre de la sección</label>
+                    @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control", placeholder = "Ej: Emprendimientos" })
+                    @Html.ValidationMessageFor(m => m.SectionName, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Descripción</label>
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "3", placeholder = "Sin límite de caracteres..." })
+                    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="row mb-4">
+        <div class="col-lg-8">
+            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
+        </div>
+        <div class="col-lg-4 text-right">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
+        </div>
+    </fieldset>
+}

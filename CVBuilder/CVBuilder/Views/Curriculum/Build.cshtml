@@ -9,7 +9,7 @@
 
 <section class="building-cv">
 
-    <div class="container"> <a href="@Url.Action("Build", "Curriculum", new { section = "studies_experiencies" })">HOLA QUE ONDA</a>
+    <div class="container">
         <div class="row list-group-row">
             <div class="col">
                 <div class="list-group tabs-group mb-3">
@@ -42,23 +42,30 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9">
-                
-                    <div class="card border-success form-sections-wrapper mb-3">
-                        @Html.Partial("_PersonalDetailsForm", Model.PersonalDetails)
-
-                        <div id="studies_experiencies" class="card-body d-none">
-                            <fieldset>
-                                <legend>Estudios</legend>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                            <label class="custom-control-label" for="customSwitch1">Visible</label>
-                                        </div>
+            <div class="col-lg-9 cv-sections">
+                <div id="personal_details" class="d-none">
+                    <div class="card border-success overflow-hidden mb-3">
+                        <div class="card-body">
+                            <h4>Detalles personales</h4>
+                            @Html.Partial("_PersonalDetailsForm", Model.PersonalDetails)
+                        </div>
+                    </div>
+                </div>
+                <div id="studies_experiencies" class="d-none">
+                    <div class="card border-success overflow-hidden mb-3">
+                        <div id="studies" class="card-body">
+                            <h4>Estudios</h4>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
                                     </div>
                                 </div>
+                            </div>
 
+                            @if (Model.Studies.Count > 0)
+                            {
                                 <div class="row mb-4">
                                     <div class="col contracted-block-group">
                                         <div class="card bg-light contracted-block mb-3">
@@ -77,127 +84,31 @@
                                         <hr />
                                     </div>
                                 </div>
+                                <hr class="mb-4" />
+                            }
 
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Título académico</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Si hay más de uno, separar con coma (300 caract. max.)</small>
-                                        </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button type="button" class="btn btn-outline-secondary add-block mb-3" data-value="studies"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card border-success overflow-hidden mb-3">
+                        <div class="card-body">
+                            <h4>Certificados / cursos</h4>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Instituto</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Si hay más de uno, separar con coma (300 caract. max.)</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Ciudad</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Si hay más de uno, separar con coma (300 caract. max.)</small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Fecha de ingreso</label>
-                                            <div class="row">
-                                                <div class="col-lg-8">
-                                                    <select class="form-control" id="exampleSelect1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <select class="form-control" id="exampleSelect1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Fecha de finalización</label>
-                                            <div class="row">
-                                                <div class="col-lg-8">
-                                                    <select class="form-control" id="exampleSelect1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <select class="form-control" id="exampleSelect1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="exampleTextarea">Información adicional</label>
-                                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Máximo 300 caracteres..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-lg-8">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 text-right">
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <hr class="mb-4" />
-                                        <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <hr class="section-item-separator mb-4">
-                            <fieldset>
-                                <legend>Certificados / cursos</legend>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                            <label class="custom-control-label" for="customSwitch1">Visible</label>
-                                        </div>
-                                    </div>
-                                </div>
-
+                            @if (Model.Certificates.Count > 0)
+                            {
                                 <div class="row mb-4">
                                     <div class="col contracted-block-group">
                                         <div class="card bg-light contracted-block mb-3">
@@ -216,97 +127,31 @@
                                         <hr />
                                     </div>
                                 </div>
+                            }
 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Nombre del certificado</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Si hay más de uno, separar con coma (300 caract. max.)</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Instituto / establecimiento</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                            <small id="emailHelp" class="form-text text-muted">Si hay más de uno, separar con coma (300 caract. max.)</small>
-                                        </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <hr class="mb-4" />
+                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card border-success overflow-hidden mb-3">
+                        <div class="card-body">
+                            <h4>Experiencia laboral</h4>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-                                                <label class="custom-control-label" for="customCheck1">Por internet</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-lg-8">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-                                                        <label class="custom-control-label" for="customCheck1">En la actualidad</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <select class="form-control" id="exampleSelect1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="exampleTextarea">Información adicional</label>
-                                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Máximo 300 caracteres..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-lg-8">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 text-right">
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <hr class="mb-4" />
-                                        <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <hr class="section-item-separator mb-4">
-                            <fieldset>
-                                <legend>Experiencia laboral</legend>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                            <label class="custom-control-label" for="customSwitch1">Visible</label>
-                                        </div>
-                                    </div>
-                                </div>
-
+                            @if (Model.WorkExperiences.Count > 0)
+                            {
                                 <div class="row mb-4">
                                     <div class="col contracted-block-group">
                                         <div class="card bg-light contracted-block mb-3">
@@ -325,196 +170,32 @@
                                         <hr />
                                     </div>
                                 </div>
+                            }
 
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Puesto de trabajo</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <hr class="mb-4" />
+                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Empresa</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Ciudad</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Fecha de ingreso</label>
-                                            <div class="row">
-                                                <div class="col-lg-8">
-                                                    <select class="form-control" id="exampleSelect1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <select class="form-control" id="exampleSelect1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Fecha de finalización</label>
-                                            <div class="row">
-                                                <div class="col-lg-8">
-                                                    <select class="form-control" id="exampleSelect1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <select class="form-control" id="exampleSelect1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="exampleTextarea">Información adicional</label>
-                                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Máximo 300 caracteres..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-lg-8">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 text-right">
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <hr class="mb-4" />
-                                        <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
-                                    </div>
-                                </div>
-                            </fieldset>
+                            </div>
                         </div>
-
-                        <div id="other_information" class="card-body d-none">
-                            <fieldset>
-                                <legend>Habilidades informáticas</legend>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                            <label class="custom-control-label" for="customSwitch1">Visible</label>
-                                        </div>
+                    </div>
+                </div>
+                <div id="other_information" class="d-none">
+                    <div class="card border-success overflow-hidden mb-3">
+                        <div class="card-body">
+                            <h4>Idiomas</h4>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row mb-4">
-                                    <div class="col contracted-block-group">
-                                        <div class="card bg-light contracted-block mb-3">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-lg-8">
-                                                        <h5>Microsoft Excel 2010</h5>
-                                                    </div>
-                                                    <div class="col-lg-4 text-right">
-                                                        <button type="submit" class="btn btn-sm" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-                                                        <button type="submit" class="btn btn-sm" title="Eliminar"><i class="far fa-trash-alt"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Nombre del programa</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ej: Microsoft Word">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Nivel</label>
-                                            <select class="form-control" id="exampleSelect1">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-lg-8">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 text-right">
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <hr class="mb-4" />
-                                        <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <hr class="section-item-separator mb-4">
-                            <fieldset>
-                                <legend>Idiomas</legend>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                            <label class="custom-control-label" for="customSwitch1">Visible</label>
-                                        </div>
-                                    </div>
-                                </div>
-
+                            @if (Model.Languages.Count > 0)
+                            {
                                 <div class="row mb-4">
                                     <div class="col contracted-block-group">
                                         <div class="card bg-light contracted-block mb-3">
@@ -533,59 +214,74 @@
                                         <hr />
                                     </div>
                                 </div>
+                            }
 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Idioma</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ej: Español">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Nivel</label>
-                                            <select class="form-control" id="exampleSelect1">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <hr class="mb-4" />
+                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card border-success overflow-hidden mb-3">
+                        <div class="card-body">
+                            <h4>Habilidades informáticas</h4>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
                                     </div>
                                 </div>
+                            </div>
 
+                            @if (Model.Skills.Count > 0)
+                            {
                                 <div class="row mb-4">
-                                    <div class="col-lg-8">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
+                                    <div class="col contracted-block-group">
+                                        <div class="card bg-light contracted-block mb-3">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-8">
+                                                        <h5>Microsoft Excel 2010</h5>
+                                                    </div>
+                                                    <div class="col-lg-4 text-right">
+                                                        <button type="submit" class="btn btn-sm" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                                                        <button type="submit" class="btn btn-sm" title="Eliminar"><i class="far fa-trash-alt"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 text-right">
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
+                                        <hr />
                                     </div>
                                 </div>
+                            }
 
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <hr class="mb-4" />
-                                        <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <hr class="mb-4" />
+                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card border-success overflow-hidden mb-3">
+                        <div class="card-body">
+                            <h4>Intereses / Hobbies</h4>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
                                     </div>
                                 </div>
-                            </fieldset>
+                            </div>
 
-                            <hr class="section-item-separator mb-4">
-                            <fieldset>
-                                <legend>Intereses / Hobbies</legend>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                            <label class="custom-control-label" for="customSwitch1">Visible</label>
-                                        </div>
-                                    </div>
-                                </div>
-
+                            @if (Model.Interests.Count > 0)
+                            {
                                 <div class="row mb-4">
                                     <div class="col contracted-block-group">
                                         <div class="card bg-light contracted-block mb-3">
@@ -604,47 +300,31 @@
                                         <hr />
                                     </div>
                                 </div>
+                            }
 
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Nombre de la actividad</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ej: Jugar">
-                                        </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <hr class="mb-4" />
+                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card border-success overflow-hidden mb-3">
+                        <div class="card-body">
+                            <h4>Referencias personales</h4>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row mb-4">
-                                    <div class="col-lg-8">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 text-right">
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <hr class="mb-4" />
-                                        <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <hr class="section-item-separator mb-4">
-                            <fieldset>
-                                <legend>Referencias personales</legend>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                            <label class="custom-control-label" for="customSwitch1">Visible</label>
-                                        </div>
-                                    </div>
-                                </div>
-
+                            @if (Model.PersonalReferences.Count > 0)
+                            {
                                 <div class="row mb-4">
                                     <div class="col contracted-block-group">
                                         <div class="card bg-light contracted-block mb-3">
@@ -663,79 +343,32 @@
                                         <hr />
                                     </div>
                                 </div>
+                            }
 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Nombre y apellido del contacto</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Empresa</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <hr class="mb-4" />
+                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Correo electrónico</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Teléfono fijo / móvil</label>
-                                            <div class="row">
-                                                <div class="input-group col-lg-5">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><b>+</b></span>
-                                                    </div>
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Cod. área">
-                                                </div>
-                                                <div class="col-lg-7">
-                                                    <input type="text" class="form-control" id="exampleInputPassword1">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-lg-8">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 text-right">
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <hr class="mb-4" />
-                                        <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
-                                    </div>
-                                </div>
-                            </fieldset>
+                            </div>
                         </div>
-
-                        <div id="custom_fields" class="card-body d-none">
-                            <fieldset>
-                                <legend>Campos personalizados</legend>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                            <label class="custom-control-label" for="customSwitch1">Visible</label>
-                                        </div>
+                    </div>
+                </div>
+                <div id="custom_fields" class="d-none">
+                    <div class="card border-success overflow-hidden mb-3">
+                        <div class="card-body">
+                            <h4>Campos personalizados</h4>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
                                     </div>
                                 </div>
+                            </div>
 
+                            @if (Model.CustomFields.Count > 0)
+                            {
                                 <div class="row mb-4">
                                     <div class="col contracted-block-group">
                                         <div class="card bg-light contracted-block mb-3">
@@ -754,59 +387,30 @@
                                         <hr />
                                     </div>
                                 </div>
+                            }
 
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Nombre de la sección</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ej: emprendimientos">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <hr class="mb-4" />
+                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="exampleTextarea">Descripción</label>
-                                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Sin límite de caracteres..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-lg-8">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 text-right">
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <hr class="mb-4" />
-                                        <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div id="form_actions_wrapper">
-                        <div id="form_actions" class="row">
-                            <div class="col-lg-7 col-sm-3">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button id="previous_page" type="button" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i> Anterior</button>
-                                    <button id="next_page" type="button" class="btn btn-success">Siguiente <i class="fas fa-arrow-alt-circle-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 col-sm-9 text-right">
-                                <button type="button" class="btn btn-success"><i class="fas fa-save"></i> Guardar CV</button>
                             </div>
                         </div>
                     </div>
-                
+                </div>
+                <div id="navigation_buttons_wrapper">
+                    <div id="navigation_buttons" class="row">
+                        <div class="col-lg-7 col-sm-3">
+                            <div class="btn-group">
+                                <button id="previous_page" type="button" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i> Anterior</button>
+                                <button id="next_page" type="button" class="btn btn-success">Siguiente <i class="fas fa-arrow-alt-circle-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-sm-9 text-right">
+                            <button type="button" class="btn btn-success"><i class="fas fa-save"></i> Finalizar CV</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

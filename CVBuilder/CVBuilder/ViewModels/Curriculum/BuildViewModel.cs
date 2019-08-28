@@ -16,7 +16,7 @@ namespace CVBuilder.ViewModels.Curriculum
         public List<SkillsViewModel> Skills { get; set; }
         public List<InterestsViewModel> Interests { get; set; }
         public List<PersonalReferencesViewModel> PersonalReferences { get; set; }
-        public List<CustomSectionsViewModel> CustomSections { get; set; }
+        public List<CustomFieldsViewModel> CustomFields { get; set; }
 
         public BuildViewModel()
         {
@@ -28,7 +28,7 @@ namespace CVBuilder.ViewModels.Curriculum
             Skills = new List<SkillsViewModel>();
             Interests = new List<InterestsViewModel>();
             PersonalReferences = new List<PersonalReferencesViewModel>();
-            CustomSections = new List<CustomSectionsViewModel>();
+            CustomFields = new List<CustomFieldsViewModel>();
         }
     }
 }

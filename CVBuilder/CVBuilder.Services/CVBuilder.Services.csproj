@@ -52,6 +52,7 @@
     <Compile Include="DTOs\StudiesDTO.cs" />
     <Compile Include="DTOs\WorkExperiencesDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudiesSL.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

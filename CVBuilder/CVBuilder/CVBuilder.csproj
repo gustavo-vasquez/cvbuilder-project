@@ -249,7 +249,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Curriculum\BuildViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\CertificatesViewModel.cs" />
-    <Compile Include="ViewModels\Curriculum\CustomSectionsViewModel.cs" />
+    <Compile Include="ViewModels\Curriculum\CustomFieldsViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\InterestsViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\LanguagesViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\PersonalDetailsViewModel.cs" />
@@ -307,6 +307,14 @@
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Curriculum\Build.cshtml" />
     <Content Include="Views\Curriculum\_PersonalDetailsForm.cshtml" />
+    <Content Include="Views\Curriculum\_StudiesForm.cshtml" />
+    <Content Include="Views\Curriculum\_CertificatesForm.cshtml" />
+    <Content Include="Views\Curriculum\_WorkExperiencesForm.cshtml" />
+    <Content Include="Views\Curriculum\_LanguagesForm.cshtml" />
+    <Content Include="Views\Curriculum\_SkillsForm.cshtml" />
+    <Content Include="Views\Curriculum\_InterestsForm.cshtml" />
+    <Content Include="Views\Curriculum\_PersonalReferencesForm.cshtml" />
+    <Content Include="Views\Curriculum\_CustomFieldsForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

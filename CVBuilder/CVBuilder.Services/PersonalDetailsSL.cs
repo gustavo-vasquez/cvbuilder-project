@@ -10,7 +10,7 @@ namespace CVBuilder.Services
 {
     public class PersonalDetailsSL
     {
-        private PersonalDetailsDL dataLayer = new PersonalDetailsDL();
+        private PersonalDetailsDL _dataLayer = new PersonalDetailsDL();
 
         public int Create(PersonalDetailsDTO dto)
         {
@@ -23,7 +23,7 @@ namespace CVBuilder.Services
             data.SummaryIsVisible = dto.SummaryIsVisible;
             data.ID_Curriculum = 1;
 
-            return dataLayer.Create(data);
+            return _dataLayer.Create(data);
         }
     }
 }

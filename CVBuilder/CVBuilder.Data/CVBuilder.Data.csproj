@@ -99,6 +99,7 @@
     <Compile Include="Studies.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="StudiesDL.cs" />
     <Compile Include="Templates.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>

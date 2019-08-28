@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.ViewModels.Curriculum
 {
-    public class CustomSectionsViewModel
+    public class CustomFieldsViewModel
     {
         [Required(ErrorMessage = "Completar este campo.")]
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]

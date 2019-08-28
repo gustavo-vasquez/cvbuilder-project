@@ -1,14 +1,8 @@
-.form-sections-wrapper {
-	overflow: hidden;
-}
-
-form[id$="_form"] {
-	/*-webkit-animation: anim 3.5s 1;
-  	animation: anim 3.5s 1;*/
-  	animation-name: slideLeft;
+.cv-sections .card-body {
+  	animation-name: slideDown;
   	animation-duration: 3.5s;
   	animation-iteration-count: 1;
-  	-webkit-animation-name: slideLeft;
+  	-webkit-animation-name: slideDown;
   	-webkit-animation-duration: 3.5s;
   	-webkit-animation-iteration-count: 1;
 }
@@ -88,7 +82,7 @@ form[id$="_form"] {
 	border-style: dashed;
 }
 
-.form-actions-fixed {
+.navigation-buttons-fixed {
     position: fixed;
     padding-bottom: 10px;
     padding-top: 10px;
@@ -181,6 +175,30 @@ form[id$="_form"] {
 @keyframes slideDown {
   0% {
     transform: translateY(-100%);
+  }
+  14.28% {
+    transform: translateY(0);
+  }
+  85.71% {
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  }
+  14.28% {
+    transform: translateY(0);
+  }
+  85.71% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
   }
   14.28% {
     transform: translateY(0);
