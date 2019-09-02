@@ -79,3 +79,11 @@ section a:hover {
 	color: white;
 	background-color: unset;
 }
+
+/*.btn-dock {
+    width: 100%;
+    border-radius: unset;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}*/

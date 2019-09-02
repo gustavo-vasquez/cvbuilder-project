@@ -82,6 +82,15 @@
 	border-style: dashed;
 }
 
+form[id$=_form] {
+  	animation-name: slideUp;
+  	animation-duration: 3.5s;
+  	animation-iteration-count: 1;
+  	-webkit-animation-name: slideUp;
+  	-webkit-animation-duration: 3.5s;
+  	-webkit-animation-iteration-count: 1;
+}
+
 .navigation-buttons-fixed {
     position: fixed;
     padding-bottom: 10px;

@@ -215,3 +215,18 @@ function deleteSectionBlock(e) {
     $(this).closest('form').remove();
     e.data.addBlockButton.toggleClass('d-none');
 }
+
+function onSectionFormSuccessful() {
+    var elementId = $(this).parent().attr('id');
+
+    $.ajax({
+        url: "/Curriculum/GetSectionBlock",
+        type: "GET",
+        data: { area: elementId },
+        contentType: "application/x-www-form-urlencoded",
+        dataType: "html",
+        success: function (result, status, xhr) {
+            $('#' + elementId + ' .contracted-block-group').append(result);
+        }
+    });
+}

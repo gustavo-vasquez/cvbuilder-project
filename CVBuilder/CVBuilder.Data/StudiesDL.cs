@@ -24,8 +24,19 @@ namespace CVBuilder.Data
                     data.IsVisible,
                     data.ID_Curriculum
                 );
+            _db.Context.SaveChanges();
 
             return result;
+        }
+
+        public IQueryable<Studies> GetAllStudies()
+        {
+            return _db.Context.Studies.Where(s => s.ID_Curriculum == 1);
+        }
+
+        public Studies GetLastStudy()
+        {
+            return _db.Context.Studies.OrderByDescending(p => p.StudyID).First();
         }
     }
 }

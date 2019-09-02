@@ -233,6 +233,8 @@
     <Content Include="lib\jquery\jquery.min.js" />
     <Content Include="lib\jquery\jquery.slim.js" />
     <Content Include="lib\jquery\jquery.slim.min.js" />
+    <Content Include="lib\jquery\jquery.unobtrusive-ajax.js" />
+    <Content Include="lib\jquery\jquery.unobtrusive-ajax.min.js" />
     <Content Include="lib\simple-line-icons\css\simple-line-icons.css" />
     <Content Include="lib\simple-line-icons\fonts\Simple-Line-Icons.svg" />
     <Content Include="Web.config" />
@@ -256,6 +258,7 @@
     <Compile Include="ViewModels\Curriculum\PersonalReferencesViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\SkillsViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\StudiesViewModel.cs" />
+    <Compile Include="ViewModels\Curriculum\SummaryBlockViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\WorkExperiencesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +318,7 @@
     <Content Include="Views\Curriculum\_InterestsForm.cshtml" />
     <Content Include="Views\Curriculum\_PersonalReferencesForm.cshtml" />
     <Content Include="Views\Curriculum\_CustomFieldsForm.cshtml" />
+    <Content Include="Views\Curriculum\_StudyBlock.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
