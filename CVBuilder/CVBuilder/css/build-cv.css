@@ -65,12 +65,18 @@
 	text-transform: uppercase;
 }
 
-.contracted-block h5 {
-	margin-top: 0.4em;
+.cv-sections h4 {
+    font-weight: 400;
 }
 
-.contracted-block button {
-	font-size: larger;
+.contracted-block h5 {
+    font-size: 18px;
+	position: relative;
+    top: 25%;
+}
+
+.edit-block, .remove-block {
+	font-size: 18px;
 	padding-left: 0.8em;
 	padding-right: 0.8em;
 }
@@ -101,6 +107,7 @@ form[id$=_form] {
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.9);
     border-top: 1px solid rgba(0, 0, 0, 0.25);
+    z-index: 1;
 }
 
 @media (min-width: 576px) {

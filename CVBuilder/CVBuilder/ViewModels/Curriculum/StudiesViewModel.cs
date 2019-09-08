@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CVBuilder.enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,5 +29,8 @@ namespace CVBuilder.ViewModels.Curriculum
         [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
         public string Description { get; set; }
         public bool IsVisible { get; set; }
+
+        public DateDropdownList StartPeriod = new DateDropdownList(DateType.CurriculumStartPeriod);
+        public DateDropdownList EndPeriod = new DateDropdownList(DateType.CurriculumEndPeriod);
     }
 }

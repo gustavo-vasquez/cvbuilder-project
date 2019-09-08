@@ -2,8 +2,8 @@
 
 @using (Ajax.BeginForm("Studies", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful" }, new { id = "studies_form" }))
 {
+    <hr />
     <fieldset>
-        <legend class="text-muted">Nuevo estudio</legend>
         @Html.AntiForgeryToken()
 
         <div class="row">
@@ -36,50 +36,26 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Fecha de ingreso</label>
+                    <label>Fecha de ingreso</label>
                     <div class="row">
                         <div class="col-lg-8">
-                            <select class="form-control" id="exampleSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            @Html.DropDownListFor(m => m.StartMonth, Model.StartPeriod.Months, new { @class = "form-control" })
                         </div>
                         <div class="col-lg-4">
-                            <select class="form-control" id="exampleSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            @Html.DropDownListFor(m => m.StartYear, Model.StartPeriod.Years, new { @class = "form-control" })
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Fecha de finalización</label>
+                    <label>Fecha de finalización</label>
                     <div class="row">
                         <div class="col-lg-8">
-                            <select class="form-control" id="exampleSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            @Html.DropDownListFor(m => m.EndMonth, Model.EndPeriod.Months, new { @class = "form-control" })
                         </div>
                         <div class="col-lg-4">
-                            <select class="form-control" id="exampleSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            @Html.DropDownListFor(m => m.EndYear, Model.EndPeriod.Years, new { @class = "form-control" })
                         </div>
                     </div>
                 </div>
@@ -101,14 +77,8 @@
         <div class="col">
             <div class="btn-group btn-block">
                 <button type="submit" class="btn btn-sm btn-outline-success"><i class="fas fa-check"></i> Hecho</button>&nbsp;
-                <button type="button" class="btn btn-sm btn-outline-danger remove-block"><i class="far fa-trash-alt"></i> Eliminar</button>
+                <button type="button" class="btn btn-sm btn-outline-danger remove-form-block"><i class="far fa-trash-alt"></i> Eliminar</button>
             </div>
         </div>
-        @*<div class="col-lg-8">
-            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
-        </div>
-        <div class="col-lg-4 text-right">
-            <button type="button" class="btn btn-sm btn-danger remove-block"><i class="far fa-trash-alt"></i> Eliminar</button>
-        </div>*@
     </div>
 }

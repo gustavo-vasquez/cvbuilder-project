@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CVBuilder.enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -46,7 +47,9 @@ namespace CVBuilder.ViewModels.Curriculum
 
         [MaxLength(10, ErrorMessage = "Máximo 10 números.")]
         public int? MobilePhone { get; set; }
-        public DateTime BirthDate { get; set; }
+        public int? Day { get; set; }
+        public string Month { get; set; }
+        public int? Year { get; set; }
         public int? IdentityCard { get; set; }
 
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
@@ -74,5 +77,7 @@ namespace CVBuilder.ViewModels.Curriculum
 
         [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
         public string TwitterUrl { get; set; }
+
+        public DateDropdownList BirthDate = new DateDropdownList(DateType.Birthday);
     }
 }

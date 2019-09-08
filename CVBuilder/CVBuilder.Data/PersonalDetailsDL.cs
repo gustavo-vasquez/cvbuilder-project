@@ -49,5 +49,10 @@ namespace CVBuilder.Data
             _db.Context.SaveChanges();
             return result;
         }
+
+        public PersonalDetails GetPersonalDetailsByCurriculumId(int id)
+        {
+            return _db.Context.PersonalDetails.Where(p => p.ID_Curriculum == id).FirstOrDefault();
+        }
     }
 }

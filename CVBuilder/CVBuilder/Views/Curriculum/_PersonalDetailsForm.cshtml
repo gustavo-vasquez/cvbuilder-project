@@ -119,31 +119,16 @@
                     <label>Fecha de nacimiento</label>
                     <div class="row">
                         <div class="col-lg-3">
-                            <select class="form-control" id="exampleSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            @Html.DropDownListFor(m => m.Day, Model.BirthDate.Days, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Day, null, new { @class = "text-danger" })
                         </div>
                         <div class="col-lg-6">
-                            <select class="form-control" id="exampleSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            @Html.DropDownListFor(m => m.Month, Model.BirthDate.Months, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Day, null, new { @class = "text-danger" })
                         </div>
                         <div class="col-lg-3">
-                            <select class="form-control" id="exampleSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            @Html.DropDownListFor(m => m.Year, Model.BirthDate.Years, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Day, null, new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

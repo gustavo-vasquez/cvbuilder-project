@@ -25,5 +25,36 @@ namespace CVBuilder.Services
 
             return _dataLayer.Create(data);
         }
+
+        public PersonalDetailsDTO GetPersonalDetailsByCurriculumId(int id)
+        {
+            PersonalDetails data = _dataLayer.GetPersonalDetailsByCurriculumId(id);
+
+            return new PersonalDetailsDTO()
+            {
+                Name = data.Name,
+                LastName = data.LastName,
+                Photo = data.Photo,
+                Summary = data.Summary,
+                SummaryCustomTitle = data.SummaryCustomTitle,
+                SummaryIsVisible = data.SummaryIsVisible,
+                Email = data.Email,
+                LinePhone = data.LinePhone,
+                AreaCodeLP = data.AreaCodeLP,
+                MobilePhone = data.MobilePhone,
+                AreaCodeMP = data.AreaCodeMP,
+                Address = data.Address,
+                City = data.City,
+                PostalCode = data.PostalCode,
+                BirthDate = data.BirthDate,
+                IdentityCard = data.IdentityCard,
+                Country = data.Country,
+                WebPageUrl = data.WebPageUrl,
+                LinkedInUrl = data.LinkedInUrl,
+                GithubUrl = data.GithubUrl,
+                FacebookUrl = data.FacebookUrl,
+                TwitterUrl = data.TwitterUrl
+            };
+        }
     }
 }

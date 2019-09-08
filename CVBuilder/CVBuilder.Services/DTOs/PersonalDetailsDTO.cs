@@ -14,13 +14,13 @@ namespace CVBuilder.Services.DTOs
         public byte[] Photo { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public int PostalCode { get; set; }
-        public short AreaCodeLP { get; set; }
-        public int LinePhone { get; set; }
-        public short AreaCodeMP { get; set; }
-        public int MobilePhone { get; set; }
-        public DateTime BirthDate { get; set; }
-        public int IdentityCard { get; set; }
+        public int? PostalCode { get; set; }
+        public short? AreaCodeLP { get; set; }
+        public int? LinePhone { get; set; }
+        public short? AreaCodeMP { get; set; }
+        public int? MobilePhone { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public int? IdentityCard { get; set; }
         public string Country { get; set; }
         public string Summary { get; set; }
         public string SummaryCustomTitle { get; set; }

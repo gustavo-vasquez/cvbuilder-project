@@ -19,9 +19,9 @@ namespace CVBuilder.Controllers
         public ActionResult Build(string section)
         {
             BuildViewModel model = new BuildViewModel();
-            List<SummaryBlockDTO> dto = _studiesService.GetStudyBlocks();
+            List<SummaryBlockDTO> studiesDto = _studiesService.GetStudyBlocks();
 
-            foreach(SummaryBlockDTO block in dto)
+            foreach(SummaryBlockDTO block in studiesDto)
             {
                 model.StudyBlocks.Add(new SummaryBlockViewModel()
                 {
@@ -30,6 +30,30 @@ namespace CVBuilder.Controllers
                     StateInTime = block.StateInTime
                 });
             }
+
+            PersonalDetailsDTO personalDetailsDto = _personalDetailsService.GetPersonalDetailsByCurriculumId(1);
+            model.PersonalDetails.Name = personalDetailsDto.Name;
+            model.PersonalDetails.LastName = personalDetailsDto.LastName;
+            model.PersonalDetails.Photo = personalDetailsDto.Photo;
+            model.PersonalDetails.Summary = personalDetailsDto.Summary;
+            model.PersonalDetails.SummaryCustomTitle = personalDetailsDto.SummaryCustomTitle;
+            model.PersonalDetails.SummaryIsVisible = personalDetailsDto.SummaryIsVisible;
+            model.PersonalDetails.Email = personalDetailsDto.Email;
+            model.PersonalDetails.LinePhone = personalDetailsDto.LinePhone;
+            model.PersonalDetails.AreaCodeLP = personalDetailsDto.AreaCodeLP;
+            model.PersonalDetails.MobilePhone = personalDetailsDto.MobilePhone;
+            model.PersonalDetails.AreaCodeMP = personalDetailsDto.AreaCodeMP;
+            model.PersonalDetails.Address = personalDetailsDto.Address;
+            model.PersonalDetails.City = personalDetailsDto.City;
+            model.PersonalDetails.PostalCode = personalDetailsDto.PostalCode;
+            //model.PersonalDetails.BirthDate = personalDetailsDto.BirthDate;
+            model.PersonalDetails.IdentityCard = personalDetailsDto.IdentityCard;
+            model.PersonalDetails.Country = personalDetailsDto.Country;
+            model.PersonalDetails.WebPageUrl = personalDetailsDto.WebPageUrl;
+            model.PersonalDetails.LinkedInUrl = personalDetailsDto.LinkedInUrl;
+            model.PersonalDetails.GithubUrl = personalDetailsDto.GithubUrl;
+            model.PersonalDetails.FacebookUrl = personalDetailsDto.FacebookUrl;
+            model.PersonalDetails.TwitterUrl = personalDetailsDto.TwitterUrl;
 
             return View(model);
         }
@@ -111,30 +135,12 @@ namespace CVBuilder.Controllers
             return PartialView("_StudiesForm", new StudiesViewModel());
         }
 
-        //[HttpGet]
-        //public PartialViewResult GetSectionBlock(string area)
-        //{
-        //    List<StudiesDTO> dto = _studiesService.GetAllStudies();
-        //    List<StudiesViewModel> model = new List<StudiesViewModel>();
-
-        //    foreach (StudiesDTO study in dto)
-        //    {
-        //        model.Add(new StudiesViewModel()
-        //        {
-        //            Title = study.Title,
-        //            Institute = study.Institute,
-        //            City = study.City,
-        //            StartMonth = study.StartMonth,
-        //            StartYear = study.StartYear,
-        //            EndMonth = study.EndMonth,
-        //            EndYear = study.EndYear,
-        //            Description = study.Description,
-        //            IsVisible = study.IsVisible
-        //        });
-        //    }
-
-        //    return PartialView("_StudiesBlocks", model);
-        //}
+        [HttpGet]
+        public PartialViewResult EditSectionForm(int id)
+        {
+            StudiesViewModel model = new StudiesViewModel();
+            return PartialView("_StudiesForm", model);
+        }
 
         [HttpGet]
         public PartialViewResult GetSectionBlock(string area)
@@ -146,6 +152,12 @@ namespace CVBuilder.Controllers
             model.StateInTime = dto.StateInTime;
 
             return PartialView("_StudyBlock", model);
+        }
+
+        [HttpPost]
+        public void RemoveBlock(int id)
+        {
+            _studiesService.Remove(id);
         }
     }
 }

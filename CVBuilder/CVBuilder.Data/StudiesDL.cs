@@ -29,6 +29,19 @@ namespace CVBuilder.Data
             return result;
         }
 
+        public Studies GetStudyById(int id)
+        {
+            return _db.Context.Studies.Find(id);
+        }
+
+        public int Remove(int id)
+        {
+            int result = _db.Context.usp_Studies_Delete(id);
+            //_db.Context.SaveChanges();
+
+            return result;
+        }
+
         public IQueryable<Studies> GetAllStudies()
         {
             return _db.Context.Studies.Where(s => s.ID_Curriculum == 1);

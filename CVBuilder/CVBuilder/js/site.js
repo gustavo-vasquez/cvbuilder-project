@@ -18,3 +18,14 @@ $(document).ready(function () {
 		location.href = "/Account/SignIn";
 	});
 });
+
+function splashSpinner(display, $element) {
+    switch (display) {
+        case true:
+            $element.closest('div.row').after('<div id="spinner" class="text-center"><img src="/img/spinners/loading.gif" /></div>');
+            break;
+        case false:
+            $('#spinner').remove();
+            break;
+    }
+}

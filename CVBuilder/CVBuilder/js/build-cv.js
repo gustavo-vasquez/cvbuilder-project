@@ -53,9 +53,11 @@ $(document).ready(function () {
 	});
 
 	$('.add-block').on('click', getSectionForm);
+	$('.edit-block').on('click', editSectionForm);
+	$('.remove-block').on('click', removeBlock);
 
 	$('#previous_page').on('click', function() {
-		var currentPosition = tabs.active;
+	    var currentPosition = tabs.active;
 
 		if(currentPosition > 0 && currentPosition < tabs.sections.length) {
 			$('#' + tabs.sections[currentPosition]).addClass('d-none');
@@ -203,15 +205,48 @@ function getSectionForm() {
         type: "GET",
         contentType: "application/x-www-form-urlencoded",
         dataType: "html",
+        beforeSend: function (xhr) {
+            splashSpinner(true, $addBlockButton);
+        },
         success: function (result, status, xhr) {
             $('#' + $addBlockButton.data('value')).append(result);
+            $.validator.unobtrusive.parse("form");
             $addBlockButton.toggleClass('d-none');
-            $('.remove-block').on('click', { addBlockButton: $addBlockButton }, deleteSectionBlock);
+            $('#StartMonth, #EndMonth').on('change', operations);
+            $('.remove-form-block').on('click', { addBlockButton: $addBlockButton }, removeNewBlock);
+        },
+        complete: function (xhr, status) {
+            splashSpinner(false);
         }
     });
 }
 
-function deleteSectionBlock(e) {
+function editSectionForm() {
+    var $editBlockButton = $(this);
+
+    $.ajax({
+        url: "/Curriculum/EditSectionForm",
+        type: "GET",
+        data: { id: $editBlockButton.data('id') },
+        contentType: "application/x-www-form-urlencoded",
+        dataType: "html",
+        beforeSend: function (xhr) {
+            splashSpinner(true, $editBlockButton);
+        },
+        success: function (result, status, xhr) {
+            $editBlockButton.closest('.card-body').append(result);
+            $.validator.unobtrusive.parse("form");
+            $editBlockButton.prop('disabled', true);
+            $('#StartMonth, #EndMonth').on('change', operations);
+            $('.remove-form-block').on('click', function () { $editBlockButton.siblings('.remove-block').trigger('click'); });
+        },
+        complete: function (xhr, status) {
+            splashSpinner(false);
+        }
+    });
+}
+
+function removeNewBlock(e) {
     $(this).closest('form').remove();
     e.data.addBlockButton.toggleClass('d-none');
 }
@@ -229,4 +264,42 @@ function onSectionFormSuccessful() {
             $('#' + elementId + ' .contracted-block-group').append(result);
         }
     });
+}
+
+function removeBlock() {
+    const $this = $(this);
+    var r = confirm(unescape('%BF') + "Est" + unescape('%E1') + " seguro?");
+
+    if (r) {
+        $.ajax({
+            url: "/Curriculum/RemoveBlock",
+            type: "POST",
+            data: { id: $this.data('id') },
+            success: function (result, status, xhr) {
+                $this.closest(".contracted-block").fadeOut(function () { $this.closest(".contracted-block").remove(); });
+            }
+        });
+    }
+}
+
+function operations() {
+    const selectId = this.id;
+    const optionValue = this.value;
+    
+    switch(selectId) {
+        case "StartMonth":
+            var $targetComboBox = $('#StartYear');
+            if (optionValue == "not_show")
+                $targetComboBox.addClass('invisible');
+            else if ($targetComboBox.hasClass('invisible'))
+                $targetComboBox.removeClass('invisible');
+            break;
+        case "EndMonth":
+            var $targetComboBox = $('#EndYear');
+            if (optionValue == "not_show" || optionValue == "present")
+                $targetComboBox.addClass('invisible');
+            else if ($targetComboBox.hasClass('invisible'))
+                $targetComboBox.removeClass('invisible');
+            break;
+    }
 }

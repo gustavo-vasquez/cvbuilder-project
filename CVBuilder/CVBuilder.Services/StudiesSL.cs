@@ -29,6 +29,23 @@ namespace CVBuilder.Services
             return _dataLayer.Create(data);
         }
 
+        public int Remove(int id)
+        {
+            return _dataLayer.Remove(id);
+        }
+
+        public StudiesDTO GetStudyById(int id)
+        {
+            Studies data = _dataLayer.GetStudyById(id);
+            return new StudiesDTO()
+            {
+                Title = data.Title,
+                Institute = data.Institute,
+                City = data.City,
+                Description = data.Description
+            };
+        }
+
         public List<StudiesDTO> GetAllStudies()
         {
             IQueryable<Studies> allStudies = _dataLayer.GetAllStudies();

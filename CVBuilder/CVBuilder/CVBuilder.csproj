@@ -186,6 +186,7 @@
     <Content Include="device-mockups\nexus_6\nexus_6_port.png" />
     <Content Include="device-mockups\samsung_tv\samsung_tv.png" />
     <Content Include="device-mockups\surface\surface.png" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="img\app-store-badge.svg" />
     <Content Include="img\bg-cta-guy.jpg" />
@@ -195,6 +196,9 @@
     <Content Include="img\bg-pattern.png" />
     <Content Include="img\demo-screen-1.jpg" />
     <Content Include="img\google-play-badge.svg" />
+    <Content Include="img\spinners\5.gif" />
+    <Content Include="img\spinners\loading.gif" />
+    <Content Include="img\spinners\spinner-icon-gif-29.jpg" />
     <Content Include="js\build-cv.js" />
     <Content Include="js\index.js" />
     <Content Include="js\new-age.min.js" />
@@ -235,6 +239,11 @@
     <Content Include="lib\jquery\jquery.slim.min.js" />
     <Content Include="lib\jquery\jquery.unobtrusive-ajax.js" />
     <Content Include="lib\jquery\jquery.unobtrusive-ajax.min.js" />
+    <None Include="lib\jquery\jquery.validate-vsdoc.js" />
+    <Content Include="lib\jquery\jquery.validate.js" />
+    <Content Include="lib\jquery\jquery.validate.min.js" />
+    <Content Include="lib\jquery\jquery.validate.unobtrusive.js" />
+    <Content Include="lib\jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="lib\simple-line-icons\css\simple-line-icons.css" />
     <Content Include="lib\simple-line-icons\fonts\Simple-Line-Icons.svg" />
     <Content Include="Web.config" />
@@ -245,6 +254,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="enums\DateType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -257,6 +267,7 @@
     <Compile Include="ViewModels\Curriculum\PersonalDetailsViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\PersonalReferencesViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\SkillsViewModel.cs" />
+    <Compile Include="ViewModels\Curriculum\DateDropdownList.cs" />
     <Compile Include="ViewModels\Curriculum\StudiesViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\SummaryBlockViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\WorkExperiencesViewModel.cs" />
