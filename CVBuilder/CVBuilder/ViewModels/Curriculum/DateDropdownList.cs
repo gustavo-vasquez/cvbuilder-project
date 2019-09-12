@@ -13,7 +13,21 @@ namespace CVBuilder.ViewModels.Curriculum
         public List<SelectListItem> Months { get; set; }
         public List<SelectListItem> Years { get; set; }
 
-        private readonly string[] _months = new string[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+        private readonly Dictionary<string, string> _months = new Dictionary<string, string>()
+        {
+            { MonthOptions.January, "Enero" },
+            { MonthOptions.February, "Febrero" },
+            { MonthOptions.March, "Marzo" },
+            { MonthOptions.April, "Abril" },
+            { MonthOptions.May, "Mayo" },
+            { MonthOptions.June, "Junio" },
+            { MonthOptions.July, "Julio" },
+            { MonthOptions.August, "Agosto" },
+            { MonthOptions.September, "Septiembre" },
+            { MonthOptions.October, "Octubre" },
+            { MonthOptions.November, "Noviembre" },
+            { MonthOptions.December, "Diciembre" },
+        };
 
         public DateDropdownList(DateType type)
         {
@@ -25,7 +39,7 @@ namespace CVBuilder.ViewModels.Curriculum
             {
                 // Generación del combo con los dias
                 IEnumerable<string> days = Enumerable.Range(1, 31).Select(n => n.ToString()).ToList();
-                Days.Add(new SelectListItem() { Value = "0", Text = "Día", Selected = true });
+                Days.Add(new SelectListItem() { Value = MonthOptions.None, Text = "Día", Selected = true });
 
                 foreach (string day in days)
                     Days.Add(new SelectListItem() { Value = day, Text = day });
@@ -42,24 +56,24 @@ namespace CVBuilder.ViewModels.Curriculum
             }
 
             // Generación del combo con los meses
-            Months.Add(new SelectListItem() { Value = "0", Text = "Mes", Selected = true });
+            Months.Add(new SelectListItem() { Value = MonthOptions.None, Text = "Mes", Selected = true });
 
             if (type == DateType.CurriculumEndPeriod)
-                Months.Add(new SelectListItem() { Value = "present", Text = "Actualidad" });
+                Months.Add(new SelectListItem() { Value = MonthOptions.Present, Text = "Actualidad" });
 
             if (type == DateType.CurriculumStartPeriod || type == DateType.CurriculumEndPeriod)
             {
-                Months.Add(new SelectListItem() { Value = "not_show", Text = "No mostrar" });
-                Months.Add(new SelectListItem() { Value = "only_year", Text = "Mostrar sólo el año" });
+                Months.Add(new SelectListItem() { Value = MonthOptions.NotShow, Text = "No mostrar" });
+                Months.Add(new SelectListItem() { Value = MonthOptions.OnlyYear, Text = "Mostrar sólo el año" });
             }
 
-            foreach (string month in _months)
-                Months.Add(new SelectListItem() { Value = month, Text = month });
+            foreach (KeyValuePair<string,string> month in _months)
+                Months.Add(new SelectListItem() { Value = month.Key, Text = month.Value });
 
             // Generación del combo con los años
             IEnumerable<string> years = Enumerable.Range(yearRangeStart, yearRangeCount).OrderByDescending(n => n).Select(n => n.ToString()).ToList();
             Years = new List<SelectListItem>();
-            Years.Add(new SelectListItem() { Value = "0", Text = "Año", Selected = true });
+            Years.Add(new SelectListItem() { Value = MonthOptions.None, Text = "Año", Selected = true });
 
             foreach (string year in years)
                 Years.Add(new SelectListItem() { Value = year, Text = year });

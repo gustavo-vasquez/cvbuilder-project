@@ -212,7 +212,7 @@ function getSectionForm() {
             $('#' + $addBlockButton.data('value')).append(result);
             $.validator.unobtrusive.parse("form");
             $addBlockButton.toggleClass('d-none');
-            $('#StartMonth, #EndMonth').on('change', operations);
+            $('#StartMonth, #EndMonth').on('change', monthBoxActions);
             $('.remove-form-block').on('click', { addBlockButton: $addBlockButton }, removeNewBlock);
         },
         complete: function (xhr, status) {
@@ -237,7 +237,7 @@ function editSectionForm() {
             $editBlockButton.closest('.card-body').append(result);
             $.validator.unobtrusive.parse("form");
             $editBlockButton.prop('disabled', true);
-            $('#StartMonth, #EndMonth').on('change', operations);
+            $('#StartMonth, #EndMonth').on('change', monthBoxActions);
             $('.remove-form-block').on('click', function () { $editBlockButton.siblings('.remove-block').trigger('click'); });
         },
         complete: function (xhr, status) {
@@ -282,24 +282,26 @@ function removeBlock() {
     }
 }
 
-function operations() {
+function monthBoxActions() {
     const selectId = this.id;
     const optionValue = this.value;
     
     switch(selectId) {
         case "StartMonth":
             var $targetComboBox = $('#StartYear');
-            if (optionValue == "not_show")
+            if (optionValue == "NotShow")
                 $targetComboBox.addClass('invisible');
             else if ($targetComboBox.hasClass('invisible'))
                 $targetComboBox.removeClass('invisible');
             break;
         case "EndMonth":
             var $targetComboBox = $('#EndYear');
-            if (optionValue == "not_show" || optionValue == "present")
+            if (optionValue == "NotShow" || optionValue == "Present")
                 $targetComboBox.addClass('invisible');
             else if ($targetComboBox.hasClass('invisible'))
                 $targetComboBox.removeClass('invisible');
+            break;
+        default:
             break;
     }
 }

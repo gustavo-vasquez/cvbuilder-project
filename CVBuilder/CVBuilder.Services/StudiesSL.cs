@@ -18,9 +18,9 @@ namespace CVBuilder.Services
             data.Title = dto.Title;
             data.Institute = dto.Institute;
             data.City = dto.City;
-            data.StartMonth = "No mostrar";
+            data.StartMonth = dto.StartMonth;
             data.StartYear = dto.StartYear;
-            data.EndMonth = "No mostrar";
+            data.EndMonth = dto.EndMonth;
             data.EndYear = dto.EndYear;
             data.Description = dto.Description;
             data.IsVisible = dto.IsVisible;
