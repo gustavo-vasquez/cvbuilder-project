@@ -39,7 +39,7 @@ namespace CVBuilder.ViewModels.Curriculum
             {
                 // Generación del combo con los dias
                 IEnumerable<string> days = Enumerable.Range(1, 31).Select(n => n.ToString()).ToList();
-                Days.Add(new SelectListItem() { Value = MonthOptions.None, Text = "Día", Selected = true });
+                Days.Add(new SelectListItem() { Value = "0", Text = "Día", Selected = true });
 
                 foreach (string day in days)
                     Days.Add(new SelectListItem() { Value = day, Text = day });
@@ -73,7 +73,7 @@ namespace CVBuilder.ViewModels.Curriculum
             // Generación del combo con los años
             IEnumerable<string> years = Enumerable.Range(yearRangeStart, yearRangeCount).OrderByDescending(n => n).Select(n => n.ToString()).ToList();
             Years = new List<SelectListItem>();
-            Years.Add(new SelectListItem() { Value = MonthOptions.None, Text = "Año", Selected = true });
+            Years.Add(new SelectListItem() { Value = "0", Text = "Año", Selected = true });
 
             foreach (string year in years)
                 Years.Add(new SelectListItem() { Value = year, Text = year });

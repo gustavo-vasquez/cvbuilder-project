@@ -1,4 +1,6 @@
-﻿using CVBuilder.Services;
+﻿using AutoMapper;
+using CVBuilder.automapper;
+using CVBuilder.Services;
 using CVBuilder.Services.DTOs;
 using CVBuilder.ViewModels.Curriculum;
 using System;
@@ -115,17 +117,7 @@ namespace CVBuilder.Controllers
                 //return PartialView("_StudiesForm", model);
             }
 
-            StudiesDTO dto = new StudiesDTO();
-            dto.Title = model.Title;
-            dto.Institute = model.Institute;
-            dto.City = model.City;
-            dto.StartMonth = model.StartMonth;
-            dto.StartYear = model.StartYear;
-            dto.EndMonth = model.EndMonth;
-            dto.EndYear = model.EndYear;
-            dto.Description = model.Description;
-            dto.IsVisible = true;
-
+            StudiesDTO dto = Mapping.Mapper.Map<StudiesViewModel, StudiesDTO>(model);
             _studiesService.Create(dto);
         }
 
@@ -138,7 +130,18 @@ namespace CVBuilder.Controllers
         [HttpGet]
         public PartialViewResult EditSectionForm(int id)
         {
+            StudiesDTO dto = _studiesService.GetStudyById(id);
             StudiesViewModel model = new StudiesViewModel();
+            model.Title = dto.Title;
+            model.Institute = dto.Institute;
+            model.City = dto.City;
+            model.StartMonth = dto.StartMonth;
+            model.StartYear = dto.StartYear;
+            model.EndMonth = dto.EndMonth;
+            model.EndYear = dto.EndYear;
+            model.Description = dto.Description;
+            model.IsVisible = dto.IsVisible;
+
             return PartialView("_StudiesForm", model);
         }
 
