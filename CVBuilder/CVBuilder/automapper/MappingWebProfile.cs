@@ -12,7 +12,8 @@ namespace CVBuilder.automapper
     {
         public MappingWebProfile()
         {
-            CreateMap<StudiesViewModel, StudiesDTO>();
+            CreateMap<StudiesViewModel, StudiesDTO>()
+                .ReverseMap();
         }
     }
 }

@@ -19,6 +19,11 @@ namespace CVBuilder.Services
             return _dataLayer.Create(data);
         }
 
+        public void Update(StudiesDTO dto)
+        {
+            _dataLayer.Update(Mapping.Mapper.Map<StudiesDTO, Studies>(dto));
+        }
+
         public int Remove(int id)
         {
             return _dataLayer.Remove(id);
@@ -27,18 +32,19 @@ namespace CVBuilder.Services
         public StudiesDTO GetStudyById(int id)
         {
             Studies data = _dataLayer.GetStudyById(id);
-            return new StudiesDTO()
-            {
-                Title = data.Title,
-                Institute = data.Institute,
-                City = data.City,
-                StartMonth = data.StartMonth,
-                StartYear = data.StartYear,
-                EndMonth = data.EndMonth,
-                EndYear = data.EndYear,
-                Description = data.Description,
-                IsVisible = data.IsVisible
-            };
+            return Mapping.Mapper.Map<Studies, StudiesDTO>(data);
+            //return new StudiesDTO()
+            //{
+            //    Title = data.Title,
+            //    Institute = data.Institute,
+            //    City = data.City,
+            //    StartMonth = data.StartMonth,
+            //    StartYear = data.StartYear,
+            //    EndMonth = data.EndMonth,
+            //    EndYear = data.EndYear,
+            //    Description = data.Description,
+            //    IsVisible = data.IsVisible
+            //};
         }
 
         public List<StudiesDTO> GetAllStudies()
@@ -83,9 +89,13 @@ namespace CVBuilder.Services
             return studyBlocks;
         }
 
-        public SummaryBlockDTO GetSummaryBlock()
+        public SummaryBlockDTO GetSummaryBlock(int id)
         {
-            Studies study = _dataLayer.GetLastStudy();
+            Studies study;
+            if (id > 0)
+                study = _dataLayer.GetStudyById(id);
+            else
+                study = _dataLayer.GetLastStudy();
 
             return new SummaryBlockDTO()
             {

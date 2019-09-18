@@ -8,6 +8,7 @@ namespace CVBuilder.Services.DTOs
 {
     public class StudiesDTO
     {
+        public int StudyID { get; set; }
         public string Title { get; set; }
         public string Institute { get; set; }
         public string City { get; set; }
@@ -17,5 +18,7 @@ namespace CVBuilder.Services.DTOs
         public int? EndYear { get; set; }
         public string Description { get; set; }
         public bool IsVisible { get; set; }
+
+        //public int studyid = 0;
     }
 }

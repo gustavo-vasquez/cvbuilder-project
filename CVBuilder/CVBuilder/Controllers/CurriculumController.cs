@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CVBuilder.automapper;
+using CVBuilder.enums;
 using CVBuilder.Services;
 using CVBuilder.Services.DTOs;
 using CVBuilder.ViewModels.Curriculum;
@@ -109,46 +110,47 @@ namespace CVBuilder.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public void Studies(StudiesViewModel model)
+        public ActionResult Studies(StudiesViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 //BuildViewModel fullModel = new BuildViewModel();
-                //return PartialView("_StudiesForm", model);
+                //return PartialView("_StudiesForm");
+            }
+            
+            StudiesDTO dto = Mapping.Mapper.Map<StudiesViewModel, StudiesDTO>(model);
+            switch (model.Mode)
+            {
+                case FormMode.NEW: _studiesService.Create(dto); break;
+                case FormMode.EDIT: _studiesService.Update(dto); break;
+                default: break;
             }
 
-            StudiesDTO dto = Mapping.Mapper.Map<StudiesViewModel, StudiesDTO>(model);
-            _studiesService.Create(dto);
+            return Json(new { formid = "#studies_form", id = model.StudyID, mode = Convert.ToInt32(model.Mode) }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public PartialViewResult GetSectionForm()
+        public PartialViewResult GetSectionForm(string section)
         {
-            return PartialView("_StudiesForm", new StudiesViewModel());
+            var model = new StudiesViewModel();
+            model.Mode = FormMode.NEW;
+            return PartialView("_StudiesForm", model);
         }
 
         [HttpGet]
-        public PartialViewResult EditSectionForm(int id)
+        public PartialViewResult EditSectionForm(string section, int id)
         {
             StudiesDTO dto = _studiesService.GetStudyById(id);
-            StudiesViewModel model = new StudiesViewModel();
-            model.Title = dto.Title;
-            model.Institute = dto.Institute;
-            model.City = dto.City;
-            model.StartMonth = dto.StartMonth;
-            model.StartYear = dto.StartYear;
-            model.EndMonth = dto.EndMonth;
-            model.EndYear = dto.EndYear;
-            model.Description = dto.Description;
-            model.IsVisible = dto.IsVisible;
+            StudiesViewModel model = Mapping.Mapper.Map<StudiesDTO, StudiesViewModel>(dto);
+            model.Mode = FormMode.EDIT;
 
             return PartialView("_StudiesForm", model);
         }
 
         [HttpGet]
-        public PartialViewResult GetSectionBlock(string area)
+        public PartialViewResult GetSectionBlock(string section, int id)
         {
-            SummaryBlockDTO dto = _studiesService.GetSummaryBlock();
+            SummaryBlockDTO dto = _studiesService.GetSummaryBlock(id);
             SummaryBlockViewModel model = new SummaryBlockViewModel();
             model.SummaryId = dto.SummaryId;
             model.Title = dto.Title;

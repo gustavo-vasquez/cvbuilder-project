@@ -1,6 +1,6 @@
 var tabs = {
     "active": 0,
-    "sections": [
+    "pages": [
                "personal_details",
                "studies_experiencies",
                "other_information",
@@ -21,18 +21,18 @@ $(document).ready(function () {
 	$('.tabs-group').on('click', 'button', function() {
 		$('.tabs-group button').removeClass('active');
 
-		for(var i = 0; i < tabs.sections.length; i++) {
-			if($(this).data("value") == tabs.sections[i]) {
+		for(var i = 0; i < tabs.pages.length; i++) {
+			if($(this).data("value") === tabs.pages[i]) {
 				tabs.active = i;
 
 				$('.cv-sections .card-body').css({ 'animation-name': 'slideDown', '-webkit-animation-name': 'slideDown' });
-				$('#' + tabs.sections[i]).removeClass('d-none');
+				$('#' + tabs.pages[i]).removeClass('d-none');
 				$(this).addClass('active');
 
-				switch(i) {
-					case 0:
-					    $('#previous_page').prop('disabled', true);
-					    if ($('#next_page').prop('disabled'))
+				switch (i) {
+				    case 0:
+				        $('#previous_page').prop('disabled', true);
+				        if ($('#next_page').prop('disabled'))
 					        $('#next_page').prop('disabled', false);
 						break;
 					case 3:
@@ -47,56 +47,56 @@ $(document).ready(function () {
 				}
 			}
 			else {
-				$('#' + tabs.sections[i]).addClass('d-none');
+				$('#' + tabs.pages[i]).addClass('d-none');
 			}
 		}
 	});
 
 	$('.add-block').on('click', getSectionForm);
-	$('.edit-block').on('click', editSectionForm);
-	$('.remove-block').on('click', removeBlock);
+	$('.contracted-block-group').on('click', '.edit-block', editSectionForm);
+	$('.contracted-block-group').on('click', '.remove-block', removeBlock);
 
 	$('#previous_page').on('click', function() {
 	    var currentPosition = tabs.active;
 
-		if(currentPosition > 0 && currentPosition < tabs.sections.length) {
-			$('#' + tabs.sections[currentPosition]).addClass('d-none');
+		if(currentPosition > 0 && currentPosition < tabs.pages.length) {
+			$('#' + tabs.pages[currentPosition]).addClass('d-none');
 			currentPosition--;
 
-			if(currentPosition == tabs.sections.length - 2)
+			if(currentPosition === tabs.pages.length - 2)
 				$('#next_page').prop('disabled', false);
 
-			if(currentPosition == 0)
+			if(currentPosition === 0)
 				$(this).prop('disabled', true);
 
 		    $('.cv-sections .card-body').css({ 'animation-name': 'slideRight', '-webkit-animation-name': 'slideRight' });
-			$('#' + tabs.sections[currentPosition]).removeClass('d-none');
+			$('#' + tabs.pages[currentPosition]).removeClass('d-none');
 			tabs.active = currentPosition;
 
 			$('.tabs-group button').removeClass('active');
-			$('.tabs-group button[data-value=' + tabs.sections[currentPosition] + ']').addClass('active');
+			$('.tabs-group button[data-value=' + tabs.pages[currentPosition] + ']').addClass('active');
 		}
 	});
 
 	$('#next_page').on('click', function () {
 	    var currentPosition = tabs.active;
 
-		if(currentPosition >= 0 && currentPosition < tabs.sections.length) {
-			$('#' + tabs.sections[currentPosition]).addClass('d-none');
+		if(currentPosition >= 0 && currentPosition < tabs.pages.length) {
+			$('#' + tabs.pages[currentPosition]).addClass('d-none');
 			currentPosition++;
 
-			if(currentPosition == 1)
+			if(currentPosition === 1)
 				$('#previous_page').prop('disabled', false);
 
-			if(currentPosition == tabs.sections.length - 1)
+			if(currentPosition === tabs.pages.length - 1)
 				$(this).prop('disabled', true);
 			
 		    $('.cv-sections .card-body').css({ 'animation-name': 'slideLeft', '-webkit-animation-name': 'slideLeft' });
-			$('#' + tabs.sections[currentPosition]).removeClass('d-none');
+			$('#' + tabs.pages[currentPosition]).removeClass('d-none');
 			tabs.active = currentPosition;
 
 			$('.tabs-group button').removeClass('active');
-			$('.tabs-group button[data-value=' + tabs.sections[currentPosition] + ']').addClass('active');
+			$('.tabs-group button[data-value=' + tabs.pages[currentPosition] + ']').addClass('active');
 
 		    //window.location.href = window.location.pathname + "#page-top";
 			
@@ -131,18 +131,18 @@ function getQsParameterByName(name) {
 }
 
 function displaySection(sectionName) {
-    for (var i = 0; i < tabs.sections.length; i++) {
-        if (sectionName == tabs.sections[i]) {
+    for (var i = 0; i < tabs.pages.length; i++) {
+        if (sectionName === tabs.pages[i]) {
             tabs.active = i;
-            $('.tabs-group button[data-value=' + tabs.sections[i] + ']').addClass('active');
+            $('.tabs-group button[data-value=' + tabs.pages[i] + ']').addClass('active');
 
             if (i === 1) $('#previous_page').prop('disabled', true);
             else if (i === 3) $('#next_page').prop('disabled', true);
             $('#' + sectionName).removeClass('d-none');
         }
     }
-    $('#' + tabs.sections[tabs.active]).removeClass('d-none');
-    $('.tabs-group button[data-value=' + tabs.sections[tabs.active] + ']').addClass('active');
+    $('#' + tabs.pages[tabs.active]).removeClass('d-none');
+    $('.tabs-group button[data-value=' + tabs.pages[tabs.active] + ']').addClass('active');
     $('#previous_page').prop('disabled', true);
 }
 
@@ -153,7 +153,7 @@ function isScrolledIntoView(elem) {
     var elemTop = $(elem).offset().top;
     var elemBottom = elemTop + $(elem).height();
 
-    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+    return elemBottom <= docViewBottom && elemTop >= docViewTop;
 }
 
 function Utils() { }
@@ -167,9 +167,9 @@ Utils.prototype = {
         var elementBottom = elementTop + $(element).height();
 
         if (fullyInView === true) {
-            return ((pageTop < elementTop) && (pageBottom > elementBottom));
+            return pageTop < elementTop && pageBottom > elementBottom;
         } else {
-            return ((elementTop <= pageBottom) && (elementBottom >= pageTop));
+            return elementTop <= pageBottom && elementBottom >= pageTop;
         }
     }
 };
@@ -199,17 +199,19 @@ function navigationButtonsWrapperInView() {
 
 function getSectionForm() {
     var $addBlockButton = $(this);
+    const section = $addBlockButton.closest('section').attr('id');
 
     $.ajax({
         url: "/Curriculum/GetSectionForm",
         type: "GET",
+        data: { section: section },
         contentType: "application/x-www-form-urlencoded",
         dataType: "html",
         beforeSend: function (xhr) {
             splashSpinner(true, $addBlockButton);
         },
         success: function (result, status, xhr) {
-            $('#' + $addBlockButton.data('value')).append(result);
+            $('#' + section).append(result);
             $.validator.unobtrusive.parse("form");
             $addBlockButton.toggleClass('d-none');
             $('#StartMonth, #EndMonth').on('change', monthBoxActions);
@@ -227,7 +229,7 @@ function editSectionForm() {
     $.ajax({
         url: "/Curriculum/EditSectionForm",
         type: "GET",
-        data: { id: $editBlockButton.data('id') },
+        data: { section: $editBlockButton.closest('section').attr('id'), id: $editBlockButton.data('id') },
         contentType: "application/x-www-form-urlencoded",
         dataType: "html",
         beforeSend: function (xhr) {
@@ -236,7 +238,7 @@ function editSectionForm() {
         success: function (result, status, xhr) {
             $editBlockButton.closest('.card-body').append(result);
             $.validator.unobtrusive.parse("form");
-            $editBlockButton.prop('disabled', true);
+            $editBlockButton.toggleClass('invisible');
             $('#StartMonth, #EndMonth').on('change', monthBoxActions);
             $('.remove-form-block').on('click', function () { $editBlockButton.siblings('.remove-block').trigger('click'); });
         },
@@ -251,20 +253,70 @@ function removeNewBlock(e) {
     e.data.addBlockButton.toggleClass('d-none');
 }
 
-function onSectionFormSuccessful() {
-    var elementId = $(this).parent().attr('id');
+function onSectionFormSuccessful(result, status, xhr) {
+    $form = $(result.formid);
+    const section = $form.closest('section').attr('id');
 
     $.ajax({
         url: "/Curriculum/GetSectionBlock",
         type: "GET",
-        data: { area: elementId },
+        data: { section: section, id: result.id },
         contentType: "application/x-www-form-urlencoded",
         dataType: "html",
-        success: function (result, status, xhr) {
-            $('#' + elementId + ' .contracted-block-group').append(result);
+        success: function (vresult, status, xhr) {
+                switch(result.mode) {
+                    case 0:
+                        $form.fadeOut(function () {
+                            $('#' + section + ' .add-block').toggleClass('d-none');
+                            $('#' + section + ' .contracted-block-group').append(vresult);
+                            $form.remove();
+                        });
+                        break;
+                    case 1:
+                        const $block = $form.closest('.contracted-block');
+                        const $nextBlock = $block.next();
+                        $block.remove();
+                        ($nextBlock.length > 0) ? $nextBlock.before(vresult) : $('#' + section + ' .contracted-block-group').append(vresult);
+                        //const index = $block.index();
+                        //const parent = $block.parent();
+
+                        //var block = $block.get(0);
+                        //var parent = block.parentNode;
+                        //parent.getElementsByClassName('contracted-block')[index].outerHTML = result;
+                        //console.log(block.parentNode);
+                        //parent.replaceChild(result, parent.children().eq(index));
+                        //$block.find('.edit-block').toggleClass('invisible');
+                        //console.log($block.index());
+                        break;
+                    default:
+                        break;
+                }
+                
+                
         }
     });
 }
+
+// function onSectionFormSuccessful() {
+//     $form = $(this);
+//     const section = $form.parent().attr('id');
+
+//     $.ajax({
+//         url: "/Curriculum/GetSectionBlock",
+//         type: "GET",
+//         data: { section: section },
+//         contentType: "application/x-www-form-urlencoded",
+//         dataType: "html",
+//         success: function (result, status, xhr) {
+//             $form.fadeOut(function () {
+//                 $form.remove();
+//                 //$form.prev().find('.edit-block').prop('disabled', false);
+//                 $('#' + section + ' .contracted-block-group').append(result);
+//                 $('button[data-value="' + section + '"]').toggleClass('d-none');
+//             });
+//         }
+//     });
+// }
 
 function removeBlock() {
     const $this = $(this);
@@ -285,18 +337,19 @@ function removeBlock() {
 function monthBoxActions() {
     const selectId = this.id;
     const optionValue = this.value;
+    var $targetComboBox;
     
     switch(selectId) {
         case "StartMonth":
-            var $targetComboBox = $('#StartYear');
-            if (optionValue == "NotShow")
+            $targetComboBox = $('#StartYear');
+            if (optionValue === "NotShow")
                 $targetComboBox.addClass('invisible');
             else if ($targetComboBox.hasClass('invisible'))
                 $targetComboBox.removeClass('invisible');
             break;
         case "EndMonth":
-            var $targetComboBox = $('#EndYear');
-            if (optionValue == "NotShow" || optionValue == "Present")
+            $targetComboBox = $('#EndYear');
+            if (optionValue === "NotShow" || optionValue === "Present")
                 $targetComboBox.addClass('invisible');
             else if ($targetComboBox.hasClass('invisible'))
                 $targetComboBox.removeClass('invisible');

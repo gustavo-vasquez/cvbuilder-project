@@ -29,6 +29,23 @@ namespace CVBuilder.Data
             return result;
         }
 
+        public void Update(Studies data)
+        {
+            _db.Context.usp_Studies_Update(
+                    data.StudyID,
+                    data.Title,
+                    data.Institute,
+                    data.City,
+                    data.StartMonth,
+                    data.StartYear,
+                    data.EndMonth,
+                    data.EndYear,
+                    data.Description,
+                    data.IsVisible,
+                    data.ID_Curriculum
+                );
+        }
+
         public Studies GetStudyById(int id)
         {
             return _db.Context.Studies.Find(id);

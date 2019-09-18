@@ -5,7 +5,8 @@
     <hr />
     <fieldset>
         @Html.AntiForgeryToken()
-
+        @Html.HiddenFor(m => m.StudyID)
+        @Html.HiddenFor(m => m.Mode)
         <div class="row">
             <div class="col">
                 <div class="form-group">
