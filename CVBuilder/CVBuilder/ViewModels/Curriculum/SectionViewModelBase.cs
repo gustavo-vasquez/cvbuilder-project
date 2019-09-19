@@ -6,8 +6,9 @@ using System.Web;
 
 namespace CVBuilder.ViewModels.Curriculum
 {
-    public abstract class BaseSectionViewModel
+    public abstract class SectionViewModelBase
     {
-        public FormMode Mode { get; set; }
+        public string FormId { get; set; }
+        public FormType Type { get; set; }
     }
 }

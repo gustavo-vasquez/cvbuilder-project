@@ -119,21 +119,20 @@ namespace CVBuilder.Controllers
             }
             
             StudiesDTO dto = Mapping.Mapper.Map<StudiesViewModel, StudiesDTO>(model);
-            switch (model.Mode)
+            switch (model.Type)
             {
-                case FormMode.NEW: _studiesService.Create(dto); break;
-                case FormMode.EDIT: _studiesService.Update(dto); break;
+                case FormType.ADD: _studiesService.Create(dto); break;
+                case FormType.EDIT: _studiesService.Update(dto); break;
                 default: break;
             }
 
-            return Json(new { formid = "#studies_form", id = model.StudyID, mode = Convert.ToInt32(model.Mode) }, JsonRequestBehavior.AllowGet);
+            return Json(new { formid = "#" + model.FormId, id = model.StudyID, mode = Convert.ToInt32(model.Type) }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public PartialViewResult GetSectionForm(string section)
         {
-            var model = new StudiesViewModel();
-            model.Mode = FormMode.NEW;
+            StudiesViewModel model = new StudiesViewModel();
             return PartialView("_StudiesForm", model);
         }
 
@@ -142,7 +141,6 @@ namespace CVBuilder.Controllers
         {
             StudiesDTO dto = _studiesService.GetStudyById(id);
             StudiesViewModel model = Mapping.Mapper.Map<StudiesDTO, StudiesViewModel>(dto);
-            model.Mode = FormMode.EDIT;
 
             return PartialView("_StudiesForm", model);
         }

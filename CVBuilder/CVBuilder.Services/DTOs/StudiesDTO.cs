@@ -18,7 +18,5 @@ namespace CVBuilder.Services.DTOs
         public int? EndYear { get; set; }
         public string Description { get; set; }
         public bool IsVisible { get; set; }
-
-        //public int studyid = 0;
     }
 }

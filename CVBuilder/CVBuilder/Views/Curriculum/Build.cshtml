@@ -1,4 +1,5 @@
-﻿@model CVBuilder.ViewModels.Curriculum.BuildViewModel
+﻿@using CVBuilder.enums;
+@model CVBuilder.ViewModels.Curriculum.BuildViewModel
 
 @{
     ViewBag.Title = "Elabore su curriculum profesional";
@@ -43,7 +44,7 @@
                 </div>
             </div>
             <div class="col-lg-9 cv-sections">
-                <div id="personal_details" class="d-none">
+                <div id="@SectionIds.PersonalDetails" class="d-none">
                     <div class="card border-success overflow-hidden mb-3">
                         <div class="card-body">
                             <h4>Detalles personales</h4>
@@ -53,7 +54,7 @@
                 </div>
                 <div id="studies_experiencies" class="d-none">
                     <div class="card border-success overflow-hidden mb-3">
-                        <section id="studies" class="card-body">
+                        <section id="@SectionIds.Studies" class="card-body">
                             <h4>Estudios</h4>
                             <div class="row mb-4">
                                 <div class="col">

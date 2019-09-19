@@ -10,6 +10,8 @@ namespace CVBuilder.ViewModels.Curriculum
 {
     public class PersonalDetailsViewModel
     {
+        public readonly DateDropdownList BirthDate = new DateDropdownList(DateType.Birthday);
+
         [Required(ErrorMessage = "Completar este campo.")]
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string Name { get; set; }
@@ -77,7 +79,5 @@ namespace CVBuilder.ViewModels.Curriculum
 
         [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
         public string TwitterUrl { get; set; }
-
-        public DateDropdownList BirthDate = new DateDropdownList(DateType.Birthday);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CVBuilder.enums;
 using CVBuilder.Services.DTOs;
 using CVBuilder.ViewModels.Curriculum;
 using System;
@@ -12,8 +13,10 @@ namespace CVBuilder.automapper
     {
         public MappingWebProfile()
         {
-            CreateMap<StudiesViewModel, StudiesDTO>()
-                .ReverseMap();
+            CreateMap<StudiesViewModel, StudiesDTO>();
+
+            CreateMap<StudiesDTO, StudiesViewModel>()
+                .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
         }
     }
 }

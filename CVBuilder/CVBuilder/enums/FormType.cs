@@ -5,9 +5,9 @@ using System.Web;
 
 namespace CVBuilder.enums
 {
-    public enum FormMode
+    public enum FormType
     {
-        NEW,
+        ADD,
         EDIT
     }
 }

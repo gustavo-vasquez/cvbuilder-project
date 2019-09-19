@@ -70,13 +70,13 @@
 }
 
 .contracted-block h5 {
-    font-size: 18px;
+    font-size: 17px;
 	position: relative;
     top: 25%;
 }
 
 .edit-block, .remove-block {
-	font-size: 18px;
+	font-size: 17px;
 	padding-left: 0.8em;
 	padding-right: 0.8em;
 }

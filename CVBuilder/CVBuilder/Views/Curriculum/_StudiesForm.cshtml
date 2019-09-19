@@ -1,12 +1,12 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.StudiesViewModel
 
-@using (Ajax.BeginForm("Studies", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful" }, new { id = "studies_form" }))
+@using (Ajax.BeginForm("Studies", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful" }, new { id = Model.FormId }))
 {
     <hr />
     <fieldset>
         @Html.AntiForgeryToken()
         @Html.HiddenFor(m => m.StudyID)
-        @Html.HiddenFor(m => m.Mode)
+        @Html.HiddenFor(m => m.Type)
         <div class="row">
             <div class="col">
                 <div class="form-group">
