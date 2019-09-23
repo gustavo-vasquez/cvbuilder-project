@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVBuilder.Data", "CVBuilder
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVBuilder.Services", "CVBuilder.Services\CVBuilder.Services.csproj", "{3BEC9A61-D1AF-477A-BC58-9984504AD86D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVBuilder.Common", "CVBuilder.Common\CVBuilder.Common.csproj", "{C316484E-1FB4-4F1E-A10C-6ACD9126B1C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3BEC9A61-D1AF-477A-BC58-9984504AD86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BEC9A61-D1AF-477A-BC58-9984504AD86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BEC9A61-D1AF-477A-BC58-9984504AD86D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C316484E-1FB4-4F1E-A10C-6ACD9126B1C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C316484E-1FB4-4F1E-A10C-6ACD9126B1C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C316484E-1FB4-4F1E-A10C-6ACD9126B1C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C316484E-1FB4-4F1E-A10C-6ACD9126B1C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

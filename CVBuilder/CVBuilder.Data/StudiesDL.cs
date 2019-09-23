@@ -54,8 +54,6 @@ namespace CVBuilder.Data
         public int Remove(int id)
         {
             int result = _db.Context.usp_Studies_Delete(id);
-            //_db.Context.SaveChanges();
-
             return result;
         }
 

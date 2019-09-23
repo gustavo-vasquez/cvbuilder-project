@@ -1,4 +1,5 @@
-﻿using CVBuilder.enums;
+﻿using CVBuilder.Common;
+using CVBuilder.enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,22 +13,6 @@ namespace CVBuilder.ViewModels.Curriculum
         public List<SelectListItem> Days { get; set; }
         public List<SelectListItem> Months { get; set; }
         public List<SelectListItem> Years { get; set; }
-
-        private readonly Dictionary<string, string> _months = new Dictionary<string, string>()
-        {
-            { MonthOptions.January, "Enero" },
-            { MonthOptions.February, "Febrero" },
-            { MonthOptions.March, "Marzo" },
-            { MonthOptions.April, "Abril" },
-            { MonthOptions.May, "Mayo" },
-            { MonthOptions.June, "Junio" },
-            { MonthOptions.July, "Julio" },
-            { MonthOptions.August, "Agosto" },
-            { MonthOptions.September, "Septiembre" },
-            { MonthOptions.October, "Octubre" },
-            { MonthOptions.November, "Noviembre" },
-            { MonthOptions.December, "Diciembre" },
-        };
 
         public DateDropdownList(DateType type)
         {
@@ -59,15 +44,15 @@ namespace CVBuilder.ViewModels.Curriculum
             Months.Add(new SelectListItem() { Value = MonthOptions.None, Text = "Mes", Selected = true });
 
             if (type == DateType.CurriculumEndPeriod)
-                Months.Add(new SelectListItem() { Value = MonthOptions.Present, Text = "Actualidad" });
+                Months.Add(new SelectListItem() { Value = MonthOptions.Present, Text = MonthOptions.MonthsComboBox[MonthOptions.Present] });
 
             if (type == DateType.CurriculumStartPeriod || type == DateType.CurriculumEndPeriod)
             {
-                Months.Add(new SelectListItem() { Value = MonthOptions.NotShow, Text = "No mostrar" });
-                Months.Add(new SelectListItem() { Value = MonthOptions.OnlyYear, Text = "Mostrar sólo el año" });
+                Months.Add(new SelectListItem() { Value = MonthOptions.NotShow, Text = MonthOptions.MonthsComboBox[MonthOptions.NotShow] });
+                Months.Add(new SelectListItem() { Value = MonthOptions.OnlyYear, Text = MonthOptions.MonthsComboBox[MonthOptions.OnlyYear] });
             }
 
-            foreach (KeyValuePair<string,string> month in _months)
+            foreach (KeyValuePair<string,string> month in MonthOptions.MonthsComboBox)
                 Months.Add(new SelectListItem() { Value = month.Key, Text = month.Value });
 
             // Generación del combo con los años

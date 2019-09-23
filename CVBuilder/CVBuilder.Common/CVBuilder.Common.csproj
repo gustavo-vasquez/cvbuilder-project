@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3BEC9A61-D1AF-477A-BC58-9984504AD86D}</ProjectGuid>
+    <ProjectGuid>{C316484E-1FB4-4F1E-A10C-6ACD9126B1C8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CVBuilder.Services</RootNamespace>
-    <AssemblyName>CVBuilder.Services</AssemblyName>
+    <RootNamespace>CVBuilder.Common</RootNamespace>
+    <AssemblyName>CVBuilder.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,17 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,35 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="automapper\Mapping.cs" />
-    <Compile Include="automapper\MappingSLProfile.cs" />
-    <Compile Include="DTOs\SummaryBlockDTO.cs" />
-    <Compile Include="PersonalDetailsSL.cs" />
-    <Compile Include="DTOs\CertificatesDTO.cs" />
-    <Compile Include="DTOs\CurriculumDTO.cs" />
-    <Compile Include="DTOs\CustomSectionsDTO.cs" />
-    <Compile Include="DTOs\InterestsDTO.cs" />
-    <Compile Include="DTOs\LanguagesDTO.cs" />
-    <Compile Include="DTOs\PersonalDetailsDTO.cs" />
-    <Compile Include="DTOs\PersonalReferencesDTO.cs" />
-    <Compile Include="DTOs\SkillsDTO.cs" />
-    <Compile Include="DTOs\StudiesDTO.cs" />
-    <Compile Include="DTOs\WorkExperiencesDTO.cs" />
+    <Compile Include="MonthOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StudiesSL.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CVBuilder.Common\CVBuilder.Common.csproj">
-      <Project>{c316484e-1fb4-4f1e-a10c-6acd9126b1c8}</Project>
-      <Name>CVBuilder.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CVBuilder.Data\CVBuilder.Data.csproj">
-      <Project>{cee0d49a-bcf0-4990-b466-c0f4857f6f57}</Project>
-      <Name>CVBuilder.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

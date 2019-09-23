@@ -268,7 +268,6 @@
     <Compile Include="enums\DateType.cs" />
     <Compile Include="enums\FormIds.cs" />
     <Compile Include="enums\FormType.cs" />
-    <Compile Include="enums\MonthOptions.cs" />
     <Compile Include="enums\SectionIds.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -359,6 +358,10 @@
     <Folder Include="ViewModels\Home\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CVBuilder.Common\CVBuilder.Common.csproj">
+      <Project>{c316484e-1fb4-4f1e-a10c-6acd9126b1c8}</Project>
+      <Name>CVBuilder.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CVBuilder.Services\CVBuilder.Services.csproj">
       <Project>{3bec9a61-d1af-477a-bc58-9984504ad86d}</Project>
       <Name>CVBuilder.Services</Name>
