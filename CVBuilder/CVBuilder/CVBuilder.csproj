@@ -212,6 +212,7 @@
     <Content Include="js\index.js" />
     <Content Include="js\new-age.min.js" />
     <Content Include="js\site.js" />
+    <Content Include="js\validations-cv.js" />
     <Content Include="lib\bootstrap\css\bootstrap-grid.css" />
     <Content Include="lib\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="lib\bootstrap\css\bootstrap-reboot.css" />
@@ -265,6 +266,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="custom_validations\EndYearGreaterThanAttribute.cs" />
+    <Compile Include="custom_validations\StartYearLessThanAttribute.cs" />
     <Compile Include="enums\DateType.cs" />
     <Compile Include="enums\FormIds.cs" />
     <Compile Include="enums\FormType.cs" />

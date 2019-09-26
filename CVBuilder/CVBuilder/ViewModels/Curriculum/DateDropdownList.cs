@@ -52,7 +52,9 @@ namespace CVBuilder.ViewModels.Curriculum
                 Months.Add(new SelectListItem() { Value = MonthOptions.OnlyYear, Text = MonthOptions.MonthsComboBox[MonthOptions.OnlyYear] });
             }
 
-            foreach (KeyValuePair<string,string> month in MonthOptions.MonthsComboBox)
+            IEnumerable<KeyValuePair<string,string>> months = MonthOptions.MonthsComboBox.Where(x => x.Key != MonthOptions.NotShow && x.Key != MonthOptions.OnlyYear && x.Key != MonthOptions.Present);
+
+            foreach (KeyValuePair<string,string> month in months)
                 Months.Add(new SelectListItem() { Value = month.Key, Text = month.Value });
 
             // Generación del combo con los años

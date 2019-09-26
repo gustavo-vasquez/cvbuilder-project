@@ -44,6 +44,7 @@
                         </div>
                         <div class="col-lg-4">
                             @Html.DropDownListFor(m => m.StartYear, Model.StartPeriod.Years, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.StartYear, null, new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -57,6 +58,7 @@
                         </div>
                         <div class="col-lg-4">
                             @Html.DropDownListFor(m => m.EndYear, Model.EndPeriod.Years, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.EndYear, null, new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

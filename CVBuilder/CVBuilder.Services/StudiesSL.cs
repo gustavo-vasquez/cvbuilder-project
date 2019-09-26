@@ -34,18 +34,6 @@ namespace CVBuilder.Services
         {
             Studies data = _dataLayer.GetStudyById(id);
             return Mapping.Mapper.Map<Studies, StudiesDTO>(data);
-            //return new StudiesDTO()
-            //{
-            //    Title = data.Title,
-            //    Institute = data.Institute,
-            //    City = data.City,
-            //    StartMonth = data.StartMonth,
-            //    StartYear = data.StartYear,
-            //    EndMonth = data.EndMonth,
-            //    EndYear = data.EndYear,
-            //    Description = data.Description,
-            //    IsVisible = data.IsVisible
-            //};
         }
 
         public List<StudiesDTO> GetAllStudies()

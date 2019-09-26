@@ -8,6 +8,7 @@ namespace CVBuilder.Services.DTOs
 {
     public class PersonalDetailsDTO
     {
+        public int PersonalDetailsID { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -19,7 +20,9 @@ namespace CVBuilder.Services.DTOs
         public int? LinePhone { get; set; }
         public short? AreaCodeMP { get; set; }
         public int? MobilePhone { get; set; }
-        public DateTime? BirthDate { get; set; }
+        public int? Day { get; set; }
+        public string Month { get; set; }
+        public int? Year { get; set; }
         public int? IdentityCard { get; set; }
         public string Country { get; set; }
         public string Summary { get; set; }

@@ -13,10 +13,15 @@ namespace CVBuilder.automapper
     {
         public MappingWebProfile()
         {
+            CreateMap<PersonalDetailsViewModel, PersonalDetailsDTO>()
+                .ForMember(dest => dest.SummaryIsVisible, act => act.UseValue(true));
+
             CreateMap<StudiesViewModel, StudiesDTO>();
 
             CreateMap<StudiesDTO, StudiesViewModel>()
                 .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
+
+            CreateMap<SummaryBlockDTO, SummaryBlockViewModel>();
         }
     }
 }

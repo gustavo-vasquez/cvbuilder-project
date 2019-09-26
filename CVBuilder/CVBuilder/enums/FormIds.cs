@@ -7,6 +7,7 @@ namespace CVBuilder.enums
 {
     public class FormIds
     {
+        public static string PersonalDetails => SectionIds.PersonalDetails + Suffix;
         public static string Studies => SectionIds.Studies + Suffix;
         public static string WorkExperiences => SectionIds.WorkExperiences + Suffix;
         public static string Certificates => SectionIds.Certificates + Suffix;

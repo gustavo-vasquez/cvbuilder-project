@@ -50,6 +50,38 @@ namespace CVBuilder.Data
             return result;
         }
 
+        public int Update(PersonalDetails data)
+        {
+            int result = _db.Context.usp_PersonalDetails_Update(
+                    data.PersonalDetailsID,
+                    data.Name,
+                    data.LastName,
+                    data.Email,
+                    data.Photo,
+                    data.Address,
+                    data.City,
+                    data.PostalCode,
+                    data.AreaCodeLP,
+                    data.LinePhone,
+                    data.AreaCodeMP,
+                    data.MobilePhone,
+                    data.BirthDate,
+                    data.IdentityCard,
+                    data.Country,
+                    data.Summary,
+                    data.SummaryCustomTitle,
+                    data.SummaryIsVisible,
+                    data.WebPageUrl,
+                    data.LinkedInUrl,
+                    data.GithubUrl,
+                    data.FacebookUrl,
+                    data.TwitterUrl,
+                    data.ID_Curriculum
+                );
+
+            return result;
+        }
+
         public PersonalDetails GetPersonalDetailsByCurriculumId(int id)
         {
             return _db.Context.PersonalDetails.Where(p => p.ID_Curriculum == id).FirstOrDefault();

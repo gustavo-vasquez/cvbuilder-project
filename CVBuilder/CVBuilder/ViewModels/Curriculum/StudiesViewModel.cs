@@ -1,4 +1,5 @@
-﻿using CVBuilder.enums;
+﻿using CVBuilder.custom_validations;
+using CVBuilder.enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,8 +27,12 @@ namespace CVBuilder.ViewModels.Curriculum
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string City { get; set; }
         public string StartMonth { get; set; }
+
+        [StartYearLessThan("EndYear")]
         public int? StartYear { get; set; }
         public string EndMonth { get; set; }
+
+        [EndYearGreaterThan("StartYear")]
         public int? EndYear { get; set; }
 
         [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]

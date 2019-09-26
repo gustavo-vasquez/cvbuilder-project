@@ -51,7 +51,9 @@
   <ItemGroup>
     <Compile Include="automapper\Mapping.cs" />
     <Compile Include="automapper\MappingSLProfile.cs" />
+    <Compile Include="CurriculumSL.cs" />
     <Compile Include="DTOs\SummaryBlockDTO.cs" />
+    <Compile Include="ICurriculumServices.cs" />
     <Compile Include="PersonalDetailsSL.cs" />
     <Compile Include="DTOs\CertificatesDTO.cs" />
     <Compile Include="DTOs\CurriculumDTO.cs" />

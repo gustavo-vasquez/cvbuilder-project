@@ -253,6 +253,12 @@ function removeNewBlock(e) {
     e.data.addBlockButton.toggleClass('d-none');
 }
 
+function successfulMessage(result, status, xhr) {
+    $form = $(result.formid);
+    $form.append('<div id="successfulMessage" class="alert alert-success text-center mt-3 mb-0 style="display: none;">' + unescape('%A1') + 'Cambios guardados!</div>');
+    $('#successfulMessage').delay(4000).fadeOut('slow', function () { $('#successfulMessage').remove(); });
+}
+
 function onSectionFormSuccessful(result, status, xhr) {
     $form = $(result.formid);
     const section = $form.closest('section').attr('id');
@@ -342,14 +348,14 @@ function monthBoxActions() {
     switch(selectId) {
         case "StartMonth":
             $targetComboBox = $('#StartYear');
-            if (optionValue === "NotShow")
+            if (optionValue === "not_show")
                 $targetComboBox.addClass('invisible');
             else if ($targetComboBox.hasClass('invisible'))
                 $targetComboBox.removeClass('invisible');
             break;
         case "EndMonth":
             $targetComboBox = $('#EndYear');
-            if (optionValue === "NotShow" || optionValue === "Present")
+            if (optionValue === "not_show" || optionValue === "present")
                 $targetComboBox.addClass('invisible');
             else if ($targetComboBox.hasClass('invisible'))
                 $targetComboBox.removeClass('invisible');

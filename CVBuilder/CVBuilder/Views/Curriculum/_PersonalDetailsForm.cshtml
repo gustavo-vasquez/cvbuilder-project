@@ -1,10 +1,11 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.PersonalDetailsViewModel
 
-@using (Ajax.BeginForm("PersonalDetails", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST" }, new { id = "personal_details_form" }))
+@using (Ajax.BeginForm("PersonalDetails", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "successfulMessage" }, new { id = Model.FormId }))
 {
     <fieldset>
         @Html.AntiForgeryToken()
-
+        @Html.HiddenFor(m => m.PersonalDetailsID)
+        @Html.HiddenFor(m => m.Type)
         <div class="row">
             <div class="col-lg-7">
                 <div class="form-group">
@@ -198,9 +199,9 @@
             </div>
         </div>
     </fieldset>
-    <fieldset class="row">
+    <div class="row">
         <div class="col text-center">
             <button type="submit" class="btn btn-success">Guardar cambios</button>
         </div>
-    </fieldset>
+    </div>
 }

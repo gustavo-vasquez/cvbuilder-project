@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.ViewModels.Curriculum
 {
-    public class PersonalDetailsViewModel
+    public class PersonalDetailsViewModel : SectionViewModelBase
     {
         public readonly DateDropdownList BirthDate = new DateDropdownList(DateType.Birthday);
+
+        public int PersonalDetailsID { get; set; }
 
         [Required(ErrorMessage = "Completar este campo.")]
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
@@ -79,5 +81,11 @@ namespace CVBuilder.ViewModels.Curriculum
 
         [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
         public string TwitterUrl { get; set; }
+
+        public PersonalDetailsViewModel()
+        {
+            base.FormId = FormIds.PersonalDetails;
+            base.Type = FormType.ADD;
+        }
     }
 }
