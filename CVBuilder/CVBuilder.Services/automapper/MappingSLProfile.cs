@@ -35,7 +35,7 @@ namespace CVBuilder.Services.automapper
         {
             try
             {
-                if (year == null || year == 0 || string.IsNullOrWhiteSpace(month) || day == null)
+                if (year == 0 || month == Common.MonthOptions.None || day == 0)
                     return null;
 
                 return Convert.ToDateTime(year + "-" + month + "-" + day);

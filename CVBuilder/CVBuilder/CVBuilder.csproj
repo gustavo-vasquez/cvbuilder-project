@@ -249,6 +249,9 @@
     <Content Include="lib\jquery\jquery.slim.min.js" />
     <Content Include="lib\jquery\jquery.unobtrusive-ajax.js" />
     <Content Include="lib\jquery\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="fonts\Lato-Regular.ttf" />
+    <Content Include="fonts\Catamaran-Regular.ttf" />
+    <Content Include="fonts\Muli-Regular.ttf" />
     <None Include="lib\jquery\jquery.validate-vsdoc.js" />
     <Content Include="lib\jquery\jquery.validate.js" />
     <Content Include="lib\jquery\jquery.validate.min.js" />

@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 	$('.cv-preview').on('mouseenter', function() {
 		$(this).append('<div class="overlay"></div>');
-		$(this).append('<button class="btn btn-sm btn-success">Cambiar plantilla</button>');
+		$(this).append('<button class="btn btn-sm btn-outline-success">Cambiar plantilla</button>');
 	}).on('mouseleave', function() {
 		$('.cv-preview div[class="overlay"], .cv-preview button').remove();
 	});
