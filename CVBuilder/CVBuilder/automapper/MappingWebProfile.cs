@@ -21,6 +21,16 @@ namespace CVBuilder.automapper
             CreateMap<StudiesDTO, StudiesViewModel>()
                 .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
 
+            CreateMap<CertificatesViewModel, CertificatesDTO>();
+
+            CreateMap<CertificatesDTO, CertificatesViewModel>()
+                .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
+
+            CreateMap<WorkExperiencesViewModel, WorkExperiencesDTO>();
+
+            CreateMap<WorkExperiencesDTO, WorkExperiencesViewModel>()
+                .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
+
             CreateMap<SummaryBlockDTO, SummaryBlockViewModel>();
         }
     }

@@ -73,9 +73,9 @@
                                     <div class="contracted-block-group">
                                         @if (Model.StudyBlocks.Count > 0)
                                         {
-                                            foreach (var StudyBlock in Model.StudyBlocks)
+                                            foreach (var block in Model.StudyBlocks)
                                             {
-                                                @Html.Partial("_StudyBlock", StudyBlock);
+                                                @Html.Partial("_StudyBlock", block);
                                             }
                                         }
                                     </div>
@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="card border-success overflow-hidden mb-3">
-                        <div class="card-body">
+                        <section id="@SectionIds.Certificates" class="card-body">
                             <h4>Certificados / cursos</h4>
                             <div class="row mb-4">
                                 <div class="col">
@@ -102,39 +102,30 @@
                                 </div>
                             </div>
 
-                            @if (Model.Certificates.Count > 0)
-                            {
-                                <div class="row mb-4">
-                                    <div class="col contracted-block-group">
-                                        <div class="card bg-light contracted-block mb-3">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-lg-8">
-                                                        <h5>Curso en programación (2018-2019)</h5>
-                                                    </div>
-                                                    <div class="col-lg-4 text-right">
-                                                        <button type="submit" class="btn btn-sm" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-                                                        <button type="submit" class="btn btn-sm" title="Eliminar"><i class="far fa-trash-alt"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
+                            <div class="row">
+                                <div class="col">
+                                    <div class="contracted-block-group">
+                                        @if (Model.CertificateBlocks.Count > 0)
+                                        {
+                                            foreach (var block in Model.CertificateBlocks)
+                                            {
+                                                @Html.Partial("_StudyBlock", block);
+                                            }
+                                        }
                                     </div>
                                 </div>
-                            }
+                            </div>
 
                             <div class="row">
                                 <div class="col text-center">
-                                    <hr class="mb-4" />
-                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
 
                     <div class="card border-success overflow-hidden mb-3">
-                        <div class="card-body">
+                        <section id="@SectionIds.WorkExperiences" class="card-body">
                             <h4>Experiencia laboral</h4>
                             <div class="row mb-4">
                                 <div class="col">
@@ -145,35 +136,26 @@
                                 </div>
                             </div>
 
-                            @if (Model.WorkExperiences.Count > 0)
-                            {
-                                <div class="row mb-4">
-                                    <div class="col contracted-block-group">
-                                        <div class="card bg-light contracted-block mb-3">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-lg-8">
-                                                        <h5>Programador Full-stack (2015-2017)</h5>
-                                                    </div>
-                                                    <div class="col-lg-4 text-right">
-                                                        <button type="submit" class="btn btn-sm" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-                                                        <button type="submit" class="btn btn-sm" title="Eliminar"><i class="far fa-trash-alt"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
+                            <div class="row">
+                                <div class="col">
+                                    <div class="contracted-block-group">
+                                        @if (Model.WorkExperiencesBlocks.Count > 0)
+                                        {
+                                            foreach (var block in Model.WorkExperiencesBlocks)
+                                            {
+                                                @Html.Partial("_StudyBlock", block);
+                                            }
+                                        }
                                     </div>
                                 </div>
-                            }
+                            </div>
 
                             <div class="row">
                                 <div class="col text-center">
-                                    <hr class="mb-4" />
-                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
+                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
                 </div>
                 <div id="other_information" class="d-none">
@@ -397,12 +379,12 @@
                     <div id="navigation_buttons" class="row">
                         <div class="col-lg-7 col-sm-3">
                             <div class="btn-group">
-                                <button id="previous_page" type="button" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i> Anterior</button>
-                                <button id="next_page" type="button" class="btn btn-success">Siguiente <i class="fas fa-arrow-alt-circle-right"></i></button>
+                                <button id="previous_page" type="button" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Anterior</button>
+                                <button id="next_page" type="button" class="btn btn-default">Siguiente <i class="fas fa-arrow-alt-circle-right"></i></button>
                             </div>
                         </div>
                         <div class="col-lg-5 col-sm-9 text-right">
-                            <button type="button" class="btn btn-success"><i class="fas fa-save"></i> Finalizar CV</button>
+                            <button type="button" class="btn btn-default"><i class="fas fa-save"></i> Finalizar CV</button>
                         </div>
                     </div>
                 </div>

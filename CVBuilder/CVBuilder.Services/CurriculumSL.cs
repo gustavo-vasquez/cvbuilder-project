@@ -10,11 +10,15 @@ namespace CVBuilder.Services
     {
         public PersonalDetailsSL PersonalDetails { get; set; }
         public StudiesSL Studies { get; set; }
+        public CertificatesSL Certificates { get; set; }
+        public WorkExperiencesSL WorkExperiences { get; set; }
 
         public CurriculumSL()
         {
-            this.PersonalDetails = new PersonalDetailsSL();
-            this.Studies = new StudiesSL();
+            PersonalDetails = new PersonalDetailsSL();
+            Studies = new StudiesSL();
+            Certificates = new CertificatesSL();
+            WorkExperiences = new WorkExperiencesSL();
         }
     }
 }

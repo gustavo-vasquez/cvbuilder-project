@@ -51,9 +51,11 @@
   <ItemGroup>
     <Compile Include="automapper\Mapping.cs" />
     <Compile Include="automapper\MappingSLProfile.cs" />
+    <Compile Include="CertificatesSL.cs" />
     <Compile Include="CurriculumSL.cs" />
     <Compile Include="DTOs\SummaryBlockDTO.cs" />
     <Compile Include="ICurriculumServices.cs" />
+    <Compile Include="ICurriculumSL.cs" />
     <Compile Include="PersonalDetailsSL.cs" />
     <Compile Include="DTOs\CertificatesDTO.cs" />
     <Compile Include="DTOs\CurriculumDTO.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="DTOs\WorkExperiencesDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudiesSL.cs" />
+    <Compile Include="WorkExperiencesSL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

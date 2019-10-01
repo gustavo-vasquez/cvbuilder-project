@@ -10,19 +10,20 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Services
 {
-    public class StudiesSL : ICurriculumSL<StudiesDTO>
+    public class WorkExperiencesSL : ICurriculumSL<WorkExperiencesDTO>
     {
-        private StudiesDL _dataLayer = new StudiesDL();
+        private WorkExperiencesDL _dataLayer = new WorkExperiencesDL();
 
-        public int Create(StudiesDTO dto)
+        public int Create(WorkExperiencesDTO dto)
         {
-            Studies data = Mapping.Mapper.Map<StudiesDTO, Studies>(dto);
+            WorkExperiences data = Mapping.Mapper.Map<WorkExperiencesDTO, WorkExperiences>(dto);
+
             return _dataLayer.Create(data);
         }
 
-        public void Update(StudiesDTO dto)
+        public void Update(WorkExperiencesDTO dto)
         {
-            _dataLayer.Update(Mapping.Mapper.Map<StudiesDTO, Studies>(dto));
+            _dataLayer.Update(Mapping.Mapper.Map<WorkExperiencesDTO, WorkExperiences>(dto));
         }
 
         public int Delete(int id)
@@ -30,30 +31,30 @@ namespace CVBuilder.Services
             return _dataLayer.Delete(id);
         }
 
-        public StudiesDTO GetById(int id)
+        public WorkExperiencesDTO GetById(int id)
         {
-            Studies data = _dataLayer.GetById(id);
-            return Mapping.Mapper.Map<Studies, StudiesDTO>(data);
+            WorkExperiences data = _dataLayer.GetById(id);
+            return Mapping.Mapper.Map<WorkExperiences, WorkExperiencesDTO>(data);
         }
 
-        public List<StudiesDTO> GetAll()
+        public List<WorkExperiencesDTO> GetAll()
         {
-            IQueryable<Studies> allStudies = _dataLayer.GetAll();
-            List<StudiesDTO> dto = new List<StudiesDTO>();
-            
-            foreach(Studies study in allStudies)
+            IQueryable<WorkExperiences> allWorkExperiences = _dataLayer.GetAll();
+            List<WorkExperiencesDTO> dto = new List<WorkExperiencesDTO>();
+
+            foreach (WorkExperiences workExperience in allWorkExperiences)
             {
-                dto.Add(new StudiesDTO()
+                dto.Add(new WorkExperiencesDTO()
                 {
-                    Title = study.Title,
-                    Institute = study.Institute,
-                    City = study.City,
-                    StartMonth = study.StartMonth,
-                    StartYear = study.StartYear,
-                    EndMonth = study.EndMonth,
-                    EndYear = study.EndYear,
-                    Description = study.Description,
-                    IsVisible = study.IsVisible
+                    Job = workExperience.Job,
+                    City = workExperience.City,
+                    Company = workExperience.Company,
+                    StartMonth = workExperience.StartMonth,
+                    StartYear = workExperience.StartYear,
+                    EndMonth = workExperience.EndMonth,
+                    EndYear = workExperience.EndYear,
+                    Description = workExperience.Description,
+                    IsVisible = workExperience.IsVisible
                 });
             }
 
@@ -62,35 +63,35 @@ namespace CVBuilder.Services
 
         public List<SummaryBlockDTO> GetAllBlocks()
         {
-            IQueryable<Studies> allStudies = _dataLayer.GetAll();
-            List<SummaryBlockDTO> studyBlocks = new List<SummaryBlockDTO>();
+            IQueryable<WorkExperiences> allWorkExperiences = _dataLayer.GetAll();
+            List<SummaryBlockDTO> workExperienceBlocks = new List<SummaryBlockDTO>();
 
-            foreach(Studies study in allStudies)
+            foreach (WorkExperiences workExperience in allWorkExperiences)
             {
-                studyBlocks.Add(new SummaryBlockDTO()
+                workExperienceBlocks.Add(new SummaryBlockDTO()
                 {
-                    SummaryId = study.StudyID,
-                    Title = study.Title,
-                    StateInTime = GenerateStateInTimeFormat(study.StartMonth, study.StartYear, study.EndMonth, study.EndYear)
+                    SummaryId = workExperience.WorkExperienceID,
+                    Title = workExperience.Job + " en " + workExperience.Company,
+                    StateInTime = GenerateStateInTimeFormat(workExperience.StartMonth, workExperience.StartYear, workExperience.EndMonth, workExperience.EndYear)
                 });
             }
 
-            return studyBlocks;
+            return workExperienceBlocks;
         }
 
         public SummaryBlockDTO GetSummaryBlock(int id)
         {
-            Studies study;
+            WorkExperiences workExperience;
             if (id > 0)
-                study = _dataLayer.GetById(id);
+                workExperience = _dataLayer.GetById(id);
             else
-                study = _dataLayer.GetLast();
+                workExperience = _dataLayer.GetLast();
 
             return new SummaryBlockDTO()
             {
-                SummaryId = study.StudyID,
-                Title = study.Title,
-                StateInTime = GenerateStateInTimeFormat(study.StartMonth, study.StartYear, study.EndMonth, study.EndYear)
+                SummaryId = workExperience.WorkExperienceID,
+                Title = workExperience.Job + " en " + workExperience.Company,
+                StateInTime = GenerateStateInTimeFormat(workExperience.StartMonth, workExperience.StartYear, workExperience.EndMonth, workExperience.EndYear)
             };
         }
 

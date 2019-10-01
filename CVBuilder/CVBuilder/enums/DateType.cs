@@ -7,8 +7,9 @@ namespace CVBuilder.enums
 {
     public enum DateType
     {
-        Birthday,
-        CurriculumStartPeriod,
-        CurriculumEndPeriod
+        BIRTHDAY,
+        START_PERIOD,
+        END_PERIOD,
+        CERTIFICATE
     }
 }

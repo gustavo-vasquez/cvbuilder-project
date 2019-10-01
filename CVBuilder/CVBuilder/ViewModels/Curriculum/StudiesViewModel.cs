@@ -11,8 +11,8 @@ namespace CVBuilder.ViewModels.Curriculum
 {
     public class StudiesViewModel : SectionViewModelBase
     {
-        public readonly DateDropdownList StartPeriod = new DateDropdownList(DateType.CurriculumStartPeriod);
-        public readonly DateDropdownList EndPeriod = new DateDropdownList(DateType.CurriculumEndPeriod);
+        public readonly DateDropdownList StartPeriod = new DateDropdownList(DateType.START_PERIOD);
+        public readonly DateDropdownList EndPeriod = new DateDropdownList(DateType.END_PERIOD);
 
         public int StudyID { get; set; }
         [Required(ErrorMessage = "Completar este campo.")]

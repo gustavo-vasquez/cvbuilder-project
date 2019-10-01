@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Data
 {
-    public class StudiesDL : DataLayerBase, ICurriculumDL<Studies>
+    public class WorkExperiencesDL : DataLayerBase, ICurriculumDL<WorkExperiences>
     {
-        public int Create(Studies data)
+        public int Create(WorkExperiences data)
         {
-            int result = _db.Context.usp_Studies_Create(
-                    data.Title,
-                    data.Institute,
+            int result = _db.Context.usp_WorkExperiences_Create(
+                    data.Job,
                     data.City,
+                    data.Company,
                     data.StartMonth,
                     data.StartYear,
                     data.EndMonth,
@@ -26,13 +26,13 @@ namespace CVBuilder.Data
             return result;
         }
 
-        public void Update(Studies data)
+        public void Update(WorkExperiences data)
         {
-            _db.Context.usp_Studies_Update(
-                    data.StudyID,
-                    data.Title,
-                    data.Institute,
+            _db.Context.usp_WorkExperiences_Update(
+                    data.WorkExperienceID,
+                    data.Job,
                     data.City,
+                    data.Company,
                     data.StartMonth,
                     data.StartYear,
                     data.EndMonth,
@@ -45,23 +45,23 @@ namespace CVBuilder.Data
 
         public int Delete(int id)
         {
-            int result = _db.Context.usp_Studies_Delete(id);
+            int result = _db.Context.usp_WorkExperiences_Delete(id);
             return result;
         }
 
-        public Studies GetById(int id)
+        public WorkExperiences GetById(int id)
         {
-            return _db.Context.Studies.Find(id);
+            return _db.Context.WorkExperiences.Find(id);
         }
 
-        public IQueryable<Studies> GetAll()
+        public IQueryable<WorkExperiences> GetAll()
         {
-            return _db.Context.Studies.Where(s => s.ID_Curriculum == 1);
+            return _db.Context.WorkExperiences.Where(s => s.ID_Curriculum == 1);
         }
 
-        public Studies GetLast()
+        public WorkExperiences GetLast()
         {
-            return _db.Context.Studies.OrderByDescending(p => p.StudyID).First();
+            return _db.Context.WorkExperiences.OrderByDescending(p => p.WorkExperienceID).First();
         }
     }
 }

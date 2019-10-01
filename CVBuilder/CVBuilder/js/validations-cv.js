@@ -35,3 +35,18 @@ $.validator.addMethod('validateendyear', function (value, element, params) {
 
     return true;
 });
+
+$.validator.unobtrusive.adapters.add('validatecertificateyear', ['inprogress'], function (options) {
+    var params = {
+        inProgress: options.params.inprogress
+    };
+    options.rules['validatecertificateyear'] = params;
+    options.messages['validatecertificateyear'] = options.message;
+});
+
+$.validator.addMethod('validatecertificateyear', function (value, element, params) {
+    if (!$('#' + params.inProgress).get(0).checked && value == 0)
+        return false;
+
+    return true;
+});

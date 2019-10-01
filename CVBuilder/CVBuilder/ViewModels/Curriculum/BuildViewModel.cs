@@ -9,10 +9,9 @@ namespace CVBuilder.ViewModels.Curriculum
     public class BuildViewModel
     {
         public PersonalDetailsViewModel PersonalDetails { get; set; }
-        public List<StudiesViewModel> Studies { get; set; }
         public List<SummaryBlockViewModel> StudyBlocks { get; set; }
-        public List<CertificatesViewModel> Certificates { get; set; }
-        public List<WorkExperiencesViewModel> WorkExperiences { get; set; }
+        public List<SummaryBlockViewModel> CertificateBlocks { get; set; }
+        public List<SummaryBlockViewModel> WorkExperiencesBlocks { get; set; }
         public List<LanguagesViewModel> Languages { get; set; }
         public List<SkillsViewModel> Skills { get; set; }
         public List<InterestsViewModel> Interests { get; set; }
@@ -22,10 +21,9 @@ namespace CVBuilder.ViewModels.Curriculum
         public BuildViewModel()
         {
             PersonalDetails = new PersonalDetailsViewModel();
-            Studies = new List<StudiesViewModel>();
             StudyBlocks = new List<SummaryBlockViewModel>();
-            Certificates = new List<CertificatesViewModel>();
-            WorkExperiences = new List<WorkExperiencesViewModel>();
+            CertificateBlocks = new List<SummaryBlockViewModel>();
+            WorkExperiencesBlocks = new List<SummaryBlockViewModel>();
             Languages = new List<LanguagesViewModel>();
             Skills = new List<SkillsViewModel>();
             Interests = new List<InterestsViewModel>();

@@ -15,7 +15,8 @@ namespace CVBuilder.Services.automapper
         {
             CreateMap<PersonalDetailsDTO, PersonalDetails>()
                 .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
-                .ForMember(dest => dest.BirthDate, act => act.ResolveUsing(src => { return this.GetBirthdateFromValues(src.Year, src.Month, src.Day); }));
+                .ForMember(dest => dest.BirthDate, act => act.ResolveUsing(src => { return this.GetBirthdateFromValues(src.Year, src.Month, src.Day); }))
+                .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<PersonalDetails, PersonalDetailsDTO>()
                 .ForMember(dest => dest.Year, act => act.ResolveUsing(src => { return src.BirthDate != null ? src.BirthDate.Value.Year : (int?)null; }))
@@ -28,7 +29,19 @@ namespace CVBuilder.Services.automapper
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<Studies, StudiesDTO>();
-                //.ForMember(dest => dest.studyid, act => act.MapFrom(src => src.StudyID));
+            //.ForMember(dest => dest.studyid, act => act.MapFrom(src => src.StudyID));
+
+            CreateMap<CertificatesDTO, Certificates>()
+                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                .ForMember(dest => dest.Curriculum, act => act.Ignore());
+
+            CreateMap<Certificates, CertificatesDTO>();
+
+            CreateMap<WorkExperiencesDTO, WorkExperiences>()
+                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                .ForMember(dest => dest.Curriculum, act => act.Ignore());
+
+            CreateMap<WorkExperiences, WorkExperiencesDTO>();
         }
 
         private DateTime? GetBirthdateFromValues(int? year, string month, int? day)
