@@ -165,7 +165,7 @@
           <Property Name="StartYear" Type="int" />
           <Property Name="EndMonth" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EndYear" Type="int" />
-          <Property Name="Description" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
           <Property Name="IsVisible" Type="bit" Nullable="false" />
           <Property Name="ID_Curriculum" Type="int" Nullable="false" />
         </EntityType>
@@ -762,7 +762,7 @@
           <Property Name="StartYear" Type="Int32" />
           <Property Name="EndMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="EndYear" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="IsVisible" Type="Boolean" Nullable="false" />
           <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Curriculum" Relationship="Self.FK_WorkExperiences_Curriculum" FromRole="WorkExperiences" ToRole="Curriculum" />
@@ -992,7 +992,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Certificates_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Certificates_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1012,7 +1012,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_CustomSections_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_CustomSections_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1027,7 +1027,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Interests_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Interests_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1042,7 +1042,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Languages_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Languages_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1052,7 +1052,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalDetails_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalDetails_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1090,7 +1090,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalReferences_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalReferences_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1109,7 +1109,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Skills_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Skills_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1131,7 +1131,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Studies_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Studies_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1159,7 +1159,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_WorkExperiences_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_WorkExperiences_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />

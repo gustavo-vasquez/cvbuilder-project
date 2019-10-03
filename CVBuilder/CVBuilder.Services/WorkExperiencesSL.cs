@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Services
 {
-    public class WorkExperiencesSL : ICurriculumSL<WorkExperiencesDTO>
+    public class WorkExperiencesSL : ICurriculumServices<WorkExperiencesDTO>
     {
         private WorkExperiencesDL _dataLayer = new WorkExperiencesDL();
 

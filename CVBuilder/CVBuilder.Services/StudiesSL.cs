@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Services
 {
-    public class StudiesSL : ICurriculumSL<StudiesDTO>
+    public class StudiesSL : ICurriculumServices<StudiesDTO>
     {
         private StudiesDL _dataLayer = new StudiesDL();
 

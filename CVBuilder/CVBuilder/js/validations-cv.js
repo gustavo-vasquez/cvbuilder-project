@@ -50,3 +50,18 @@ $.validator.addMethod('validatecertificateyear', function (value, element, param
 
     return true;
 });
+
+$.validator.unobtrusive.adapters.add('validaterequiredfromcombobox', ['allowemptystrings'], function (options) {
+    var params = {
+        allowEmptyStrings: options.params.allowemptystrings
+    };
+    options.rules['validaterequiredfromcombobox'] = params;
+    options.messages['validaterequiredfromcombobox'] = options.message;
+});
+
+$.validator.addMethod('validaterequiredfromcombobox', function (value, element, params) {
+    if (value === "none" || !params.allowEmptyStrings)
+        return false;
+
+    return true;
+});

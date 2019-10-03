@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Data
 {
-    public class CertificatesDL : DataLayerBase, ICurriculumDL<Certificates>
+    public class CertificatesDL : DataLayerBase, ICurriculumData<Certificates>
     {
         public int Create(Certificates data)
         {

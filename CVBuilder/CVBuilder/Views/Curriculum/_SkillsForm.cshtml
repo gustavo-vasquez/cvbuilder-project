@@ -1,40 +1,36 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.SkillsViewModel
 
-@using (Ajax.BeginForm("Skills", "Curriculum", new AjaxOptions() { HttpMethod = "POST" }, new { id = "skills_form" }))
+@using (Ajax.BeginForm("Skills", "Curriculum", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful" }, new { id = Model.FormId }))
 {
+    <hr />
     <fieldset>
         @Html.AntiForgeryToken()
-
+        @Html.HiddenFor(m => m.SkillID)
+        @Html.HiddenFor(m => m.Type)
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label>Nombre del programa</label>
+                    <label>Nombre de la habilidad</label>
                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Ej: Microsoft Word" })
                     @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Nivel</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
+                    <label>Nivel</label>
+                    @Html.DropDownListFor(m => m.Level, Model.Levels, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Level, null, new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </fieldset>
-    <fieldset class="row mb-4">
-        <div class="col-lg-8">
-            <div class="btn-group">
-                <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
+
+    <div class="row">
+        <div class="col">
+            <div class="btn-group btn-block">
+                <button type="submit" class="btn btn-sm btn-outline-success"><i class="fas fa-check"></i> Hecho</button>&nbsp;
+                <button type="button" class="btn btn-sm btn-outline-danger remove-form-block"><i class="far fa-trash-alt"></i> Eliminar</button>
             </div>
         </div>
-        <div class="col-lg-4 text-right">
-            <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
-        </div>
-    </fieldset>
+    </div>
 }

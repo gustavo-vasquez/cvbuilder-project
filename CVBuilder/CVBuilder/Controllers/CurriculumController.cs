@@ -15,6 +15,7 @@ namespace CVBuilder.Controllers
     public class CurriculumController : Controller
     {
         private CurriculumSL _curriculumServices = new CurriculumSL();
+        private const string _sectionErrorMessage = "La sección no existe.";
 
         // GET: Curriculum
         [HttpGet]
@@ -24,71 +25,22 @@ namespace CVBuilder.Controllers
             PersonalDetailsDTO personalDetailsDto = _curriculumServices.PersonalDetails.GetPersonalDetailsByCurriculumId(1);
 
             if (personalDetailsDto != null)
-            {
-                model.PersonalDetails.PersonalDetailsID = personalDetailsDto.PersonalDetailsID;
-                model.PersonalDetails.Type = FormType.EDIT;
-
-                model.PersonalDetails.Name = personalDetailsDto.Name;
-                model.PersonalDetails.LastName = personalDetailsDto.LastName;
-                model.PersonalDetails.Photo = personalDetailsDto.Photo;
-                model.PersonalDetails.Summary = personalDetailsDto.Summary;
-                model.PersonalDetails.SummaryCustomTitle = personalDetailsDto.SummaryCustomTitle;
-                model.PersonalDetails.SummaryIsVisible = personalDetailsDto.SummaryIsVisible;
-                model.PersonalDetails.Email = personalDetailsDto.Email;
-                model.PersonalDetails.LinePhone = personalDetailsDto.LinePhone;
-                model.PersonalDetails.AreaCodeLP = personalDetailsDto.AreaCodeLP;
-                model.PersonalDetails.MobilePhone = personalDetailsDto.MobilePhone;
-                model.PersonalDetails.AreaCodeMP = personalDetailsDto.AreaCodeMP;
-                model.PersonalDetails.Day = personalDetailsDto.Day;
-                model.PersonalDetails.Month = personalDetailsDto.Month;
-                model.PersonalDetails.Year = personalDetailsDto.Year;
-                model.PersonalDetails.Address = personalDetailsDto.Address;
-                model.PersonalDetails.City = personalDetailsDto.City;
-                model.PersonalDetails.PostalCode = personalDetailsDto.PostalCode;
-                model.PersonalDetails.IdentityCard = personalDetailsDto.IdentityCard;
-                model.PersonalDetails.Country = personalDetailsDto.Country;
-                model.PersonalDetails.WebPageUrl = personalDetailsDto.WebPageUrl;
-                model.PersonalDetails.LinkedInUrl = personalDetailsDto.LinkedInUrl;
-                model.PersonalDetails.GithubUrl = personalDetailsDto.GithubUrl;
-                model.PersonalDetails.FacebookUrl = personalDetailsDto.FacebookUrl;
-                model.PersonalDetails.TwitterUrl = personalDetailsDto.TwitterUrl;
-            }
+                model.PersonalDetails = Mapping.Mapper.Map<PersonalDetailsDTO, PersonalDetailsViewModel>(personalDetailsDto);
 
             List<SummaryBlockDTO> studiesDto = _curriculumServices.Studies.GetAllBlocks();
-
-            foreach (SummaryBlockDTO block in studiesDto)
-            {
-                model.StudyBlocks.Add(new SummaryBlockViewModel()
-                {
-                    SummaryId = block.SummaryId,
-                    Title = block.Title,
-                    StateInTime = block.StateInTime
-                });
-            }
+            model.StudyBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(studiesDto);
 
             List<SummaryBlockDTO> certificatesDto = _curriculumServices.Certificates.GetAllBlocks();
-
-            foreach (SummaryBlockDTO block in certificatesDto)
-            {
-                model.CertificateBlocks.Add(new SummaryBlockViewModel()
-                {
-                    SummaryId = block.SummaryId,
-                    Title = block.Title,
-                    StateInTime = block.StateInTime
-                });
-            }
+            model.CertificateBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(certificatesDto);
 
             List<SummaryBlockDTO> workExperiencesDto = _curriculumServices.WorkExperiences.GetAllBlocks();
+            model.WorkExperienceBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(workExperiencesDto);
 
-            foreach (SummaryBlockDTO block in workExperiencesDto)
-            {
-                model.WorkExperiencesBlocks.Add(new SummaryBlockViewModel()
-                {
-                    SummaryId = block.SummaryId,
-                    Title = block.Title,
-                    StateInTime = block.StateInTime
-                });
-            }
+            List<SummaryBlockDTO> languagesDto = _curriculumServices.Languages.GetAllBlocks();
+            model.LanguageBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(languagesDto);
+
+            List<SummaryBlockDTO> skillsDto = _curriculumServices.Skills.GetAllBlocks();
+            model.SkillBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(skillsDto);
 
             return View(model);
         }
@@ -171,6 +123,40 @@ namespace CVBuilder.Controllers
             return Json(new { formid = "#" + model.FormId, id = model.WorkExperienceID, mode = Convert.ToInt32(model.Type) });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Languages(LanguagesViewModel model)
+        {
+            if (!ModelState.IsValid) { }
+
+            LanguagesDTO dto = Mapping.Mapper.Map<LanguagesViewModel, LanguagesDTO>(model);
+            switch (model.Type)
+            {
+                case FormType.ADD: _curriculumServices.Languages.Create(dto); break;
+                case FormType.EDIT: _curriculumServices.Languages.Update(dto); break;
+                default: break;
+            }
+
+            return Json(new { formid = "#" + model.FormId, id = model.LanguageID, mode = Convert.ToInt32(model.Type) });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Skills(SkillsViewModel model)
+        {
+            if (!ModelState.IsValid) { }
+
+            SkillsDTO dto = Mapping.Mapper.Map<SkillsViewModel, SkillsDTO>(model);
+            switch (model.Type)
+            {
+                case FormType.ADD: _curriculumServices.Skills.Create(dto); break;
+                case FormType.EDIT: _curriculumServices.Skills.Update(dto); break;
+                default: break;
+            }
+
+            return Json(new { formid = "#" + model.FormId, id = model.SkillID, mode = Convert.ToInt32(model.Type) });
+        }
+
         [HttpGet]
         public PartialViewResult GetSectionForm(string section)
         {
@@ -190,8 +176,16 @@ namespace CVBuilder.Controllers
                     model = new WorkExperiencesViewModel();
                     viewName = "_WorkExperiencesForm";
                     break;
+                case SectionIds.Languages:
+                    model = new LanguagesViewModel();
+                    viewName = "_LanguagesForm";
+                    break;
+                case SectionIds.Skills:
+                    model = new SkillsViewModel();
+                    viewName = "_SkillsForm";
+                    break;
                 default:
-                    throw new ArgumentException("La sección no existe.");
+                    throw new ArgumentException(_sectionErrorMessage);
             }
 
             return PartialView(viewName, model);
@@ -216,8 +210,16 @@ namespace CVBuilder.Controllers
                     model = Mapping.Mapper.Map<WorkExperiencesDTO, WorkExperiencesViewModel>(_curriculumServices.WorkExperiences.GetById(id));
                     viewName = "_WorkExperiencesForm";
                     break;
+                case SectionIds.Languages:
+                    model = Mapping.Mapper.Map<LanguagesDTO, LanguagesViewModel>(_curriculumServices.Languages.GetById(id));
+                    viewName = "_LanguagesForm";
+                    break;
+                case SectionIds.Skills:
+                    model = Mapping.Mapper.Map<SkillsDTO, SkillsViewModel>(_curriculumServices.Skills.GetById(id));
+                    viewName = "_SkillsForm";
+                    break;
                 default:
-                    throw new ArgumentException("La sección no existe.");
+                    throw new ArgumentException(_sectionErrorMessage);
             }
 
             return PartialView(viewName, model);
@@ -242,8 +244,16 @@ namespace CVBuilder.Controllers
                     dto = _curriculumServices.WorkExperiences.GetSummaryBlock(id);
                     model = Mapping.Mapper.Map<SummaryBlockDTO, SummaryBlockViewModel>(dto);
                     break;
+                case SectionIds.Languages:
+                    dto = _curriculumServices.Languages.GetSummaryBlock(id);
+                    model = Mapping.Mapper.Map<SummaryBlockDTO, SummaryBlockViewModel>(dto);
+                    break;
+                case SectionIds.Skills:
+                    dto = _curriculumServices.Skills.GetSummaryBlock(id);
+                    model = Mapping.Mapper.Map<SummaryBlockDTO, SummaryBlockViewModel>(dto);
+                    break;
                 default:
-                    throw new ArgumentException("La sección no existe.");
+                    throw new ArgumentException(_sectionErrorMessage);
             }
 
             return PartialView("_StudyBlock", model);
@@ -263,8 +273,14 @@ namespace CVBuilder.Controllers
                 case SectionIds.WorkExperiences:
                     _curriculumServices.WorkExperiences.Delete(id);
                     break;
+                case SectionIds.Languages:
+                    _curriculumServices.Languages.Delete(id);
+                    break;
+                case SectionIds.Skills:
+                    _curriculumServices.Skills.Delete(id);
+                    break;
                 default:
-                    throw new ArgumentException("La sección no existe.");
+                    throw new ArgumentException(_sectionErrorMessage);
             }
         }
     }

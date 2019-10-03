@@ -16,6 +16,9 @@ namespace CVBuilder.automapper
             CreateMap<PersonalDetailsViewModel, PersonalDetailsDTO>()
                 .ForMember(dest => dest.SummaryIsVisible, act => act.UseValue(true));
 
+            CreateMap<PersonalDetailsDTO, PersonalDetailsViewModel>()
+                .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
+
             CreateMap<StudiesViewModel, StudiesDTO>();
 
             CreateMap<StudiesDTO, StudiesViewModel>()
@@ -29,6 +32,16 @@ namespace CVBuilder.automapper
             CreateMap<WorkExperiencesViewModel, WorkExperiencesDTO>();
 
             CreateMap<WorkExperiencesDTO, WorkExperiencesViewModel>()
+                .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
+
+            CreateMap<LanguagesViewModel, LanguagesDTO>();
+
+            CreateMap<LanguagesDTO, LanguagesViewModel>()
+                .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
+
+            CreateMap<SkillsViewModel, SkillsDTO>();
+
+            CreateMap<SkillsDTO, SkillsViewModel>()
                 .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
 
             CreateMap<SummaryBlockDTO, SummaryBlockViewModel>();

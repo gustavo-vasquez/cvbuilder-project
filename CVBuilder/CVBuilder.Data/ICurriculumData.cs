@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Data
 {
-    interface ICurriculumDL<T> where T : class
+    interface ICurriculumData<T> where T : class
     {
         int Create(T data);
         void Update(T data);

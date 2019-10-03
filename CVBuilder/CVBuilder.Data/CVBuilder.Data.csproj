@@ -80,13 +80,14 @@
     </Compile>
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="IDatabaseConnection.cs" />
-    <Compile Include="ICurriculumDL.cs" />
+    <Compile Include="ICurriculumData.cs" />
     <Compile Include="Interests.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Languages.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="LanguagesDL.cs" />
     <Compile Include="PersonalDetails.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
@@ -99,6 +100,7 @@
     <Compile Include="Skills.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="SkillsDL.cs" />
     <Compile Include="Studies.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>

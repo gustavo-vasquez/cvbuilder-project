@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Services
 {
-    public class CertificatesSL : ICurriculumSL<CertificatesDTO>
+    public class CertificatesSL : ICurriculumServices<CertificatesDTO>
     {
         private CertificatesDL _dataLayer = new CertificatesDL();
 

@@ -270,6 +270,7 @@
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="custom_validations\EndYearGreaterThanAttribute.cs" />
+    <Compile Include="custom_validations\RequiredFromComboboxAttribute.cs" />
     <Compile Include="custom_validations\RequiredIfNotAttribute.cs" />
     <Compile Include="custom_validations\StartYearLessThanAttribute.cs" />
     <Compile Include="enums\DateType.cs" />

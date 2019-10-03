@@ -42,6 +42,18 @@ namespace CVBuilder.Services.automapper
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<WorkExperiences, WorkExperiencesDTO>();
+
+            CreateMap<LanguagesDTO, Languages>()
+                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                .ForMember(dest => dest.Curriculum, act => act.Ignore());
+
+            CreateMap<Languages, LanguagesDTO>();
+
+            CreateMap<SkillsDTO, Skills>()
+                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                .ForMember(dest => dest.Curriculum, act => act.Ignore());
+
+            CreateMap<Skills, SkillsDTO>();
         }
 
         private DateTime? GetBirthdateFromValues(int? year, string month, int? day)

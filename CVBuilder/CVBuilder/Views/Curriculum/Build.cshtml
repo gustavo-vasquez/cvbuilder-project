@@ -139,9 +139,9 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="contracted-block-group">
-                                        @if (Model.WorkExperiencesBlocks.Count > 0)
+                                        @if (Model.WorkExperienceBlocks.Count > 0)
                                         {
-                                            foreach (var block in Model.WorkExperiencesBlocks)
+                                            foreach (var block in Model.WorkExperienceBlocks)
                                             {
                                                 @Html.Partial("_StudyBlock", block);
                                             }
@@ -160,7 +160,7 @@
                 </div>
                 <div id="other_information" class="d-none">
                     <div class="card border-success overflow-hidden mb-3">
-                        <div class="card-body">
+                        <section id="@SectionIds.Languages" class="card-body">
                             <h4>Idiomas</h4>
                             <div class="row mb-4">
                                 <div class="col">
@@ -171,40 +171,31 @@
                                 </div>
                             </div>
 
-                            @if (Model.Languages.Count > 0)
-                            {
-                                <div class="row mb-4">
-                                    <div class="col contracted-block-group">
-                                        <div class="card bg-light contracted-block mb-3">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-lg-8">
-                                                        <h5>Inglés (Experto)</h5>
-                                                    </div>
-                                                    <div class="col-lg-4 text-right">
-                                                        <button type="submit" class="btn btn-sm" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-                                                        <button type="submit" class="btn btn-sm" title="Eliminar"><i class="far fa-trash-alt"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
+                            <div class="row">
+                                <div class="col">
+                                    <div class="contracted-block-group">
+                                        @if (Model.LanguageBlocks.Count > 0)
+                                        {
+                                            foreach (var block in Model.LanguageBlocks)
+                                            {
+                                                @Html.Partial("_StudyBlock", block);
+                                            }
+                                        }
                                     </div>
                                 </div>
-                            }
+                            </div>
 
                             <div class="row">
                                 <div class="col text-center">
-                                    <hr class="mb-4" />
-                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
+                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
 
                     <div class="card border-success overflow-hidden mb-3">
-                        <div class="card-body">
-                            <h4>Habilidades informáticas</h4>
+                        <section id="@SectionIds.Skills" class="card-body">
+                            <h4>Habilidades</h4>
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
@@ -214,35 +205,26 @@
                                 </div>
                             </div>
 
-                            @if (Model.Skills.Count > 0)
-                            {
-                                <div class="row mb-4">
-                                    <div class="col contracted-block-group">
-                                        <div class="card bg-light contracted-block mb-3">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-lg-8">
-                                                        <h5>Microsoft Excel 2010</h5>
-                                                    </div>
-                                                    <div class="col-lg-4 text-right">
-                                                        <button type="submit" class="btn btn-sm" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-                                                        <button type="submit" class="btn btn-sm" title="Eliminar"><i class="far fa-trash-alt"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
+                            <div class="row">
+                                <div class="col">
+                                    <div class="contracted-block-group">
+                                        @if (Model.SkillBlocks.Count > 0)
+                                        {
+                                            foreach (var block in Model.SkillBlocks)
+                                            {
+                                                @Html.Partial("_StudyBlock", block);
+                                            }
+                                        }
                                     </div>
                                 </div>
-                            }
+                            </div>
 
                             <div class="row">
                                 <div class="col text-center">
-                                    <hr class="mb-4" />
-                                    <button type="button" class="btn btn-outline-secondary btn-md mb-3"><i class="fas fa-plus"></i> Agregar otro bloque</button>
+                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
 
                     <div class="card border-success overflow-hidden mb-3">
@@ -257,7 +239,7 @@
                                 </div>
                             </div>
 
-                            @if (Model.Interests.Count > 0)
+                            @if (Model.InterestBlocks.Count > 0)
                             {
                                 <div class="row mb-4">
                                     <div class="col contracted-block-group">
@@ -300,7 +282,7 @@
                                 </div>
                             </div>
 
-                            @if (Model.PersonalReferences.Count > 0)
+                            @if (Model.PersonalReferenceBlocks.Count > 0)
                             {
                                 <div class="row mb-4">
                                     <div class="col contracted-block-group">
@@ -344,7 +326,7 @@
                                 </div>
                             </div>
 
-                            @if (Model.CustomFields.Count > 0)
+                            @if (Model.CustomFieldBlocks.Count > 0)
                             {
                                 <div class="row mb-4">
                                     <div class="col contracted-block-group">

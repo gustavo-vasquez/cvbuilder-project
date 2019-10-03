@@ -8,6 +8,7 @@ namespace CVBuilder.Services.DTOs
 {
     public class SkillsDTO
     {
+        public int SkillID { get; set; }
         public string Name { get; set; }
         public string Level { get; set; }
         public bool IsVisible { get; set; }
