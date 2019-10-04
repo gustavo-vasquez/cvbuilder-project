@@ -16,7 +16,7 @@ namespace CVBuilder.ViewModels.Curriculum
         public List<SummaryBlockViewModel> SkillBlocks { get; set; }
         public List<SummaryBlockViewModel> InterestBlocks { get; set; }
         public List<SummaryBlockViewModel> PersonalReferenceBlocks { get; set; }
-        public List<SummaryBlockViewModel> CustomFieldBlocks { get; set; }
+        public List<SummaryBlockViewModel> CustomSectionBlocks { get; set; }
 
         public BuildViewModel()
         {
@@ -28,7 +28,7 @@ namespace CVBuilder.ViewModels.Curriculum
             SkillBlocks = new List<SummaryBlockViewModel>();
             InterestBlocks = new List<SummaryBlockViewModel>();
             PersonalReferenceBlocks = new List<SummaryBlockViewModel>();
-            CustomFieldBlocks = new List<SummaryBlockViewModel>();
+            CustomSectionBlocks = new List<SummaryBlockViewModel>();
         }
     }
 }

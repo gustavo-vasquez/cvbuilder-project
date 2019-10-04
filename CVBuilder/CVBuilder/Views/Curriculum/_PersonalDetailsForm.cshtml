@@ -1,6 +1,6 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.PersonalDetailsViewModel
 
-@using (Ajax.BeginForm("PersonalDetails", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "successfulMessage" }, new { id = Model.FormId }))
+@using (Ajax.BeginForm("PersonalDetails", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "successfulMessage", OnFailure = "onErrorSubmit" }, new { id = Model.FormId }))
 {
     <fieldset>
         @Html.AntiForgeryToken()
@@ -111,7 +111,7 @@
                             @Html.ValidationMessageFor(m => m.AreaCodeMP, null, new { @class = "text-danger" })
                         </div>
                         <div class="col-lg-7">
-                            @Html.TextBoxFor(m => m.MobilePhone, new { @class = "form-control", placeholder = "Cod. área" })
+                            @Html.TextBoxFor(m => m.MobilePhone, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.MobilePhone, null, new { @class = "text-danger" })
                         </div>
                     </div>

@@ -29,26 +29,6 @@ namespace CVBuilder.Services
             return _dataLayer.Delete(id);
         }
 
-        public List<CertificatesDTO> GetAll()
-        {
-            IQueryable<Certificates> allCertificates = _dataLayer.GetAll();
-            List<CertificatesDTO> dto = new List<CertificatesDTO>();
-
-            foreach (Certificates certificate in allCertificates)
-            {
-                dto.Add(new CertificatesDTO()
-                {
-                    Name = certificate.Name,
-                    Institute = certificate.Institute,
-                    OnlineMode = certificate.OnlineMode,
-                    InProgress = certificate.InProgress,
-                    Year = certificate.Year
-                });
-            }
-
-            return dto;
-        }
-
         public CertificatesDTO GetById(int id)
         {
             Certificates data = _dataLayer.GetById(id);

@@ -36,30 +36,6 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<Studies, StudiesDTO>(data);
         }
 
-        public List<StudiesDTO> GetAll()
-        {
-            IQueryable<Studies> allStudies = _dataLayer.GetAll();
-            List<StudiesDTO> dto = new List<StudiesDTO>();
-            
-            foreach(Studies study in allStudies)
-            {
-                dto.Add(new StudiesDTO()
-                {
-                    Title = study.Title,
-                    Institute = study.Institute,
-                    City = study.City,
-                    StartMonth = study.StartMonth,
-                    StartYear = study.StartYear,
-                    EndMonth = study.EndMonth,
-                    EndYear = study.EndYear,
-                    Description = study.Description,
-                    IsVisible = study.IsVisible
-                });
-            }
-
-            return dto;
-        }
-
         public List<SummaryBlockDTO> GetAllBlocks()
         {
             IQueryable<Studies> allStudies = _dataLayer.GetAll();

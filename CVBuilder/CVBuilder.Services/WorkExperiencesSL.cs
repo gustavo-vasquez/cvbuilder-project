@@ -37,30 +37,6 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<WorkExperiences, WorkExperiencesDTO>(data);
         }
 
-        public List<WorkExperiencesDTO> GetAll()
-        {
-            IQueryable<WorkExperiences> allWorkExperiences = _dataLayer.GetAll();
-            List<WorkExperiencesDTO> dto = new List<WorkExperiencesDTO>();
-
-            foreach (WorkExperiences workExperience in allWorkExperiences)
-            {
-                dto.Add(new WorkExperiencesDTO()
-                {
-                    Job = workExperience.Job,
-                    City = workExperience.City,
-                    Company = workExperience.Company,
-                    StartMonth = workExperience.StartMonth,
-                    StartYear = workExperience.StartYear,
-                    EndMonth = workExperience.EndMonth,
-                    EndYear = workExperience.EndYear,
-                    Description = workExperience.Description,
-                    IsVisible = workExperience.IsVisible
-                });
-            }
-
-            return dto;
-        }
-
         public List<SummaryBlockDTO> GetAllBlocks()
         {
             IQueryable<WorkExperiences> allWorkExperiences = _dataLayer.GetAll();

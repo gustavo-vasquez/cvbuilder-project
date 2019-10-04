@@ -285,7 +285,7 @@
     <Compile Include="ViewModels\Curriculum\SectionViewModelBase.cs" />
     <Compile Include="ViewModels\Curriculum\BuildViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\CertificatesViewModel.cs" />
-    <Compile Include="ViewModels\Curriculum\CustomFieldsViewModel.cs" />
+    <Compile Include="ViewModels\Curriculum\CustomSectionsViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\InterestsViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\LanguagesViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\PersonalDetailsViewModel.cs" />
@@ -352,7 +352,7 @@
     <Content Include="Views\Curriculum\_SkillsForm.cshtml" />
     <Content Include="Views\Curriculum\_InterestsForm.cshtml" />
     <Content Include="Views\Curriculum\_PersonalReferencesForm.cshtml" />
-    <Content Include="Views\Curriculum\_CustomFieldsForm.cshtml" />
+    <Content Include="Views\Curriculum\_CustomSectionsForm.cshtml" />
     <Content Include="Views\Curriculum\_StudyBlock.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

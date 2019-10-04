@@ -60,6 +60,7 @@
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="CurriculumDL.cs" />
+    <Compile Include="CustomSectionsDL.cs" />
     <Compile Include="CustomSections.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
@@ -84,6 +85,7 @@
     <Compile Include="Interests.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="InterestsDL.cs" />
     <Compile Include="Languages.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
@@ -95,6 +97,7 @@
     <Compile Include="PersonalReferences.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="PersonalReferencesDL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataLayerBase.cs" />
     <Compile Include="Skills.cs">

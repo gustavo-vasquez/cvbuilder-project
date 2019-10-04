@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CVBuilderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CVBuilderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Certificates">
           <Key>
             <PropertyRef Name="CertificateID" />
@@ -577,7 +577,8 @@
             <End Role="WorkExperiences" EntitySet="WorkExperiences" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CVBuilderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -956,6 +957,76 @@
             <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="WorkExperiences" EntitySet="WorkExperiences" />
           </AssociationSet>
+          <FunctionImport Name="usp_Certificates_Create">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="institute" Mode="In" Type="String" />
+            <Parameter Name="onlineMode" Mode="In" Type="Boolean" />
+            <Parameter Name="inProgress" Mode="In" Type="Boolean" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Certificates_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Certificates_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="institute" Mode="In" Type="String" />
+            <Parameter Name="onlineMode" Mode="In" Type="Boolean" />
+            <Parameter Name="inProgress" Mode="In" Type="Boolean" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CustomSections_Create">
+            <Parameter Name="sectionName" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CustomSections_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CustomSections_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="sectionName" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Interests_Create">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Interests_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Interests_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Languages_Create">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="level" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Languages_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Languages_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="level" Mode="In" Type="String" />
+            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="usp_PersonalDetails_Create">
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="lastname" Mode="In" Type="String" />
@@ -981,78 +1052,8 @@
             <Parameter Name="twitterUrl" Mode="In" Type="String" />
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="usp_Certificates_Create">
-            <Parameter Name="name" Mode="In" Type="String" />
-            <Parameter Name="institute" Mode="In" Type="String" />
-            <Parameter Name="onlineMode" Mode="In" Type="Boolean" />
-            <Parameter Name="inProgress" Mode="In" Type="Boolean" />
-            <Parameter Name="year" Mode="In" Type="Int32" />
-            <Parameter Name="description" Mode="In" Type="String" />
-            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
-            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_Certificates_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_Certificates_Update">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="name" Mode="In" Type="String" />
-            <Parameter Name="institute" Mode="In" Type="String" />
-            <Parameter Name="onlineMode" Mode="In" Type="Boolean" />
-            <Parameter Name="inProgress" Mode="In" Type="Boolean" />
-            <Parameter Name="year" Mode="In" Type="Int32" />
-            <Parameter Name="description" Mode="In" Type="String" />
-            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
-            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_CustomSections_Create">
-            <Parameter Name="sectionName" Mode="In" Type="String" />
-            <Parameter Name="description" Mode="In" Type="String" />
-            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
-            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_CustomSections_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_CustomSections_Update">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="sectionName" Mode="In" Type="String" />
-            <Parameter Name="description" Mode="In" Type="String" />
-            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
-            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_Interests_Create">
-            <Parameter Name="name" Mode="In" Type="String" />
-            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
-            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_Interests_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_Interests_Update">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="name" Mode="In" Type="String" />
-            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
-            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_Languages_Create">
-            <Parameter Name="name" Mode="In" Type="String" />
-            <Parameter Name="level" Mode="In" Type="String" />
-            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
-            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_Languages_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_Languages_Update">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="name" Mode="In" Type="String" />
-            <Parameter Name="level" Mode="In" Type="String" />
-            <Parameter Name="isVisible" Mode="In" Type="Boolean" />
-            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="usp_PersonalDetails_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalDetails_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1090,7 +1091,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalReferences_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalReferences_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1109,7 +1110,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Skills_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Skills_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1131,7 +1132,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Studies_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Studies_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1159,7 +1160,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_WorkExperiences_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_WorkExperiences_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1357,7 +1358,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="usp_PersonalDetails_Create" FunctionName="CVBuilderModel.Store.usp_PersonalDetails_Create" />
           <FunctionImportMapping FunctionImportName="usp_Certificates_Create" FunctionName="CVBuilderModel.Store.usp_Certificates_Create" />
           <FunctionImportMapping FunctionImportName="usp_Certificates_Delete" FunctionName="CVBuilderModel.Store.usp_Certificates_Delete" />
           <FunctionImportMapping FunctionImportName="usp_Certificates_Update" FunctionName="CVBuilderModel.Store.usp_Certificates_Update" />
@@ -1370,6 +1370,7 @@
           <FunctionImportMapping FunctionImportName="usp_Languages_Create" FunctionName="CVBuilderModel.Store.usp_Languages_Create" />
           <FunctionImportMapping FunctionImportName="usp_Languages_Delete" FunctionName="CVBuilderModel.Store.usp_Languages_Delete" />
           <FunctionImportMapping FunctionImportName="usp_Languages_Update" FunctionName="CVBuilderModel.Store.usp_Languages_Update" />
+          <FunctionImportMapping FunctionImportName="usp_PersonalDetails_Create" FunctionName="CVBuilderModel.Store.usp_PersonalDetails_Create" />
           <FunctionImportMapping FunctionImportName="usp_PersonalDetails_Delete" FunctionName="CVBuilderModel.Store.usp_PersonalDetails_Delete" />
           <FunctionImportMapping FunctionImportName="usp_PersonalDetails_Update" FunctionName="CVBuilderModel.Store.usp_PersonalDetails_Update" />
           <FunctionImportMapping FunctionImportName="usp_PersonalReferences_Create" FunctionName="CVBuilderModel.Store.usp_PersonalReferences_Create" />

@@ -40,103 +40,6 @@ namespace CVBuilder.Data
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<WorkExperiences> WorkExperiences { get; set; }
     
-        public virtual int usp_PersonalDetails_Create(string name, string lastname, string email, byte[] photo, string address, string city, Nullable<int> postalCode, Nullable<short> areaCodeLP, Nullable<int> linePhone, Nullable<short> areaCodeMP, Nullable<int> mobilePhone, Nullable<System.DateTime> birthDate, Nullable<int> identityCard, string country, string summary, string summaryCustomTitle, Nullable<bool> summaryIsVisible, string webPageUrl, string linkedInUrl, string githubUrl, string facebookUrl, string twitterUrl, Nullable<int> id_curriculum)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("name", name) :
-                new ObjectParameter("name", typeof(string));
-    
-            var lastnameParameter = lastname != null ?
-                new ObjectParameter("lastname", lastname) :
-                new ObjectParameter("lastname", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("email", email) :
-                new ObjectParameter("email", typeof(string));
-    
-            var photoParameter = photo != null ?
-                new ObjectParameter("photo", photo) :
-                new ObjectParameter("photo", typeof(byte[]));
-    
-            var addressParameter = address != null ?
-                new ObjectParameter("address", address) :
-                new ObjectParameter("address", typeof(string));
-    
-            var cityParameter = city != null ?
-                new ObjectParameter("city", city) :
-                new ObjectParameter("city", typeof(string));
-    
-            var postalCodeParameter = postalCode.HasValue ?
-                new ObjectParameter("postalCode", postalCode) :
-                new ObjectParameter("postalCode", typeof(int));
-    
-            var areaCodeLPParameter = areaCodeLP.HasValue ?
-                new ObjectParameter("areaCodeLP", areaCodeLP) :
-                new ObjectParameter("areaCodeLP", typeof(short));
-    
-            var linePhoneParameter = linePhone.HasValue ?
-                new ObjectParameter("linePhone", linePhone) :
-                new ObjectParameter("linePhone", typeof(int));
-    
-            var areaCodeMPParameter = areaCodeMP.HasValue ?
-                new ObjectParameter("areaCodeMP", areaCodeMP) :
-                new ObjectParameter("areaCodeMP", typeof(short));
-    
-            var mobilePhoneParameter = mobilePhone.HasValue ?
-                new ObjectParameter("mobilePhone", mobilePhone) :
-                new ObjectParameter("mobilePhone", typeof(int));
-    
-            var birthDateParameter = birthDate.HasValue ?
-                new ObjectParameter("birthDate", birthDate) :
-                new ObjectParameter("birthDate", typeof(System.DateTime));
-    
-            var identityCardParameter = identityCard.HasValue ?
-                new ObjectParameter("identityCard", identityCard) :
-                new ObjectParameter("identityCard", typeof(int));
-    
-            var countryParameter = country != null ?
-                new ObjectParameter("country", country) :
-                new ObjectParameter("country", typeof(string));
-    
-            var summaryParameter = summary != null ?
-                new ObjectParameter("summary", summary) :
-                new ObjectParameter("summary", typeof(string));
-    
-            var summaryCustomTitleParameter = summaryCustomTitle != null ?
-                new ObjectParameter("summaryCustomTitle", summaryCustomTitle) :
-                new ObjectParameter("summaryCustomTitle", typeof(string));
-    
-            var summaryIsVisibleParameter = summaryIsVisible.HasValue ?
-                new ObjectParameter("summaryIsVisible", summaryIsVisible) :
-                new ObjectParameter("summaryIsVisible", typeof(bool));
-    
-            var webPageUrlParameter = webPageUrl != null ?
-                new ObjectParameter("webPageUrl", webPageUrl) :
-                new ObjectParameter("webPageUrl", typeof(string));
-    
-            var linkedInUrlParameter = linkedInUrl != null ?
-                new ObjectParameter("linkedInUrl", linkedInUrl) :
-                new ObjectParameter("linkedInUrl", typeof(string));
-    
-            var githubUrlParameter = githubUrl != null ?
-                new ObjectParameter("githubUrl", githubUrl) :
-                new ObjectParameter("githubUrl", typeof(string));
-    
-            var facebookUrlParameter = facebookUrl != null ?
-                new ObjectParameter("facebookUrl", facebookUrl) :
-                new ObjectParameter("facebookUrl", typeof(string));
-    
-            var twitterUrlParameter = twitterUrl != null ?
-                new ObjectParameter("twitterUrl", twitterUrl) :
-                new ObjectParameter("twitterUrl", typeof(string));
-    
-            var id_curriculumParameter = id_curriculum.HasValue ?
-                new ObjectParameter("id_curriculum", id_curriculum) :
-                new ObjectParameter("id_curriculum", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalDetails_Create", nameParameter, lastnameParameter, emailParameter, photoParameter, addressParameter, cityParameter, postalCodeParameter, areaCodeLPParameter, linePhoneParameter, areaCodeMPParameter, mobilePhoneParameter, birthDateParameter, identityCardParameter, countryParameter, summaryParameter, summaryCustomTitleParameter, summaryIsVisibleParameter, webPageUrlParameter, linkedInUrlParameter, githubUrlParameter, facebookUrlParameter, twitterUrlParameter, id_curriculumParameter);
-        }
-    
         public virtual int usp_Certificates_Create(string name, string institute, Nullable<bool> onlineMode, Nullable<bool> inProgress, Nullable<int> year, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)
         {
             var nameParameter = name != null ?
@@ -379,6 +282,103 @@ namespace CVBuilder.Data
                 new ObjectParameter("id_curriculum", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Languages_Update", idParameter, nameParameter, levelParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_PersonalDetails_Create(string name, string lastname, string email, byte[] photo, string address, string city, Nullable<int> postalCode, Nullable<short> areaCodeLP, Nullable<int> linePhone, Nullable<short> areaCodeMP, Nullable<int> mobilePhone, Nullable<System.DateTime> birthDate, Nullable<int> identityCard, string country, string summary, string summaryCustomTitle, Nullable<bool> summaryIsVisible, string webPageUrl, string linkedInUrl, string githubUrl, string facebookUrl, string twitterUrl, Nullable<int> id_curriculum)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var lastnameParameter = lastname != null ?
+                new ObjectParameter("lastname", lastname) :
+                new ObjectParameter("lastname", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var photoParameter = photo != null ?
+                new ObjectParameter("photo", photo) :
+                new ObjectParameter("photo", typeof(byte[]));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("address", address) :
+                new ObjectParameter("address", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var postalCodeParameter = postalCode.HasValue ?
+                new ObjectParameter("postalCode", postalCode) :
+                new ObjectParameter("postalCode", typeof(int));
+    
+            var areaCodeLPParameter = areaCodeLP.HasValue ?
+                new ObjectParameter("areaCodeLP", areaCodeLP) :
+                new ObjectParameter("areaCodeLP", typeof(short));
+    
+            var linePhoneParameter = linePhone.HasValue ?
+                new ObjectParameter("linePhone", linePhone) :
+                new ObjectParameter("linePhone", typeof(int));
+    
+            var areaCodeMPParameter = areaCodeMP.HasValue ?
+                new ObjectParameter("areaCodeMP", areaCodeMP) :
+                new ObjectParameter("areaCodeMP", typeof(short));
+    
+            var mobilePhoneParameter = mobilePhone.HasValue ?
+                new ObjectParameter("mobilePhone", mobilePhone) :
+                new ObjectParameter("mobilePhone", typeof(int));
+    
+            var birthDateParameter = birthDate.HasValue ?
+                new ObjectParameter("birthDate", birthDate) :
+                new ObjectParameter("birthDate", typeof(System.DateTime));
+    
+            var identityCardParameter = identityCard.HasValue ?
+                new ObjectParameter("identityCard", identityCard) :
+                new ObjectParameter("identityCard", typeof(int));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("country", country) :
+                new ObjectParameter("country", typeof(string));
+    
+            var summaryParameter = summary != null ?
+                new ObjectParameter("summary", summary) :
+                new ObjectParameter("summary", typeof(string));
+    
+            var summaryCustomTitleParameter = summaryCustomTitle != null ?
+                new ObjectParameter("summaryCustomTitle", summaryCustomTitle) :
+                new ObjectParameter("summaryCustomTitle", typeof(string));
+    
+            var summaryIsVisibleParameter = summaryIsVisible.HasValue ?
+                new ObjectParameter("summaryIsVisible", summaryIsVisible) :
+                new ObjectParameter("summaryIsVisible", typeof(bool));
+    
+            var webPageUrlParameter = webPageUrl != null ?
+                new ObjectParameter("webPageUrl", webPageUrl) :
+                new ObjectParameter("webPageUrl", typeof(string));
+    
+            var linkedInUrlParameter = linkedInUrl != null ?
+                new ObjectParameter("linkedInUrl", linkedInUrl) :
+                new ObjectParameter("linkedInUrl", typeof(string));
+    
+            var githubUrlParameter = githubUrl != null ?
+                new ObjectParameter("githubUrl", githubUrl) :
+                new ObjectParameter("githubUrl", typeof(string));
+    
+            var facebookUrlParameter = facebookUrl != null ?
+                new ObjectParameter("facebookUrl", facebookUrl) :
+                new ObjectParameter("facebookUrl", typeof(string));
+    
+            var twitterUrlParameter = twitterUrl != null ?
+                new ObjectParameter("twitterUrl", twitterUrl) :
+                new ObjectParameter("twitterUrl", typeof(string));
+    
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalDetails_Create", nameParameter, lastnameParameter, emailParameter, photoParameter, addressParameter, cityParameter, postalCodeParameter, areaCodeLPParameter, linePhoneParameter, areaCodeMPParameter, mobilePhoneParameter, birthDateParameter, identityCardParameter, countryParameter, summaryParameter, summaryCustomTitleParameter, summaryIsVisibleParameter, webPageUrlParameter, linkedInUrlParameter, githubUrlParameter, facebookUrlParameter, twitterUrlParameter, id_curriculumParameter);
         }
     
         public virtual int usp_PersonalDetails_Delete(Nullable<int> id)

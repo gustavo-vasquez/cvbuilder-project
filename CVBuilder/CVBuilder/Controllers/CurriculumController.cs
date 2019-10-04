@@ -26,21 +26,15 @@ namespace CVBuilder.Controllers
 
             if (personalDetailsDto != null)
                 model.PersonalDetails = Mapping.Mapper.Map<PersonalDetailsDTO, PersonalDetailsViewModel>(personalDetailsDto);
-
-            List<SummaryBlockDTO> studiesDto = _curriculumServices.Studies.GetAllBlocks();
-            model.StudyBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(studiesDto);
-
-            List<SummaryBlockDTO> certificatesDto = _curriculumServices.Certificates.GetAllBlocks();
-            model.CertificateBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(certificatesDto);
-
-            List<SummaryBlockDTO> workExperiencesDto = _curriculumServices.WorkExperiences.GetAllBlocks();
-            model.WorkExperienceBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(workExperiencesDto);
-
-            List<SummaryBlockDTO> languagesDto = _curriculumServices.Languages.GetAllBlocks();
-            model.LanguageBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(languagesDto);
-
-            List<SummaryBlockDTO> skillsDto = _curriculumServices.Skills.GetAllBlocks();
-            model.SkillBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(skillsDto);
+            
+            model.StudyBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Studies.GetAllBlocks());
+            model.CertificateBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Certificates.GetAllBlocks());
+            model.WorkExperienceBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.WorkExperiences.GetAllBlocks());
+            model.LanguageBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Languages.GetAllBlocks());
+            model.SkillBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Skills.GetAllBlocks());
+            model.InterestBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Interests.GetAllBlocks());
+            model.PersonalReferenceBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.PersonalReferences.GetAllBlocks());
+            model.CustomSectionBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.CustomSections.GetAllBlocks());
 
             return View(model);
         }
@@ -157,6 +151,57 @@ namespace CVBuilder.Controllers
             return Json(new { formid = "#" + model.FormId, id = model.SkillID, mode = Convert.ToInt32(model.Type) });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Interests(InterestsViewModel model)
+        {
+            if (!ModelState.IsValid) { }
+
+            InterestsDTO dto = Mapping.Mapper.Map<InterestsViewModel, InterestsDTO>(model);
+            switch (model.Type)
+            {
+                case FormType.ADD: _curriculumServices.Interests.Create(dto); break;
+                case FormType.EDIT: _curriculumServices.Interests.Update(dto); break;
+                default: break;
+            }
+
+            return Json(new { formid = "#" + model.FormId, id = model.InterestID, mode = Convert.ToInt32(model.Type) });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PersonalReferences(PersonalReferencesViewModel model)
+        {
+            if (!ModelState.IsValid) { }
+
+            PersonalReferencesDTO dto = Mapping.Mapper.Map<PersonalReferencesViewModel, PersonalReferencesDTO>(model);
+            switch (model.Type)
+            {
+                case FormType.ADD: _curriculumServices.PersonalReferences.Create(dto); break;
+                case FormType.EDIT: _curriculumServices.PersonalReferences.Update(dto); break;
+                default: break;
+            }
+
+            return Json(new { formid = "#" + model.FormId, id = model.PersonalReferenceID, mode = Convert.ToInt32(model.Type) });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CustomSections(CustomSectionsViewModel model)
+        {
+            if (!ModelState.IsValid) { }
+
+            CustomSectionsDTO dto = Mapping.Mapper.Map<CustomSectionsViewModel, CustomSectionsDTO>(model);
+            switch (model.Type)
+            {
+                case FormType.ADD: _curriculumServices.CustomSections.Create(dto); break;
+                case FormType.EDIT: _curriculumServices.CustomSections.Update(dto); break;
+                default: break;
+            }
+
+            return Json(new { formid = "#" + model.FormId, id = model.CustomSectionID, mode = Convert.ToInt32(model.Type) });
+        }
+
         [HttpGet]
         public PartialViewResult GetSectionForm(string section)
         {
@@ -183,6 +228,18 @@ namespace CVBuilder.Controllers
                 case SectionIds.Skills:
                     model = new SkillsViewModel();
                     viewName = "_SkillsForm";
+                    break;
+                case SectionIds.Interests:
+                    model = new InterestsViewModel();
+                    viewName = "_InterestsForm";
+                    break;
+                case SectionIds.PersonalReferences:
+                    model = new PersonalReferencesViewModel();
+                    viewName = "_PersonalReferencesForm";
+                    break;
+                case SectionIds.CustomSections:
+                    model = new CustomSectionsViewModel();
+                    viewName = "_CustomSectionsForm";
                     break;
                 default:
                     throw new ArgumentException(_sectionErrorMessage);
@@ -218,6 +275,18 @@ namespace CVBuilder.Controllers
                     model = Mapping.Mapper.Map<SkillsDTO, SkillsViewModel>(_curriculumServices.Skills.GetById(id));
                     viewName = "_SkillsForm";
                     break;
+                case SectionIds.Interests:
+                    model = Mapping.Mapper.Map<InterestsDTO, InterestsViewModel>(_curriculumServices.Interests.GetById(id));
+                    viewName = "_InterestsForm";
+                    break;
+                case SectionIds.PersonalReferences:
+                    model = Mapping.Mapper.Map<PersonalReferencesDTO, PersonalReferencesViewModel>(_curriculumServices.PersonalReferences.GetById(id));
+                    viewName = "_PersonalReferencesForm";
+                    break;
+                case SectionIds.CustomSections:
+                    model = Mapping.Mapper.Map<CustomSectionsDTO, CustomSectionsViewModel>(_curriculumServices.CustomSections.GetById(id));
+                    viewName = "_CustomSectionsForm";
+                    break;
                 default:
                     throw new ArgumentException(_sectionErrorMessage);
             }
@@ -252,6 +321,18 @@ namespace CVBuilder.Controllers
                     dto = _curriculumServices.Skills.GetSummaryBlock(id);
                     model = Mapping.Mapper.Map<SummaryBlockDTO, SummaryBlockViewModel>(dto);
                     break;
+                case SectionIds.Interests:
+                    dto = _curriculumServices.Interests.GetSummaryBlock(id);
+                    model = Mapping.Mapper.Map<SummaryBlockDTO, SummaryBlockViewModel>(dto);
+                    break;
+                case SectionIds.PersonalReferences:
+                    dto = _curriculumServices.PersonalReferences.GetSummaryBlock(id);
+                    model = Mapping.Mapper.Map<SummaryBlockDTO, SummaryBlockViewModel>(dto);
+                    break;
+                case SectionIds.CustomSections:
+                    dto = _curriculumServices.CustomSections.GetSummaryBlock(id);
+                    model = Mapping.Mapper.Map<SummaryBlockDTO, SummaryBlockViewModel>(dto);
+                    break;
                 default:
                     throw new ArgumentException(_sectionErrorMessage);
             }
@@ -278,6 +359,15 @@ namespace CVBuilder.Controllers
                     break;
                 case SectionIds.Skills:
                     _curriculumServices.Skills.Delete(id);
+                    break;
+                case SectionIds.Interests:
+                    _curriculumServices.Interests.Delete(id);
+                    break;
+                case SectionIds.PersonalReferences:
+                    _curriculumServices.PersonalReferences.Delete(id);
+                    break;
+                case SectionIds.CustomSections:
+                    _curriculumServices.CustomSections.Delete(id);
                     break;
                 default:
                     throw new ArgumentException(_sectionErrorMessage);

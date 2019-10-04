@@ -1,6 +1,6 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.WorkExperiencesViewModel
 
-@using (Ajax.BeginForm("WorkExperiences", "Curriculum", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful" }, new { id = Model.FormId }))
+@using (Ajax.BeginForm("WorkExperiences", "Curriculum", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful", OnFailure = "onErrorSubmit" }, new { id = Model.FormId }))
 {
     <hr />
     <fieldset>

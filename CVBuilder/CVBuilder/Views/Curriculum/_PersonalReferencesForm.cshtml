@@ -1,14 +1,16 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.PersonalReferencesViewModel
 
-@using (Ajax.BeginForm("PersonalReferences", "Curriculum", new AjaxOptions() { HttpMethod = "POST" }, new { id = "personal_references_form" }))
+@using (Ajax.BeginForm("PersonalReferences", "Curriculum", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful", OnFailure = "onErrorSubmit" }, new { id = Model.FormId }))
 {
+    <hr />
     <fieldset>
         @Html.AntiForgeryToken()
-
+        @Html.HiddenFor(m => m.PersonalReferenceID)
+        @Html.HiddenFor(m => m.Type)
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label>Nombre y apellido del contacto</label>
+                    <label>Nombre/apellido del contacto</label>
                     @Html.TextBoxFor(m => m.ContactPerson, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.ContactPerson, null, new { @class = "text-danger" })
                 </div>
@@ -38,11 +40,11 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><b>+</b></span>
                             </div>
-                            @Html.TextBoxFor(m => m.AreaCode, new { @class = "form-control", placeholder = "Cod. área" })
+                            @Html.TextBoxFor(m => m.AreaCode, new { @class = "form-control", placeholder = "Cod. área", data_val_number = "Sólo se admiten números." })
                             @Html.ValidationMessageFor(m => m.AreaCode, null, new { @class = "text-danger" })
                         </div>
                         <div class="col-lg-7">
-                            @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control", data_val_number = "Sólo se admiten números." })
                             @Html.ValidationMessageFor(m => m.Telephone, null, new { @class = "text-danger" })
                         </div>
                     </div>
@@ -50,14 +52,13 @@
             </div>
         </div>
     </fieldset>
-    <fieldset class="row mb-4">
-        <div class="col-lg-8">
-            <div class="btn-group">
-                <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
+
+    <div class="row">
+        <div class="col">
+            <div class="btn-group btn-block">
+                <button type="submit" class="btn btn-sm btn-outline-success"><i class="fas fa-check"></i> Hecho</button>&nbsp;
+                <button type="button" class="btn btn-sm btn-outline-danger remove-form-block"><i class="far fa-trash-alt"></i> Eliminar</button>
             </div>
         </div>
-        <div class="col-lg-4 text-right">
-            <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
-        </div>
-    </fieldset>
+    </div>
 }

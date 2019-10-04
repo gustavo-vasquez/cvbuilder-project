@@ -1,10 +1,12 @@
-﻿@model CVBuilder.ViewModels.Curriculum.CustomFieldsViewModel
+﻿@model CVBuilder.ViewModels.Curriculum.CustomSectionsViewModel
 
-@using (Ajax.BeginForm("CustomFields", "Curriculum", new AjaxOptions() { HttpMethod = "POST" }, new { id = "custom_fields_form" }))
+@using (Ajax.BeginForm("CustomSections", "Curriculum", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful", OnFailure = "onErrorSubmit" }, new { id = Model.FormId }))
 {
+    <hr />
     <fieldset>
         @Html.AntiForgeryToken()
-
+        @Html.HiddenFor(m => m.CustomSectionID)
+        @Html.HiddenFor(m => m.Type)
         <div class="row">
             <div class="col">
                 <div class="form-group">
@@ -25,12 +27,13 @@
             </div>
         </div>
     </fieldset>
-    <fieldset class="row mb-4">
-        <div class="col-lg-8">
-            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Hecho</button>
+
+    <div class="row">
+        <div class="col">
+            <div class="btn-group btn-block">
+                <button type="submit" class="btn btn-sm btn-outline-success"><i class="fas fa-check"></i> Hecho</button>&nbsp;
+                <button type="button" class="btn btn-sm btn-outline-danger remove-form-block"><i class="far fa-trash-alt"></i> Eliminar</button>
+            </div>
         </div>
-        <div class="col-lg-4 text-right">
-            <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
-        </div>
-    </fieldset>
+    </div>
 }

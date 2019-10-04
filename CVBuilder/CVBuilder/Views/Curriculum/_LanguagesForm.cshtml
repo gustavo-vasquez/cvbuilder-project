@@ -1,6 +1,6 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.LanguagesViewModel
 
-@using (Ajax.BeginForm("Languages", "Curriculum", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful" }, new { id = Model.FormId }))
+@using (Ajax.BeginForm("Languages", "Curriculum", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful", OnFailure = "onErrorSubmit" }, new { id = Model.FormId }))
 {
     <hr />
     <fieldset>

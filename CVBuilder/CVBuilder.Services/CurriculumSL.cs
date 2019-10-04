@@ -14,6 +14,9 @@ namespace CVBuilder.Services
         public WorkExperiencesSL WorkExperiences { get; set; }
         public LanguagesSL Languages { get; set; }
         public SkillsSL Skills { get; set; }
+        public InterestsSL Interests { get; set; }
+        public PersonalReferencesSL PersonalReferences { get; set; }
+        public CustomSectionsSL CustomSections { get; set; }
 
         public CurriculumSL()
         {
@@ -23,6 +26,9 @@ namespace CVBuilder.Services
             WorkExperiences = new WorkExperiencesSL();
             Languages = new LanguagesSL();
             Skills = new SkillsSL();
+            Interests = new InterestsSL();
+            PersonalReferences = new PersonalReferencesSL();
+            CustomSections = new CustomSectionsSL();
         }
     }
 }

@@ -14,5 +14,7 @@ namespace CVBuilder.Services
         WorkExperiencesSL WorkExperiences { get; set; }
         LanguagesSL Languages { get; set; }
         SkillsSL Skills { get; set; }
+        PersonalReferencesSL PersonalReferences { get; set; }
+        CustomSectionsSL CustomSections { get; set; }
     }
 }

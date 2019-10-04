@@ -15,7 +15,7 @@ namespace CVBuilder.enums
         public static string Skills => SectionIds.Skills + Suffix;
         public static string Interests => SectionIds.Interests + Suffix;
         public static string PersonalReferences => SectionIds.PersonalReferences + Suffix;
-        public static string CustomFields => SectionIds.CustomFields + Suffix;
+        public static string CustomSections => SectionIds.CustomSections + Suffix;
 
         private const string Suffix = "_form";
     }

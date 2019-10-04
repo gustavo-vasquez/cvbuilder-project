@@ -36,20 +36,21 @@ namespace CVBuilder.ViewModels.Curriculum
         public string City { get; set; }
 
         [DataType(DataType.PostalCode)]
-        [MaxLength(5, ErrorMessage = "Cod. postal no válido.")]
+        [Range(1, 99999, ErrorMessage = "Máximo 5 números.")]
         public int? PostalCode { get; set; }
 
-        [MaxLength(4, ErrorMessage = "Cod. área no válido.")]
+        [Range(1, 9999, ErrorMessage = "Máximo 4 números.")]
         public short? AreaCodeLP { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        [MaxLength(10, ErrorMessage = "Máximo 10 números.")]
+        [Range(1, 9999999999, ErrorMessage = "Máximo 10 números.")]
         public int? LinePhone { get; set; }
 
-        [MaxLength(4, ErrorMessage = "Cod. área no válido.")]
+        [Range(1, 9999, ErrorMessage = "Máximo 4 números.")]
         public short? AreaCodeMP { get; set; }
 
-        [MaxLength(10, ErrorMessage = "Máximo 10 números.")]
+        [DataType(DataType.PhoneNumber)]
+        [Range(1, 9999999999, ErrorMessage = "Máximo 10 números.")]
         public int? MobilePhone { get; set; }
         public int? Day { get; set; }
         public string Month { get; set; }

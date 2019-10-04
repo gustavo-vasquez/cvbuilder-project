@@ -15,6 +15,6 @@ namespace CVBuilder.enums
         public const string Skills = "skills";
         public const string Interests = "interests";
         public const string PersonalReferences = "personal_references";
-        public const string CustomFields = "custom_fields";
+        public const string CustomSections = "custom_sections";
     }
 }

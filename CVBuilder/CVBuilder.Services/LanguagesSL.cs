@@ -36,24 +36,6 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<Languages, LanguagesDTO>(data);
         }
 
-        public List<LanguagesDTO> GetAll()
-        {
-            IQueryable<Languages> allLanguages = _dataLayer.GetAll();
-            List<LanguagesDTO> dto = new List<LanguagesDTO>();
-
-            foreach (Languages language in allLanguages)
-            {
-                dto.Add(new LanguagesDTO()
-                {
-                    Name = language.Name,
-                    Level = language.Level,
-                    IsVisible = language.IsVisible
-                });
-            }
-
-            return dto;
-        }
-
         public List<SummaryBlockDTO> GetAllBlocks()
         {
             IQueryable<Languages> allLanguages = _dataLayer.GetAll();

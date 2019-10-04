@@ -469,3 +469,8 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
     border-color: #61bb94;
     box-shadow: 0 0 0 0.2rem rgba(97,187,148,.3);
 }
+
+.input-group > input[type=text]:last-of-type {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}

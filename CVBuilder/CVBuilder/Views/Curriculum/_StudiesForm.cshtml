@@ -1,6 +1,6 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.StudiesViewModel
 
-@using (Ajax.BeginForm("Studies", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful" }, new { id = Model.FormId }))
+@using (Ajax.BeginForm("Studies", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSectionFormSuccessful", OnFailure = "onErrorSubmit" }, new { id = Model.FormId }))
 {
     <hr />
     <fieldset>
@@ -11,7 +11,7 @@
             <div class="col">
                 <div class="form-group">
                     <label>Título académico</label>
-                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control", autofocus = "true" })
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
                 </div>
             </div>

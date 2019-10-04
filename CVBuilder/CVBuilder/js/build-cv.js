@@ -214,6 +214,7 @@ function getSectionForm() {
             $('#' + section).append(result);
             $.validator.unobtrusive.parse("form");
             $addBlockButton.toggleClass('d-none');
+            $('#' + section + ' form input:text').first().focus();
 
             if (section === "studies" || section === "work_experiences")
                 $('#StartMonth, #EndMonth').on('change', monthBoxActions);
@@ -236,7 +237,7 @@ function editSectionForm() {
     $.ajax({
         url: "/Curriculum/EditSectionForm",
         type: "GET",
-        data: { section: $editBlockButton.closest('section').attr('id'), id: $editBlockButton.data('id') },
+        data: { section: section, id: $editBlockButton.data('id') },
         contentType: "application/x-www-form-urlencoded",
         dataType: "html",
         beforeSend: function (xhr) {
@@ -246,6 +247,7 @@ function editSectionForm() {
             $editBlockButton.closest('.card-body').append(result);
             $.validator.unobtrusive.parse("form");
             $editBlockButton.toggleClass('invisible');
+            $('#' + section + ' form input:text').first().focus();
 
             if (section === "studies" || section === "work_experiences")
                 $('#StartMonth, #EndMonth').on('change', monthBoxActions);
@@ -278,6 +280,10 @@ function successfulMessage(result, status, xhr) {
     $form = $(result.formid);
     $form.append('<div id="successfulMessage" class="alert alert-success text-center mt-3 mb-0 style="display: none;">' + unescape('%A1') + 'Cambios guardados!</div>');
     $('#successfulMessage').delay(4000).fadeOut('slow', function () { $('#successfulMessage').remove(); });
+}
+
+function onErrorSubmit(event, xhr, options, exc) {
+    console.log(event.responseText);
 }
 
 function onSectionFormSuccessful(result, status, xhr) {
