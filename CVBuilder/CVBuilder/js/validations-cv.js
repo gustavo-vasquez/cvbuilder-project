@@ -2,6 +2,34 @@
     ignore: ""
 });
 
+$.validator.unobtrusive.adapters.add('validatepostedfileextensions', ['extensions'], function (options) {
+    var params = {
+        extensions: options.params.extensions
+    };
+    options.rules['validatepostedfileextensions'] = params;
+    options.messages['validatepostedfileextensions'] = options.message;
+});
+
+$.validator.addMethod('validatepostedfileextensions', function (value, element, params) {
+    const fileExtension = value.toLowerCase().split('.').pop();
+    return params.extensions.includes(fileExtension);
+});
+
+$.validator.unobtrusive.adapters.add('validatemaxfilesize', ['size'], function (options) {
+    var params = {
+        size: options.params.size
+    };
+    options.rules['validatemaxfilesize'] = params;
+    options.messages['validatemaxfilesize'] = options.message;
+});
+
+$.validator.addMethod('validatemaxfilesize', function (value, element, params) {
+    if (element.files[0].size > params.size)
+        return false;
+
+    return true;
+});
+
 $.validator.unobtrusive.adapters.add('validatestartyear', ['endyear'], function (options) {
     var params = {
         endYear: options.params.endyear

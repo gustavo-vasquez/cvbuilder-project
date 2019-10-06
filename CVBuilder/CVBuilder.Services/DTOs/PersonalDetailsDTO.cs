@@ -12,7 +12,9 @@ namespace CVBuilder.Services.DTOs
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public byte[] Photo { get; set; }
+        public byte[] UploadedPhoto { get; set; }
+        public string Photo { get; set; }
+        public string MimeType { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public int? PostalCode { get; set; }

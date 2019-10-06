@@ -38,6 +38,7 @@ namespace CVBuilder.Data
         public string FacebookUrl { get; set; }
         public string TwitterUrl { get; set; }
         public int ID_Curriculum { get; set; }
+        public string MimeType { get; set; }
     
         public virtual Curriculum Curriculum { get; set; }
     }

@@ -205,6 +205,8 @@
     <Content Include="img\bg-pattern.png" />
     <Content Include="img\demo-screen-1.jpg" />
     <Content Include="img\google-play-badge.svg" />
+    <Content Include="img\profile.png" />
+    <Content Include="img\profile_coat.png" />
     <Content Include="img\spinners\5.gif" />
     <Content Include="img\spinners\loading.gif" />
     <Content Include="img\spinners\spinner-icon-gif-29.jpg" />
@@ -270,6 +272,8 @@
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="custom_validations\EndYearGreaterThanAttribute.cs" />
+    <Compile Include="custom_validations\MaxFileSizeAttribute.cs" />
+    <Compile Include="custom_validations\PostedFileExtensionsAttribute.cs" />
     <Compile Include="custom_validations\RequiredFromComboboxAttribute.cs" />
     <Compile Include="custom_validations\RequiredIfNotAttribute.cs" />
     <Compile Include="custom_validations\StartYearLessThanAttribute.cs" />

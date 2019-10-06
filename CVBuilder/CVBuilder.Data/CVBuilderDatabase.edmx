@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CVBuilderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CVBuilderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Certificates">
           <Key>
             <PropertyRef Name="CertificateID" />
@@ -84,6 +84,7 @@
           <Property Name="FacebookUrl" Type="nvarchar" MaxLength="300" />
           <Property Name="TwitterUrl" Type="nvarchar" MaxLength="300" />
           <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+          <Property Name="MimeType" Type="nvarchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="PersonalReferences">
           <Key>
@@ -152,6 +153,7 @@
           <Property Name="MobilePhone" Type="int" />
           <Property Name="BirthDate" Type="datetime" />
           <Property Name="Nationality" Type="nvarchar" MaxLength="100" />
+          <Property Name="MimeType" Type="nvarchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="WorkExperiences">
           <Key>
@@ -376,6 +378,7 @@
           <Parameter Name="lastname" Type="nvarchar" Mode="In" />
           <Parameter Name="email" Type="nvarchar" Mode="In" />
           <Parameter Name="photo" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="mimeType" Type="nvarchar" Mode="In" />
           <Parameter Name="address" Type="nvarchar" Mode="In" />
           <Parameter Name="city" Type="nvarchar" Mode="In" />
           <Parameter Name="postalCode" Type="int" Mode="In" />
@@ -405,6 +408,7 @@
           <Parameter Name="lastname" Type="nvarchar" Mode="In" />
           <Parameter Name="email" Type="nvarchar" Mode="In" />
           <Parameter Name="photo" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="mimeType" Type="nvarchar" Mode="In" />
           <Parameter Name="address" Type="nvarchar" Mode="In" />
           <Parameter Name="city" Type="nvarchar" Mode="In" />
           <Parameter Name="postalCode" Type="int" Mode="In" />
@@ -577,8 +581,7 @@
             <End Role="WorkExperiences" EntitySet="WorkExperiences" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CVBuilderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -677,6 +680,7 @@
           <Property Name="TwitterUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Curriculum" Relationship="Self.FK_PersonalDetails_Curriculum" FromRole="PersonalDetails" ToRole="Curriculum" />
+          <Property Name="MimeType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PersonalReferences">
           <Key>
@@ -750,6 +754,7 @@
           <Property Name="BirthDate" Type="DateTime" Precision="3" />
           <Property Name="Nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Curriculum" Relationship="Self.FK_Curriculum_Users" FromRole="Users" ToRole="Curriculum" />
+          <Property Name="MimeType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="WorkExperiences">
           <Key>
@@ -968,7 +973,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Certificates_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Certificates_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -988,7 +993,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_CustomSections_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_CustomSections_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1003,7 +1008,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Interests_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Interests_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1018,7 +1023,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Languages_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Languages_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1032,6 +1037,7 @@
             <Parameter Name="lastname" Mode="In" Type="String" />
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="photo" Mode="In" Type="Binary" />
+            <Parameter Name="mimeType" Mode="In" Type="String" />
             <Parameter Name="address" Mode="In" Type="String" />
             <Parameter Name="city" Mode="In" Type="String" />
             <Parameter Name="postalCode" Mode="In" Type="Int32" />
@@ -1053,7 +1059,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalDetails_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalDetails_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1061,6 +1067,7 @@
             <Parameter Name="lastname" Mode="In" Type="String" />
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="photo" Mode="In" Type="Binary" />
+            <Parameter Name="mimeType" Mode="In" Type="String" />
             <Parameter Name="address" Mode="In" Type="String" />
             <Parameter Name="city" Mode="In" Type="String" />
             <Parameter Name="postalCode" Mode="In" Type="Int32" />
@@ -1091,7 +1098,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalReferences_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalReferences_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1110,7 +1117,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Skills_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Skills_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1132,7 +1139,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Studies_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Studies_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1160,7 +1167,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_WorkExperiences_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_WorkExperiences_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1241,6 +1248,7 @@
           <EntitySetMapping Name="PersonalDetails">
             <EntityTypeMapping TypeName="CVBuilderModel.PersonalDetails">
               <MappingFragment StoreEntitySet="PersonalDetails">
+                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
                 <ScalarProperty Name="PersonalDetailsID" ColumnName="PersonalDetailsID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1322,6 +1330,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CVBuilderModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

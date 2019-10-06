@@ -1,6 +1,6 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.PersonalDetailsViewModel
 
-@using (Ajax.BeginForm("PersonalDetails", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "successfulMessage", OnFailure = "onErrorSubmit" }, new { id = Model.FormId }))
+@using (Ajax.BeginForm("PersonalDetails", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "successfulMessage", OnFailure = "onErrorSubmit" }, new { id = Model.FormId, enctype = "multipart/form-data" }))
 {
     <fieldset>
         @Html.AntiForgeryToken()
@@ -21,9 +21,10 @@
             </div>
             <div class="col-lg-5">
                 <div class="form-group text-center">
-                    @Html.TextBoxFor(m => m.Photo, new { type = "file", @class = "d-none" })
-                    <button type="button" class="btn btn-outline-success profile-photo"></button>
+                    @Html.TextBoxFor(m => m.UploadedPhoto, new { type = "file", @class = "d-none" })
+                    <button type="button" class="btn btn-outline-success profile-photo" style="background-image: url(@Model.Photo);"></button>
                 </div>
+                @Html.ValidationMessageFor(m => m.UploadedPhoto, null, new { @class = "text-danger" })
             </div>
         </div>
 

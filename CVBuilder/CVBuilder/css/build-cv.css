@@ -43,7 +43,7 @@
 }
 
 .profile-photo {
-	background-image: url('https://vignette.wikia.nocookie.net/clashroyale/images/6/62/Happy_Hoggy.png');
+	background-image: url('../img/profile_coat.png');
 	background-size: cover;
 	background-position: center;
 	width: 170px;
@@ -116,7 +116,7 @@ form[id$=_form] {
     backdrop-filter: blur(4px); /* solo en chrome funciona */
 }
 
-@media (min-width: 576px) {
+/*@media (min-width: 576px) {
   .list-group-row {
     display: block;
   }
@@ -132,7 +132,7 @@ form[id$=_form] {
   .btn-group-row {
     display: none;
   }
-}
+}*/
 
 @-webkit-keyframes slideLeft {
   0% {

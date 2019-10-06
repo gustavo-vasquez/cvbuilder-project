@@ -36,6 +36,7 @@ namespace CVBuilder.Data
         public Nullable<int> MobilePhone { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
         public string Nationality { get; set; }
+        public string MimeType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Curriculum> Curriculum { get; set; }

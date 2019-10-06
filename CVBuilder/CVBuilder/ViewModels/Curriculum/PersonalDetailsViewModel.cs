@@ -1,10 +1,12 @@
-﻿using CVBuilder.enums;
+﻿using CVBuilder.custom_validations;
+using CVBuilder.enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace CVBuilder.ViewModels.Curriculum
 {
@@ -26,7 +28,11 @@ namespace CVBuilder.ViewModels.Curriculum
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string Email { get; set; }
         
-        public byte[] Photo { get; set; }
+        [PostedFileExtensions("jpg,jpeg,png", ErrorMessage = "Permitido solamente: jpg, jpeg y png.")]
+        [MaxFileSize(1048576)]
+        public HttpPostedFileBase UploadedPhoto { get; set; }
+
+        public string Photo { get; set; }
 
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string Address { get; set; }

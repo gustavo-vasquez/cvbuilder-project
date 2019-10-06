@@ -26,6 +26,7 @@ namespace CVBuilder.Data
                             data.LastName,
                             data.Email,
                             data.Photo,
+                            data.MimeType,
                             data.Address,
                             data.City,
                             data.PostalCode,
@@ -46,7 +47,7 @@ namespace CVBuilder.Data
                             data.TwitterUrl,
                             data.ID_Curriculum
                     );
-            _db.Context.SaveChanges();
+            
             return result;
         }
 
@@ -58,6 +59,7 @@ namespace CVBuilder.Data
                     data.LastName,
                     data.Email,
                     data.Photo,
+                    data.MimeType,
                     data.Address,
                     data.City,
                     data.PostalCode,
