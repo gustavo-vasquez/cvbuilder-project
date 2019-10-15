@@ -17,7 +17,5 @@ namespace CVBuilder.Data
         {
             return _db.Context.Curriculum.Find(id);
         }
-
-        
     }
 }

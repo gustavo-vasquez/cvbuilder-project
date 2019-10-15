@@ -56,6 +56,7 @@
     <Compile Include="CurriculumSL.cs" />
     <Compile Include="CustomSectionsSL.cs" />
     <Compile Include="DTOs\SummaryBlockDTO.cs" />
+    <Compile Include="DTOs\TemplatesDTO.cs" />
     <Compile Include="ICurriculumServices.cs" />
     <Compile Include="ICurriculumSL.cs" />
     <Compile Include="InterestsSL.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkillsSL.cs" />
     <Compile Include="StudiesSL.cs" />
+    <Compile Include="TemplatesSL.cs" />
     <Compile Include="WorkExperiencesSL.cs" />
   </ItemGroup>
   <ItemGroup>

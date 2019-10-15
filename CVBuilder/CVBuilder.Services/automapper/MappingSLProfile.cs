@@ -75,6 +75,8 @@ namespace CVBuilder.Services.automapper
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<CustomSections, CustomSectionsDTO>();
+
+            CreateMap<Templates, TemplatesDTO>();
         }
 
         private string ByteArrayToBase64(byte[] file, string mimeType)

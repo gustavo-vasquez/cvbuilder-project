@@ -1,0 +1,22 @@
+﻿@model string
+
+<div class="modal text-center fade" id="template_wizard" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Elige la plantilla de tu CV</h5>
+                <button type="button" class="close" data-dismiss="modal" title="Cerrar">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button class="btn btn-default btn-wizard-arrow" data-type="back" title="Anterior"><i class="fas fa-angle-left"></i></button>
+                <button class="btn btn-default btn-wizard-arrow" data-type="next" title="Siguiente"><i class="fas fa-angle-right"></i></button>
+                <img class="img-fluid cv-preview-img" src="@Model">
+            </div>
+            <div class="modal-footer">
+                <button id="changeTemplate" type="button" class="btn btn-block btn-default">Elegir</button>
+            </div>
+        </div>
+    </div>
+</div>

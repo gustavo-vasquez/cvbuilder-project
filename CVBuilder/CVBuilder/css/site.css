@@ -13,6 +13,21 @@
   src: url('../fonts/Muli-Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'FiraSans';
+  src: url('../fonts/FiraSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Arimo';
+  src: url('../fonts/Arimo-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+}
+
 #mainNav.navbar-shrink {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }

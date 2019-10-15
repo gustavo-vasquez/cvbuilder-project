@@ -64,6 +64,8 @@ namespace CVBuilder.automapper
                 .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
 
             CreateMap<SummaryBlockDTO, SummaryBlockViewModel>();
+
+            CreateMap<TemplatesDTO, FinishedViewModel>();
         }
 
         private byte[] PostedFileToByteArray(HttpPostedFileBase file)

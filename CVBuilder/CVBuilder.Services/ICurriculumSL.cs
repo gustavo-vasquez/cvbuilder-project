@@ -16,5 +16,6 @@ namespace CVBuilder.Services
         SkillsSL Skills { get; set; }
         PersonalReferencesSL PersonalReferences { get; set; }
         CustomSectionsSL CustomSections { get; set; }
+        TemplatesSL Templates { get; set; }
     }
 }

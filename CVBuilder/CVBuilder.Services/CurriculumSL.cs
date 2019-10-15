@@ -17,6 +17,7 @@ namespace CVBuilder.Services
         public InterestsSL Interests { get; set; }
         public PersonalReferencesSL PersonalReferences { get; set; }
         public CustomSectionsSL CustomSections { get; set; }
+        public TemplatesSL Templates { get; set; }
 
         public CurriculumSL()
         {
@@ -29,6 +30,7 @@ namespace CVBuilder.Services
             Interests = new InterestsSL();
             PersonalReferences = new PersonalReferencesSL();
             CustomSections = new CustomSectionsSL();
+            Templates = new TemplatesSL();
         }
     }
 }

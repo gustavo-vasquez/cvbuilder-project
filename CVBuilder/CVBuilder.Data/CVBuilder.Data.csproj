@@ -111,6 +111,7 @@
     <Compile Include="Templates.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="TemplatesDL.cs" />
     <Compile Include="Users.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>

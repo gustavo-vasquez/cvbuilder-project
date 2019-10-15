@@ -107,9 +107,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\build-cv.css" />
+    <Content Include="css\finished-cv.css" />
     <Content Include="css\new-age.css" />
     <Content Include="css\new-age.min.css" />
     <Content Include="css\site.css" />
+    <Content Include="css\templates\classic.css" />
+    <Content Include="css\templates\elegant.css" />
+    <Content Include="css\templates\modern.css" />
     <Content Include="device-mockups\apple_watch\edition\gold.png" />
     <Content Include="device-mockups\apple_watch\edition\rose.png" />
     <Content Include="device-mockups\apple_watch\sport\black.png" />
@@ -210,7 +214,11 @@
     <Content Include="img\spinners\5.gif" />
     <Content Include="img\spinners\loading.gif" />
     <Content Include="img\spinners\spinner-icon-gif-29.jpg" />
+    <Content Include="img\templates\classic.png" />
+    <Content Include="img\templates\elegant.png" />
+    <Content Include="img\templates\modern.png" />
     <Content Include="js\build-cv.js" />
+    <Content Include="js\finished-cv.js" />
     <Content Include="js\index.js" />
     <Content Include="js\new-age.min.js" />
     <Content Include="js\site.js" />
@@ -254,6 +262,10 @@
     <Content Include="fonts\Lato-Regular.ttf" />
     <Content Include="fonts\Catamaran-Regular.ttf" />
     <Content Include="fonts\Muli-Regular.ttf" />
+    <Content Include="fonts\Arimo-Regular.ttf" />
+    <Content Include="fonts\Barlow-Regular.ttf" />
+    <Content Include="fonts\FiraSans-Regular.ttf" />
+    <Content Include="fonts\Roboto-Regular.ttf" />
     <None Include="lib\jquery\jquery.validate-vsdoc.js" />
     <Content Include="lib\jquery\jquery.validate.js" />
     <Content Include="lib\jquery\jquery.validate.min.js" />
@@ -285,6 +297,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Curriculum\FinishedViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\ISectionViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\SectionViewModelBase.cs" />
     <Compile Include="ViewModels\Curriculum\BuildViewModel.cs" />
@@ -358,6 +371,11 @@
     <Content Include="Views\Curriculum\_PersonalReferencesForm.cshtml" />
     <Content Include="Views\Curriculum\_CustomSectionsForm.cshtml" />
     <Content Include="Views\Curriculum\_StudyBlock.cshtml" />
+    <Content Include="Views\Curriculum\Finished.cshtml" />
+    <Content Include="Views\Curriculum\_ClassicTemplate.cshtml" />
+    <Content Include="Views\Curriculum\_ElegantTemplate.cshtml" />
+    <Content Include="Views\Curriculum\_ModernTemplate.cshtml" />
+    <Content Include="Views\Curriculum\_ModalTemplate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

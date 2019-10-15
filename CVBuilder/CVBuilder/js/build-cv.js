@@ -8,6 +8,8 @@ var tabs = {
     ]
 };
 
+const templates = ["/img/templates/classic.png", "/img/templates/elegant.png", "/img/templates/modern.png"];
+
 $(window).resize(function () {
     // 576 -> pantalla móvil | 768 -> pantalla tablet
     const width = $(this).innerWidth();
@@ -28,9 +30,10 @@ $(document).ready(function () {
 
 	$('.cv-preview').on('mouseenter', function() {
 		$(this).append('<div class="overlay"></div>');
-		$(this).append('<button class="btn btn-sm btn-outline-success">Cambiar plantilla</button>');
+		$('#choose_template').removeClass('invisible');
 	}).on('mouseleave', function() {
-		$('.cv-preview div[class="overlay"], .cv-preview button').remove();
+	    $('.cv-preview div[class="overlay"]').remove();
+	    $('#choose_template').addClass('invisible');
 	});
 
 	$('.tabs-group').on('click', 'button', function() {
@@ -126,6 +129,33 @@ $(document).ready(function () {
 	});
 
 	navigationButtonsWrapperInView();
+
+	$('#template_wizard').on('show.bs.modal', function (e) {
+	    $('.cv-preview-img').attr('src', $('.cv-preview img').attr('src'));
+	})
+
+	$('#changeTemplate').on('click', function () {
+	    const previewPath = $('.cv-preview-img').attr('src');
+
+	    $.ajax({
+	        url: "/Curriculum/ChangeTemplate",
+	        type: "GET",
+	        data: { path: previewPath },
+	        //beforeSend: function (xhr) {
+	        //    splashSpinner(true, $addBlockButton);
+	        //},
+	        success: function (result, status, xhr) {
+	            $('.cv-preview img').attr('src', previewPath);
+	            $('#template_wizard').modal('hide');
+	        },
+	        //complete: function (xhr, status) {
+	        //    splashSpinner(false);
+	        //}
+	        error: function (event, xhr, options, exc) {
+	            alert('Error al cambiar de plantilla.');
+	        }
+	    });
+	});
 });
 
 // FUNCIONES
@@ -201,6 +231,54 @@ $.fn.scrollStopped = function (callback) {
     });
 };
 
+function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+}
+
+$('.btn-wizard-arrow').on('click', function (e) {
+    const type = $(this).data('type');
+    const $template = $(this).siblings('img').first();
+    var imagePath = "";
+
+    switch (type) {
+        case "back":
+            switch ($template.attr('src')) {
+                case templates[0]:
+                    imagePath = templates[2];
+                    break;
+                case templates[1]:
+                    imagePath = templates[0];
+                    break;
+                case templates[2]:
+                    imagePath = templates[1];
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case "next":
+            switch ($template.attr('src')) {
+                case templates[0]:
+                    imagePath = templates[1];
+                    break;
+                case templates[1]:
+                    imagePath = templates[2];
+                    break;
+                case templates[2]:
+                    imagePath = templates[0];
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+
+    if (!isEmptyOrSpaces(imagePath))
+        $template.attr('src', imagePath);
+});
+
 function navigationButtonsWrapperInView() {
     var $element = $('#navigation_buttons');
     var isElementInView = Utils.isElementInView($('#navigation_buttons_wrapper'), false);
@@ -230,187 +308,6 @@ function profilePicturePreview(e) {
     }
     else
         alert("Tu navegador no soporta File API.");
-}
-
-function generateThumbnail(event) {
-    //Check File API support
-    if (window.File && window.FileList && window.FileReader) {
-        $this = $(this);
-
-        if ($this.valid()) {
-            var $thumbnailsRow = $(event.data.thumbnailsRowId);
-            var buttonsToDisable, multimediaElement, createHTMLElements, filetype;
-
-            switch ($this.attr('id')) {
-                case "ImageFiles":
-                    buttonsToDisable = "#newGifBtn, #newVideoBtn";
-                    multimediaElement = ".images-upload-thumbnail";
-                    filetype = "image";
-                    createHTMLElements = function (picFile) {
-                        // Creo los elementos con su contenido
-                        var $wrapper = $('<div></div>');
-                        $wrapper.attr({ "class": "col col-md-3" });
-                        var $figure = $('<figure></figure>');
-                        var $hidden = $('<input/>');
-                        $hidden.attr({ type: "hidden", name: "ImagesUploaded", value: picFile.result });
-                        var $img = $('<img/>');
-                        $img.attr({ "class": multimediaElement.substring(1), src: picFile.result, title: picFile.fileName });
-                        var $removeButton = $('<button></button>');
-                        $removeButton.attr({ "class": "image-remove-thumbnail", type: "button", title: "Eliminar" });
-                        $removeButton.html("&times;");
-
-                        // Colocando los elementos creados
-                        $hidden.appendTo($figure);
-                        $img.appendTo($figure);
-                        $removeButton.appendTo($figure);
-                        $figure.appendTo($wrapper);
-                        $wrapper.appendTo($thumbnailsRow);
-                    };
-                    break;
-                case "GifImage":
-                    buttonsToDisable = "#newImageBtn, #newVideoBtn";
-                    multimediaElement = ".gif-upload-thumbnail";
-                    filetype = "image";
-                    createHTMLElements = function (picFile) {
-                        // Creo los elementos con su contenido
-                        var $wrapper = $('<div></div>');
-                        $wrapper.attr({ "class": "col col-md-5" });
-                        var $figure = $('<figure></figure>');
-                        var $img = $('<img/>');
-                        $img.attr({ "class": multimediaElement.substring(1), src: picFile.result, title: picFile.fileName });
-                        var $removeButton = $('<button></button>');
-                        $removeButton.attr({ "class": "gif-remove-thumbnail", type: "button", title: "Eliminar" });
-                        $removeButton.html("&times;");
-
-                        // Colocando los elementos creados
-                        $img.appendTo($figure);
-                        $removeButton.appendTo($figure);
-                        $figure.appendTo($wrapper);
-                        $wrapper.appendTo($thumbnailsRow);
-                    };
-                    break;
-                case "VideoFile":
-                    buttonsToDisable = "#newImageBtn, #newGifBtn";
-                    multimediaElement = ".video-upload-thumbnail";
-                    filetype = "video";
-                    createHTMLElements = function (picFile) {
-                        // Creo los elementos con su contenido
-                        var $wrapper = $('<div></div>');
-                        $wrapper.attr({ "class": "col" });
-                        var $figure = $('<figure></figure>');
-                        var $description = $('<div></div>');
-                        $description.attr({ "class": "alert alert-dismissible alert-secondary" });
-                        $description.html("<button type='button' class='close video-remove-thumbnail' title='Eliminar'>&times;</button><i class='fas fa-video'></i> " + picFile.fileName);
-                        var $containerVideo = $('<div></div>');
-                        $containerVideo.attr({ "class": "card embed-responsive embed-responsive-16by9" });
-                        var $video = $('<video></video>');
-                        $video.attr({ "class": multimediaElement.substring(1) + " embed-responsive-item", src: picFile.result, title: picFile.fileName, controls: "controls" });
-
-                        // Colocando los elementos creados                        
-                        $description.appendTo($figure);
-                        $video.appendTo($containerVideo);
-                        $containerVideo.appendTo($figure);
-                        $figure.appendTo($wrapper);
-                        $wrapper.appendTo($thumbnailsRow);
-                    };
-                    break;
-                default:
-                    return;
-            }
-
-            $(buttonsToDisable).addClass("disabled label-off");
-
-            if ($this.attr('id') == "ImageFiles") {
-                var files = event.target.files; //FileList object
-                var filesCount = $('input[name=ImagesUploaded]').length + files.length;
-
-                if (filesCount > 4)
-                    return imageErrorMsg("length");
-                else
-                    $('.image-error-msg').remove();
-
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-
-                    if (!file.type.match(filetype))
-                        continue;
-
-                    filesTotalSize = filesTotalSize + files[i].size;
-
-                    if (filesTotalSize > (2 * 1024 * 1024)) {
-                        // Permitido hasta 2MB
-                        filesTotalSize = filesTotalSize - files[i].size;
-                        return imageErrorMsg("size");
-                    }
-                    else
-                        $('.image-error-msg').remove();
-
-                    var picReader = new FileReader();
-                    picReader.fileName = file.name;
-
-                    picReader.addEventListener("load", function (event) {
-                        var picFile = event.target;
-                        createHTMLElements(picFile);
-
-                        $('.image-remove-thumbnail').on('click', function () {
-                            $(this).closest("figure").parent("div").remove();
-
-                            if ($thumbnailsRow.is(':empty')) {
-                                $thumbnailsRow.addClass('d-none');
-                                $(buttonsToDisable).removeClass("disabled label-off");
-                            }
-
-                            $this.val(null);
-                        });
-                    });
-
-                    //Read the image
-                    picReader.readAsDataURL(file);
-                }
-
-                if ($thumbnailsRow.hasClass('d-none')) {
-                    $thumbnailsRow.removeClass('d-none');
-                }
-                return;
-            }
-
-            var file = event.target.files[0]; //FileList object
-
-            if (!file.type.match(filetype))
-                return;
-
-            var picReader = new FileReader();
-            picReader.fileName = file.name;
-
-            picReader.addEventListener("load", function (event) {
-                var picFile = event.target;
-
-                if ($(multimediaElement).length > 0)
-                    $(multimediaElement).attr({ src: picFile.result, title: picFile.fileName });
-                else
-                    createHTMLElements(picFile);
-
-                $('.gif-remove-thumbnail, .video-remove-thumbnail').on('click', function () {
-                    $(this).closest("figure").parent("div").remove();
-
-                    if ($thumbnailsRow.is(':empty'))
-                        $thumbnailsRow.addClass('d-none');
-
-                    $(buttonsToDisable).removeClass("disabled label-off");
-                    $this.val(null);
-                });
-            });
-
-            //Read the image
-            picReader.readAsDataURL(file);
-
-            if ($thumbnailsRow.hasClass('d-none')) {
-                $thumbnailsRow.removeClass('d-none');
-            }
-        }
-    }
-    else
-        alert("Tu navegador no soporta File API");
 }
 
 function getSectionForm() {

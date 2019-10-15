@@ -131,7 +131,7 @@
           </Key>
           <Property Name="TemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="AccentColor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PreviewPath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -730,8 +730,8 @@
           </Key>
           <Property Name="TemplateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AccentColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Curriculum" Relationship="Self.FK_Curriculum_Templates" FromRole="Templates" ToRole="Curriculum" />
+          <Property Name="PreviewPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -1321,9 +1321,9 @@
           <EntitySetMapping Name="Templates">
             <EntityTypeMapping TypeName="CVBuilderModel.Templates">
               <MappingFragment StoreEntitySet="Templates">
+                <ScalarProperty Name="PreviewPath" ColumnName="PreviewPath" />
                 <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="AccentColor" ColumnName="AccentColor" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

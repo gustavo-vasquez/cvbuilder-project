@@ -35,6 +35,7 @@ namespace CVBuilder.Controllers
             model.InterestBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Interests.GetAllBlocks());
             model.PersonalReferenceBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.PersonalReferences.GetAllBlocks());
             model.CustomSectionBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.CustomSections.GetAllBlocks());
+            model.PreviewPath = _curriculumServices.Templates.GetPreviewPath(1);
 
             return View(model);
         }
@@ -372,6 +373,19 @@ namespace CVBuilder.Controllers
                 default:
                     throw new ArgumentException(_sectionErrorMessage);
             }
+        }
+
+        [HttpGet]
+        public ActionResult Finished()
+        {
+            TemplatesDTO dto = _curriculumServices.Templates.GetByUserId(1);
+            return View(Mapping.Mapper.Map<TemplatesDTO, FinishedViewModel>(dto));
+        }
+
+        [HttpGet]
+        public void ChangeTemplate(string path)
+        {
+            _curriculumServices.Templates.ChangeTemplate(path, 1, 1);
         }
     }
 }
