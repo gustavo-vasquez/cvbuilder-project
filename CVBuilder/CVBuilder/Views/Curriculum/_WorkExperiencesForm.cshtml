@@ -40,10 +40,10 @@
                     <label>Fecha de ingreso</label>
                     <div class="row">
                         <div class="col-lg-8">
-                            @Html.DropDownListFor(m => m.StartMonth, Model.StartPeriod.Months, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.StartMonth, Model.StartPeriod.Months, new { @class = "custom-select" })
                         </div>
                         <div class="col-lg-4">
-                            @Html.DropDownListFor(m => m.StartYear, Model.StartPeriod.Years, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.StartYear, Model.StartPeriod.Years, new { @class = "custom-select" })
                             @Html.ValidationMessageFor(m => m.StartYear, null, new { @class = "text-danger" })
                         </div>
                     </div>
@@ -54,10 +54,10 @@
                     <label>Fecha de finalización</label>
                     <div class="row">
                         <div class="col-lg-8">
-                            @Html.DropDownListFor(m => m.EndMonth, Model.EndPeriod.Months, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.EndMonth, Model.EndPeriod.Months, new { @class = "custom-select" })
                         </div>
                         <div class="col-lg-4">
-                            @Html.DropDownListFor(m => m.EndYear, Model.EndPeriod.Years, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.EndYear, Model.EndPeriod.Years, new { @class = "custom-select" })
                             @Html.ValidationMessageFor(m => m.EndYear, null, new { @class = "text-danger" })
                         </div>
                     </div>

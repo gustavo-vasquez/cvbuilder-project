@@ -4,7 +4,7 @@ var tabs = {
                "personal_details",
                "studies_experiencies",
                "other_information",
-               "custom_sections"
+               "own_sections"
     ]
 };
 

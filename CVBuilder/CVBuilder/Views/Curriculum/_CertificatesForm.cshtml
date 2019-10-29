@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="col-lg-5">
-                            @Html.DropDownListFor(m => m.Year, Model.Period.Years, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.Year, Model.Period.Years, new { @class = "custom-select" })
                             @Html.ValidationMessageFor(m => m.Year, null, new { @class = "text-danger" })
                         </div>
                     </div>

@@ -23,26 +23,33 @@
 
 <body id="page-top">
     <!-- barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-shrink" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="@Url.Action("Index", "Home")"><i class="fas fa-pencil-ruler"></i> CVBuilder</a>
+    <nav id="mainNav" class="navbar navbar-expand-lg navbar-light fixed-top navbar-shrink">
+        <div class="container justify-content-center">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")" title="Ir a página principal"><i class="fas fa-pencil-ruler"></i> CVBuilder</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
+                <span class="navbar-brand align-middle"><i class="fas fa-pencil-ruler"></i> CVBuilder <i class="fas fa-caret-down"></i></span>
+                <span class="btn btn-sm btn-outline-default btn-myaccount">Acceder <i class="fas fa-sign-in-alt"></i></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
+            <div id="navbarResponsive" class="collapse navbar-collapse">
+                <hr />
+                <ul class="navbar-nav ml-auto text-center">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#download">Características</a>
+                        <a class="nav-link js-scroll-trigger" href="#landing_page">Crear CV</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#features">Plantillas</a>
+                        <a class="nav-link js-scroll-trigger" href="#features">Características</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
+                        <a class="nav-link js-scroll-trigger" href="#templates">Plantillas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#testimonials">Testimonios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#download">Descargas</a>
                     </li>
                 </ul>
-                <button class="btn btn-sm btn-default btn-myaccount">Mi cuenta <i class="fas fa-chevron-down"></i></button>
+                <button class="btn btn-sm btn-outline-default btn-myaccount">Acceder <i class="fas fa-sign-in-alt"></i></button>
             </div>
         </div>
     </nav>

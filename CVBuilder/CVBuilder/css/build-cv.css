@@ -23,6 +23,7 @@
 .cv-preview button {
     color: white;
     border-color: white;
+    background-color: rgba(0, 0, 0, 0.22);
     border-radius: 4px;
 	position: absolute;
 	left: 50%;
@@ -35,7 +36,6 @@
     color: black;
     background-color: white;
     border-color: black;
-    border-radius: 4px;
 }
 
 .cv-sections h4 {
@@ -66,8 +66,7 @@
 }
 
 .rename-title {
-	font-size: large;
-	cursor: pointer;
+    padding: 0 0.5rem;
 }
 
 .custom-control-label {

@@ -5,107 +5,56 @@
 }
 
 @section curriculum_finished {
+    @*<script src="~/lib/html2canvas/html2canvas.js" type="text/javascript"></script>*@
+    @*<script src="~/lib/html2canvas.js" type="text/javascript"></script>*@
+    <script src="~/lib/jspdf.debug.js" type="text/javascript"></script>
+    <script src="~/lib/dom-to-image.min.js"></script>
     <script src="~/js/finished-cv.js" type="text/javascript"></script>
 }
 
 <link href="~/css/finished-cv.css" rel="stylesheet" />
 
-<script type="text/javascript">
-function printDiv(printpage)
-{
-    var headstr = "<html><head><title>" + document.title + "</title><link href=\"/css/finished-cv.css\" rel=\"stylesheet\" /></head><body>";
-    var newstr = printpage.innerHTML;
-    var oldstr = document.body.innerHTML;
-    document.body.innerHTML = headstr+newstr;
-    window.print();
-    document.body.innerHTML = oldstr;
-    return false;
-}
-
-function PrintElem(elem) {
-    var mywindow = window.open('', 'PRINT', 'height=720,width=1280');
-
-    mywindow.document.write('<html><head><title>' + document.title + '</title>');
-    mywindow.document.write('<link rel="stylesheet" href="/css/finished-cv.css" type="text/css" />');
-    mywindow.document.write('</head><body >');
-    mywindow.document.write(elem.outerHTML);
-    mywindow.document.write('</body></html>');
-
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
-
-    setTimeout(function () {
-        mywindow.print();
-    }, 500);
-    //mywindow.close();
-
-    return true;
-}
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-
-<script type="text/javascript">
-    function print() {
-        const filename  = 'ThisIsYourPDFFilename.pdf';
-
-        html2canvas(document.querySelector('#book')).then(canvas => {
-            let pdf = new jsPDF('p', 'mm', 'a4');
-            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 793, 1122);
-            pdf.save(filename);
-        });
-    }
-
-    // Variant
-    // This one lets you improve the PDF sharpness by scaling up the HTML node tree to render as an image before getting pasted on the PDF.
-    function print(quality) {
-        if (quality === undefined)
-            quality = 1;
-
-        const filename  = 'ThisIsYourPDFFilename.pdf';
-
-        html2canvas(document.querySelector('#book'), 
-								{scale: quality}
-						 ).then(canvas => {
-						     let pdf = new jsPDF('p', 'mm', 'a4');
-						     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-						     pdf.save(filename);
-						 });
-    }
-</script>
-
-<section class="pb-0">
-    <h1 class="text-center text-success"><i class="fas fa-check-circle"></i></h1>
-    <h3 class="text-center">¡Tu CV está completado!</h3>
-    <p class="template-legend">Plantilla: @Model.Name</p>
-    <div class="row no-gutters template-actions-wrapper">
-        <div class="col-4">
-            <button class="btn btn-template" onclick="PrintElem(document.getElementsByClassName('book')[0]);"><i class="fas fa-print"></i> Imprimir CV</button>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron template-actions-wrapper">
+                    <h1><i class="fas fa-check-circle"></i></h1>
+                    <h3>¡Tu CV está completado!</h3>
+                    <p class="template-legend">Plantilla: @Model.Name</p>
+                    <div class="row no-gutters">
+                        <div class="col-4">
+                            <button id="print_cv" class="btn btn-default"><i class="fas fa-print"></i> Imprimir CV</button>
+                        </div>
+                        <div class="col-4">
+                            <button id="choose_template" class="btn btn-default" data-toggle="modal" data-target="#template_wizard"><i class="fas fa-palette"></i> Cambiar plantilla</button>
+                        </div>
+                        <div class="col-4">
+                            <button id="download_cv" class="btn btn-default"><i class="fas fa-download"></i> Descargar CV</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-4">
-            <button id="choose_template" class="btn btn-template" data-toggle="modal" data-target="#template_wizard"><i class="fas fa-palette"></i> Cambiar plantilla</button>
-        </div>
-        <div class="col-4">
-            <button class="btn btn-template" onclick="print();"><i class="fas fa-download"></i> Descargar CV</button>
+        <div id="curriculum_finished" class="row">
+                    @switch (Model.Name)
+                    {
+                        case "Classic":
+                            @Html.Partial("_ClassicTemplate")
+                            break;
+                        case "Elegant":
+                            @Html.Partial("_ElegantTemplate")
+                            break;
+                        case "Modern":
+                            @Html.Partial("_ModernTemplate")
+                            break;
+                        default:
+                            <div class="alert alert-secondary text-center mt-4">No se ha podido cargar la plantilla, vuelva a seleccionarla.</div>
+                            break;
+                    }
         </div>
     </div>
-
-    @switch (Model.Name)
-    {
-        case "Classic":
-            @Html.Partial("_ClassicTemplate")
-            break;
-        case "Elegant":
-            @Html.Partial("_ElegantTemplate")
-            break;
-        case "Modern":
-            @Html.Partial("_ModernTemplate")
-            break;
-        default:
-            <div class="alert alert-secondary text-center mt-4">No se ha podido cargar la plantilla, vuelva a seleccionarla.</div>
-            break;
-    }
+    
 </section>
 
 @Html.Partial("_ModalTemplate", Model.PreviewPath)

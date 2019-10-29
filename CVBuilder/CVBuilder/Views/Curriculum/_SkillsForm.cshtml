@@ -18,7 +18,7 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label>Nivel</label>
-                    @Html.DropDownListFor(m => m.Level, Model.Levels, new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.Level, Model.Levels, new { @class = "custom-select" })
                     @Html.ValidationMessageFor(m => m.Level, null, new { @class = "text-danger" })
                 </div>
             </div>

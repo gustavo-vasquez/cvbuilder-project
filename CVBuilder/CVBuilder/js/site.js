@@ -6,8 +6,8 @@ $(document).ready(function () {
             target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
             if (target.length) {
                 $('html, body').animate({
-                    //scrollTop: (target.offset().top - 48)
-                    scrollTop: 0
+                    scrollTop: (target.offset().top - 48)
+                    //scrollTop: 0
                 }, 1000, "easeInOutExpo");
                 return false;
             }
@@ -22,7 +22,7 @@ $(document).ready(function () {
 function splashSpinner(display, $element) {
     switch (display) {
         case true:
-            $element.closest('div.row').after('<div id="spinner" class="text-center"><img src="/img/spinners/loading.gif" /></div>');
+            $element.closest('div.row').after('<div id="spinner" class="text-center"><img src="/img/spinners/spinner_3.gif" width="50" alt="loading_form" /></div>');
             break;
         case false:
             $('#spinner').remove();

@@ -34,15 +34,15 @@
                     <label>Fecha de nacimiento</label>
                     <div class="row">
                         <div class="col-lg-3">
-                            @Html.DropDownListFor(m => m.Day, Model.BirthDate.Days, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.Day, Model.BirthDate.Days, new { @class = "custom-select" })
                             @Html.ValidationMessageFor(m => m.Day, null, new { @class = "text-danger" })
                         </div>
                         <div class="col-lg-5">
-                            @Html.DropDownListFor(m => m.Month, Model.BirthDate.Months, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.Month, Model.BirthDate.Months, new { @class = "custom-select" })
                             @Html.ValidationMessageFor(m => m.Day, null, new { @class = "text-danger" })
                         </div>
                         <div class="col-lg-4">
-                            @Html.DropDownListFor(m => m.Year, Model.BirthDate.Years, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.Year, Model.BirthDate.Years, new { @class = "custom-select" })
                             @Html.ValidationMessageFor(m => m.Day, null, new { @class = "text-danger" })
                         </div>
                     </div>
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label>Resumen profesional <span class="badge badge-secondary rename-title ml-2" title="Renombrar"><i class="fas fa-pencil-alt"></i></span></label>
+                    <label>Resumen profesional <a href="#" class="rename-title"><i class="fas fa-pencil-alt"></i> Editar</a></label>
                     @Html.TextAreaFor(m => m.Summary, new { @class = "form-control", rows = "3", placeholder = "Máximo 300 caracteres..." })
                     @Html.ValidationMessageFor(m => m.Summary, null, new { @class = "text-danger" })
                     <div class="col-lg-5 custom-control custom-switch">
