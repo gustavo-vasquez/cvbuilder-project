@@ -26,11 +26,14 @@ namespace CVBuilder.custom_validations
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            HttpPostedFileBase currentValue = (HttpPostedFileBase)value;
-            string extension = Path.GetExtension(currentValue.FileName).ToLower().Replace(".", "");
+            if(value != null)
+            {
+                HttpPostedFileBase currentValue = (HttpPostedFileBase)value;
+                string extension = Path.GetExtension(currentValue.FileName).ToLower().Replace(".", "");
 
-            if (!_extensions.Contains(extension))
-                return new ValidationResult(FormatErrorMessage(currentValue.FileName));
+                if (!_extensions.Contains(extension))
+                    return new ValidationResult(FormatErrorMessage(currentValue.FileName));
+            }
 
             return ValidationResult.Success;
         }

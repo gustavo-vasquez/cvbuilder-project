@@ -17,7 +17,7 @@ namespace CVBuilder.automapper
             CreateMap<PersonalDetailsViewModel, PersonalDetailsDTO>()
                 .ForMember(dest => dest.SummaryIsVisible, act => act.UseValue(true))
                 .ForMember(dest => dest.UploadedPhoto, act => act.ResolveUsing(src => { return PostedFileToByteArray(src.UploadedPhoto); }))
-                .ForMember(dest => dest.MimeType, act => act.ResolveUsing(src => { return src.UploadedPhoto.ContentType; }))
+                .ForMember(dest => dest.MimeType, act => act.ResolveUsing(src => { return src.UploadedPhoto != null ? src.UploadedPhoto.ContentType : null; }))
                 .ForMember(dest => dest.Photo, act => act.Ignore());
 
             CreateMap<PersonalDetailsDTO, PersonalDetailsViewModel>()
@@ -70,7 +70,7 @@ namespace CVBuilder.automapper
 
         private byte[] PostedFileToByteArray(HttpPostedFileBase file)
         {
-            if(file.ContentLength > 0)
+            if(file != null && file.ContentLength > 0)
             {
                 MemoryStream ms = new MemoryStream();
                 file.InputStream.CopyTo(ms);

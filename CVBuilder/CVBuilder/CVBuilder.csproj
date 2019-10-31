@@ -218,6 +218,7 @@
     <Content Include="img\templates\classic.png" />
     <Content Include="img\templates\elegant.png" />
     <Content Include="img\templates\modern.png" />
+    <Content Include="img\bg-finished-cv.jpg" />
     <Content Include="js\build-cv.js" />
     <Content Include="js\finished-cv.js" />
     <Content Include="js\index.js" />

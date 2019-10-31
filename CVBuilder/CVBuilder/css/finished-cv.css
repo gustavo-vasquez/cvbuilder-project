@@ -9,13 +9,31 @@
     }
 }
 
+.finished-cv {
+    background-image: url('../img/bg-finished-cv.jpg');
+    background-size: contain;
+    background-repeat: repeat;
+}
+
+.finished-cv:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0.6;
+}
+
 .template-actions-wrapper {
     font-family: Lato;
     text-align: center;
-    background-color: unset;
+    background-color: white;
     padding: 1rem;
-    border: 1px #D3D3D3 solid;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid;
+    /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);*/
 }
 
 .template-actions-wrapper > h1 > i {

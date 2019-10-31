@@ -24,7 +24,7 @@ $.validator.unobtrusive.adapters.add('validatemaxfilesize', ['size'], function (
 });
 
 $.validator.addMethod('validatemaxfilesize', function (value, element, params) {
-    if (element.files[0].size > params.size)
+    if (element.files.length > 0 && element.files[0].size > params.size)
         return false;
 
     return true;

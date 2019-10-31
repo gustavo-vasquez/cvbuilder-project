@@ -24,10 +24,13 @@ namespace CVBuilder.custom_validations
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            HttpPostedFileBase currentValue = (HttpPostedFileBase)value;
+            if(value != null)
+            {
+                HttpPostedFileBase currentValue = (HttpPostedFileBase)value;
 
-            if (currentValue.ContentLength > _size)
-                return new ValidationResult(FormatErrorMessage(currentValue.FileName));
+                if (currentValue.ContentLength > 0 && currentValue.ContentLength > _size)
+                    return new ValidationResult(FormatErrorMessage(currentValue.FileName));
+            }
 
             return ValidationResult.Success;
         }

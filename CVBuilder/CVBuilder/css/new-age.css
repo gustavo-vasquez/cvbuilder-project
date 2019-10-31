@@ -395,10 +395,31 @@ section.contact ul.list-social li.social-google-plus a:hover {
 }
 
 body > footer {
-  padding: 25px 0;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.3);
-  background-color: #222222;
+    position: relative;
+    padding: 25px 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.3);
+    background-color: #222222;
+}
+
+.custom-control-label:before, .custom-control-input:checked~.custom-control-label::before, .custom-control-input:focus:not(:checked)~.custom-control-label::before {
+    border-color: #27b557;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: #27b557;
+}
+
+/*.custom-checkbox .custom-control-input:checked~.custom-control-label::after {
+    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='lightgreen' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+}*/
+
+/*.custom-control-input:active~.custom-control-label::before {
+    background-color:green;
+}*/
+   
+.custom-checkbox .custom-control-input:focus~.custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem rgba(97,187,148,.3); 
 }
 
 footer p {
