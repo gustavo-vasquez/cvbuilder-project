@@ -1,4 +1,8 @@
-﻿.page {
+﻿#curriculum_finished > div:not(:first-of-type) {
+    margin-top: 3rem;
+}
+
+.page {
     width: 210mm;
     height: 297mm;
     max-width: 210mm;

@@ -67,6 +67,15 @@
     outline: 1px solid #388821;
 }
 
+#loading_print_pdf {
+    animation-name: slideDown;
+  	animation-duration: 3.5s;
+  	animation-iteration-count: 1;
+  	-webkit-animation-name: slideDown;
+  	-webkit-animation-duration: 3.5s;
+  	-webkit-animation-iteration-count: 1;
+}
+
 .modal {
     padding-right: 0px !important;
 }

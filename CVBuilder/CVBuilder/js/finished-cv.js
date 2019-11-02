@@ -1,6 +1,24 @@
 ﻿const templates = ["/img/templates/classic.png", "/img/templates/elegant.png", "/img/templates/modern.png"];
 
 $(document).ready(function () {
+    var sum = 0;
+    var pageBase;
+    var heightBase = $('.page').height();
+
+    $('.page').children('div').each(function () {
+        sum += $(this).outerHeight(true);
+
+        if (sum > heightBase) {
+            pageBase = document.createElement("div");
+            pageBase.className = "col-auto page";
+            document.getElementById("curriculum_finished").appendChild(pageBase);
+            pageBase.appendChild(this);
+            sum = 0;
+        }
+        else if (pageBase !== undefined)
+            pageBase.appendChild(this);
+    });
+
     $('#print_cv').on('click', printCV);
 
     $('.btn-wizard-arrow').on('click', function (e) {
@@ -77,58 +95,78 @@ function isEmptyOrSpaces(str) {
 }
 
 function printCV() {
-    const node = $('.page')[0];
-    var spinnerNode = getSpinnerNode(node, "print");
-    node.parentNode.parentNode.insertBefore(spinnerNode, node.parentNode);
+    const pageNodes = document.getElementsByClassName("page");
+    var spinnerNode = getSpinnerNode("print");
+    pageNodes[0].parentNode.parentNode.insertBefore(spinnerNode, pageNodes[0].parentNode);
 
     let iframepreview = document.getElementById("iframepreview");
 
     if (iframepreview == null) {
-        domtoimage.toSvg(node, { style: { 'margin': 0 } })
-        .then(function (dataUrl) {
-            let img = new Image();
-            img.src = dataUrl;
+        iframepreview = document.createElement("iframe");
+        document.body.appendChild(iframepreview);
+        iframepreview.id = "iframepreview"; // optional id
+        iframepreview.name = "iframepreview";
+        iframepreview.style = "display: none;";
+        iframepreview.marginHeight = 0;
+        iframepreview.marginWidth = 0;
+        iframepreview.scrolling = "no";
+        iframepreview.width = 794;
+        iframepreview.height = 1123;
 
-            iframepreview = document.createElement("iframe");
-            document.body.appendChild(iframepreview);
-            iframepreview.id = "iframepreview"; // optional id
-            iframepreview.name = "iframepreview";
-            iframepreview.style = "display: none;";
-            iframepreview.marginHeight = 0;
-            iframepreview.marginWidth = 0;
-            iframepreview.scrolling = "no";
-            iframepreview.width = 794;
-            iframepreview.height = 1123;
-            iframepreview.contentDocument.body.appendChild(img);
-        })
-        .catch(function (error) {
-            console.error('Error al preparar el curriculum.', error);
-        });
+        generatePrintPreview(pageNodes, iframepreview);
     }
-            
+    
     setTimeout(function () {
         iframepreview.contentDocument.close(); // necessary for IE >= 10
         iframepreview.focus(); // necessary for IE >= 10*/
         iframepreview.contentWindow.print();
         spinnerNode.remove();
-    }, 5000);
+    }, 3300 * pageNodes.length);
 }
+
+async function generatePrintPreview(pageNodes, iframepreview) {
+    for (var i = 0; i < pageNodes.length; i++) {
+        const dataUrl = await (convertToImage(pageNodes[i], "svg"));
+        let img = new Image();
+        img.src = dataUrl;
+        iframepreview.contentDocument.body.appendChild(img);
+    }
+};
+
+async function generatePdfDocument(pageNodes) {
+    let pdf = new jsPDF('p', 'mm', 'a4');
+
+    for (var i = 0; i < pageNodes.length; i++) {
+        if (i !== 0)
+            pdf.addPage();
+
+        const dataUrl = await (convertToImage(pageNodes[i], "jpeg"));
+        pdf.addImage(dataUrl, 'JPEG', 0, 0);
+    }
+
+    pdf.save('cvbuilder.pdf');
+    spinnerNode.remove();
+};
+
+async function convertToImage(pageNode, imageType) {
+    switch (imageType) {
+        case "svg":
+            return await(domtoimage.toSvg(pageNode, { style: { 'margin': 0 } }));
+        case "jpeg":
+            return await(domtoimage.toJpeg(pageNode, { style: { 'margin': 0 } }));
+        default:
+            break;
+    }
+};
 
 function downloadAsPdf() {
-    const node = document.getElementsByClassName('page')[0];
-    var spinnerNode = getSpinnerNode(node, "pdf");
-    node.parentNode.parentNode.insertBefore(spinnerNode, node.parentNode);
-
-    domtoimage.toJpeg(node, { style: { 'margin': 0 } })
-    .then(function (dataUrl) {
-        let pdf = new jsPDF('p', 'mm', 'a4');
-        pdf.addImage(dataUrl, 'JPEG', 0, 0);
-        pdf.save('cvbuilder.pdf');
-        spinnerNode.remove();
-    });
+    const pageNodes = document.getElementsByClassName('page');
+    var spinnerNode = getSpinnerNode("pdf");
+    pageNodes[0].parentNode.parentNode.insertBefore(spinnerNode, pageNodes[0].parentNode);
+    generatePdfDocument(pageNodes);
 }
 
-function getSpinnerNode(node, type) {
+function getSpinnerNode(type) {
     var text;
 
     switch (type) {
@@ -144,7 +182,7 @@ function getSpinnerNode(node, type) {
 
     spinnerNode = document.createElement("h5");
     spinnerNode.id = "loading_print_pdf";
-    spinnerNode.className = "h6 text-center mb-4";
+    spinnerNode.className = "h6 position-relative text-center mb-4";
     spinnerNode.innerHTML = '<img class="img-fluid" src="/img/spinners/spinner_3.gif" width="50" alt="generating_cv" />' + text + '...';
 
     return spinnerNode;
