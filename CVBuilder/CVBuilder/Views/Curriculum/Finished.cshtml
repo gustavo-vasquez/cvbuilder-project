@@ -5,8 +5,6 @@
 }
 
 @section curriculum_finished {
-    @*<script src="~/lib/html2canvas/html2canvas.js" type="text/javascript"></script>*@
-    @*<script src="~/lib/html2canvas.js" type="text/javascript"></script>*@
     <script src="~/lib/jspdf.debug.js" type="text/javascript"></script>
     <script src="~/lib/dom-to-image.min.js"></script>
     <script src="~/js/finished-cv.js" type="text/javascript"></script>
@@ -36,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div id="curriculum_finished" class="row">
+        <div id="curriculum_finished" class="row" data-template-cv="@Model.Name">
                     @switch (Model.Name)
                     {
                         case "Classic":

@@ -36,19 +36,23 @@
 .left-panel {
     color: white;
     background-color: #3a3a3c;
-    /*border-top-left-radius: 0.3rem;
-    border-bottom-left-radius: 0.3rem;*/
     min-height: 100%;
     max-height: 100%;
+    padding: 0.5cm;
 }
 
 .right-panel {
     min-height: 100%;
     max-height: 100%;
+    padding: 0.5cm;
 }
 
 .left-panel .row, .right-panel .row {
-    margin: 15px;
+    padding: 0.6rem;
+}
+
+.left-panel > .row:first-child, .right-panel > .row:first-child {
+    /*padding-top: 1cm;*/
 }
 
 .left-panel .row.no-gutters, .right-panel .row.no-gutters {

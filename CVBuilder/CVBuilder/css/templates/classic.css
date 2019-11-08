@@ -1,13 +1,9 @@
-﻿#curriculum_finished > div:not(:first-of-type) {
-    margin-top: 3rem;
-}
-
-.page {
+﻿.page {
     width: 210mm;
     height: 297mm;
     max-width: 210mm;
     margin: 0 auto;
-    padding: 0.5cm 1cm;
+    padding: 0.8cm 1cm;
     background: white;
     outline: 1px #28a745 solid;
     /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);*/
@@ -47,7 +43,7 @@
 }
 
 .page > .row:not(:first-child) {
-    margin-top: 0.6rem;
+    margin-top: 0.5rem;
 }
 
 .page .cv-block .block-title, .page .block-title {
@@ -64,5 +60,6 @@
 .page .cv-block p {
     font-size: 0.9rem;
     font-family: 'Arimo';
+    line-height: 1.3;
     margin-bottom: 10px;
 }

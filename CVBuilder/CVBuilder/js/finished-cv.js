@@ -4,20 +4,123 @@ $(document).ready(function () {
     var sum = 0;
     var pageBase;
     var heightBase = $('.page').height();
+    let container = document.getElementById("curriculum_finished");
 
-    $('.page').children('div').each(function () {
-        sum += $(this).outerHeight(true);
+    switch (container.dataset.templateCv) {
+        case "Classic":
+            $('.page').children('div').each(function () {
+                sum += $(this).outerHeight(true);
 
-        if (sum > heightBase) {
-            pageBase = document.createElement("div");
-            pageBase.className = "col-auto page";
-            document.getElementById("curriculum_finished").appendChild(pageBase);
-            pageBase.appendChild(this);
+                if (sum > heightBase) {
+                    pageBase = document.createElement("div");
+                    pageBase.className = "col-auto page";
+                    container.appendChild(pageBase);
+                    pageBase.appendChild(this);
+                    sum = $(this).outerHeight(true);
+                }
+                else if (pageBase !== undefined)
+                    pageBase.appendChild(this);
+            });
+            break;
+        case "Elegant":
+            $leftPanel = $('.page .left-panel').first();
+            heightBase = $leftPanel.height();
+            $leftPanel.children('div').each(function () {
+                sum += this.clientHeight;
+
+                if (sum > heightBase) {
+                    pageBase = document.createElement("div");
+                    pageBase.className = "col-auto page";
+                    pageBase.innerHTML = '<div class="row"><div class="col-4 left-panel"></div><div class="col-8 right-panel"></div></div>';
+                    container.appendChild(pageBase);
+                    pageBase = pageBase.getElementsByClassName("left-panel")[0];
+                    pageBase.appendChild(this);
+                    sum = this.clientHeight;
+                }
+                else if (pageBase !== undefined)
+                    pageBase.appendChild(this);
+            });
+
             sum = 0;
-        }
-        else if (pageBase !== undefined)
-            pageBase.appendChild(this);
-    });
+            $rightPanel = $('.page .right-panel').first();
+            heightBase = $rightPanel.height();
+            pageBase = undefined;
+            pageNextIndex = 1;
+
+            $rightPanel.children('div').each(function () {
+                sum += this.clientHeight;
+
+                if (sum > heightBase) {
+                    pageBase = document.getElementsByClassName("page")[pageNextIndex];
+
+                    if (pageBase === undefined) {
+                        pageBase = document.createElement("div");
+                        pageBase.className = "col-auto page";
+                        pageBase.innerHTML = '<div class="row"><div class="col-4 left-panel"></div><div class="col-8 right-panel"></div></div>';
+                        container.appendChild(pageBase);
+                    }
+                    
+                    pageBase = pageBase.getElementsByClassName("right-panel")[0];
+                    pageBase.appendChild(this);
+                    sum = this.clientHeight;
+                    pageNextIndex++;
+                }
+                else if (pageBase !== undefined)
+                    pageBase.appendChild(this);
+            });
+            break;
+        case "Modern":
+            $leftPanel = $('.page .left-panel').first();
+            heightBase = $leftPanel.height();
+            $leftPanel.children('div').each(function () {
+                sum += this.clientHeight;
+
+                if (sum > heightBase) {
+                    pageBase = document.createElement("div");
+                    pageBase.className = "col-auto page";
+                    pageBase.innerHTML = '<div class="row"><div class="col-4 left-panel"></div><div class="col-8 right-panel"></div></div>';
+                    container.appendChild(pageBase);
+                    pageBase = pageBase.getElementsByClassName("left-panel")[0];
+                    pageBase.appendChild(this);
+                    sum = this.clientHeight;
+                    heightBase = $(pageBase).height();
+                }
+                else if (pageBase !== undefined)
+                    pageBase.appendChild(this);
+            });
+
+            sum = 0;
+            $rightPanel = $('.page .right-panel').first();
+            heightBase = $rightPanel.height();
+            pageBase = undefined;
+            pageNextIndex = 1;
+
+            $rightPanel.children('div').each(function () {
+                sum += this.clientHeight;
+
+                if (sum > heightBase) {
+                    pageBase = document.getElementsByClassName("page")[pageNextIndex];
+
+                    if (pageBase === undefined) {
+                        pageBase = document.createElement("div");
+                        pageBase.className = "col-auto page";
+                        pageBase.innerHTML = '<div class="row"><div class="col-4 left-panel"></div><div class="col-8 right-panel"></div></div>';
+                        container.appendChild(pageBase);
+                    }
+                    
+                    pageBase = pageBase.getElementsByClassName("right-panel")[0];
+                    pageBase.appendChild(this);
+                    sum = this.clientHeight;
+                    heightBase = $(pageBase).height();
+                    pageNextIndex++;
+                }
+                else if (pageBase !== undefined)
+                    pageBase.appendChild(this);
+            });
+            break;
+        default:
+            alert("Error, no se pudo analizar el paginado del curriculum.");
+    }
 
     $('#print_cv').on('click', printCV);
 

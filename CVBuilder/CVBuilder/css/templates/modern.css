@@ -9,7 +9,23 @@
 }
 
 .page > .row:not(:first-child) {
+    height: calc(100% - 171.58px);
+    height: -o-calc(100% - 171.58px); /* opera */
+    height: -webkit-calc(100% - 171.58px); /* google, safari */
+    height: -moz-calc(100% - 171.58px); /* firefox */
+}
+
+.page:not(:first-of-type) > .row {
+    height: 100%;
+}
+
+.page .left-panel, .page .right-panel {
     padding: 0.5cm;
+    height: 100%;
+}
+
+.page .left-panel .row, .page .right-panel .row {
+    padding: 0.4rem 0;
 }
     
 /*@page {
@@ -32,8 +48,7 @@
 
 .cv-header {
     background-color: #2b3033;
-    /*border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem;*/
+    height: 171.58px;
 }
 
 .cv-header img {
@@ -50,6 +65,7 @@
 .cv-legend {
     background-color: #f5f5f5;
     padding-top: 0.5rem;
+    text-overflow: ellipsis;
 }
 
 .highlight {
@@ -65,13 +81,15 @@
 
 .page h5 {
     font-family: 'Barlow';
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
+    margin: 0;
+    padding-bottom: 0.3rem;
 }
 
 .page .left-panel hr {
     max-width: 100% !important;
-    margin-top: 0;
+    margin: 0;
     border-color: black;
 }
 
@@ -79,7 +97,7 @@
     font-size: 0.9rem;
     text-align: justify;
     color: #3e3e3e;
-    margin-bottom: 0;
+    margin-bottom: 0.4rem;
 }
 
 .page p, .page span {
@@ -100,21 +118,33 @@
     font-size: 0.9rem;
 }
 
-.page .left-panel .row, .page .right-panel .row {
-    margin-top: 0.4rem;
+.contact {
+    padding-top: 0.8rem !important;
 }
 
-.contact .row i {
+/*.contact .row i {
     font-size: 1.5rem;
-}
+    padding: 0.3rem 0;
+}*/
 
-.contact span {
+/*.left-panel .row i {
+    font-size: 1.3rem;
+    padding: 0.3rem 0;
+}*/
+
+/*.contact span {
     overflow-wrap: break-word !important;
-}
+    padding: 0.1rem 0;
+}*/
+
+/*.left-panel span {
+    overflow-wrap: break-word !important;
+    padding: 0.1rem 0;
+}*/
 
 .page .right-panel hr {
     max-width: 100% !important;
-    margin-top: 0;
+    margin: 0;
     border-color: #b5b2b2;
 }
 
@@ -127,7 +157,6 @@
     margin-bottom: 6px;
 }
 
-.block-title {
-    font-weight: bold;
-    font-size: 1.1rem !important;
-}
+/*.section-title {
+    padding: 0.3rem;
+}*/
