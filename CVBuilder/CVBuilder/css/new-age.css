@@ -24,6 +24,28 @@ a:hover, a:focus {
   color: #4caf50;
 }
 
+.nav-link {
+    position: relative;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #3ac540;
+    transform-origin: bottom right;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+}
+
+.nav-link:hover::before {
+    transform-origin: bottom left;
+    transform: scaleX(1);
+}
+
 hr {
   max-width: 100px;
   border-width: 1px;
