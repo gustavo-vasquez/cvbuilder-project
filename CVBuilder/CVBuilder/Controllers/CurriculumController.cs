@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace CVBuilder.Controllers
 {
+    [Authorize]
     public class CurriculumController : Controller
     {
         private CurriculumSL _curriculumServices = new CurriculumSL();

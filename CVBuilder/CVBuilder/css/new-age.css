@@ -17,11 +17,47 @@ body {
 a {
   color: #4caf50;
   -webkit-transition: all .35s;
+  -moz-transition: none;
   transition: all .35s;
 }
 
 a:hover, a:focus {
   color: #4caf50;
+}
+
+.navbar-brand {
+  position: relative;
+}
+
+.navbar-brand::before, .navbar-brand::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #3ac540;
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+.navbar-brand::before {
+  top: 0;
+  transform-origin: center right;
+}
+
+.navbar-brand:hover::before {
+  transform-origin: center left;
+  transform: scaleX(1);
+}
+
+.navbar-brand::after {
+  bottom: 0;
+  transform-origin: center left;
+}
+
+.navbar-brand:hover::after {
+  transform-origin: center right;
+  transform: scaleX(1);
 }
 
 .nav-link {
@@ -31,19 +67,47 @@ a:hover, a:focus {
 .nav-link::before {
     content: '';
     position: absolute;
+    left: 50%;
     bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
     height: 2px;
     background-color: #3ac540;
-    transform-origin: bottom right;
-    transform: scaleX(0);
-    transition: transform 0.5s ease;
+    transform-origin: center;
+    transform: translate(-50%, 0) scaleX(0);
+    transition: transform 0.3s ease-in-out;
 }
 
 .nav-link:hover::before {
-    transform-origin: bottom left;
-    transform: scaleX(1);
+    transform: translate(-50%, 0) scaleX(1);
+}
+
+.dropdown-menu {
+    font-size: 14px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu > a {
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
+
+.dropdown-item {
+    animation-name: slideUp;
+  	animation-duration: 2s;
+  	animation-iteration-count: 1;
+  	-webkit-animation-name: slideUp;
+  	-webkit-animation-duration: 2s;
+  	-webkit-animation-iteration-count: 1;
+}
+
+.dropdown-item:not(:hover):not(:focus) > i {
+    color: #169461;
+}
+
+.dropdown-item:focus, .dropdown-item:hover, .dropdown-item:active {
+    color: white;
+    background-color: #27b557;
 }
 
 hr {

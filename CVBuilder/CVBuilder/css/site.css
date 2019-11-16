@@ -49,6 +49,15 @@
   box-shadow: 0 0 0 0.2rem rgba(97,187,148,.3);
 }
 
+.btn-group > .btn-myaccount:not(:last-child):not(.dropdown-toggle) {
+    border-right: none;
+}
+
+.btn-group > .btn-group:not(:first-child) > .btn-myaccount, .btn-group > .btn-myaccount:not(:first-child) {
+    margin-left: 0;
+    padding-left: 0.75rem;
+}
+
 header.masthead {
 	background-size: cover;
 	background-attachment: fixed;
