@@ -1,0 +1,59 @@
+﻿@model CVBuilder.ViewModels.Account.ExternalLoginConfirmationViewModel
+@{
+    string loginProvider = ViewBag.LoginProvider;
+    string providerIcon = (loginProvider != "Microsoft") ? loginProvider.ToLower() : "windows";
+    ViewBag.Title = "Confirmar acceso con " + loginProvider;
+}
+
+<section class="container">
+    <div class="card border-success">
+        <div class="card-body text-center">
+            <h1><i class="fab fa-@providerIcon icon-item"></i></h1>
+            <h1 class="card-title">Asocia tu cuenta de @loginProvider</h1>
+            <hr />
+            @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl, LoginProvider = loginProvider }, FormMethod.Post, new { id = "external_login_confirmation_form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.Email)
+                @Html.HiddenFor(m => m.UserName)
+                @Html.HiddenFor(m => m.GivenName)
+                @Html.HiddenFor(m => m.SurName)
+                @Html.HiddenFor(m => m.AvatarUrl)
+                <p class="card-text">Estás a punto de crear una cuenta en CVBuilder a través de @loginProvider.</p>
+                <p class="card-text">Por favor, verifica que los datos obtenidos sean los correctos antes de confirmar.</p>
+                <div class="row mt-4 mb-4">
+                    <div class="col-auto m-auto">
+                        <div class="row external-user-info align-items-center">
+                            <div class="col-md-auto">
+                                <img src="@Model.AvatarUrl" class="img-fluid img-thumbnail" alt="external_profile_picture" />
+                            </div>
+                            <div class="col-md-auto">
+                                @if (!string.IsNullOrWhiteSpace(Model.GivenName))
+                                {
+                                    <p>Nombre: @Model.GivenName</p>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(Model.SurName))
+                                {
+                                    <p>Apellido: @Model.SurName</p>
+                                }
+                                <p>Usuario: @Model.UserName</p>
+                                <p>Email: @Model.Email</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(m => m.GivenName, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(m => m.SurName, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col">
+                        <input type="submit" class="btn btn-default" value="Confirmar acceso con @loginProvider" />
+                    </div>
+                </div>
+            }
+            <a href="@Url.Action("SignIn", "Account", new { returnUrl = ViewBag.ReturnUrl })" class="card-link"><small>¿No son correctos? Intentar de nuevo.</small></a>
+        </div>
+    </div>
+</section>

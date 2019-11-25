@@ -118,6 +118,7 @@ header.masthead .container-content {
 section a {
 	color: #3aab03;
     border-radius: 4px;
+    padding: 0 0.125rem;
 }
 
 section a:hover {
@@ -136,10 +137,13 @@ section a:hover {
     background: #2bb746;
 }
 
-.connect-with a {
-	font-size: 2em;
-	padding-left: 0.5rem;
-	padding-right: 0.5rem;
+.connect-with button {
+	padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+}
+
+.connect-with button i {
+    font-size: 2em;
 }
 
 .social-media a {

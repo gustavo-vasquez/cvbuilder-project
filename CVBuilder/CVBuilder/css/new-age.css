@@ -672,6 +672,33 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
     border-top: 1px dotted rgba(0, 0, 0, 0.25);
 }
 
+#external_login_confirmation_form input[type="submit"] {
+    white-space: normal;
+}
+
+.external-user-info {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ded8d8;
+    border-radius: 10px;
+    background-color: #f8fafb;
+}
+
+@media (min-width: 768px) {
+    .external-user-info > div.col-md-auto:first-child {
+        border-right: 1px dashed lightgray;
+    }
+}
+
+.external-user-info img {
+    width: 100px;
+    height: 100px;
+}
+
+.external-user-info p {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
 @-webkit-keyframes slideLeft {
   0% {
     transform: translateX(100%);

@@ -8,9 +8,17 @@ namespace CVBuilder.ViewModels.Account
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        public string UserName { get; set; }
+        
+        public string GivenName { get; set; }
+        
+        public string SurName { get; set; }
+
+        public string AvatarUrl { get; set; }
     }
 
     public class ExternalLoginListViewModel

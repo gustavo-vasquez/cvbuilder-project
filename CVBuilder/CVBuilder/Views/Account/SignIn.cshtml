@@ -1,4 +1,5 @@
 ﻿@model CVBuilder.ViewModels.Account.SignInViewModel
+@using Microsoft.Owin.Security
 
 @{
     ViewBag.Title = "Accede a tu cuenta";
@@ -44,18 +45,34 @@
                         }
                     </div>
                 </div>
-                <div class="card border-success mb-3">
-                    <div class="card-body">
-                        <div class="connect-with row">
-                            <div class="col-lg-5">
-                                <p class="mt-2">Conéctate con:</p>
-                            </div>
-                            <div class="col-lg-7">
-                                <a href="#" title="Cuenta de Google"><i class="fab fa-google"></i></a> <a href="#" title="Cuenta Microsoft"><i class="fab fa-windows"></i></a> <a href="#" title="Cuenta de LinkedIn"><i class="fab fa-linkedin"></i></a> <a href="#" title="Cuenta de Github"><i class="fab fa-github"></i></a>
+                @{
+                    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+
+                    if (loginProviders.Count() > 0)
+                    {
+                        <div class="card border-success mb-3">
+                            <div class="card-body">
+                                @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="connect-with row">
+                                        <div class="col-lg-5">
+                                            <p class="mt-2">Conéctate con:</p>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            @foreach (AuthenticationDescription p in loginProviders)
+                                            {
+                                                string providerIcon = (p.Caption != "Microsoft") ? p.Caption.ToLower() : "windows";
+                                                <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Accede utilizando tu cuenta de @p.Caption"><i class="fab fa-@providerIcon"></i></button>
+                                            }
+                                            @*<a href="#" title="Cuenta de Google"><i class="fab fa-google"></i></a> <a href="#" title="Cuenta Microsoft"><i class="fab fa-windows"></i></a> <a href="#" title="Cuenta de LinkedIn"><i class="fab fa-linkedin"></i></a> <a href="#" title="Cuenta de Github"><i class="fab fa-github"></i></a>*@
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
-                    </div>
-                </div>
+                    }
+                }
             </div>
             <div class="col-lg-6">
                 <div class="card border-success mb-3">

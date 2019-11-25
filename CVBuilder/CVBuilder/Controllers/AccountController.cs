@@ -6,12 +6,14 @@ using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace CVBuilder.Controllers
 {
+    [RequireHttps]
     [Authorize]
     public class AccountController : Controller
     {
@@ -317,7 +319,7 @@ namespace CVBuilder.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("SignIn", new { returnUrl = returnUrl });
             }
 
             // Sign in the user with this external login provider if the user already has a login
@@ -335,20 +337,74 @@ namespace CVBuilder.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    string givenName = "";
+                    string surName = "";
+                    string avatarUrl = "/img/profile_coat.png";
+
+                    foreach(var claim in loginInfo.ExternalIdentity.Claims)
+                    {
+                        switch (claim.Type)
+                        {
+                            case ClaimTypes.GivenName:
+                                givenName = claim.Value + " ";
+                                break;
+                            case ClaimTypes.Surname:
+                                surName = claim.Value;
+                                break;
+                            case "urn:github:avatar_url":
+                            case "urn:google:picture":
+                                avatarUrl = claim.Value;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    //string userName = (givenName != "" || surName != "") ? givenName + surName : loginInfo.DefaultUserName;
+                    //if(loginInfo.Login.LoginProvider == "LinkedIn")
+                    //{
+                    //    var externalIdentity = HttpContext.GetOwinContext().Authentication.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+                    //    string accessToken =
+                    //                externalIdentity.Result.Claims.FirstOrDefault(c => c.Type == "urn:linkedin:accesstoken").Value;
+                    //    avatarUrl = GetUserPhotoUrl(accessToken);
+                    //}
+
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel {
+                        Email = loginInfo.Email,
+                        UserName = loginInfo.DefaultUserName,
+                        GivenName = givenName,
+                        SurName = surName,
+                        AvatarUrl = avatarUrl
+                    });
             }
         }
+
+        //public string GetUserPhotoUrl(string accessToken)
+        //{
+        //    string result = string.Empty;
+        //    var apiRequestUri = new Uri("https://api.linkedin.com/v2/people/~:(picture-url)?format=json");
+        //    using (var webClient = new System.Net.WebClient())
+        //    {
+        //        webClient.Headers.Add(System.Net.HttpRequestHeader.Authorization, "Bearer " + accessToken);
+        //        var json = webClient.DownloadString(apiRequestUri);
+        //        dynamic x = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+        //        string userPicture = x.pictureUrl;
+        //        result = userPicture;
+        //    }
+        //    return result;
+        //}
 
         //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl, string loginProvider)
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                //return RedirectToAction("Index", "Manage");
+                return RedirectToLocal(returnUrl);
             }
 
             if (ModelState.IsValid)
@@ -374,6 +430,7 @@ namespace CVBuilder.Controllers
             }
 
             ViewBag.ReturnUrl = returnUrl;
+            ViewBag.LoginProvider = loginProvider;
             return View(model);
         }
 

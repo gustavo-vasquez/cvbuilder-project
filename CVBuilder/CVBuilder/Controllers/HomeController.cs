@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace CVBuilder.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         // GET: Home

@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace CVBuilder.Controllers
 {
+    [RequireHttps]
     [Authorize]
     public class CurriculumController : Controller
     {
