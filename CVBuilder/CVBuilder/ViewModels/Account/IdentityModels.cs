@@ -24,7 +24,7 @@ namespace CVBuilder.ViewModels.Account
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("CVBuilder", throwIfV1Schema: false)
         {
         }
 

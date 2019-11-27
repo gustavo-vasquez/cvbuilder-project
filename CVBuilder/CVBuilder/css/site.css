@@ -130,11 +130,13 @@ section a:hover {
 ::-moz-selection { /* Code for Firefox */
     color: white;
     background: #50982d;
+    text-shadow: 1px 1px 2px #000000aa;
 }
 
 ::selection {
     color: white;
     background: #2bb746;
+    text-shadow: 1px 1px 2px #000000aa;
 }
 
 .connect-with button {
