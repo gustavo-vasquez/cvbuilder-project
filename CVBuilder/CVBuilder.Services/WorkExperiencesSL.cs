@@ -14,16 +14,16 @@ namespace CVBuilder.Services
     {
         private WorkExperiencesDL _dataLayer = new WorkExperiencesDL();
 
-        public int Create(WorkExperiencesDTO dto)
+        public int Create(WorkExperiencesDTO dto, int curriculumId)
         {
             WorkExperiences data = Mapping.Mapper.Map<WorkExperiencesDTO, WorkExperiences>(dto);
 
-            return _dataLayer.Create(data);
+            return _dataLayer.Create(data, curriculumId);
         }
 
-        public void Update(WorkExperiencesDTO dto)
+        public void Update(WorkExperiencesDTO dto, int curriculumId)
         {
-            _dataLayer.Update(Mapping.Mapper.Map<WorkExperiencesDTO, WorkExperiences>(dto));
+            _dataLayer.Update(Mapping.Mapper.Map<WorkExperiencesDTO, WorkExperiences>(dto), curriculumId);
         }
 
         public int Delete(int id)
@@ -37,9 +37,9 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<WorkExperiences, WorkExperiencesDTO>(data);
         }
 
-        public List<SummaryBlockDTO> GetAllBlocks()
+        public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
-            IQueryable<WorkExperiences> allWorkExperiences = _dataLayer.GetAll();
+            IQueryable<WorkExperiences> allWorkExperiences = _dataLayer.GetAll(curriculumId);
             List<SummaryBlockDTO> workExperienceBlocks = new List<SummaryBlockDTO>();
 
             foreach (WorkExperiences workExperience in allWorkExperiences)

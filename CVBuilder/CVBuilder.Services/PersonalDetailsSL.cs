@@ -13,18 +13,18 @@ namespace CVBuilder.Services
     {
         private PersonalDetailsDL _dataLayer = new PersonalDetailsDL();
 
-        public int Create(PersonalDetailsDTO dto)
+        public int Create(PersonalDetailsDTO dto, int curriculumId)
         {
             PersonalDetails data = Mapping.Mapper.Map<PersonalDetailsDTO, PersonalDetails>(dto);
 
-            return _dataLayer.Create(data);
+            return _dataLayer.Create(data, curriculumId);
         }
 
-        public int Update(PersonalDetailsDTO dto)
+        public int Update(PersonalDetailsDTO dto, int curriculumId)
         {
             PersonalDetails data = Mapping.Mapper.Map<PersonalDetailsDTO, PersonalDetails>(dto);
 
-            return _dataLayer.Update(data);
+            return _dataLayer.Update(data, curriculumId);
         }
 
         public PersonalDetailsDTO GetPersonalDetailsByCurriculumId(int id)

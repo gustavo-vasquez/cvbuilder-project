@@ -9,11 +9,11 @@ namespace CVBuilder.Services
 {
     interface ICurriculumServices<T> where T : class
     {
-        int Create(T data);
-        void Update(T data);
+        int Create(T data, int curriculumId);
+        void Update(T data, int curriculumId);
         int Delete(int id);
         T GetById(int id);
-        List<SummaryBlockDTO> GetAllBlocks();
+        List<SummaryBlockDTO> GetAllBlocks(int curriculumId);
         SummaryBlockDTO GetSummaryBlock(int id);
     }
 }

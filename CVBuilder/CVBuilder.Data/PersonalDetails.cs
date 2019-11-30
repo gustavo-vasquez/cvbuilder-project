@@ -19,6 +19,7 @@ namespace CVBuilder.Data
         public string LastName { get; set; }
         public string Email { get; set; }
         public byte[] Photo { get; set; }
+        public string MimeType { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public Nullable<int> PostalCode { get; set; }
@@ -38,7 +39,6 @@ namespace CVBuilder.Data
         public string FacebookUrl { get; set; }
         public string TwitterUrl { get; set; }
         public int ID_Curriculum { get; set; }
-        public string MimeType { get; set; }
     
         public virtual Curriculum Curriculum { get; set; }
     }

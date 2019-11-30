@@ -39,6 +39,11 @@ namespace CVBuilder.Data
         public virtual DbSet<Templates> Templates { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<WorkExperiences> WorkExperiences { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     
         public virtual int usp_Certificates_Create(string name, string institute, Nullable<bool> onlineMode, Nullable<bool> inProgress, Nullable<int> year, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)
         {
@@ -125,6 +130,45 @@ namespace CVBuilder.Data
                 new ObjectParameter("id_curriculum", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Certificates_Update", idParameter, nameParameter, instituteParameter, onlineModeParameter, inProgressParameter, yearParameter, descriptionParameter, isVisibleParameter, id_curriculumParameter);
+        }
+    
+        public virtual int usp_Curriculum_Create(string id_user, ObjectParameter id_curriculum_inserted)
+        {
+            var id_userParameter = id_user != null ?
+                new ObjectParameter("id_user", id_user) :
+                new ObjectParameter("id_user", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Curriculum_Create", id_userParameter, id_curriculum_inserted);
+        }
+    
+        public virtual int usp_Curriculum_Delete(Nullable<int> id_curriculum, string id_user)
+        {
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            var id_userParameter = id_user != null ?
+                new ObjectParameter("id_user", id_user) :
+                new ObjectParameter("id_user", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Curriculum_Delete", id_curriculumParameter, id_userParameter);
+        }
+    
+        public virtual int usp_Curriculum_Update(Nullable<int> id_curriculum, string id_user, Nullable<int> id_template)
+        {
+            var id_curriculumParameter = id_curriculum.HasValue ?
+                new ObjectParameter("id_curriculum", id_curriculum) :
+                new ObjectParameter("id_curriculum", typeof(int));
+    
+            var id_userParameter = id_user != null ?
+                new ObjectParameter("id_user", id_user) :
+                new ObjectParameter("id_user", typeof(string));
+    
+            var id_templateParameter = id_template.HasValue ?
+                new ObjectParameter("id_template", id_template) :
+                new ObjectParameter("id_template", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Curriculum_Update", id_curriculumParameter, id_userParameter, id_templateParameter);
         }
     
         public virtual int usp_CustomSections_Create(string sectionName, string description, Nullable<bool> isVisible, Nullable<int> id_curriculum)

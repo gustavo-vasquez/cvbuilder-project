@@ -8,7 +8,7 @@ namespace CVBuilder.Data
 {
     public class StudiesDL : DataLayerBase, ICurriculumData<Studies>
     {
-        public int Create(Studies data)
+        public int Create(Studies data, int curriculumId)
         {
             int result = _db.Context.usp_Studies_Create(
                     data.Title,
@@ -20,13 +20,13 @@ namespace CVBuilder.Data
                     data.EndYear,
                     data.Description,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
 
             return result;
         }
 
-        public void Update(Studies data)
+        public void Update(Studies data, int curriculumId)
         {
             _db.Context.usp_Studies_Update(
                     data.StudyID,
@@ -39,7 +39,7 @@ namespace CVBuilder.Data
                     data.EndYear,
                     data.Description,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
         }
 
@@ -54,9 +54,9 @@ namespace CVBuilder.Data
             return _db.Context.Studies.Find(id);
         }
 
-        public IQueryable<Studies> GetAll()
+        public IQueryable<Studies> GetAll(int curriculumId)
         {
-            return _db.Context.Studies.Where(s => s.ID_Curriculum == 1);
+            return _db.Context.Studies.Where(s => s.ID_Curriculum == curriculumId);
         }
 
         public Studies GetLast()

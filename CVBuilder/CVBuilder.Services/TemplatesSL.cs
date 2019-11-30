@@ -13,18 +13,18 @@ namespace CVBuilder.Services
     {
         private TemplatesDL _dataLayer = new TemplatesDL();
 
-        public TemplatesDTO GetByUserId(int userId)
+        public TemplatesDTO GetByUserId(string userId)
         {
             Templates data = _dataLayer.GetByUserId(userId);
             return Mapping.Mapper.Map<Templates, TemplatesDTO>(data);
         }
 
-        public string GetPreviewPath(int userId)
+        public string GetPreviewPath(string userId)
         {
             return _dataLayer.GetPreviewPath(userId);
         }
 
-        public void ChangeTemplate(string path, int curriculumId, int userId)
+        public void ChangeTemplate(string path, int curriculumId, string userId)
         {
             _dataLayer.ChangeTemplate(path, curriculumId, userId);
         }

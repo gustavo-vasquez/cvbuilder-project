@@ -8,26 +8,26 @@ namespace CVBuilder.Data
 {
     public class CustomSectionsDL : DataLayerBase, ICurriculumData<CustomSections>
     {
-        public int Create(CustomSections data)
+        public int Create(CustomSections data, int curriculumId)
         {
             int result = _db.Context.usp_CustomSections_Create(
                     data.SectionName,
                     data.Description,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
 
             return result;
         }
 
-        public void Update(CustomSections data)
+        public void Update(CustomSections data, int curriculumId)
         {
             _db.Context.usp_CustomSections_Update(
                     data.CustomSectionID,
                     data.SectionName,
                     data.Description,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
         }
 
@@ -42,9 +42,9 @@ namespace CVBuilder.Data
             return _db.Context.CustomSections.Find(id);
         }
 
-        public IQueryable<CustomSections> GetAll()
+        public IQueryable<CustomSections> GetAll(int curriculumId)
         {
-            return _db.Context.CustomSections.Where(s => s.ID_Curriculum == 1);
+            return _db.Context.CustomSections.Where(s => s.ID_Curriculum == curriculumId);
         }
 
         public CustomSections GetLast()

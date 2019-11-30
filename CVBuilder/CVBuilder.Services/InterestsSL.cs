@@ -14,15 +14,15 @@ namespace CVBuilder.Services
     {
         private InterestsDL _dataLayer = new InterestsDL();
 
-        public int Create(InterestsDTO dto)
+        public int Create(InterestsDTO dto, int curriculumId)
         {
             Interests data = Mapping.Mapper.Map<InterestsDTO, Interests>(dto);
-            return _dataLayer.Create(data);
+            return _dataLayer.Create(data, curriculumId);
         }
 
-        public void Update(InterestsDTO dto)
+        public void Update(InterestsDTO dto, int curriculumId)
         {
-            _dataLayer.Update(Mapping.Mapper.Map<InterestsDTO, Interests>(dto));
+            _dataLayer.Update(Mapping.Mapper.Map<InterestsDTO, Interests>(dto), curriculumId);
         }
 
         public int Delete(int id)
@@ -36,9 +36,9 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<Interests, InterestsDTO>(data);
         }
 
-        public List<SummaryBlockDTO> GetAllBlocks()
+        public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
-            IQueryable<Interests> allInterests = _dataLayer.GetAll();
+            IQueryable<Interests> allInterests = _dataLayer.GetAll(curriculumId);
             List<SummaryBlockDTO> interestBlocks = new List<SummaryBlockDTO>();
 
             foreach (Interests interest in allInterests)

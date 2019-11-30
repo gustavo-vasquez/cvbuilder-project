@@ -10,7 +10,7 @@ namespace CVBuilder.Data
     {
         private IDatabaseConnection _db = new DatabaseConnection();
 
-        public int Create(PersonalDetails data)
+        public int Create(PersonalDetails data, int curriculumId)
         {
             //string connectionString = @"data source=GUSTAVO-PC\SQLEXPRESS;initial catalog=CVBuilder;persist security info=True;user id=sa;password=123;MultipleActiveResultSets=True;App=EntityFramework"; //ConfigurationManager.ConnectionStrings["CVBuilderEntities"].ConnectionString;
             //SqlConnection connection = new SqlConnection(connectionString);
@@ -45,13 +45,13 @@ namespace CVBuilder.Data
                             data.GithubUrl,
                             data.FacebookUrl,
                             data.TwitterUrl,
-                            data.ID_Curriculum
+                            curriculumId
                     );
             
             return result;
         }
 
-        public int Update(PersonalDetails data)
+        public int Update(PersonalDetails data, int curriculumId)
         {
             int result = _db.Context.usp_PersonalDetails_Update(
                     data.PersonalDetailsID,
@@ -78,7 +78,7 @@ namespace CVBuilder.Data
                     data.GithubUrl,
                     data.FacebookUrl,
                     data.TwitterUrl,
-                    data.ID_Curriculum
+                    curriculumId
                 );
 
             return result;

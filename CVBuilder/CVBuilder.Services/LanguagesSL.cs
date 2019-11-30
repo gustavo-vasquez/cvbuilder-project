@@ -14,15 +14,15 @@ namespace CVBuilder.Services
     {
         private LanguagesDL _dataLayer = new LanguagesDL();
 
-        public int Create(LanguagesDTO dto)
+        public int Create(LanguagesDTO dto, int curriculumId)
         {
             Languages data = Mapping.Mapper.Map<LanguagesDTO, Languages>(dto);
-            return _dataLayer.Create(data);
+            return _dataLayer.Create(data, curriculumId);
         }
 
-        public void Update(LanguagesDTO dto)
+        public void Update(LanguagesDTO dto, int curriculumId)
         {
-            _dataLayer.Update(Mapping.Mapper.Map<LanguagesDTO, Languages>(dto));
+            _dataLayer.Update(Mapping.Mapper.Map<LanguagesDTO, Languages>(dto), curriculumId);
         }
 
         public int Delete(int id)
@@ -36,9 +36,9 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<Languages, LanguagesDTO>(data);
         }
 
-        public List<SummaryBlockDTO> GetAllBlocks()
+        public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
-            IQueryable<Languages> allLanguages = _dataLayer.GetAll();
+            IQueryable<Languages> allLanguages = _dataLayer.GetAll(curriculumId);
             List<SummaryBlockDTO> languageBlocks = new List<SummaryBlockDTO>();
 
             foreach (Languages language in allLanguages)

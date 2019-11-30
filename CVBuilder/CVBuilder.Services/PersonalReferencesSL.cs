@@ -13,15 +13,15 @@ namespace CVBuilder.Services
     {
         private PersonalReferencesDL _dataLayer = new PersonalReferencesDL();
 
-        public int Create(PersonalReferencesDTO dto)
+        public int Create(PersonalReferencesDTO dto, int curriculumId)
         {
             PersonalReferences data = Mapping.Mapper.Map<PersonalReferencesDTO, PersonalReferences>(dto);
-            return _dataLayer.Create(data);
+            return _dataLayer.Create(data, curriculumId);
         }
 
-        public void Update(PersonalReferencesDTO dto)
+        public void Update(PersonalReferencesDTO dto, int curriculumId)
         {
-            _dataLayer.Update(Mapping.Mapper.Map<PersonalReferencesDTO, PersonalReferences>(dto));
+            _dataLayer.Update(Mapping.Mapper.Map<PersonalReferencesDTO, PersonalReferences>(dto), curriculumId);
         }
 
         public int Delete(int id)
@@ -35,9 +35,9 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<PersonalReferences, PersonalReferencesDTO>(data);
         }
 
-        public List<SummaryBlockDTO> GetAllBlocks()
+        public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
-            IQueryable<PersonalReferences> allPersonalReferences = _dataLayer.GetAll();
+            IQueryable<PersonalReferences> allPersonalReferences = _dataLayer.GetAll(curriculumId);
             List<SummaryBlockDTO> personalReferenceBlocks = new List<SummaryBlockDTO>();
 
             foreach (PersonalReferences personalReference in allPersonalReferences)

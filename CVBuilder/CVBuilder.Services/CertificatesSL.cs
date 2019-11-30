@@ -13,15 +13,15 @@ namespace CVBuilder.Services
     {
         private CertificatesDL _dataLayer = new CertificatesDL();
 
-        public int Create(CertificatesDTO dto)
+        public int Create(CertificatesDTO dto, int curriculumId)
         {
             Certificates data = Mapping.Mapper.Map<CertificatesDTO, Certificates>(dto);
-            return _dataLayer.Create(data);
+            return _dataLayer.Create(data, curriculumId);
         }
 
-        public void Update(CertificatesDTO dto)
+        public void Update(CertificatesDTO dto, int curriculumId)
         {
-            _dataLayer.Update(Mapping.Mapper.Map<CertificatesDTO, Certificates>(dto));
+            _dataLayer.Update(Mapping.Mapper.Map<CertificatesDTO, Certificates>(dto), curriculumId);
         }
 
         public int Delete(int id)
@@ -51,9 +51,9 @@ namespace CVBuilder.Services
             };
         }
 
-        public List<SummaryBlockDTO> GetAllBlocks()
+        public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
-            IQueryable<Certificates> allCertificates = _dataLayer.GetAll();
+            IQueryable<Certificates> allCertificates = _dataLayer.GetAll(curriculumId);
             List<SummaryBlockDTO> certificateBlocks = new List<SummaryBlockDTO>();
 
             foreach (Certificates certificate in allCertificates)

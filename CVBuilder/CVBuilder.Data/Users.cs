@@ -14,12 +14,6 @@ namespace CVBuilder.Data
     
     public partial class Users
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
-        {
-            this.Curriculum = new HashSet<Curriculum>();
-        }
-    
         public int UserID { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -37,8 +31,5 @@ namespace CVBuilder.Data
         public Nullable<System.DateTime> BirthDate { get; set; }
         public string Nationality { get; set; }
         public string MimeType { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Curriculum> Curriculum { get; set; }
     }
 }

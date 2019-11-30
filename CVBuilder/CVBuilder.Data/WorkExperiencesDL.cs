@@ -8,7 +8,7 @@ namespace CVBuilder.Data
 {
     public class WorkExperiencesDL : DataLayerBase, ICurriculumData<WorkExperiences>
     {
-        public int Create(WorkExperiences data)
+        public int Create(WorkExperiences data, int curriculumId)
         {
             int result = _db.Context.usp_WorkExperiences_Create(
                     data.Job,
@@ -20,13 +20,13 @@ namespace CVBuilder.Data
                     data.EndYear,
                     data.Description,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
 
             return result;
         }
 
-        public void Update(WorkExperiences data)
+        public void Update(WorkExperiences data, int curriculumId)
         {
             _db.Context.usp_WorkExperiences_Update(
                     data.WorkExperienceID,
@@ -39,7 +39,7 @@ namespace CVBuilder.Data
                     data.EndYear,
                     data.Description,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
         }
 
@@ -54,9 +54,9 @@ namespace CVBuilder.Data
             return _db.Context.WorkExperiences.Find(id);
         }
 
-        public IQueryable<WorkExperiences> GetAll()
+        public IQueryable<WorkExperiences> GetAll(int curriculumId)
         {
-            return _db.Context.WorkExperiences.Where(s => s.ID_Curriculum == 1);
+            return _db.Context.WorkExperiences.Where(s => s.ID_Curriculum == curriculumId);
         }
 
         public WorkExperiences GetLast()

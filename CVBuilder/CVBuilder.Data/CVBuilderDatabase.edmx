@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CVBuilderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CVBuilderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Certificates">
           <Key>
             <PropertyRef Name="CertificateID" />
@@ -24,7 +24,7 @@
             <PropertyRef Name="CurriculumID" />
           </Key>
           <Property Name="CurriculumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="ID_User" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ID_Template" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomSections">
@@ -65,8 +65,9 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="MimeType" Type="nvarchar" MaxLength="25" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
-          <Property Name="City" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
           <Property Name="PostalCode" Type="int" />
           <Property Name="AreaCodeLP" Type="smallint" />
           <Property Name="LinePhone" Type="int" />
@@ -84,7 +85,6 @@
           <Property Name="FacebookUrl" Type="nvarchar" MaxLength="300" />
           <Property Name="TwitterUrl" Type="nvarchar" MaxLength="300" />
           <Property Name="ID_Curriculum" Type="int" Nullable="false" />
-          <Property Name="MimeType" Type="nvarchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="PersonalReferences">
           <Key>
@@ -171,6 +171,67 @@
           <Property Name="IsVisible" Type="bit" Nullable="false" />
           <Property Name="ID_Curriculum" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Certificates_Curriculum">
           <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
           <End Role="Certificates" Type="Self.Certificates" Multiplicity="*" />
@@ -196,11 +257,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Curriculum_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Curriculum">
               <PropertyRef Name="ID_User" />
@@ -216,6 +277,62 @@
             </Principal>
             <Dependent Role="CustomSections">
               <PropertyRef Name="ID_Curriculum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -326,6 +443,19 @@
           <Parameter Name="description" Type="nvarchar" Mode="In" />
           <Parameter Name="isVisible" Type="bit" Mode="In" />
           <Parameter Name="id_curriculum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Curriculum_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_user" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_curriculum_inserted" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="usp_Curriculum_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+          <Parameter Name="id_user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Curriculum_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_curriculum" Type="int" Mode="In" />
+          <Parameter Name="id_user" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_template" Type="int" Mode="In" />
         </Function>
         <Function Name="usp_CustomSections_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sectionName" Type="nvarchar" Mode="In" />
@@ -536,6 +666,12 @@
           <EntitySet Name="Templates" EntityType="Self.Templates" Schema="cvbuilder" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="cvbuilder" store:Type="Tables" />
           <EntitySet Name="WorkExperiences" EntityType="Self.WorkExperiences" Schema="cvbuilder" store:Type="Tables" />
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Certificates_Curriculum" Association="Self.FK_Certificates_Curriculum">
             <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="Certificates" EntitySet="Certificates" />
@@ -545,12 +681,28 @@
             <End Role="Curriculum" EntitySet="Curriculum" />
           </AssociationSet>
           <AssociationSet Name="FK_Curriculum_Users" Association="Self.FK_Curriculum_Users">
-            <End Role="Users" EntitySet="Users" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Curriculum" EntitySet="Curriculum" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomSections_Curriculum" Association="Self.FK_CustomSections_Curriculum">
             <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="CustomSections" EntitySet="CustomSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_Interests_Curriculum" Association="Self.FK_Interests_Curriculum">
             <End Role="Curriculum" EntitySet="Curriculum" />
@@ -581,7 +733,8 @@
             <End Role="WorkExperiences" EntitySet="WorkExperiences" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CVBuilderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -605,11 +758,11 @@
             <PropertyRef Name="CurriculumID" />
           </Key>
           <Property Name="CurriculumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="ID_User" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ID_Template" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Certificates" Relationship="Self.FK_Certificates_Curriculum" FromRole="Curriculum" ToRole="Certificates" />
           <NavigationProperty Name="Templates" Relationship="Self.FK_Curriculum_Templates" FromRole="Curriculum" ToRole="Templates" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Curriculum_Users" FromRole="Curriculum" ToRole="Users" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Curriculum_Users" FromRole="Curriculum" ToRole="AspNetUsers" />
           <NavigationProperty Name="CustomSections" Relationship="Self.FK_CustomSections_Curriculum" FromRole="Curriculum" ToRole="CustomSections" />
           <NavigationProperty Name="Interests" Relationship="Self.FK_Interests_Curriculum" FromRole="Curriculum" ToRole="Interests" />
           <NavigationProperty Name="Languages" Relationship="Self.FK_Languages_Curriculum" FromRole="Curriculum" ToRole="Languages" />
@@ -660,8 +813,9 @@
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="MimeType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PostalCode" Type="Int32" />
           <Property Name="AreaCodeLP" Type="Int16" />
           <Property Name="LinePhone" Type="Int32" />
@@ -680,7 +834,6 @@
           <Property Name="TwitterUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Curriculum" Relationship="Self.FK_PersonalDetails_Curriculum" FromRole="PersonalDetails" ToRole="Curriculum" />
-          <Property Name="MimeType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PersonalReferences">
           <Key>
@@ -730,8 +883,8 @@
           </Key>
           <Property Name="TemplateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Curriculum_Templates" FromRole="Templates" ToRole="Curriculum" />
           <Property Name="PreviewPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Curriculum_Templates" FromRole="Templates" ToRole="Curriculum" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -753,7 +906,6 @@
           <Property Name="MobilePhone" Type="Int32" />
           <Property Name="BirthDate" Type="DateTime" Precision="3" />
           <Property Name="Nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Curriculum_Users" FromRole="Users" ToRole="Curriculum" />
           <Property Name="MimeType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="WorkExperiences">
@@ -772,6 +924,66 @@
           <Property Name="IsVisible" Type="Boolean" Nullable="false" />
           <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Curriculum" Relationship="Self.FK_WorkExperiences_Curriculum" FromRole="WorkExperiences" ToRole="Curriculum" />
+        </EntityType>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Curriculum_Users" FromRole="AspNetUsers" ToRole="Curriculum" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <Association Name="FK_Certificates_Curriculum">
           <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="1" />
@@ -798,11 +1010,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Curriculum_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Curriculum">
               <PropertyRef Name="ID_User" />
@@ -905,6 +1117,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="CVBuilderEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Certificates" EntityType="Self.Certificates" />
           <EntitySet Name="Curriculum" EntityType="Self.Curriculum" />
@@ -918,6 +1162,11 @@
           <EntitySet Name="Templates" EntityType="Self.Templates" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <EntitySet Name="WorkExperiences" EntityType="Self.WorkExperiences" />
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <AssociationSet Name="FK_Certificates_Curriculum" Association="Self.FK_Certificates_Curriculum">
             <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="Certificates" EntitySet="Certificates" />
@@ -927,7 +1176,7 @@
             <End Role="Curriculum" EntitySet="Curriculum" />
           </AssociationSet>
           <AssociationSet Name="FK_Curriculum_Users" Association="Self.FK_Curriculum_Users">
-            <End Role="Users" EntitySet="Users" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Curriculum" EntitySet="Curriculum" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomSections_Curriculum" Association="Self.FK_CustomSections_Curriculum">
@@ -962,6 +1211,18 @@
             <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="WorkExperiences" EntitySet="WorkExperiences" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
           <FunctionImport Name="usp_Certificates_Create">
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="institute" Mode="In" Type="String" />
@@ -973,7 +1234,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Certificates_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Certificates_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -986,6 +1247,19 @@
             <Parameter Name="isVisible" Mode="In" Type="Boolean" />
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="usp_Curriculum_Create">
+            <Parameter Name="id_user" Mode="In" Type="String" />
+            <Parameter Name="id_curriculum_inserted" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Curriculum_Delete">
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+            <Parameter Name="id_user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Curriculum_Update">
+            <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
+            <Parameter Name="id_user" Mode="In" Type="String" />
+            <Parameter Name="id_template" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="usp_CustomSections_Create">
             <Parameter Name="sectionName" Mode="In" Type="String" />
             <Parameter Name="description" Mode="In" Type="String" />
@@ -993,7 +1267,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_CustomSections_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_CustomSections_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1008,7 +1282,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Interests_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Interests_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1023,7 +1297,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Languages_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Languages_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1059,7 +1333,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalDetails_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalDetails_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1098,7 +1372,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalReferences_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PersonalReferences_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1117,7 +1391,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Skills_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Skills_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1139,7 +1413,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Studies_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_Studies_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1167,7 +1441,7 @@
             <Parameter Name="id_curriculum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_WorkExperiences_Delete">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_WorkExperiences_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1248,12 +1522,12 @@
           <EntitySetMapping Name="PersonalDetails">
             <EntityTypeMapping TypeName="CVBuilderModel.PersonalDetails">
               <MappingFragment StoreEntitySet="PersonalDetails">
-                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
                 <ScalarProperty Name="PersonalDetailsID" ColumnName="PersonalDetailsID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
@@ -1321,16 +1595,15 @@
           <EntitySetMapping Name="Templates">
             <EntityTypeMapping TypeName="CVBuilderModel.Templates">
               <MappingFragment StoreEntitySet="Templates">
-                <ScalarProperty Name="PreviewPath" ColumnName="PreviewPath" />
                 <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PreviewPath" ColumnName="PreviewPath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CVBuilderModel.Users">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -1347,6 +1620,7 @@
                 <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1367,9 +1641,75 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="CVBuilderModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="CVBuilderModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="CVBuilderModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="CVBuilderModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="CVBuilderModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="CVBuilderModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="usp_Certificates_Create" FunctionName="CVBuilderModel.Store.usp_Certificates_Create" />
           <FunctionImportMapping FunctionImportName="usp_Certificates_Delete" FunctionName="CVBuilderModel.Store.usp_Certificates_Delete" />
           <FunctionImportMapping FunctionImportName="usp_Certificates_Update" FunctionName="CVBuilderModel.Store.usp_Certificates_Update" />
+          <FunctionImportMapping FunctionImportName="usp_Curriculum_Create" FunctionName="CVBuilderModel.Store.usp_Curriculum_Create" />
+          <FunctionImportMapping FunctionImportName="usp_Curriculum_Delete" FunctionName="CVBuilderModel.Store.usp_Curriculum_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_Curriculum_Update" FunctionName="CVBuilderModel.Store.usp_Curriculum_Update" />
           <FunctionImportMapping FunctionImportName="usp_CustomSections_Create" FunctionName="CVBuilderModel.Store.usp_CustomSections_Create" />
           <FunctionImportMapping FunctionImportName="usp_CustomSections_Delete" FunctionName="CVBuilderModel.Store.usp_CustomSections_Delete" />
           <FunctionImportMapping FunctionImportName="usp_CustomSections_Update" FunctionName="CVBuilderModel.Store.usp_CustomSections_Update" />

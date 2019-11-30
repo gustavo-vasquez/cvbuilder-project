@@ -8,7 +8,7 @@ namespace CVBuilder.Data
 {
     public class PersonalReferencesDL : DataLayerBase, ICurriculumData<PersonalReferences>
     {
-        public int Create(PersonalReferences data)
+        public int Create(PersonalReferences data, int curriculumId)
         {
             int result = _db.Context.usp_PersonalReferences_Create(
                     data.Company,
@@ -17,13 +17,13 @@ namespace CVBuilder.Data
                     data.Telephone,
                     data.Email,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
 
             return result;
         }
 
-        public void Update(PersonalReferences data)
+        public void Update(PersonalReferences data, int curriculumId)
         {
             _db.Context.usp_PersonalReferences_Update(
                     data.PersonalReferenceID,
@@ -33,7 +33,7 @@ namespace CVBuilder.Data
                     data.Telephone,
                     data.Email,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
         }
 
@@ -48,9 +48,9 @@ namespace CVBuilder.Data
             return _db.Context.PersonalReferences.Find(id);
         }
 
-        public IQueryable<PersonalReferences> GetAll()
+        public IQueryable<PersonalReferences> GetAll(int curriculumId)
         {
-            return _db.Context.PersonalReferences.Where(s => s.ID_Curriculum == 1);
+            return _db.Context.PersonalReferences.Where(s => s.ID_Curriculum == curriculumId);
         }
 
         public PersonalReferences GetLast()

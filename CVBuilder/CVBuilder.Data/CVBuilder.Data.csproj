@@ -52,6 +52,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetRoles.cs">
+      <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaims.cs">
+      <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogins.cs">
+      <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUsers.cs">
+      <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Certificates.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
@@ -60,10 +72,10 @@
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="CurriculumDL.cs" />
-    <Compile Include="CustomSectionsDL.cs" />
     <Compile Include="CustomSections.cs">
       <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomSectionsDL.cs" />
     <Compile Include="CVBuilderDatabase.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CVBuilderDatabase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>CVBuilderDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="IDatabaseConnection.cs" />
@@ -121,7 +136,9 @@
     <Compile Include="WorkExperiencesDL.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="CVBuilderDatabase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CVBuilderDatabase.Designer.cs</LastGenOutput>

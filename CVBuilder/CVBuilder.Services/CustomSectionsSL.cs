@@ -13,15 +13,15 @@ namespace CVBuilder.Services
     {
         private CustomSectionsDL _dataLayer = new CustomSectionsDL();
 
-        public int Create(CustomSectionsDTO dto)
+        public int Create(CustomSectionsDTO dto, int curriculumId)
         {
             CustomSections data = Mapping.Mapper.Map<CustomSectionsDTO, CustomSections>(dto);
-            return _dataLayer.Create(data);
+            return _dataLayer.Create(data, curriculumId);
         }
 
-        public void Update(CustomSectionsDTO dto)
+        public void Update(CustomSectionsDTO dto, int curriculumId)
         {
-            _dataLayer.Update(Mapping.Mapper.Map<CustomSectionsDTO, CustomSections>(dto));
+            _dataLayer.Update(Mapping.Mapper.Map<CustomSectionsDTO, CustomSections>(dto), curriculumId);
         }
 
         public int Delete(int id)
@@ -35,9 +35,9 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<CustomSections, CustomSectionsDTO>(data);
         }
 
-        public List<SummaryBlockDTO> GetAllBlocks()
+        public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
-            IQueryable<CustomSections> allCustomSections = _dataLayer.GetAll();
+            IQueryable<CustomSections> allCustomSections = _dataLayer.GetAll(curriculumId);
             List<SummaryBlockDTO> customSectionBlocks = new List<SummaryBlockDTO>();
 
             foreach (CustomSections customSection in allCustomSections)

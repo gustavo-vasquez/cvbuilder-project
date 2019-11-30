@@ -8,7 +8,7 @@ namespace CVBuilder.Data
 {
     public class CertificatesDL : DataLayerBase, ICurriculumData<Certificates>
     {
-        public int Create(Certificates data)
+        public int Create(Certificates data, int curriculumId)
         {
             int result = _db.Context.usp_Certificates_Create(
                     data.Name,
@@ -18,13 +18,13 @@ namespace CVBuilder.Data
                     data.Year,
                     data.Description,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
 
             return result;
         }
 
-        public void Update(Certificates data)
+        public void Update(Certificates data, int curriculumId)
         {
             _db.Context.usp_Certificates_Update(
                     data.CertificateID,
@@ -35,7 +35,7 @@ namespace CVBuilder.Data
                     data.Year,
                     data.Description,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
         }
 
@@ -55,9 +55,9 @@ namespace CVBuilder.Data
             return _db.Context.Certificates.OrderByDescending(c => c.CertificateID).First();
         }
 
-        public IQueryable<Certificates> GetAll()
+        public IQueryable<Certificates> GetAll(int curriculumId)
         {
-            return _db.Context.Certificates.Where(c => c.ID_Curriculum == 1);
+            return _db.Context.Certificates.Where(c => c.ID_Curriculum == curriculumId);
         }
     }
 }

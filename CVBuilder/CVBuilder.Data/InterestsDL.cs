@@ -8,24 +8,24 @@ namespace CVBuilder.Data
 {
     public class InterestsDL : DataLayerBase, ICurriculumData<Interests>
     {
-        public int Create(Interests data)
+        public int Create(Interests data, int curriculumId)
         {
             int result = _db.Context.usp_Interests_Create(
                     data.Name,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
 
             return result;
         }
 
-        public void Update(Interests data)
+        public void Update(Interests data, int curriculumId)
         {
             _db.Context.usp_Interests_Update(
                     data.InterestID,
                     data.Name,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
         }
 
@@ -40,9 +40,9 @@ namespace CVBuilder.Data
             return _db.Context.Interests.Find(id);
         }
 
-        public IQueryable<Interests> GetAll()
+        public IQueryable<Interests> GetAll(int curriculumId)
         {
-            return _db.Context.Interests.Where(s => s.ID_Curriculum == 1);
+            return _db.Context.Interests.Where(s => s.ID_Curriculum == curriculumId);
         }
 
         public Interests GetLast()

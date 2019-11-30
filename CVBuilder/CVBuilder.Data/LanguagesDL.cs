@@ -8,26 +8,26 @@ namespace CVBuilder.Data
 {
     public class LanguagesDL : DataLayerBase, ICurriculumData<Languages>
     {
-        public int Create(Languages data)
+        public int Create(Languages data, int curriculumId)
         {
             int result = _db.Context.usp_Languages_Create(
                     data.Name,
                     data.Level,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
 
             return result;
         }
 
-        public void Update(Languages data)
+        public void Update(Languages data, int curriculumId)
         {
             _db.Context.usp_Languages_Update(
                     data.LanguageID,
                     data.Name,
                     data.Level,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
         }
 
@@ -42,9 +42,9 @@ namespace CVBuilder.Data
             return _db.Context.Languages.Find(id);
         }
 
-        public IQueryable<Languages> GetAll()
+        public IQueryable<Languages> GetAll(int curriculumId)
         {
-            return _db.Context.Languages.Where(s => s.ID_Curriculum == 1);
+            return _db.Context.Languages.Where(s => s.ID_Curriculum == curriculumId);
         }
 
         public Languages GetLast()

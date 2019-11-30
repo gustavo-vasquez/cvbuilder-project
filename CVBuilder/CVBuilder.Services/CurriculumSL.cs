@@ -32,5 +32,15 @@ namespace CVBuilder.Services
             CustomSections = new CustomSectionsSL();
             Templates = new TemplatesSL();
         }
+
+        public static int Create(string userId)
+        {
+            return new Data.CurriculumDL().Create(userId);
+        }
+
+        public int GetCurriculumId(string userId)
+        {
+            return new Data.CurriculumDL().GetCurriculumId(userId);
+        }
     }
 }

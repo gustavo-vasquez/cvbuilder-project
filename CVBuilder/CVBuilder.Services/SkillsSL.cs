@@ -14,15 +14,15 @@ namespace CVBuilder.Services
     {
         private SkillsDL _dataLayer = new SkillsDL();
 
-        public int Create(SkillsDTO dto)
+        public int Create(SkillsDTO dto, int curriculumId)
         {
             Skills data = Mapping.Mapper.Map<SkillsDTO, Skills>(dto);
-            return _dataLayer.Create(data);
+            return _dataLayer.Create(data, curriculumId);
         }
 
-        public void Update(SkillsDTO dto)
+        public void Update(SkillsDTO dto, int curriculumId)
         {
-            _dataLayer.Update(Mapping.Mapper.Map<SkillsDTO, Skills>(dto));
+            _dataLayer.Update(Mapping.Mapper.Map<SkillsDTO, Skills>(dto), curriculumId);
         }
 
         public int Delete(int id)
@@ -36,9 +36,9 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<Skills, SkillsDTO>(data);
         }
 
-        public List<SummaryBlockDTO> GetAllBlocks()
+        public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
-            IQueryable<Skills> allSkills = _dataLayer.GetAll();
+            IQueryable<Skills> allSkills = _dataLayer.GetAll(curriculumId);
             List<SummaryBlockDTO> skillBlocks = new List<SummaryBlockDTO>();
 
             foreach (Skills skill in allSkills)

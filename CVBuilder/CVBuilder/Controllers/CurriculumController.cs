@@ -4,6 +4,7 @@ using CVBuilder.enums;
 using CVBuilder.Services;
 using CVBuilder.Services.DTOs;
 using CVBuilder.ViewModels.Curriculum;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,20 +26,20 @@ namespace CVBuilder.Controllers
         public ActionResult Build(string section)
         {
             BuildViewModel model = new BuildViewModel();
-            PersonalDetailsDTO personalDetailsDto = _curriculumServices.PersonalDetails.GetPersonalDetailsByCurriculumId(1);
+            PersonalDetailsDTO personalDetailsDto = _curriculumServices.PersonalDetails.GetPersonalDetailsByCurriculumId(_curriculumServices.GetCurriculumId(User.Identity.GetUserId()));
 
             if (personalDetailsDto != null)
                 model.PersonalDetails = Mapping.Mapper.Map<PersonalDetailsDTO, PersonalDetailsViewModel>(personalDetailsDto);
             
-            model.StudyBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Studies.GetAllBlocks());
-            model.CertificateBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Certificates.GetAllBlocks());
-            model.WorkExperienceBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.WorkExperiences.GetAllBlocks());
-            model.LanguageBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Languages.GetAllBlocks());
-            model.SkillBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Skills.GetAllBlocks());
-            model.InterestBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Interests.GetAllBlocks());
-            model.PersonalReferenceBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.PersonalReferences.GetAllBlocks());
-            model.CustomSectionBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.CustomSections.GetAllBlocks());
-            model.PreviewPath = _curriculumServices.Templates.GetPreviewPath(1);
+            model.StudyBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Studies.GetAllBlocks(_curriculumServices.GetCurriculumId(User.Identity.GetUserId())));
+            model.CertificateBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Certificates.GetAllBlocks(_curriculumServices.GetCurriculumId(User.Identity.GetUserId())));
+            model.WorkExperienceBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.WorkExperiences.GetAllBlocks(_curriculumServices.GetCurriculumId(User.Identity.GetUserId())));
+            model.LanguageBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Languages.GetAllBlocks(_curriculumServices.GetCurriculumId(User.Identity.GetUserId())));
+            model.SkillBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Skills.GetAllBlocks(_curriculumServices.GetCurriculumId(User.Identity.GetUserId())));
+            model.InterestBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.Interests.GetAllBlocks(_curriculumServices.GetCurriculumId(User.Identity.GetUserId())));
+            model.PersonalReferenceBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.PersonalReferences.GetAllBlocks(_curriculumServices.GetCurriculumId(User.Identity.GetUserId())));
+            model.CustomSectionBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.CustomSections.GetAllBlocks(_curriculumServices.GetCurriculumId(User.Identity.GetUserId())));
+            model.PreviewPath = _curriculumServices.Templates.GetPreviewPath(User.Identity.GetUserId());
 
             return View(model);
         }
@@ -58,8 +59,8 @@ namespace CVBuilder.Controllers
 
             switch (model.Type)
             {
-                case FormType.ADD: _curriculumServices.PersonalDetails.Create(dto); break;
-                case FormType.EDIT: _curriculumServices.PersonalDetails.Update(dto); break;
+                case FormType.ADD: _curriculumServices.PersonalDetails.Create(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
+                case FormType.EDIT: _curriculumServices.PersonalDetails.Update(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
                 default: break;
             }
 
@@ -79,8 +80,8 @@ namespace CVBuilder.Controllers
             StudiesDTO dto = Mapping.Mapper.Map<StudiesViewModel, StudiesDTO>(model);
             switch (model.Type)
             {
-                case FormType.ADD: _curriculumServices.Studies.Create(dto); break;
-                case FormType.EDIT: _curriculumServices.Studies.Update(dto); break;
+                case FormType.ADD: _curriculumServices.Studies.Create(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
+                case FormType.EDIT: _curriculumServices.Studies.Update(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
                 default: break;
             }
 
@@ -96,8 +97,8 @@ namespace CVBuilder.Controllers
             CertificatesDTO dto = Mapping.Mapper.Map<CertificatesViewModel, CertificatesDTO>(model);
             switch (model.Type)
             {
-                case FormType.ADD: _curriculumServices.Certificates.Create(dto); break;
-                case FormType.EDIT: _curriculumServices.Certificates.Update(dto); break;
+                case FormType.ADD: _curriculumServices.Certificates.Create(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
+                case FormType.EDIT: _curriculumServices.Certificates.Update(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
                 default: break;
             }
 
@@ -113,8 +114,8 @@ namespace CVBuilder.Controllers
             WorkExperiencesDTO dto = Mapping.Mapper.Map<WorkExperiencesViewModel, WorkExperiencesDTO>(model);
             switch (model.Type)
             {
-                case FormType.ADD: _curriculumServices.WorkExperiences.Create(dto); break;
-                case FormType.EDIT: _curriculumServices.WorkExperiences.Update(dto); break;
+                case FormType.ADD: _curriculumServices.WorkExperiences.Create(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
+                case FormType.EDIT: _curriculumServices.WorkExperiences.Update(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
                 default: break;
             }
 
@@ -130,8 +131,8 @@ namespace CVBuilder.Controllers
             LanguagesDTO dto = Mapping.Mapper.Map<LanguagesViewModel, LanguagesDTO>(model);
             switch (model.Type)
             {
-                case FormType.ADD: _curriculumServices.Languages.Create(dto); break;
-                case FormType.EDIT: _curriculumServices.Languages.Update(dto); break;
+                case FormType.ADD: _curriculumServices.Languages.Create(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
+                case FormType.EDIT: _curriculumServices.Languages.Update(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
                 default: break;
             }
 
@@ -147,8 +148,8 @@ namespace CVBuilder.Controllers
             SkillsDTO dto = Mapping.Mapper.Map<SkillsViewModel, SkillsDTO>(model);
             switch (model.Type)
             {
-                case FormType.ADD: _curriculumServices.Skills.Create(dto); break;
-                case FormType.EDIT: _curriculumServices.Skills.Update(dto); break;
+                case FormType.ADD: _curriculumServices.Skills.Create(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
+                case FormType.EDIT: _curriculumServices.Skills.Update(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
                 default: break;
             }
 
@@ -164,8 +165,8 @@ namespace CVBuilder.Controllers
             InterestsDTO dto = Mapping.Mapper.Map<InterestsViewModel, InterestsDTO>(model);
             switch (model.Type)
             {
-                case FormType.ADD: _curriculumServices.Interests.Create(dto); break;
-                case FormType.EDIT: _curriculumServices.Interests.Update(dto); break;
+                case FormType.ADD: _curriculumServices.Interests.Create(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
+                case FormType.EDIT: _curriculumServices.Interests.Update(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
                 default: break;
             }
 
@@ -181,8 +182,8 @@ namespace CVBuilder.Controllers
             PersonalReferencesDTO dto = Mapping.Mapper.Map<PersonalReferencesViewModel, PersonalReferencesDTO>(model);
             switch (model.Type)
             {
-                case FormType.ADD: _curriculumServices.PersonalReferences.Create(dto); break;
-                case FormType.EDIT: _curriculumServices.PersonalReferences.Update(dto); break;
+                case FormType.ADD: _curriculumServices.PersonalReferences.Create(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
+                case FormType.EDIT: _curriculumServices.PersonalReferences.Update(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
                 default: break;
             }
 
@@ -198,8 +199,8 @@ namespace CVBuilder.Controllers
             CustomSectionsDTO dto = Mapping.Mapper.Map<CustomSectionsViewModel, CustomSectionsDTO>(model);
             switch (model.Type)
             {
-                case FormType.ADD: _curriculumServices.CustomSections.Create(dto); break;
-                case FormType.EDIT: _curriculumServices.CustomSections.Update(dto); break;
+                case FormType.ADD: _curriculumServices.CustomSections.Create(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
+                case FormType.EDIT: _curriculumServices.CustomSections.Update(dto, _curriculumServices.GetCurriculumId(User.Identity.GetUserId())); break;
                 default: break;
             }
 
@@ -381,14 +382,15 @@ namespace CVBuilder.Controllers
         [HttpGet]
         public ActionResult Finished()
         {
-            TemplatesDTO dto = _curriculumServices.Templates.GetByUserId(1);
+            TemplatesDTO dto = _curriculumServices.Templates.GetByUserId(User.Identity.GetUserId());
             return View(Mapping.Mapper.Map<TemplatesDTO, FinishedViewModel>(dto));
         }
 
         [HttpGet]
         public void ChangeTemplate(string path)
         {
-            _curriculumServices.Templates.ChangeTemplate(path, 1, 1);
+            string userId = User.Identity.GetUserId();
+            _curriculumServices.Templates.ChangeTemplate(path, _curriculumServices.GetCurriculumId(userId), userId);
         }
     }
 }

@@ -8,26 +8,26 @@ namespace CVBuilder.Data
 {
     public class SkillsDL : DataLayerBase, ICurriculumData<Skills>
     {
-        public int Create(Skills data)
+        public int Create(Skills data, int curriculumId)
         {
             int result = _db.Context.usp_Skills_Create(
                     data.Name,
                     data.Level,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
 
             return result;
         }
 
-        public void Update(Skills data)
+        public void Update(Skills data, int curriculumId)
         {
             _db.Context.usp_Skills_Update(
                     data.SkillID,
                     data.Name,
                     data.Level,
                     data.IsVisible,
-                    data.ID_Curriculum
+                    curriculumId
                 );
         }
 
@@ -42,9 +42,9 @@ namespace CVBuilder.Data
             return _db.Context.Skills.Find(id);
         }
 
-        public IQueryable<Skills> GetAll()
+        public IQueryable<Skills> GetAll(int curriculumId)
         {
-            return _db.Context.Skills.Where(s => s.ID_Curriculum == 1);
+            return _db.Context.Skills.Where(s => s.ID_Curriculum == curriculumId);
         }
 
         public Skills GetLast()

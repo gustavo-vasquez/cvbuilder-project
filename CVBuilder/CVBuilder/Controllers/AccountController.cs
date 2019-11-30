@@ -66,6 +66,7 @@ namespace CVBuilder.Controllers
 
                 if (result.Succeeded)
                 {
+                    Services.CurriculumSL.Create(user.Id);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -337,8 +338,8 @@ namespace CVBuilder.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    string givenName = "";
-                    string surName = "";
+                    string givenName = null;
+                    string surName = null;
                     string avatarUrl = "/img/profile_coat.png";
 
                     foreach(var claim in loginInfo.ExternalIdentity.Claims)
@@ -422,6 +423,25 @@ namespace CVBuilder.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+                        int curriculumId = Services.CurriculumSL.Create(user.Id);
+                        byte[] profilePhoto = null;
+
+                        if (model.AvatarUrl != "/img/profile_coat.png")
+                        {
+                            using (var webClient = new System.Net.WebClient())
+                                profilePhoto = webClient.DownloadData(model.AvatarUrl);
+                        }
+
+                        new Services.PersonalDetailsSL().Create(new Services.DTOs.PersonalDetailsDTO()
+                        {
+                            Name = model.GivenName ?? model.UserName,
+                            LastName = model.SurName ?? model.UserName,
+                            Email = model.Email,
+                            UploadedPhoto = profilePhoto,
+                            Summary = string.Empty,
+                            SummaryIsVisible = true
+                        }, curriculumId);
+
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }

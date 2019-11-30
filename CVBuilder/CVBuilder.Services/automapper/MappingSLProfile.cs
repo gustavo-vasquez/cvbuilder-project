@@ -15,7 +15,7 @@ namespace CVBuilder.Services.automapper
         public MappingSLProfile()
         {
             CreateMap<PersonalDetailsDTO, PersonalDetails>()
-                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                //.ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
                 .ForMember(dest => dest.Photo, act => act.MapFrom(src => src.UploadedPhoto))
                 .ForMember(dest => dest.BirthDate, act => act.ResolveUsing(src => { return GetBirthdateFromValues(src.Year, src.Month, src.Day); }))
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
@@ -28,50 +28,50 @@ namespace CVBuilder.Services.automapper
 
             CreateMap<StudiesDTO, Studies>()
                 //.ForMember(dest => dest.StudyID, act => act.MapFrom(src => src.studyid))
-                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                //.ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<Studies, StudiesDTO>();
             //.ForMember(dest => dest.studyid, act => act.MapFrom(src => src.StudyID));
 
             CreateMap<CertificatesDTO, Certificates>()
-                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                //.ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<Certificates, CertificatesDTO>();
 
             CreateMap<WorkExperiencesDTO, WorkExperiences>()
-                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                //.ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<WorkExperiences, WorkExperiencesDTO>();
 
             CreateMap<LanguagesDTO, Languages>()
-                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                //.ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<Languages, LanguagesDTO>();
 
             CreateMap<SkillsDTO, Skills>()
-                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                //.ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<Skills, SkillsDTO>();
 
             CreateMap<InterestsDTO, Interests>()
-                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                //.ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<Interests, InterestsDTO>();
 
             CreateMap<PersonalReferencesDTO, PersonalReferences>()
-                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                //.ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<PersonalReferences, PersonalReferencesDTO>();
 
             CreateMap<CustomSectionsDTO, CustomSections>()
-                .ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
+                //.ForMember(dest => dest.ID_Curriculum, act => act.UseValue(1))
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<CustomSections, CustomSectionsDTO>();

@@ -64,8 +64,8 @@
                     @Html.TextAreaFor(m => m.Summary, new { @class = "form-control", rows = "3", placeholder = "Máximo 300 caracteres..." })
                     @Html.ValidationMessageFor(m => m.Summary, null, new { @class = "text-danger" })
                     <div class="col-lg-5 custom-control custom-switch">
-                        @Html.CheckBoxFor(m => m.SummaryIsVisible, new { @class = "custom-control-input", @checked = "checked" })
-                        <label class="custom-control-label" for="PersonalDetails_SummaryIsVisible">Visible</label>
+                        @Html.CheckBoxFor(m => m.SummaryIsVisible, new { @class = "custom-control-input" })
+                        <label class="custom-control-label" for="SummaryIsVisible">Visible</label>
                     </div>
                 </div>
             </div>

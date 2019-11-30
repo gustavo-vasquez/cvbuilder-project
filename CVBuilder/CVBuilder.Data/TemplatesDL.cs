@@ -8,7 +8,7 @@ namespace CVBuilder.Data
 {
     public class TemplatesDL : DataLayerBase
     {
-        public Templates GetByUserId(int userId)
+        public Templates GetByUserId(string userId)
         {
             Templates template = (from tem in _db.Context.Templates
                                 join cv in _db.Context.Curriculum
@@ -22,12 +22,12 @@ namespace CVBuilder.Data
                 return _db.Context.Templates.Find(1);
         }
 
-        public string GetPreviewPath(int userId)
+        public string GetPreviewPath(string userId)
         {   
             return GetByUserId(userId).PreviewPath;
         }
 
-        public void ChangeTemplate(string path, int curriculumId, int userId)
+        public void ChangeTemplate(string path, int curriculumId, string userId)
         {
             Templates template = _db.Context.Templates.SingleOrDefault(t => t.PreviewPath == path);
 
