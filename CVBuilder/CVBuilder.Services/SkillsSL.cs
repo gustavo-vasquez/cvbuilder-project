@@ -36,6 +36,11 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<Skills, SkillsDTO>(data);
         }
 
+        public List<SkillsDTO> GetAll(int curriculumId)
+        {
+            return Mapping.Mapper.Map<List<Skills>, List<SkillsDTO>>(_dataLayer.GetAll(curriculumId).ToList());
+        }
+
         public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
             IQueryable<Skills> allSkills = _dataLayer.GetAll(curriculumId);

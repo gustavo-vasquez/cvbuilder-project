@@ -1,4 +1,5 @@
-﻿using CVBuilder.Data;
+﻿using CVBuilder.Common;
+using CVBuilder.Data;
 using CVBuilder.Services.automapper;
 using CVBuilder.Services.DTOs;
 using System;
@@ -35,6 +36,11 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<Certificates, CertificatesDTO>(data);
         }
 
+        public List<CertificatesDTO> GetAll(int curriculumId)
+        {
+            return Mapping.Mapper.Map<List<Certificates>, List<CertificatesDTO>>(_dataLayer.GetAll(curriculumId).ToList());
+        }
+
         public SummaryBlockDTO GetSummaryBlock(int id)
         {
             Certificates certificate;
@@ -47,7 +53,7 @@ namespace CVBuilder.Services
             {
                 SummaryId = certificate.CertificateID,
                 Title = certificate.Name,
-                StateInTime = (certificate.InProgress) ? "(En progreso)" : "(" + certificate.Year.ToString() + ")"
+                StateInTime = (certificate.InProgress) ? "(" + CurriculumGlobals.CERTIFICATE_INPROGRESS_TEXT + ")" : "(" + certificate.Year.ToString() + ")"
             };
         }
 
@@ -62,7 +68,7 @@ namespace CVBuilder.Services
                 {
                     SummaryId = certificate.CertificateID,
                     Title = certificate.Name,
-                    StateInTime = (certificate.InProgress) ? "(En progreso)" : "(" + certificate.Year.ToString() + ")"
+                    StateInTime = (certificate.InProgress) ? "(" + CurriculumGlobals.CERTIFICATE_INPROGRESS_TEXT + ")" : "(" + certificate.Year.ToString() + ")"
                 });
             }
 

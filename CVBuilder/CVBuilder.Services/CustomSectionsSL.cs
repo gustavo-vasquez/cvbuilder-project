@@ -35,6 +35,11 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<CustomSections, CustomSectionsDTO>(data);
         }
 
+        public List<CustomSectionsDTO> GetAll(int curriculumId)
+        {
+            return Mapping.Mapper.Map<List<CustomSections>, List<CustomSectionsDTO>>(_dataLayer.GetAll(curriculumId).ToList());
+        }
+
         public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
             IQueryable<CustomSections> allCustomSections = _dataLayer.GetAll(curriculumId);

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CVBuilder.Common;
 using CVBuilder.enums;
 using CVBuilder.Services.DTOs;
 using CVBuilder.ViewModels.Curriculum;
@@ -66,6 +67,39 @@ namespace CVBuilder.automapper
             CreateMap<SummaryBlockDTO, SummaryBlockViewModel>();
 
             CreateMap<TemplatesDTO, FinishedViewModel>();
+
+            CreateMap<PersonalDetailsDTO, PersonalDetailsDisplay>()
+                .ForMember(dest => dest.Photo, act => act.ResolveUsing(src => { return src.Photo ?? CurriculumGlobals.DEFAULT_AVATAR_PATH; }))
+                .ForMember(dest => dest.LinePhone, act => act.ResolveUsing(src => { return src.LinePhone != null && src.AreaCodeLP != null ? " | (+" + src.AreaCodeLP + ") " + src.LinePhone : null; }))
+                .ForMember(dest => dest.MobilePhone, act => act.ResolveUsing(src => { return src.MobilePhone != null && src.AreaCodeMP != null ? " | (+" + src.AreaCodeMP + ") " + src.MobilePhone : null; }))
+                .ForMember(dest => dest.Location, act => act.ResolveUsing(src => { return GenerateLocation(src.Address, src.City, src.Country, src.PostalCode); }))
+                .ForMember(dest => dest.FacebookUrl, act => act.ResolveUsing(src => { return src.FacebookUrl != null ? src.FacebookUrl.Substring(CurriculumGlobals.FACEBOOK_DOMAIN_START.Length) : null; }))
+                .ForMember(dest => dest.LinkedInUrl, act => act.ResolveUsing(src => { return src.LinkedInUrl != null ? src.LinkedInUrl.Substring(CurriculumGlobals.LINKEDIN_DOMAIN_START.Length) : null; }))
+                .ForMember(dest => dest.GithubUrl, act => act.ResolveUsing(src => { return src.GithubUrl != null ? src.GithubUrl.Substring(CurriculumGlobals.GITHUB_DOMAIN_START.Length) : null; }))
+                .ForMember(dest => dest.TwitterUrl, act => act.ResolveUsing(src => { return src.TwitterUrl != null ? src.TwitterUrl.Substring(CurriculumGlobals.TWITTER_DOMAIN_START.Length) : null; }));
+
+            CreateMap<StudiesDTO, StudiesDisplay>()
+                .ForMember(dest => dest.StateInTime, act => act.ResolveUsing(src => { return CurriculumGlobals.GenerateStateInTimeFormat(src.StartMonth, src.StartYear, src.EndMonth, src.EndYear); }));
+
+            CreateMap<WorkExperiencesDTO, WorkExperiencesDisplay>()
+                .ForMember(dest => dest.StateInTime, act => act.ResolveUsing(src => { return CurriculumGlobals.GenerateStateInTimeFormat(src.StartMonth, src.StartYear, src.EndMonth, src.EndYear); }));
+
+            CreateMap<CertificatesDTO, CertificatesDisplay>();
+
+            CreateMap<LanguagesDTO, LanguagesDisplay>()
+                .ForMember(dest => dest.Level, act => act.ResolveUsing(src => { return LevelOptions.LevelComboBox[src.Level]; }));
+
+            CreateMap<SkillsDTO, SkillsDisplay>()
+                .ForMember(dest => dest.Level, act => act.ResolveUsing(src => { return LevelOptions.LevelComboBox[src.Level]; }));
+
+            CreateMap<InterestsDTO, InterestsDisplay>();
+
+            CreateMap<PersonalReferencesDTO, PersonalReferencesDisplay>()
+                .ForMember(dest => dest.PhoneNumber, act => act.ResolveUsing(src => { return src.Telephone != null && src.AreaCode != null ? "(+" + src.AreaCode + ") " + src.Telephone : null; }));
+
+            CreateMap<CustomSectionsDTO, CustomSectionsDisplay>();
+
+            CreateMap<FinishedDTO, FinishedViewModel>();
         }
 
         private byte[] PostedFileToByteArray(HttpPostedFileBase file)
@@ -79,6 +113,34 @@ namespace CVBuilder.automapper
             }
 
             return null;
+        }
+
+        private string GenerateLocation(string address, string city, string country, int? postalCode)
+        {
+            string location = string.Empty;
+
+            if (address != null)
+            {
+                location = address;
+
+                if (postalCode != null)
+                    location += " (" + postalCode + ")";
+
+                location += ", ";
+            }   
+
+            if (city != null)
+                location += city;
+
+            if (country != null)
+                location += ", " + country;
+
+            
+
+            if (location == string.Empty)
+                return null;
+            else
+                return location;
         }
     }
 }

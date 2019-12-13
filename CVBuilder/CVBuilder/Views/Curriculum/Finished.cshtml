@@ -35,21 +35,21 @@
             </div>
         </div>
         <div id="curriculum_finished" class="row" data-template-cv="@Model.Name">
-                    @switch (Model.Name)
-                    {
-                        case "Classic":
-                            @Html.Partial("_ClassicTemplate")
-                            break;
-                        case "Elegant":
-                            @Html.Partial("_ElegantTemplate")
-                            break;
-                        case "Modern":
-                            @Html.Partial("_ModernTemplate")
-                            break;
-                        default:
-                            <div class="alert alert-secondary text-center mt-4">No se ha podido cargar la plantilla, vuelva a seleccionarla.</div>
-                            break;
-                    }
+            @switch (Model.Name)
+            {
+                case "Classic":
+                    @Html.Partial("_ClassicTemplate", Model)
+                    break;
+                case "Elegant":
+                    @Html.Partial("_ElegantTemplate")
+                    break;
+                case "Modern":
+                    @Html.Partial("_ModernTemplate")
+                    break;
+                default:
+                    <div class="alert alert-secondary text-center mt-4">No se ha podido cargar la plantilla, vuelva a seleccionarla.</div>
+                    break;
+            }
         </div>
     </div>
     

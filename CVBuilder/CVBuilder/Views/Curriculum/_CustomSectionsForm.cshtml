@@ -21,7 +21,7 @@
             <div class="col">
                 <div class="form-group">
                     <label>Descripción</label>
-                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "3", placeholder = "Sin límite de caracteres..." })
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "10", placeholder = "Sin límite de caracteres..." })
                     @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
                 </div>
             </div>

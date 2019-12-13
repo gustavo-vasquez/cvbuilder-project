@@ -1,252 +1,225 @@
-﻿<link href="~/css/templates/classic.css" rel="stylesheet" />
+﻿@model CVBuilder.ViewModels.Curriculum.FinishedViewModel
+@using CVBuilder.Common
+<link href="~/css/templates/classic.css" rel="stylesheet" />
+
 <div class="col-auto page">
     <div class="row cv-header">
         <div class="col">
-            <img class="img-fluid rounded-circle" src="~/img/profile_coat.png" />
-            <p class="title">Juan Pérez</p>
-            <p class="subtitle">juan.perez@gmail.com | (+5411) 1234-5678</p>
-            <p class="subtitle"><i class="fab fa-facebook-square highlight"></i> juanperez &nbsp; <i class="fab fa-linkedin highlight"></i> juanperez &nbsp; <i class="fab fa-twitter highlight"></i> juanperez</p>
-            <p class="subtitle">Buenos Aires, Argentina</p>
+            <img class="img-fluid rounded-circle" src="@Model.PersonalDetails.Photo" />
+            <p class="title">@Model.PersonalDetails.Name @Model.PersonalDetails.LastName</p>
+            <p class="subtitle">@Model.PersonalDetails.Email @if (Model.PersonalDetails.LinePhone != null) { @Model.PersonalDetails.LinePhone } @if (Model.PersonalDetails.MobilePhone != null) { @Model.PersonalDetails.MobilePhone }</p>
+            <p class="subtitle">
+                @if (Model.PersonalDetails.FacebookUrl != null) {<i class="fab fa-facebook-square highlight"></i> @Model.PersonalDetails.FacebookUrl}
+                @if (Model.PersonalDetails.LinkedInUrl != null) { <i class="fab fa-linkedin highlight"></i> @Model.PersonalDetails.LinkedInUrl}
+                @if (Model.PersonalDetails.GithubUrl != null) { <i class="fab fa-github highlight"></i> @Model.PersonalDetails.GithubUrl}
+                @if (Model.PersonalDetails.TwitterUrl != null) { <i class="fab fa-twitter highlight"></i> @Model.PersonalDetails.TwitterUrl}
+            </p>
+            <p class="subtitle">@if (Model.PersonalDetails.Location != null) { @(Model.PersonalDetails.Location) }
+                @if (Model.PersonalDetails.WebPageUrl != null) { <i class="fas fa-globe-americas pl-1"></i> @Model.PersonalDetails.WebPageUrl}
+            </p>
         </div>
     </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h3 class="block-title text-uppercase">Resumen profesional</h3>
+    @if (Model.PersonalDetails.SummaryIsVisible)
+    {
+        <div class="row cv-block">
+            <div class="col-4">
+                <h3 class="block-title text-uppercase">@(Model.PersonalDetails.SummaryCustomTitle ?? CurriculumGlobals.DEFAULT_SUMMARY_TITLE)</h3>
+            </div>
+            <div class="col-8">
+                <p>@Model.PersonalDetails.Summary</p>
+            </div>
         </div>
-        <div class="col-8">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    }
+
+    @if (Model.WorkExperiences.Count() > 0)
+    {
+        <div class="row">
+            <div class="col">
+                <h3 class="block-title text-uppercase">Experiencia laboral</h3>
+                <hr class="mw-100 mt-0 mb-0" />
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 class="block-title text-uppercase">Experiencia laboral</h3>
-            <hr class="mw-100 mt-0 mb-0" />
+        foreach (var work in Model.WorkExperiences)
+        {
+            <div class="row cv-block">
+                <div class="col-4">
+                    <h5 class="block-subtitle font-weight-bold">@work.Company</h5>
+                    <h5 class="block-subtitle">@work.City</h5>
+                </div>
+                <div class="col-8">
+                    <h5 class="block-subtitle font-weight-bold">@work.Job</h5>
+                    @if (work.StateInTime != string.Empty) {<h5 class="block-subtitle">@work.StateInTime</h5>}
+                    @if (!string.IsNullOrWhiteSpace(work.Description)) { <p>@work.Description</p> }
+                </div>
+            </div>
+        }
+    }
+
+    @if (Model.Certificates.Count() > 0)
+    {
+        <div class="row">
+            <div class="col">
+                <h3 class="block-title text-uppercase">Certificados - Cursos</h3>
+                <hr class="mw-100 mt-0 mb-0" />
+            </div>
         </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h5 class="block-subtitle font-weight-bold">Creative Corporation</h5>
-            <h5 class="block-subtitle">Ciudad Autónoma de Buenos Aires</h5>
+        foreach (var certificate in Model.Certificates)
+        {
+            <div class="row cv-block">
+                <div class="col-4">
+                    <h5 class="block-subtitle font-weight-bold">@certificate.Institute</h5>
+                    @if (certificate.OnlineMode)
+                    {
+                        <h5 class="block-subtitle">@CurriculumGlobals.CERTIFICATE_ONLINE_TEXT</h5>
+                    }
+                    else
+                    {
+                        <h5 class="block-subtitle">@CurriculumGlobals.CERTIFICATE_CLASS_TEXT</h5>
+                    }
+                </div>
+                <div class="col-8">
+                    <h5 class="block-subtitle font-weight-bold">@certificate.Name</h5>
+                    @if (certificate.InProgress)
+                    {
+                        <h5 class="block-subtitle">@CurriculumGlobals.CERTIFICATE_INPROGRESS_TEXT</h5>
+                    }
+                    else
+                    {
+                        <h5 class="block-subtitle">@certificate.Year</h5>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(certificate.Description))
+                    { <p>@certificate.Description</p> }
+                </div>
+            </div>
+        }
+    }
+
+    @if (Model.Studies.Count() > 0)
+    {
+        <div class="row">
+            <div class="col">
+                <h3 class="block-title text-uppercase">Estudios</h3>
+                <hr class="mw-100 mt-0 mb-0" />
+            </div>
         </div>
-        <div class="col-8">
-            <h5 class="block-subtitle font-weight-bold">Diseñador web & gráfico</h5>
-            <h5 class="block-subtitle">Septiembre 2018-Diciembre 2019</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        foreach (var study in Model.Studies)
+        {
+            <div class="row cv-block">
+                <div class="col-4">
+                    <h5 class="block-subtitle font-weight-bold">@study.Institute</h5>
+                    <h5 class="block-subtitle">@study.City</h5>
+                </div>
+                <div class="col-8">
+                    <h5 class="block-subtitle font-weight-bold">@study.Title</h5>
+                    @if (study.StateInTime != string.Empty) {<h5 class="block-subtitle">@study.StateInTime</h5>}
+                    @if (!string.IsNullOrWhiteSpace(study.Description)) { <p>@study.Description</p> }
+                </div>
+            </div>
+        }
+    }
+    
+    @if (Model.PersonalReferences.Count() > 0)
+    {
+        <div class="row">
+            <div class="col">
+                <h3 class="block-title text-uppercase">Referencias personales</h3>
+                <hr class="mw-100 mt-0 mb-0" />
+            </div>
         </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h5 class="block-subtitle font-weight-bold">Creative Corporation</h5>
-            <h5 class="block-subtitle">Ciudad Autónoma de Buenos Aires</h5>
-        </div>
-        <div class="col-8">
-            <h5 class="block-subtitle font-weight-bold">Diseñador web & gráfico</h5>
-            <h5 class="block-subtitle">Septiembre 2018-Diciembre 2019</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 class="block-title text-uppercase">Estudios</h3>
-            <hr class="mw-100 mt-0 mb-0" />
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h5 class="block-subtitle font-weight-bold">Universidad Nacional</h5>
-            <h5 class="block-subtitle">Ciudad Autónoma de Buenos Aires</h5>
-        </div>
-        <div class="col-8">
-            <h5 class="block-subtitle font-weight-bold">Diseñador gráfico</h5>
-            <h5 class="block-subtitle">Septiembre 2011-Diciembre 2016</h5>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h5 class="block-subtitle font-weight-bold">Escuela Nº111</h5>
-            <h5 class="block-subtitle">Ciudad Autónoma de Buenos Aires</h5>
-        </div>
-        <div class="col-8">
-            <h5 class="block-subtitle font-weight-bold">Bachiller en Economía</h5>
-            <h5 class="block-subtitle">Septiembre 1997-Diciembre 2010</h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 class="block-title text-uppercase">Referencias personales</h3>
-            <hr class="mw-100 mt-0 mb-0" />
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h5 class="block-subtitle font-weight-bold">Soft Tech</h5>
-            <h5 class="block-subtitle">(+5411) 1234-5678</h5>
-        </div>
-        <div class="col-8">
-            <h5 class="block-subtitle font-weight-bold">Juan Pérez</h5>
-            <h5 class="block-subtitle">juan.perez@mail.com</h5>
-            <p>Juan se desempeñó correctamente en los proyectos en los que estuvo involucrado. Participó y lideró con solidez los grupos de trabajo.</p>
-        </div>
-    </div>
-    <div class="mt-2">
-        <div class="row cv-block mt-0">
+        foreach (var reference in Model.PersonalReferences)
+        {
+            <div class="row cv-block">
+                <div class="col-4">
+                    <h5 class="block-subtitle font-weight-bold">@reference.Company</h5>
+                    @if (reference.PhoneNumber != null)
+                    {
+                        <h5 class="block-subtitle">@reference.PhoneNumber</h5>
+                    }
+                </div>
+                <div class="col-8">
+                    <h5 class="block-subtitle font-weight-bold">@reference.ContactPerson</h5>
+                    <h5 class="block-subtitle">@reference.Email</h5>
+                </div>
+            </div>
+        }
+    }
+    
+    @if (Model.Languages.Count() > 0)
+    {
+        <div class="row cv-block">
             <div class="col-4">
                 <h3 class="block-title text-uppercase">Idiomas</h3>
             </div>
             <div class="col-8">
-                <p>Español (nativo), Inglés (Avanzado), Francés (Intermedio)</p>
+                <p>
+                    @{
+                        List<string> text = new List<string>();
+                        foreach (var language in Model.Languages)
+                        {
+                            text.Add(String.Concat(language.Name, " (", language.Level, ")"));
+                        }
+                        @String.Join(", ", text);
+                    }
+                </p>
             </div>
-        </div>
-        <div class="row cv-block mt-0">
+            </div>
+    }
+        
+    @if (Model.Skills.Count() > 0)
+    {
+        <div class="row cv-block">
             <div class="col-4">
                 <h3 class="block-title text-uppercase">Habilidades</h3>
             </div>
             <div class="col-8">
-                <p>Photoshop, Illustrator, CorelDRAW, Word, Excel</p>
+                <p>
+                    @{
+                        List<string> text = new List<string>();
+                        foreach (var skill in Model.Skills)
+                        {
+                            text.Add(String.Concat(skill.Name, " (", skill.Level, ")"));
+                        }
+                        @String.Join(", ", text);
+                    }
+                </p>
             </div>
         </div>
-        <div class="row cv-block mt-0">
+    }
+        
+    @if (Model.Interests.Count() > 0)
+    {
+        <div class="row cv-block">
             <div class="col-4">
                 <h3 class="block-title text-uppercase">Intereses</h3>
             </div>
             <div class="col-8">
-                <p>Comer, correr, ver series.</p>
+                <p>
+                    @{
+                        List<string> text = new List<string>();
+                        foreach (var interest in Model.Interests)
+                        {
+                            text.Add(interest.Name);
+                        }
+                        @String.Join(", ", text);
+                    }
+                </p>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 class="block-title text-uppercase">Referencias personales</h3>
-            <hr class="mw-100 mt-0 mb-0" />
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h5 class="block-subtitle font-weight-bold">Soft Tech</h5>
-            <h5 class="block-subtitle">(+5411) 1234-5678</h5>
-        </div>
-        <div class="col-8">
-            <h5 class="block-subtitle font-weight-bold">Juan Pérez</h5>
-            <h5 class="block-subtitle">juan.perez@mail.com</h5>
-            <p>Juan se desempeñó correctamente en los proyectos en los que estuvo involucrado. Participó y lideró con solidez los grupos de trabajo.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h5 class="block-subtitle font-weight-bold">Soft Tech</h5>
-            <h5 class="block-subtitle">(+5411) 1234-5678</h5>
-        </div>
-        <div class="col-8">
-            <h5 class="block-subtitle font-weight-bold">Juan Pérez</h5>
-            <h5 class="block-subtitle">juan.perez@mail.com</h5>
-            <p>Juan se desempeñó correctamente en los proyectos en los que estuvo involucrado. Participó y lideró con solidez los grupos de trabajo.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h5 class="block-subtitle font-weight-bold">Soft Tech</h5>
-            <h5 class="block-subtitle">(+5411) 1234-5678</h5>
-        </div>
-        <div class="col-8">
-            <h5 class="block-subtitle font-weight-bold">Juan Pérez</h5>
-            <h5 class="block-subtitle">juan.perez@mail.com</h5>
-            <p>Juan se desempeñó correctamente en los proyectos en los que estuvo involucrado. Participó y lideró con solidez los grupos de trabajo.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h5 class="block-subtitle font-weight-bold">Soft Tech</h5>
-            <h5 class="block-subtitle">(+5411) 1234-5678</h5>
-        </div>
-        <div class="col-8">
-            <h5 class="block-subtitle font-weight-bold">Juan Pérez</h5>
-            <h5 class="block-subtitle">juan.perez@mail.com</h5>
-            <p>Juan se desempeñó correctamente en los proyectos en los que estuvo involucrado. Participó y lideró con solidez los grupos de trabajo.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h5 class="block-subtitle font-weight-bold">Soft Tech</h5>
-            <h5 class="block-subtitle">(+5411) 1234-5678</h5>
-        </div>
-        <div class="col-8">
-            <h5 class="block-subtitle font-weight-bold">Juan Pérez</h5>
-            <h5 class="block-subtitle">juan.perez@mail.com</h5>
-            <p>Juan se desempeñó correctamente en los proyectos en los que estuvo involucrado. Participó y lideró con solidez los grupos de trabajo.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h3 class="block-title text-uppercase">Resumen profesional</h3>
-        </div>
-        <div class="col-8">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h3 class="block-title text-uppercase">Resumen profesional</h3>
-        </div>
-        <div class="col-8">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h3 class="block-title text-uppercase">Resumen profesional</h3>
-        </div>
-        <div class="col-8">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h3 class="block-title text-uppercase">Resumen profesional</h3>
-        </div>
-        <div class="col-8">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h3 class="block-title text-uppercase">Resumen profesional</h3>
-        </div>
-        <div class="col-8">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h3 class="block-title text-uppercase">Resumen profesional</h3>
-        </div>
-        <div class="col-8">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        </div>
-    </div>
-    <div class="row cv-block">
-        <div class="col-4">
-            <h3 class="block-title text-uppercase">Resumen profesional</h3>
-        </div>
-        <div class="col-8">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        </div>
-    </div>
-    <div class="mt-2">
-        <div class="row cv-block mt-0">
-            <div class="col-4">
-                <h3 class="block-title text-uppercase">Idiomas</h3>
+    }
+
+    @if (Model.CustomSections.Count() > 0)
+    {
+        foreach (var customSection in Model.CustomSections)
+        {
+            <div class="row cv-block">
+                <div class="col-4">
+                    <h3 class="block-title text-uppercase">@customSection.SectionName</h3>
+                </div>
+                <div class="col-8">
+                    <p style="white-space: pre-wrap;">@customSection.Description</p>
+                </div>
             </div>
-            <div class="col-8">
-                <p>Español (nativo), Inglés (Avanzado), Francés (Intermedio)</p>
-            </div>
-        </div>
-        <div class="row cv-block mt-0">
-            <div class="col-4">
-                <h3 class="block-title text-uppercase">Habilidades</h3>
-            </div>
-            <div class="col-8">
-                <p>Photoshop, Illustrator, CorelDRAW, Word, Excel</p>
-            </div>
-        </div>
-    </div>
+        }
+    }
 </div>

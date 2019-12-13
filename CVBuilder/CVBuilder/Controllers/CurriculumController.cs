@@ -382,8 +382,10 @@ namespace CVBuilder.Controllers
         [HttpGet]
         public ActionResult Finished()
         {
-            TemplatesDTO dto = _curriculumServices.Templates.GetByUserId(User.Identity.GetUserId());
-            return View(Mapping.Mapper.Map<TemplatesDTO, FinishedViewModel>(dto));
+            string userId = User.Identity.GetUserId();
+            FinishedDTO dto = _curriculumServices.GetCurriculumContent(userId, _curriculumServices.GetCurriculumId(userId));
+
+            return View(Mapping.Mapper.Map<FinishedDTO, FinishedViewModel>(dto));
         }
 
         [HttpGet]

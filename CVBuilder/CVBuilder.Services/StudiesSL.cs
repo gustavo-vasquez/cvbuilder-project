@@ -36,6 +36,11 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<Studies, StudiesDTO>(data);
         }
 
+        public List<StudiesDTO> GetAll(int curriculumId)
+        {
+            return Mapping.Mapper.Map<List<Studies>, List<StudiesDTO>>(_dataLayer.GetAll(curriculumId).ToList());
+        }
+
         public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
             IQueryable<Studies> allStudies = _dataLayer.GetAll(curriculumId);
@@ -47,7 +52,7 @@ namespace CVBuilder.Services
                 {
                     SummaryId = study.StudyID,
                     Title = study.Title,
-                    StateInTime = GenerateStateInTimeFormat(study.StartMonth, study.StartYear, study.EndMonth, study.EndYear)
+                    StateInTime = CurriculumGlobals.GenerateStateInTimeFormat(study.StartMonth, study.StartYear, study.EndMonth, study.EndYear)
                 });
             }
 
@@ -66,76 +71,76 @@ namespace CVBuilder.Services
             {
                 SummaryId = study.StudyID,
                 Title = study.Title,
-                StateInTime = GenerateStateInTimeFormat(study.StartMonth, study.StartYear, study.EndMonth, study.EndYear)
+                StateInTime = CurriculumGlobals.GenerateStateInTimeFormat(study.StartMonth, study.StartYear, study.EndMonth, study.EndYear)
             };
         }
 
-        private string GenerateStateInTimeFormat(string startMonth, int? startYear, string endMonth, int? endYear)
-        {
-            string stateInTime = string.Empty;
+        //private string GenerateStateInTimeFormat(string startMonth, int? startYear, string endMonth, int? endYear)
+        //{
+        //    string stateInTime = string.Empty;
 
-            if (startMonth != MonthOptions.None && endMonth != MonthOptions.None)
-            {
-                string startMonthFormatted = MonthOptions.MonthsComboBox[startMonth];
-                string endMonthFormatted = MonthOptions.MonthsComboBox[endMonth];
+        //    if (startMonth != MonthOptions.None && endMonth != MonthOptions.None)
+        //    {
+        //        string startMonthFormatted = MonthOptions.MonthsComboBox[startMonth];
+        //        string endMonthFormatted = MonthOptions.MonthsComboBox[endMonth];
 
-                switch (startMonth)
-                {
-                    case MonthOptions.NotShow:
-                        if (endMonth != MonthOptions.None && endMonth != MonthOptions.NotShow)
-                        {
-                            switch (endMonth)
-                            {
-                                case MonthOptions.Present:
-                                    stateInTime = "(" + endMonthFormatted + ")";
-                                    break;
-                                case MonthOptions.OnlyYear:
-                                    stateInTime = "(" + endYear + ")";
-                                    break;
-                                default:
-                                    stateInTime = "(" + endMonthFormatted + " " + endYear + ")";
-                                    break;
-                            }
-                        }
-                        break;
-                    case MonthOptions.OnlyYear:
-                        if (endMonth != MonthOptions.None && endMonth != MonthOptions.NotShow)
-                        {
-                            switch (endMonth)
-                            {
-                                case MonthOptions.Present:
-                                    stateInTime = "(" + startYear + "-" + endMonthFormatted + ")";
-                                    break;
-                                case MonthOptions.OnlyYear:
-                                    stateInTime = "(" + startYear + "-" + endYear + ")";
-                                    break;
-                                default:
-                                    stateInTime = "(" + startYear + "-" + endMonthFormatted + " " + endYear + ")";
-                                    break;
-                            }
-                        }
-                        break;
-                    default:
-                        if (endMonth != MonthOptions.None && endMonth != MonthOptions.NotShow)
-                        {
-                            switch (endMonth)
-                            {
-                                case MonthOptions.Present:
-                                    stateInTime = "(" + startMonthFormatted + " " + startYear + "-" + endMonthFormatted + ")";
-                                    break;
-                                case MonthOptions.OnlyYear:
-                                    stateInTime = "(" + startMonthFormatted + " " + startYear + "-" + endYear + ")";
-                                    break;
-                                default:
-                                    stateInTime = "(" + startMonthFormatted + " " + startYear + "-" + endMonthFormatted + " " + endYear + ")";
-                                    break;
-                            }
-                        }
-                        break;
-                }
-            }
+        //        switch (startMonth)
+        //        {
+        //            case MonthOptions.NotShow:
+        //                if (endMonth != MonthOptions.None && endMonth != MonthOptions.NotShow)
+        //                {
+        //                    switch (endMonth)
+        //                    {
+        //                        case MonthOptions.Present:
+        //                            stateInTime = "(" + endMonthFormatted + ")";
+        //                            break;
+        //                        case MonthOptions.OnlyYear:
+        //                            stateInTime = "(" + endYear + ")";
+        //                            break;
+        //                        default:
+        //                            stateInTime = "(" + endMonthFormatted + " " + endYear + ")";
+        //                            break;
+        //                    }
+        //                }
+        //                break;
+        //            case MonthOptions.OnlyYear:
+        //                if (endMonth != MonthOptions.None && endMonth != MonthOptions.NotShow)
+        //                {
+        //                    switch (endMonth)
+        //                    {
+        //                        case MonthOptions.Present:
+        //                            stateInTime = "(" + startYear + "-" + endMonthFormatted + ")";
+        //                            break;
+        //                        case MonthOptions.OnlyYear:
+        //                            stateInTime = "(" + startYear + "-" + endYear + ")";
+        //                            break;
+        //                        default:
+        //                            stateInTime = "(" + startYear + "-" + endMonthFormatted + " " + endYear + ")";
+        //                            break;
+        //                    }
+        //                }
+        //                break;
+        //            default:
+        //                if (endMonth != MonthOptions.None && endMonth != MonthOptions.NotShow)
+        //                {
+        //                    switch (endMonth)
+        //                    {
+        //                        case MonthOptions.Present:
+        //                            stateInTime = "(" + startMonthFormatted + " " + startYear + "-" + endMonthFormatted + ")";
+        //                            break;
+        //                        case MonthOptions.OnlyYear:
+        //                            stateInTime = "(" + startMonthFormatted + " " + startYear + "-" + endYear + ")";
+        //                            break;
+        //                        default:
+        //                            stateInTime = "(" + startMonthFormatted + " " + startYear + "-" + endMonthFormatted + " " + endYear + ")";
+        //                            break;
+        //                    }
+        //                }
+        //                break;
+        //        }
+        //    }
 
-            return stateInTime;
-        }
+        //    return stateInTime;
+        //}
     }
 }
