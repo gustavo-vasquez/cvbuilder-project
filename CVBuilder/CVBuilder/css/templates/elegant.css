@@ -48,11 +48,7 @@
 }
 
 .left-panel .row, .right-panel .row {
-    padding: 0.6rem;
-}
-
-.left-panel > .row:first-child, .right-panel > .row:first-child {
-    /*padding-top: 1cm;*/
+    padding: 0.4rem;
 }
 
 .left-panel .row.no-gutters, .right-panel .row.no-gutters {
@@ -66,7 +62,7 @@
 }
 
 .page > .row > .left-panel .title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-transform: uppercase;
     margin-top: 0.5rem;
 }
@@ -103,7 +99,7 @@
 }
 
 .page > .row > .right-panel .title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
     margin-top: 0.5rem;
@@ -117,7 +113,7 @@
 }
 
 .page > .row > .right-panel p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-align: justify;
     line-height: 1.4;
     margin-bottom: 0;

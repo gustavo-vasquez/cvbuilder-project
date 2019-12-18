@@ -94,7 +94,7 @@
 }
 
 .page p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-align: justify;
     color: #3e3e3e;
     margin-bottom: 0.4rem;
@@ -115,32 +115,16 @@
 .page .left-panel span, .page .right-panel span {
     display: block;
     overflow-wrap: break-word;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .contact {
     padding-top: 0.8rem !important;
 }
 
-/*.contact .row i {
-    font-size: 1.5rem;
-    padding: 0.3rem 0;
-}*/
-
-/*.left-panel .row i {
-    font-size: 1.3rem;
-    padding: 0.3rem 0;
-}*/
-
-/*.contact span {
-    overflow-wrap: break-word !important;
-    padding: 0.1rem 0;
-}*/
-
-/*.left-panel span {
-    overflow-wrap: break-word !important;
-    padding: 0.1rem 0;
-}*/
+.page .left-panel > .row > [class^="col-"]:last-child {
+    padding-left: 0;
+}
 
 .page .right-panel hr {
     max-width: 100% !important;
@@ -156,7 +140,3 @@
     color: black;
     margin-bottom: 6px;
 }
-
-/*.section-title {
-    padding: 0.3rem;
-}*/

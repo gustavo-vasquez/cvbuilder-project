@@ -245,7 +245,7 @@ function wizardArrowSwitching() {
 }
 
 function changeTemplate() {
-    const previewPath = document.getElementsByClassName("cv-preview-img")[0].src;
+    const previewPath = $('.cv-preview-img').attr('src');
 
     $.ajax({
         url: "/Curriculum/ChangeTemplate",

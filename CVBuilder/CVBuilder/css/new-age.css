@@ -685,6 +685,10 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
     margin-bottom: 0;
 }
 
+.white-space-pre-wrap {
+    white-space: pre-wrap;
+}
+
 @-webkit-keyframes slideLeft {
   0% {
     transform: translateX(100%);

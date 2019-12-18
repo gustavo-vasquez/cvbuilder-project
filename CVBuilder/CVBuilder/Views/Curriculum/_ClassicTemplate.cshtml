@@ -7,7 +7,7 @@
         <div class="col">
             <img class="img-fluid rounded-circle" src="@Model.PersonalDetails.Photo" />
             <p class="title">@Model.PersonalDetails.Name @Model.PersonalDetails.LastName</p>
-            <p class="subtitle">@Model.PersonalDetails.Email @if (Model.PersonalDetails.LinePhone != null) { @Model.PersonalDetails.LinePhone } @if (Model.PersonalDetails.MobilePhone != null) { @Model.PersonalDetails.MobilePhone }</p>
+            <p class="subtitle font-weight-bold">@Model.PersonalDetails.Email @if (Model.PersonalDetails.LinePhone != null) {<span> |</span> @Model.PersonalDetails.LinePhone } @if (Model.PersonalDetails.MobilePhone != null) {<span> |</span> @Model.PersonalDetails.MobilePhone }</p>
             <p class="subtitle">
                 @if (Model.PersonalDetails.FacebookUrl != null) {<i class="fab fa-facebook-square highlight"></i> @Model.PersonalDetails.FacebookUrl}
                 @if (Model.PersonalDetails.LinkedInUrl != null) { <i class="fab fa-linkedin highlight"></i> @Model.PersonalDetails.LinkedInUrl}
@@ -132,10 +132,7 @@
             <div class="row cv-block">
                 <div class="col-4">
                     <h5 class="block-subtitle font-weight-bold">@reference.Company</h5>
-                    @if (reference.PhoneNumber != null)
-                    {
-                        <h5 class="block-subtitle">@reference.PhoneNumber</h5>
-                    }
+                    @if (reference.PhoneNumber != null) {<h5 class="block-subtitle">@reference.PhoneNumber</h5>}
                 </div>
                 <div class="col-8">
                     <h5 class="block-subtitle font-weight-bold">@reference.ContactPerson</h5>
@@ -157,7 +154,7 @@
                         List<string> text = new List<string>();
                         foreach (var language in Model.Languages)
                         {
-                            text.Add(String.Concat(language.Name, " (", language.Level, ")"));
+                            text.Add(String.Concat(language.Name, " (", LevelOptions.LevelComboBox[language.Level], ")"));
                         }
                         @String.Join(", ", text);
                     }
@@ -178,7 +175,7 @@
                         List<string> text = new List<string>();
                         foreach (var skill in Model.Skills)
                         {
-                            text.Add(String.Concat(skill.Name, " (", skill.Level, ")"));
+                            text.Add(String.Concat(skill.Name, " (", LevelOptions.LevelComboBox[skill.Level], ")"));
                         }
                         @String.Join(", ", text);
                     }
@@ -217,7 +214,7 @@
                     <h3 class="block-title text-uppercase">@customSection.SectionName</h3>
                 </div>
                 <div class="col-8">
-                    <p style="white-space: pre-wrap;">@customSection.Description</p>
+                    <p class="white-space-pre-wrap">@customSection.Description</p>
                 </div>
             </div>
         }

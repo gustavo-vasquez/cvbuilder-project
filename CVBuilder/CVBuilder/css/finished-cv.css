@@ -40,11 +40,6 @@
     color: #04bd68;
 }
 
-/*.template-actions-wrapper .btn-default {
-    color: seagreen;
-    background-color: transparent;
-}*/
-
 .template-legend {
     font-family: Lato;
     font-size: 0.9rem;
@@ -107,4 +102,20 @@
 
 #curriculum_finished > div:not(:first-of-type) {
     margin-top: 3rem;
+}
+
+.progress-bar-beginner {
+    width: 33%;
+}
+
+.progress-bar-intermediate {
+    width: 66%;
+}
+
+.progress-bar-advanced {
+    width: 100%;
+}
+
+.letter-spacing-1 {
+    letter-spacing: 1px;
 }

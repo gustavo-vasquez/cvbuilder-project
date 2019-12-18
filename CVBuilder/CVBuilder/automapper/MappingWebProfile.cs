@@ -70,8 +70,8 @@ namespace CVBuilder.automapper
 
             CreateMap<PersonalDetailsDTO, PersonalDetailsDisplay>()
                 .ForMember(dest => dest.Photo, act => act.ResolveUsing(src => { return src.Photo ?? CurriculumGlobals.DEFAULT_AVATAR_PATH; }))
-                .ForMember(dest => dest.LinePhone, act => act.ResolveUsing(src => { return src.LinePhone != null && src.AreaCodeLP != null ? " | (+" + src.AreaCodeLP + ") " + src.LinePhone : null; }))
-                .ForMember(dest => dest.MobilePhone, act => act.ResolveUsing(src => { return src.MobilePhone != null && src.AreaCodeMP != null ? " | (+" + src.AreaCodeMP + ") " + src.MobilePhone : null; }))
+                .ForMember(dest => dest.LinePhone, act => act.ResolveUsing(src => { return src.LinePhone != null && src.AreaCodeLP != null ? "(+" + src.AreaCodeLP + ") " + src.LinePhone : null; }))
+                .ForMember(dest => dest.MobilePhone, act => act.ResolveUsing(src => { return src.MobilePhone != null && src.AreaCodeMP != null ? "(+" + src.AreaCodeMP + ") " + src.MobilePhone : null; }))
                 .ForMember(dest => dest.Location, act => act.ResolveUsing(src => { return GenerateLocation(src.Address, src.City, src.Country, src.PostalCode); }))
                 .ForMember(dest => dest.FacebookUrl, act => act.ResolveUsing(src => { return src.FacebookUrl != null ? src.FacebookUrl.Substring(CurriculumGlobals.FACEBOOK_DOMAIN_START.Length) : null; }))
                 .ForMember(dest => dest.LinkedInUrl, act => act.ResolveUsing(src => { return src.LinkedInUrl != null ? src.LinkedInUrl.Substring(CurriculumGlobals.LINKEDIN_DOMAIN_START.Length) : null; }))
@@ -86,11 +86,11 @@ namespace CVBuilder.automapper
 
             CreateMap<CertificatesDTO, CertificatesDisplay>();
 
-            CreateMap<LanguagesDTO, LanguagesDisplay>()
-                .ForMember(dest => dest.Level, act => act.ResolveUsing(src => { return LevelOptions.LevelComboBox[src.Level]; }));
+            CreateMap<LanguagesDTO, LanguagesDisplay>();
+                //.ForMember(dest => dest.Level, act => act.ResolveUsing(src => { return LevelOptions.LevelComboBox[src.Level]; }));
 
-            CreateMap<SkillsDTO, SkillsDisplay>()
-                .ForMember(dest => dest.Level, act => act.ResolveUsing(src => { return LevelOptions.LevelComboBox[src.Level]; }));
+            CreateMap<SkillsDTO, SkillsDisplay>();
+                //.ForMember(dest => dest.Level, act => act.ResolveUsing(src => { return LevelOptions.LevelComboBox[src.Level]; }));
 
             CreateMap<InterestsDTO, InterestsDisplay>();
 
