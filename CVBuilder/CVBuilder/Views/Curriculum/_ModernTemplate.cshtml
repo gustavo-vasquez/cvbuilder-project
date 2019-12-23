@@ -13,9 +13,12 @@
         <div class="col-5 justify-content-center align-self-center">
             <h1>@Model.PersonalDetails.LastName</h1>
         </div>
-        <div class="col cv-legend">
-            <h4>Diseñador gráfico</h4>
-        </div>
+        @if (Model.PersonalDetails.Profession != null)
+        {
+            <div class="col cv-legend">
+                <h4>@Model.PersonalDetails.Profession</h4>
+            </div>
+        }
     </div>
     <div class="row">
         <div class="col-4 left-panel">

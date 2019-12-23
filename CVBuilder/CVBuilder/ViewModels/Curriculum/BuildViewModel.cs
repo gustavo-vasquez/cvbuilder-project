@@ -18,6 +18,7 @@ namespace CVBuilder.ViewModels.Curriculum
         public List<SummaryBlockViewModel> PersonalReferenceBlocks { get; set; }
         public List<SummaryBlockViewModel> CustomSectionBlocks { get; set; }
         public string PreviewPath { get; set; }
+        public SectionVisibilityModel SectionVisibility { get; set; }
 
         public BuildViewModel()
         {
@@ -30,6 +31,7 @@ namespace CVBuilder.ViewModels.Curriculum
             InterestBlocks = new List<SummaryBlockViewModel>();
             PersonalReferenceBlocks = new List<SummaryBlockViewModel>();
             CustomSectionBlocks = new List<SummaryBlockViewModel>();
+            SectionVisibility = new SectionVisibilityModel();
         }
     }
 }

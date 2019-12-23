@@ -31,6 +31,14 @@ namespace CVBuilder.Data
         public int CurriculumID { get; set; }
         public string ID_User { get; set; }
         public int ID_Template { get; set; }
+        public Nullable<bool> StudiesIsVisible { get; set; }
+        public Nullable<bool> WorkExperiencesIsVisible { get; set; }
+        public Nullable<bool> CertificatesIsVisible { get; set; }
+        public Nullable<bool> LanguagesIsVisible { get; set; }
+        public Nullable<bool> SkillsIsVisible { get; set; }
+        public Nullable<bool> InterestsIsVisible { get; set; }
+        public Nullable<bool> PersonalReferencesIsVisible { get; set; }
+        public Nullable<bool> CustomSectionsIsVisible { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Certificates> Certificates { get; set; }

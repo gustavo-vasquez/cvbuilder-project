@@ -1,4 +1,6 @@
-﻿using CVBuilder.Services.DTOs;
+﻿using CVBuilder.Data;
+using CVBuilder.Services.automapper;
+using CVBuilder.Services.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +46,12 @@ namespace CVBuilder.Services
             return new Data.CurriculumDL().GetCurriculumId(userId);
         }
 
+        public SectionVisibilityDTO GetVisibilityStates(int curriculumId)
+        {
+            Curriculum curriculum = new Data.CurriculumDL().GetCurriculumById(curriculumId);
+            return Mapping.Mapper.Map<Curriculum, SectionVisibilityDTO>(curriculum);
+        }
+
         public FinishedDTO GetCurriculumContent(string userId, int curriculumId)
         {
             FinishedDTO dto = new FinishedDTO();
@@ -52,14 +60,15 @@ namespace CVBuilder.Services
             dto.Name = template.Name;
             dto.PreviewPath = template.PreviewPath;
             dto.PersonalDetails = PersonalDetails.GetPersonalDetailsByCurriculumId(curriculumId);
-            dto.Studies = Studies.GetAll(curriculumId);
-            dto.WorkExperiences = WorkExperiences.GetAll(curriculumId);
-            dto.Certificates = Certificates.GetAll(curriculumId);
-            dto.PersonalReferences = PersonalReferences.GetAll(curriculumId);
-            dto.Languages = Languages.GetAll(curriculumId);
-            dto.Skills = Skills.GetAll(curriculumId);
+            dto.Studies = Studies.GetAllVisible(curriculumId);
+            dto.WorkExperiences = WorkExperiences.GetAllVisible(curriculumId);
+            dto.Certificates = Certificates.GetAllVisible(curriculumId);
+            dto.PersonalReferences = PersonalReferences.GetAllVisible(curriculumId);
+            dto.Languages = Languages.GetAllVisible(curriculumId);
+            dto.Skills = Skills.GetAllVisible(curriculumId);
             dto.Interests = Interests.GetAll(curriculumId);
-            dto.CustomSections = CustomSections.GetAll(curriculumId);
+            dto.CustomSections = CustomSections.GetAllVisible(curriculumId);
+            dto.SectionVisibility = GetVisibilityStates(curriculumId);
 
             return dto;
         }

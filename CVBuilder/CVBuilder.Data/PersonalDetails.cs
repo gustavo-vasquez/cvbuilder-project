@@ -28,7 +28,6 @@ namespace CVBuilder.Data
         public Nullable<short> AreaCodeMP { get; set; }
         public Nullable<int> MobilePhone { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
-        public Nullable<int> IdentityCard { get; set; }
         public string Country { get; set; }
         public string Summary { get; set; }
         public string SummaryCustomTitle { get; set; }
@@ -39,6 +38,7 @@ namespace CVBuilder.Data
         public string FacebookUrl { get; set; }
         public string TwitterUrl { get; set; }
         public int ID_Curriculum { get; set; }
+        public string Profession { get; set; }
     
         public virtual Curriculum Curriculum { get; set; }
     }

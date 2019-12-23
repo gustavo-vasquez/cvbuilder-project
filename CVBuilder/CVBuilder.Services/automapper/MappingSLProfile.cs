@@ -77,6 +77,8 @@ namespace CVBuilder.Services.automapper
             CreateMap<CustomSections, CustomSectionsDTO>();
 
             CreateMap<Templates, TemplatesDTO>();
+
+            CreateMap<Curriculum, SectionVisibilityDTO>();
         }
 
         private string ByteArrayToBase64(byte[] file, string mimeType)

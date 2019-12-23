@@ -9,6 +9,15 @@
         @Html.HiddenFor(m => m.Type)
         <div class="row">
             <div class="col">
+                <div class="custom-control custom-switch pb-4">
+                    @Html.CheckBoxFor(m => m.IsVisible, new { @class = "custom-control-input" })
+                    <label class="custom-control-label" for="IsVisible">Bloque visible</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
                 <div class="form-group">
                     <label>Nombre de la sección</label>
                     @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control", placeholder = "Ej: Emprendimientos" })

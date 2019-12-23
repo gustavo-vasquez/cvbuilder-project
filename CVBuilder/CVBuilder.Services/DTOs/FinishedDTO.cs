@@ -20,5 +20,6 @@ namespace CVBuilder.Services.DTOs
         public List<InterestsDTO> Interests { get; set; }
         public List<PersonalReferencesDTO> PersonalReferences { get; set; }
         public List<CustomSectionsDTO> CustomSections { get; set; }
+        public SectionVisibilityDTO SectionVisibility { get; set; }
     }
 }

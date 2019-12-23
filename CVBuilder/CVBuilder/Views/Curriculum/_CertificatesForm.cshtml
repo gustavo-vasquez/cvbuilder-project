@@ -8,6 +8,15 @@
         @Html.HiddenFor(m => m.CertificateID)
         @Html.HiddenFor(m => m.Type)
         <div class="row">
+            <div class="col">
+                <div class="custom-control custom-switch pb-4">
+                    @Html.CheckBoxFor(m => m.IsVisible, new { @class = "custom-control-input" })
+                    <label class="custom-control-label" for="IsVisible">Bloque visible</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-lg-6">
                 <div class="form-group"> 
                     <label>Nombre del certificado</label> 

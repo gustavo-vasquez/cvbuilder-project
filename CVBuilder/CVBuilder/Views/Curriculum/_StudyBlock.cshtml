@@ -1,6 +1,6 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.SummaryBlockViewModel
 
-<div class="card bg-light contracted-block mb-3">
+<div class="card bg-light contracted-block mb-3 @if (!Model.IsVisible) {<text>border-0</text>}">
     <div class="card-body pt-2 pb-2">
         <div class="row">
             <div class="col-lg-8">

@@ -49,5 +49,12 @@ namespace CVBuilder.Data
         {
             return _db.Context.Interests.OrderByDescending(p => p.InterestID).First();
         }
+
+        public void ToggleVisibility(int curriculumId)
+        {
+            Curriculum curriculum = _db.Context.Curriculum.SingleOrDefault(c => c.CurriculumID == curriculumId);
+            curriculum.InterestsIsVisible = curriculum.InterestsIsVisible == true ? false : true;
+            _db.Context.SaveChanges();
+        }
     }
 }

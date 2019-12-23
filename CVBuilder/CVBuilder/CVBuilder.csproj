@@ -382,6 +382,7 @@
     <Compile Include="ViewModels\Account\SignInViewModel.cs" />
     <Compile Include="ViewModels\Account\UserLoginModel.cs" />
     <Compile Include="ViewModels\Account\UserRegisterModel.cs" />
+    <Compile Include="ViewModels\Curriculum\SectionVisibilityModel.cs" />
     <Compile Include="ViewModels\ValMessages.cs" />
     <Compile Include="ViewModels\Curriculum\FinishedViewModel.cs" />
     <Compile Include="ViewModels\Curriculum\ISectionViewModel.cs" />

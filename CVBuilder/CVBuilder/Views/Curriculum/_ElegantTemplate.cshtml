@@ -153,7 +153,7 @@
             <div class="row">
                 <div class="col">
                     <h1 class="text-uppercase">@Model.PersonalDetails.Name @Model.PersonalDetails.LastName</h1>
-                    <h5 class="occupation text-uppercase">Diseñador gráfico</h5>
+                    @if (Model.PersonalDetails.Profession != null) {<h5 class="occupation text-uppercase">@Model.PersonalDetails.Profession</h5>}
                 </div>
             </div>
             <div class="row">

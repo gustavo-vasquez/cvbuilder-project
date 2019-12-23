@@ -26,5 +26,10 @@ namespace CVBuilder.Data
         {
             return _db.Context.Curriculum.SingleOrDefault(c => c.ID_User == userId).CurriculumID;
         }
+
+        public Curriculum GetCurriculumById(int curriculumId)
+        {
+            return _db.Context.Curriculum.SingleOrDefault(c => c.CurriculumID == curriculumId);
+        }
     }
 }

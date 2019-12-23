@@ -90,6 +90,11 @@
 	cursor:pointer;
 }
 
+.section-not-visible {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
 .contracted-block h5 {
     font-size: 17px;
 	position: relative;

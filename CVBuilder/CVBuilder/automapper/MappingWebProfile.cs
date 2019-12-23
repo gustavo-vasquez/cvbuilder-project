@@ -79,18 +79,16 @@ namespace CVBuilder.automapper
                 .ForMember(dest => dest.TwitterUrl, act => act.ResolveUsing(src => { return src.TwitterUrl != null ? src.TwitterUrl.Substring(CurriculumGlobals.TWITTER_DOMAIN_START.Length) : null; }));
 
             CreateMap<StudiesDTO, StudiesDisplay>()
-                .ForMember(dest => dest.StateInTime, act => act.ResolveUsing(src => { return CurriculumGlobals.GenerateStateInTimeFormat(src.StartMonth, src.StartYear, src.EndMonth, src.EndYear); }));
+                .ForMember(dest => dest.StateInTime, act => act.ResolveUsing(src => { return GenerateTimePeriodCV(src.StartMonth, src.StartYear, src.EndMonth, src.EndYear); }));
 
             CreateMap<WorkExperiencesDTO, WorkExperiencesDisplay>()
-                .ForMember(dest => dest.StateInTime, act => act.ResolveUsing(src => { return CurriculumGlobals.GenerateStateInTimeFormat(src.StartMonth, src.StartYear, src.EndMonth, src.EndYear); }));
+                .ForMember(dest => dest.StateInTime, act => act.ResolveUsing(src => { return GenerateTimePeriodCV(src.StartMonth, src.StartYear, src.EndMonth, src.EndYear); }));
 
             CreateMap<CertificatesDTO, CertificatesDisplay>();
 
             CreateMap<LanguagesDTO, LanguagesDisplay>();
-                //.ForMember(dest => dest.Level, act => act.ResolveUsing(src => { return LevelOptions.LevelComboBox[src.Level]; }));
 
             CreateMap<SkillsDTO, SkillsDisplay>();
-                //.ForMember(dest => dest.Level, act => act.ResolveUsing(src => { return LevelOptions.LevelComboBox[src.Level]; }));
 
             CreateMap<InterestsDTO, InterestsDisplay>();
 
@@ -100,6 +98,8 @@ namespace CVBuilder.automapper
             CreateMap<CustomSectionsDTO, CustomSectionsDisplay>();
 
             CreateMap<FinishedDTO, FinishedViewModel>();
+
+            CreateMap<SectionVisibilityDTO, SectionVisibilityModel>();
         }
 
         private byte[] PostedFileToByteArray(HttpPostedFileBase file)
@@ -141,6 +141,13 @@ namespace CVBuilder.automapper
                 return null;
             else
                 return location;
+        }
+
+        public string GenerateTimePeriodCV(string startMonth, int? startYear, string endMonth, int? endYear)
+        {
+            string timePeriod = CurriculumGlobals.GenerateStateInTimeFormat(startMonth, startYear, endMonth, endYear);
+
+            return timePeriod.Substring(1, timePeriod.Length - 2);
         }
     }
 }

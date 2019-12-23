@@ -72,6 +72,23 @@ $(document).ready(function () {
 
 	$('.profile-photo').on('click', function () { $('#UploadedPhoto').trigger('click') });
 	$('#UploadedPhoto').on('change', profilePicturePreview);
+
+	$('.toggle-section-visibility').on('change', function () {
+	    const section = $(this).data('section');
+
+	    $.ajax({
+	        url: "/Curriculum/ToggleSectionVisibility",
+	        type: "GET",
+	        data: { section: section },
+	        success: function (result, status, xhr) {
+	            $('#' + section + ' .contracted-block-group').toggleClass('section-not-visible');
+	        },
+	        error: function (event, xhr, options, exc) {
+	            alert('Error al intentar cambiar visibilidad de la sección.');
+	        }
+	    });
+	});
+
 	$('.add-block').on('click', getSectionForm);
 	$('.contracted-block-group').on('click', '.edit-block', editSectionForm);
 	$('.contracted-block-group').on('click', '.remove-block', removeBlock);

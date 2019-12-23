@@ -41,6 +41,11 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<List<Certificates>, List<CertificatesDTO>>(_dataLayer.GetAll(curriculumId).ToList());
         }
 
+        public List<CertificatesDTO> GetAllVisible(int curriculumId)
+        {
+            return Mapping.Mapper.Map<List<Certificates>, List<CertificatesDTO>>(_dataLayer.GetAllVisible(curriculumId).ToList());
+        }
+
         public SummaryBlockDTO GetSummaryBlock(int id)
         {
             Certificates certificate;
@@ -53,7 +58,8 @@ namespace CVBuilder.Services
             {
                 SummaryId = certificate.CertificateID,
                 Title = certificate.Name,
-                StateInTime = (certificate.InProgress) ? "(" + CurriculumGlobals.CERTIFICATE_INPROGRESS_TEXT + ")" : "(" + certificate.Year.ToString() + ")"
+                StateInTime = (certificate.InProgress) ? "(" + CurriculumGlobals.CERTIFICATE_INPROGRESS_TEXT + ")" : "(" + certificate.Year.ToString() + ")",
+                IsVisible = certificate.IsVisible
             };
         }
 
@@ -68,11 +74,17 @@ namespace CVBuilder.Services
                 {
                     SummaryId = certificate.CertificateID,
                     Title = certificate.Name,
-                    StateInTime = (certificate.InProgress) ? "(" + CurriculumGlobals.CERTIFICATE_INPROGRESS_TEXT + ")" : "(" + certificate.Year.ToString() + ")"
+                    StateInTime = (certificate.InProgress) ? "(" + CurriculumGlobals.CERTIFICATE_INPROGRESS_TEXT + ")" : "(" + certificate.Year.ToString() + ")",
+                    IsVisible = certificate.IsVisible
                 });
             }
 
             return certificateBlocks;
+        }
+
+        public void ToggleVisibility(int curriculumId)
+        {
+            _dataLayer.ToggleVisibility(curriculumId);
         }
     }
 }

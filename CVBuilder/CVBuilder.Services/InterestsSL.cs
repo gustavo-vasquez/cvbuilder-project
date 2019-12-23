@@ -51,7 +51,8 @@ namespace CVBuilder.Services
                 interestBlocks.Add(new SummaryBlockDTO()
                 {
                     SummaryId = interest.InterestID,
-                    Title = interest.Name
+                    Title = interest.Name,
+                    IsVisible = interest.IsVisible
                 });
             }
 
@@ -69,8 +70,14 @@ namespace CVBuilder.Services
             return new SummaryBlockDTO()
             {
                 SummaryId = interest.InterestID,
-                Title = interest.Name
+                Title = interest.Name,
+                IsVisible = interest.IsVisible
             };
+        }
+
+        public void ToggleVisibility(int curriculumId)
+        {
+            _dataLayer.ToggleVisibility(curriculumId);
         }
     }
 }

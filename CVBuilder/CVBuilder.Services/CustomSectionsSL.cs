@@ -40,6 +40,11 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<List<CustomSections>, List<CustomSectionsDTO>>(_dataLayer.GetAll(curriculumId).ToList());
         }
 
+        public List<CustomSectionsDTO> GetAllVisible(int curriculumId)
+        {
+            return Mapping.Mapper.Map<List<CustomSections>, List<CustomSectionsDTO>>(_dataLayer.GetAllVisible(curriculumId).ToList());
+        }
+
         public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
             IQueryable<CustomSections> allCustomSections = _dataLayer.GetAll(curriculumId);
@@ -50,7 +55,8 @@ namespace CVBuilder.Services
                 customSectionBlocks.Add(new SummaryBlockDTO()
                 {
                     SummaryId = customSection.CustomSectionID,
-                    Title = customSection.SectionName
+                    Title = customSection.SectionName,
+                    IsVisible = customSection.IsVisible
                 });
             }
 
@@ -68,8 +74,14 @@ namespace CVBuilder.Services
             return new SummaryBlockDTO()
             {
                 SummaryId = customSection.CustomSectionID,
-                Title = customSection.SectionName
+                Title = customSection.SectionName,
+                IsVisible = customSection.IsVisible
             };
+        }
+
+        public void ToggleVisibility(int curriculumId)
+        {
+            _dataLayer.ToggleVisibility(curriculumId);
         }
     }
 }

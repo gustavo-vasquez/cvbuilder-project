@@ -59,5 +59,17 @@ namespace CVBuilder.Data
         {
             return _db.Context.Certificates.Where(c => c.ID_Curriculum == curriculumId);
         }
+
+        public IQueryable<Certificates> GetAllVisible(int curriculumId)
+        {
+            return _db.Context.Certificates.Where(s => s.ID_Curriculum == curriculumId && s.IsVisible);
+        }
+
+        public void ToggleVisibility(int curriculumId)
+        {
+            Curriculum curriculum = _db.Context.Curriculum.SingleOrDefault(c => c.CurriculumID == curriculumId);
+            curriculum.CertificatesIsVisible = curriculum.CertificatesIsVisible == true ? false : true;
+            _db.Context.SaveChanges();
+        }
     }
 }

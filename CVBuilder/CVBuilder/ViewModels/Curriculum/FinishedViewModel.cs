@@ -19,6 +19,7 @@ namespace CVBuilder.ViewModels.Curriculum
         public IEnumerable<InterestsDisplay> Interests { get; set; }
         public IEnumerable<PersonalReferencesDisplay> PersonalReferences { get; set; }
         public IEnumerable<CustomSectionsDisplay> CustomSections { get; set; }
+        public SectionVisibilityModel SectionVisibility { get; set; }
     }
 
     public class PersonalDetailsDisplay
@@ -26,10 +27,10 @@ namespace CVBuilder.ViewModels.Curriculum
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string Profession { get; set; }
         public string Photo { get; set; }
         public string LinePhone { get; set; }
         public string MobilePhone { get; set; }
-        public int? IdentityCard { get; set; }
         public string Location { get; set; }
         public string Summary { get; set; }
         public string SummaryCustomTitle { get; set; }

@@ -41,6 +41,11 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<List<Languages>, List<LanguagesDTO>>(_dataLayer.GetAll(curriculumId).ToList());
         }
 
+        public List<LanguagesDTO> GetAllVisible(int curriculumId)
+        {
+            return Mapping.Mapper.Map<List<Languages>, List<LanguagesDTO>>(_dataLayer.GetAllVisible(curriculumId).ToList());
+        }
+
         public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
             IQueryable<Languages> allLanguages = _dataLayer.GetAll(curriculumId);
@@ -52,7 +57,8 @@ namespace CVBuilder.Services
                 {
                     SummaryId = language.LanguageID,
                     Title = language.Name,
-                    StateInTime = "(" + LevelOptions.LevelComboBox[language.Level] + ")"
+                    StateInTime = "(" + LevelOptions.LevelComboBox[language.Level] + ")",
+                    IsVisible = language.IsVisible
                 });
             }
 
@@ -71,8 +77,14 @@ namespace CVBuilder.Services
             {
                 SummaryId = language.LanguageID,
                 Title = language.Name,
-                StateInTime = "(" + LevelOptions.LevelComboBox[language.Level] + ")"
+                StateInTime = "(" + LevelOptions.LevelComboBox[language.Level] + ")",
+                IsVisible = language.IsVisible
             };
+        }
+
+        public void ToggleVisibility(int curriculumId)
+        {
+            _dataLayer.ToggleVisibility(curriculumId);
         }
     }
 }

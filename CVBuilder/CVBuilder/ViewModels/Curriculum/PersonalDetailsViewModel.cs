@@ -27,7 +27,9 @@ namespace CVBuilder.ViewModels.Curriculum
         [Required(ErrorMessage = "Completar este campo.")]
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string Email { get; set; }
-        
+
+        public string Profession { get; set; }
+
         [PostedFileExtensions("jpg,jpeg,png", ErrorMessage = "Permitido solamente: jpg, jpeg y png.")]
         [MaxFileSize(1048576)]
         public HttpPostedFileBase UploadedPhoto { get; set; }
@@ -61,7 +63,6 @@ namespace CVBuilder.ViewModels.Curriculum
         public int? Day { get; set; }
         public string Month { get; set; }
         public int? Year { get; set; }
-        public int? IdentityCard { get; set; }
 
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string Country { get; set; }

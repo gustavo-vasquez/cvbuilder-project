@@ -25,6 +25,8 @@ namespace CVBuilder.Controllers
         [HttpGet]
         public ActionResult Build(string section)
         {
+            int curriculumId = _curriculumServices.GetCurriculumId(User.Identity.GetUserId());
+            SectionVisibilityDTO sectionVisibility = _curriculumServices.GetVisibilityStates(curriculumId);
             BuildViewModel model = new BuildViewModel();
             PersonalDetailsDTO personalDetailsDto = _curriculumServices.PersonalDetails.GetPersonalDetailsByCurriculumId(_curriculumServices.GetCurriculumId(User.Identity.GetUserId()));
 
@@ -40,6 +42,7 @@ namespace CVBuilder.Controllers
             model.PersonalReferenceBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.PersonalReferences.GetAllBlocks(_curriculumServices.GetCurriculumId(User.Identity.GetUserId())));
             model.CustomSectionBlocks = Mapping.Mapper.Map<List<SummaryBlockDTO>, List<SummaryBlockViewModel>>(_curriculumServices.CustomSections.GetAllBlocks(_curriculumServices.GetCurriculumId(User.Identity.GetUserId())));
             model.PreviewPath = _curriculumServices.Templates.GetPreviewPath(User.Identity.GetUserId());
+            model.SectionVisibility = Mapping.Mapper.Map<SectionVisibilityDTO, SectionVisibilityModel>(sectionVisibility);
 
             return View(model);
         }
@@ -393,6 +396,42 @@ namespace CVBuilder.Controllers
         {
             string userId = User.Identity.GetUserId();
             _curriculumServices.Templates.ChangeTemplate(path, _curriculumServices.GetCurriculumId(userId), userId);
+        }
+
+        [HttpGet]
+        public void ToggleSectionVisibility(string section)
+        {
+            int curriculumId = _curriculumServices.GetCurriculumId(User.Identity.GetUserId());
+
+            switch (section)
+            {
+                case SectionIds.Studies:
+                    _curriculumServices.Studies.ToggleVisibility(curriculumId);
+                    break;
+                case SectionIds.Certificates:
+                    _curriculumServices.Certificates.ToggleVisibility(curriculumId);
+                    break;
+                case SectionIds.WorkExperiences:
+                    _curriculumServices.WorkExperiences.ToggleVisibility(curriculumId);
+                    break;
+                case SectionIds.Languages:
+                    _curriculumServices.Languages.ToggleVisibility(curriculumId);
+                    break;
+                case SectionIds.Skills:
+                    _curriculumServices.Skills.ToggleVisibility(curriculumId);
+                    break;
+                case SectionIds.Interests:
+                    _curriculumServices.Interests.ToggleVisibility(curriculumId);
+                    break;
+                case SectionIds.PersonalReferences:
+                    _curriculumServices.PersonalReferences.ToggleVisibility(curriculumId);
+                    break;
+                case SectionIds.CustomSections:
+                    _curriculumServices.CustomSections.ToggleVisibility(curriculumId);
+                    break;
+                default:
+                    throw new InvalidOperationException("No se pudo cambiar la visibilidad de la sección.");
+            }
         }
     }
 }

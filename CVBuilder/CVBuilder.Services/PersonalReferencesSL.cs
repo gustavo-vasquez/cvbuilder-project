@@ -40,6 +40,11 @@ namespace CVBuilder.Services
             return Mapping.Mapper.Map<List<PersonalReferences>, List<PersonalReferencesDTO>>(_dataLayer.GetAll(curriculumId).ToList());
         }
 
+        public List<PersonalReferencesDTO> GetAllVisible(int curriculumId)
+        {
+            return Mapping.Mapper.Map<List<PersonalReferences>, List<PersonalReferencesDTO>>(_dataLayer.GetAllVisible(curriculumId).ToList());
+        }
+
         public List<SummaryBlockDTO> GetAllBlocks(int curriculumId)
         {
             IQueryable<PersonalReferences> allPersonalReferences = _dataLayer.GetAll(curriculumId);
@@ -50,7 +55,8 @@ namespace CVBuilder.Services
                 personalReferenceBlocks.Add(new SummaryBlockDTO()
                 {
                     SummaryId = personalReference.PersonalReferenceID,
-                    Title = personalReference.ContactPerson + " desde " + personalReference.Company
+                    Title = personalReference.ContactPerson + " desde " + personalReference.Company,
+                    IsVisible = personalReference.IsVisible
                 });
             }
 
@@ -68,8 +74,14 @@ namespace CVBuilder.Services
             return new SummaryBlockDTO()
             {
                 SummaryId = personalReference.PersonalReferenceID,
-                Title = personalReference.ContactPerson + " desde " + personalReference.Company
+                Title = personalReference.ContactPerson + " desde " + personalReference.Company,
+                IsVisible = personalReference.IsVisible
             };
+        }
+
+        public void ToggleVisibility(int curriculumId)
+        {
+            _dataLayer.ToggleVisibility(curriculumId);
         }
     }
 }

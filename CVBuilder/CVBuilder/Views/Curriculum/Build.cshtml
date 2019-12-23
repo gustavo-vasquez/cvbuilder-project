@@ -55,15 +55,15 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
+                                        @Html.CheckBoxFor(m => m.SectionVisibility.StudiesIsVisible, new { @class = "custom-control-input toggle-section-visibility", data_section = SectionIds.Studies })
+                                        <label class="custom-control-label" for="SectionVisibility_StudiesIsVisible">Visible</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="contracted-block-group">
+                                    <div class="contracted-block-group @if(!Model.SectionVisibility.StudiesIsVisible) {<text>section-not-visible</text>}">
                                         @if (Model.StudyBlocks.Count > 0)
                                         {
                                             foreach (var block in Model.StudyBlocks)
@@ -89,15 +89,15 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
+                                        @Html.CheckBoxFor(m => m.SectionVisibility.CertificatesIsVisible, new { @class = "custom-control-input toggle-section-visibility", data_section = SectionIds.Certificates })
+                                        <label class="custom-control-label" for="SectionVisibility_CertificatesIsVisible">Visible</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="contracted-block-group">
+                                    <div class="contracted-block-group @if(!Model.SectionVisibility.CertificatesIsVisible) {<text>section-not-visible</text>}">
                                         @if (Model.CertificateBlocks.Count > 0)
                                         {
                                             foreach (var block in Model.CertificateBlocks)
@@ -123,15 +123,15 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
+                                        @Html.CheckBoxFor(m => m.SectionVisibility.WorkExperiencesIsVisible, new { @class = "custom-control-input toggle-section-visibility", data_section = SectionIds.WorkExperiences })
+                                        <label class="custom-control-label" for="SectionVisibility_WorkExperiencesIsVisible">Visible</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="contracted-block-group">
+                                    <div class="contracted-block-group @if(!Model.SectionVisibility.WorkExperiencesIsVisible) {<text>section-not-visible</text>}">
                                         @if (Model.WorkExperienceBlocks.Count > 0)
                                         {
                                             foreach (var block in Model.WorkExperienceBlocks)
@@ -158,15 +158,15 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
+                                        @Html.CheckBoxFor(m => m.SectionVisibility.LanguagesIsVisible, new { @class = "custom-control-input toggle-section-visibility", data_section = SectionIds.Languages })
+                                        <label class="custom-control-label" for="SectionVisibility_LanguagesIsVisible">Visible</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="contracted-block-group">
+                                    <div class="contracted-block-group @if(!Model.SectionVisibility.LanguagesIsVisible) {<text>section-not-visible</text>}">
                                         @if (Model.LanguageBlocks.Count > 0)
                                         {
                                             foreach (var block in Model.LanguageBlocks)
@@ -192,15 +192,15 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
+                                        @Html.CheckBoxFor(m => m.SectionVisibility.SkillsIsVisible, new { @class = "custom-control-input toggle-section-visibility", data_section = SectionIds.Skills })
+                                        <label class="custom-control-label" for="SectionVisibility_SkillsIsVisible">Visible</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="contracted-block-group">
+                                    <div class="contracted-block-group @if(!Model.SectionVisibility.SkillsIsVisible) {<text>section-not-visible</text>}">
                                         @if (Model.SkillBlocks.Count > 0)
                                         {
                                             foreach (var block in Model.SkillBlocks)
@@ -226,15 +226,15 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
+                                        @Html.CheckBoxFor(m => m.SectionVisibility.InterestsIsVisible, new { @class = "custom-control-input toggle-section-visibility", data_section = SectionIds.Interests })
+                                        <label class="custom-control-label" for="SectionVisibility_InterestsIsVisible">Visible</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="contracted-block-group">
+                                    <div class="contracted-block-group @if(!Model.SectionVisibility.InterestsIsVisible) {<text>section-not-visible</text>}">
                                         @if (Model.InterestBlocks.Count > 0)
                                         {
                                             foreach (var block in Model.InterestBlocks)
@@ -260,15 +260,15 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
+                                        @Html.CheckBoxFor(m => m.SectionVisibility.PersonalReferencesIsVisible, new { @class = "custom-control-input toggle-section-visibility", data_section = SectionIds.PersonalReferences })
+                                        <label class="custom-control-label" for="SectionVisibility_PersonalReferencesIsVisible">Visible</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="contracted-block-group">
+                                    <div class="contracted-block-group @if(!Model.SectionVisibility.PersonalReferencesIsVisible) {<text>section-not-visible</text>}">
                                         @if (Model.PersonalReferenceBlocks.Count > 0)
                                         {
                                             foreach (var block in Model.PersonalReferenceBlocks)
@@ -295,15 +295,15 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                        <label class="custom-control-label" for="customSwitch1">Visible</label>
+                                        @Html.CheckBoxFor(m => m.SectionVisibility.CustomSectionsIsVisible, new { @class = "custom-control-input toggle-section-visibility", data_section = SectionIds.CustomSections })
+                                        <label class="custom-control-label" for="SectionVisibility_CustomSectionsIsVisible">Visible</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="contracted-block-group">
+                                    <div class="contracted-block-group @if(!Model.SectionVisibility.CustomSectionsIsVisible) {<text>section-not-visible</text>}">
                                         @if (Model.CustomSectionBlocks.Count > 0)
                                         {
                                             foreach (var block in Model.CustomSectionBlocks)

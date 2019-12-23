@@ -59,9 +59,21 @@ namespace CVBuilder.Data
             return _db.Context.WorkExperiences.Where(s => s.ID_Curriculum == curriculumId);
         }
 
+        public IQueryable<WorkExperiences> GetAllVisible(int curriculumId)
+        {
+            return _db.Context.WorkExperiences.Where(s => s.ID_Curriculum == curriculumId && s.IsVisible);
+        }
+
         public WorkExperiences GetLast()
         {
             return _db.Context.WorkExperiences.OrderByDescending(p => p.WorkExperienceID).First();
+        }
+
+        public void ToggleVisibility(int curriculumId)
+        {
+            Curriculum curriculum = _db.Context.Curriculum.SingleOrDefault(c => c.CurriculumID == curriculumId);
+            curriculum.WorkExperiencesIsVisible = curriculum.WorkExperiencesIsVisible == true ? false : true;
+            _db.Context.SaveChanges();
         }
     }
 }

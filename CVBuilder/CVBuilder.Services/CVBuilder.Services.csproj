@@ -56,6 +56,7 @@
     <Compile Include="CurriculumSL.cs" />
     <Compile Include="CustomSectionsSL.cs" />
     <Compile Include="DTOs\FinishedDTO.cs" />
+    <Compile Include="DTOs\SectionVisibilityDTO.cs" />
     <Compile Include="DTOs\SummaryBlockDTO.cs" />
     <Compile Include="DTOs\TemplatesDTO.cs" />
     <Compile Include="ICurriculumServices.cs" />

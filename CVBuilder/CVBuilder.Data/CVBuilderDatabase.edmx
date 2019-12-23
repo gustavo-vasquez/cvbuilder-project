@@ -26,6 +26,14 @@
           <Property Name="CurriculumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_User" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ID_Template" Type="int" Nullable="false" />
+          <Property Name="StudiesIsVisible" Type="bit" />
+          <Property Name="WorkExperiencesIsVisible" Type="bit" />
+          <Property Name="CertificatesIsVisible" Type="bit" />
+          <Property Name="LanguagesIsVisible" Type="bit" />
+          <Property Name="SkillsIsVisible" Type="bit" />
+          <Property Name="InterestsIsVisible" Type="bit" />
+          <Property Name="PersonalReferencesIsVisible" Type="bit" />
+          <Property Name="CustomSectionsIsVisible" Type="bit" />
         </EntityType>
         <EntityType Name="CustomSections">
           <Key>
@@ -74,7 +82,6 @@
           <Property Name="AreaCodeMP" Type="smallint" />
           <Property Name="MobilePhone" Type="int" />
           <Property Name="BirthDate" Type="datetime" />
-          <Property Name="IdentityCard" Type="int" />
           <Property Name="Country" Type="nvarchar" MaxLength="100" />
           <Property Name="Summary" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="SummaryCustomTitle" Type="nvarchar" MaxLength="50" />
@@ -85,6 +92,7 @@
           <Property Name="FacebookUrl" Type="nvarchar" MaxLength="300" />
           <Property Name="TwitterUrl" Type="nvarchar" MaxLength="300" />
           <Property Name="ID_Curriculum" Type="int" Nullable="false" />
+          <Property Name="Profession" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="PersonalReferences">
           <Key>
@@ -507,6 +515,7 @@
           <Parameter Name="name" Type="nvarchar" Mode="In" />
           <Parameter Name="lastname" Type="nvarchar" Mode="In" />
           <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="profession" Type="nvarchar" Mode="In" />
           <Parameter Name="photo" Type="varbinary(max)" Mode="In" />
           <Parameter Name="mimeType" Type="nvarchar" Mode="In" />
           <Parameter Name="address" Type="nvarchar" Mode="In" />
@@ -517,7 +526,6 @@
           <Parameter Name="areaCodeMP" Type="smallint" Mode="In" />
           <Parameter Name="mobilePhone" Type="int" Mode="In" />
           <Parameter Name="birthDate" Type="datetime" Mode="In" />
-          <Parameter Name="identityCard" Type="int" Mode="In" />
           <Parameter Name="country" Type="nvarchar" Mode="In" />
           <Parameter Name="summary" Type="nvarchar" Mode="In" />
           <Parameter Name="summaryCustomTitle" Type="nvarchar" Mode="In" />
@@ -537,6 +545,7 @@
           <Parameter Name="name" Type="nvarchar" Mode="In" />
           <Parameter Name="lastname" Type="nvarchar" Mode="In" />
           <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="profession" Type="nvarchar" Mode="In" />
           <Parameter Name="photo" Type="varbinary(max)" Mode="In" />
           <Parameter Name="mimeType" Type="nvarchar" Mode="In" />
           <Parameter Name="address" Type="nvarchar" Mode="In" />
@@ -547,7 +556,6 @@
           <Parameter Name="areaCodeMP" Type="smallint" Mode="In" />
           <Parameter Name="mobilePhone" Type="int" Mode="In" />
           <Parameter Name="birthDate" Type="datetime" Mode="In" />
-          <Parameter Name="identityCard" Type="int" Mode="In" />
           <Parameter Name="country" Type="nvarchar" Mode="In" />
           <Parameter Name="summary" Type="nvarchar" Mode="In" />
           <Parameter Name="summaryCustomTitle" Type="nvarchar" Mode="In" />
@@ -770,6 +778,14 @@
           <NavigationProperty Name="Skills" Relationship="Self.FK_Skills_Curriculum" FromRole="Curriculum" ToRole="Skills" />
           <NavigationProperty Name="Studies" Relationship="Self.FK_Studies_Curriculum" FromRole="Curriculum" ToRole="Studies" />
           <NavigationProperty Name="WorkExperiences" Relationship="Self.FK_WorkExperiences_Curriculum" FromRole="Curriculum" ToRole="WorkExperiences" />
+          <Property Name="StudiesIsVisible" Type="Boolean" />
+          <Property Name="WorkExperiencesIsVisible" Type="Boolean" />
+          <Property Name="CertificatesIsVisible" Type="Boolean" />
+          <Property Name="LanguagesIsVisible" Type="Boolean" />
+          <Property Name="SkillsIsVisible" Type="Boolean" />
+          <Property Name="InterestsIsVisible" Type="Boolean" />
+          <Property Name="PersonalReferencesIsVisible" Type="Boolean" />
+          <Property Name="CustomSectionsIsVisible" Type="Boolean" />
         </EntityType>
         <EntityType Name="CustomSections">
           <Key>
@@ -821,7 +837,6 @@
           <Property Name="AreaCodeMP" Type="Int16" />
           <Property Name="MobilePhone" Type="Int32" />
           <Property Name="BirthDate" Type="DateTime" Precision="3" />
-          <Property Name="IdentityCard" Type="Int32" />
           <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Summary" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SummaryCustomTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -833,6 +848,7 @@
           <Property Name="TwitterUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="ID_Curriculum" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Curriculum" Relationship="Self.FK_PersonalDetails_Curriculum" FromRole="PersonalDetails" ToRole="Curriculum" />
+          <Property Name="Profession" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PersonalReferences">
           <Key>
@@ -1309,6 +1325,7 @@
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="lastname" Mode="In" Type="String" />
             <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="profession" Mode="In" Type="String" />
             <Parameter Name="photo" Mode="In" Type="Binary" />
             <Parameter Name="mimeType" Mode="In" Type="String" />
             <Parameter Name="address" Mode="In" Type="String" />
@@ -1319,7 +1336,6 @@
             <Parameter Name="areaCodeMP" Mode="In" Type="Int16" />
             <Parameter Name="mobilePhone" Mode="In" Type="Int32" />
             <Parameter Name="birthDate" Mode="In" Type="DateTime" />
-            <Parameter Name="identityCard" Mode="In" Type="Int32" />
             <Parameter Name="country" Mode="In" Type="String" />
             <Parameter Name="summary" Mode="In" Type="String" />
             <Parameter Name="summaryCustomTitle" Mode="In" Type="String" />
@@ -1339,6 +1355,7 @@
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="lastname" Mode="In" Type="String" />
             <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="profession" Mode="In" Type="String" />
             <Parameter Name="photo" Mode="In" Type="Binary" />
             <Parameter Name="mimeType" Mode="In" Type="String" />
             <Parameter Name="address" Mode="In" Type="String" />
@@ -1349,7 +1366,6 @@
             <Parameter Name="areaCodeMP" Mode="In" Type="Int16" />
             <Parameter Name="mobilePhone" Mode="In" Type="Int32" />
             <Parameter Name="birthDate" Mode="In" Type="DateTime" />
-            <Parameter Name="identityCard" Mode="In" Type="Int32" />
             <Parameter Name="country" Mode="In" Type="String" />
             <Parameter Name="summary" Mode="In" Type="String" />
             <Parameter Name="summaryCustomTitle" Mode="In" Type="String" />
@@ -1480,6 +1496,14 @@
           <EntitySetMapping Name="Curriculum">
             <EntityTypeMapping TypeName="CVBuilderModel.Curriculum">
               <MappingFragment StoreEntitySet="Curriculum">
+                <ScalarProperty Name="CustomSectionsIsVisible" ColumnName="CustomSectionsIsVisible" />
+                <ScalarProperty Name="PersonalReferencesIsVisible" ColumnName="PersonalReferencesIsVisible" />
+                <ScalarProperty Name="InterestsIsVisible" ColumnName="InterestsIsVisible" />
+                <ScalarProperty Name="SkillsIsVisible" ColumnName="SkillsIsVisible" />
+                <ScalarProperty Name="LanguagesIsVisible" ColumnName="LanguagesIsVisible" />
+                <ScalarProperty Name="CertificatesIsVisible" ColumnName="CertificatesIsVisible" />
+                <ScalarProperty Name="WorkExperiencesIsVisible" ColumnName="WorkExperiencesIsVisible" />
+                <ScalarProperty Name="StudiesIsVisible" ColumnName="StudiesIsVisible" />
                 <ScalarProperty Name="CurriculumID" ColumnName="CurriculumID" />
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
                 <ScalarProperty Name="ID_Template" ColumnName="ID_Template" />
@@ -1521,6 +1545,7 @@
           <EntitySetMapping Name="PersonalDetails">
             <EntityTypeMapping TypeName="CVBuilderModel.PersonalDetails">
               <MappingFragment StoreEntitySet="PersonalDetails">
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
                 <ScalarProperty Name="PersonalDetailsID" ColumnName="PersonalDetailsID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1535,7 +1560,6 @@
                 <ScalarProperty Name="AreaCodeMP" ColumnName="AreaCodeMP" />
                 <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />
                 <ScalarProperty Name="SummaryCustomTitle" ColumnName="SummaryCustomTitle" />
