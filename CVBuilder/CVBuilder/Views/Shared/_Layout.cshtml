@@ -59,7 +59,7 @@
                             <a class="dropdown-item" href="@Url.Action("Build", "Curriculum")"><i class="fas fa-marker"></i> Editar curriculum</a>
                             <a class="dropdown-item" href="@Url.Action("Finished", "Curriculum")"><i class="fas fa-print"></i> Imprimir/guardar como PDF</a>
                             <div class="dropdown-divider"></div>
-                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "user_logoff_form" }))
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "account_user_logoff" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <button class="dropdown-item" type="submit"><i class="fas fa-sign-out-alt"></i> Salir</button>

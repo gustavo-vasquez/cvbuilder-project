@@ -345,7 +345,7 @@ namespace CVBuilder.Controllers
                     throw new ArgumentException(_sectionErrorMessage);
             }
 
-            return PartialView("_StudyBlock", model);
+            return PartialView("_SummaryBlock", model);
         }
 
         [HttpPost]

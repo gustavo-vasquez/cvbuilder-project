@@ -328,7 +328,7 @@ namespace CVBuilder.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Languages_Update", idParameter, nameParameter, levelParameter, isVisibleParameter, id_curriculumParameter);
         }
     
-        public virtual int usp_PersonalDetails_Create(string name, string lastname, string email, string profession, byte[] photo, string mimeType, string address, string city, Nullable<int> postalCode, Nullable<short> areaCodeLP, Nullable<int> linePhone, Nullable<short> areaCodeMP, Nullable<int> mobilePhone, Nullable<System.DateTime> birthDate, string country, string summary, string summaryCustomTitle, Nullable<bool> summaryIsVisible, string webPageUrl, string linkedInUrl, string githubUrl, string facebookUrl, string twitterUrl, Nullable<int> id_curriculum)
+        public virtual int usp_PersonalDetails_Create(string name, string lastname, string email, string profession, byte[] photo, string mimeType, string address, string city, Nullable<int> postalCode, Nullable<short> areaCodeLP, Nullable<int> linePhone, Nullable<short> areaCodeMP, Nullable<int> mobilePhone, string country, string summary, string summaryCustomTitle, Nullable<bool> summaryIsVisible, string webPageUrl, string linkedInUrl, string githubUrl, string facebookUrl, string twitterUrl, Nullable<int> id_curriculum)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("name", name) :
@@ -382,10 +382,6 @@ namespace CVBuilder.Data
                 new ObjectParameter("mobilePhone", mobilePhone) :
                 new ObjectParameter("mobilePhone", typeof(int));
     
-            var birthDateParameter = birthDate.HasValue ?
-                new ObjectParameter("birthDate", birthDate) :
-                new ObjectParameter("birthDate", typeof(System.DateTime));
-    
             var countryParameter = country != null ?
                 new ObjectParameter("country", country) :
                 new ObjectParameter("country", typeof(string));
@@ -426,7 +422,7 @@ namespace CVBuilder.Data
                 new ObjectParameter("id_curriculum", id_curriculum) :
                 new ObjectParameter("id_curriculum", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalDetails_Create", nameParameter, lastnameParameter, emailParameter, professionParameter, photoParameter, mimeTypeParameter, addressParameter, cityParameter, postalCodeParameter, areaCodeLPParameter, linePhoneParameter, areaCodeMPParameter, mobilePhoneParameter, birthDateParameter, countryParameter, summaryParameter, summaryCustomTitleParameter, summaryIsVisibleParameter, webPageUrlParameter, linkedInUrlParameter, githubUrlParameter, facebookUrlParameter, twitterUrlParameter, id_curriculumParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalDetails_Create", nameParameter, lastnameParameter, emailParameter, professionParameter, photoParameter, mimeTypeParameter, addressParameter, cityParameter, postalCodeParameter, areaCodeLPParameter, linePhoneParameter, areaCodeMPParameter, mobilePhoneParameter, countryParameter, summaryParameter, summaryCustomTitleParameter, summaryIsVisibleParameter, webPageUrlParameter, linkedInUrlParameter, githubUrlParameter, facebookUrlParameter, twitterUrlParameter, id_curriculumParameter);
         }
     
         public virtual int usp_PersonalDetails_Delete(Nullable<int> id)
@@ -438,7 +434,7 @@ namespace CVBuilder.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalDetails_Delete", idParameter);
         }
     
-        public virtual int usp_PersonalDetails_Update(Nullable<int> id, string name, string lastname, string email, string profession, byte[] photo, string mimeType, string address, string city, Nullable<int> postalCode, Nullable<short> areaCodeLP, Nullable<int> linePhone, Nullable<short> areaCodeMP, Nullable<int> mobilePhone, Nullable<System.DateTime> birthDate, string country, string summary, string summaryCustomTitle, Nullable<bool> summaryIsVisible, string webPageUrl, string linkedInUrl, string githubUrl, string facebookUrl, string twitterUrl, Nullable<int> id_curriculum)
+        public virtual int usp_PersonalDetails_Update(Nullable<int> id, string name, string lastname, string email, string profession, byte[] photo, string mimeType, string address, string city, Nullable<int> postalCode, Nullable<short> areaCodeLP, Nullable<int> linePhone, Nullable<short> areaCodeMP, Nullable<int> mobilePhone, string country, string summary, string summaryCustomTitle, Nullable<bool> summaryIsVisible, string webPageUrl, string linkedInUrl, string githubUrl, string facebookUrl, string twitterUrl, Nullable<int> id_curriculum)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
@@ -496,10 +492,6 @@ namespace CVBuilder.Data
                 new ObjectParameter("mobilePhone", mobilePhone) :
                 new ObjectParameter("mobilePhone", typeof(int));
     
-            var birthDateParameter = birthDate.HasValue ?
-                new ObjectParameter("birthDate", birthDate) :
-                new ObjectParameter("birthDate", typeof(System.DateTime));
-    
             var countryParameter = country != null ?
                 new ObjectParameter("country", country) :
                 new ObjectParameter("country", typeof(string));
@@ -540,7 +532,7 @@ namespace CVBuilder.Data
                 new ObjectParameter("id_curriculum", id_curriculum) :
                 new ObjectParameter("id_curriculum", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalDetails_Update", idParameter, nameParameter, lastnameParameter, emailParameter, professionParameter, photoParameter, mimeTypeParameter, addressParameter, cityParameter, postalCodeParameter, areaCodeLPParameter, linePhoneParameter, areaCodeMPParameter, mobilePhoneParameter, birthDateParameter, countryParameter, summaryParameter, summaryCustomTitleParameter, summaryIsVisibleParameter, webPageUrlParameter, linkedInUrlParameter, githubUrlParameter, facebookUrlParameter, twitterUrlParameter, id_curriculumParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PersonalDetails_Update", idParameter, nameParameter, lastnameParameter, emailParameter, professionParameter, photoParameter, mimeTypeParameter, addressParameter, cityParameter, postalCodeParameter, areaCodeLPParameter, linePhoneParameter, areaCodeMPParameter, mobilePhoneParameter, countryParameter, summaryParameter, summaryCustomTitleParameter, summaryIsVisibleParameter, webPageUrlParameter, linkedInUrlParameter, githubUrlParameter, facebookUrlParameter, twitterUrlParameter, id_curriculumParameter);
         }
     
         public virtual int usp_PersonalReferences_Create(string company, string contactPerson, Nullable<short> areaCode, Nullable<int> telephone, string email, Nullable<bool> isVisible, Nullable<int> id_curriculum)

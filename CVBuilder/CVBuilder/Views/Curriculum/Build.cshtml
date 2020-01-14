@@ -61,23 +61,24 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contracted-block-group @if(!Model.SectionVisibility.StudiesIsVisible) {<text>section-not-visible</text>}">
-                                        @if (Model.StudyBlocks.Count > 0)
-                                        {
-                                            foreach (var block in Model.StudyBlocks)
+                            <div class="summary-block-wrapper @if(!Model.SectionVisibility.StudiesIsVisible) {<text>section-not-visible</text>}">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contracted-block-group">
+                                            @if (Model.StudyBlocks.Count > 0)
                                             {
-                                                @Html.Partial("_StudyBlock", block);
+                                                foreach (var block in Model.StudyBlocks)
+                                                {
+                                                    @Html.Partial("_SummaryBlock", block);
+                                                }
                                             }
-                                        }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -95,23 +96,24 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contracted-block-group @if(!Model.SectionVisibility.CertificatesIsVisible) {<text>section-not-visible</text>}">
-                                        @if (Model.CertificateBlocks.Count > 0)
-                                        {
-                                            foreach (var block in Model.CertificateBlocks)
+                            <div class="summary-block-wrapper @if(!Model.SectionVisibility.CertificatesIsVisible) {<text>section-not-visible</text>}">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contracted-block-group">
+                                            @if (Model.CertificateBlocks.Count > 0)
                                             {
-                                                @Html.Partial("_StudyBlock", block);
+                                                foreach (var block in Model.CertificateBlocks)
+                                                {
+                                                    @Html.Partial("_SummaryBlock", block);
+                                                }
                                             }
-                                        }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -129,23 +131,24 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contracted-block-group @if(!Model.SectionVisibility.WorkExperiencesIsVisible) {<text>section-not-visible</text>}">
-                                        @if (Model.WorkExperienceBlocks.Count > 0)
-                                        {
-                                            foreach (var block in Model.WorkExperienceBlocks)
+                            <div class="summary-block-wrapper @if(!Model.SectionVisibility.WorkExperiencesIsVisible) {<text>section-not-visible</text>}">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contracted-block-group">
+                                            @if (Model.WorkExperienceBlocks.Count > 0)
                                             {
-                                                @Html.Partial("_StudyBlock", block);
+                                                foreach (var block in Model.WorkExperienceBlocks)
+                                                {
+                                                    @Html.Partial("_SummaryBlock", block);
+                                                }
                                             }
-                                        }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -164,23 +167,24 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contracted-block-group @if(!Model.SectionVisibility.LanguagesIsVisible) {<text>section-not-visible</text>}">
-                                        @if (Model.LanguageBlocks.Count > 0)
-                                        {
-                                            foreach (var block in Model.LanguageBlocks)
+                            <div class="summary-block-wrapper @if(!Model.SectionVisibility.LanguagesIsVisible) {<text>section-not-visible</text>}">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contracted-block-group">
+                                            @if (Model.LanguageBlocks.Count > 0)
                                             {
-                                                @Html.Partial("_StudyBlock", block);
+                                                foreach (var block in Model.LanguageBlocks)
+                                                {
+                                                    @Html.Partial("_SummaryBlock", block);
+                                                }
                                             }
-                                        }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -198,23 +202,24 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contracted-block-group @if(!Model.SectionVisibility.SkillsIsVisible) {<text>section-not-visible</text>}">
-                                        @if (Model.SkillBlocks.Count > 0)
-                                        {
-                                            foreach (var block in Model.SkillBlocks)
+                            <div class="summary-block-wrapper @if(!Model.SectionVisibility.SkillsIsVisible) {<text>section-not-visible</text>}">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contracted-block-group">
+                                            @if (Model.SkillBlocks.Count > 0)
                                             {
-                                                @Html.Partial("_StudyBlock", block);
+                                                foreach (var block in Model.SkillBlocks)
+                                                {
+                                                    @Html.Partial("_SummaryBlock", block);
+                                                }
                                             }
-                                        }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -232,23 +237,24 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contracted-block-group @if(!Model.SectionVisibility.InterestsIsVisible) {<text>section-not-visible</text>}">
-                                        @if (Model.InterestBlocks.Count > 0)
-                                        {
-                                            foreach (var block in Model.InterestBlocks)
+                            <div class="summary-block-wrapper @if(!Model.SectionVisibility.InterestsIsVisible) {<text>section-not-visible</text>}">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contracted-block-group">
+                                            @if (Model.InterestBlocks.Count > 0)
                                             {
-                                                @Html.Partial("_StudyBlock", block);
+                                                foreach (var block in Model.InterestBlocks)
+                                                {
+                                                    @Html.Partial("_SummaryBlock", block);
+                                                }
                                             }
-                                        }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -266,23 +272,24 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contracted-block-group @if(!Model.SectionVisibility.PersonalReferencesIsVisible) {<text>section-not-visible</text>}">
-                                        @if (Model.PersonalReferenceBlocks.Count > 0)
-                                        {
-                                            foreach (var block in Model.PersonalReferenceBlocks)
+                            <div class="summary-block-wrapper @if(!Model.SectionVisibility.InterestsIsVisible) {<text>section-not-visible</text>}">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contracted-block-group">
+                                            @if (Model.PersonalReferenceBlocks.Count > 0)
                                             {
-                                                @Html.Partial("_StudyBlock", block);
+                                                foreach (var block in Model.PersonalReferenceBlocks)
+                                                {
+                                                    @Html.Partial("_SummaryBlock", block);
+                                                }
                                             }
-                                        }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -301,38 +308,37 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contracted-block-group @if(!Model.SectionVisibility.CustomSectionsIsVisible) {<text>section-not-visible</text>}">
-                                        @if (Model.CustomSectionBlocks.Count > 0)
-                                        {
-                                            foreach (var block in Model.CustomSectionBlocks)
+                            <div class="summary-block-wrapper @if(!Model.SectionVisibility.InterestsIsVisible) {<text>section-not-visible</text>}">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contracted-block-group">
+                                            @if (Model.CustomSectionBlocks.Count > 0)
                                             {
-                                                @Html.Partial("_StudyBlock", block);
+                                                foreach (var block in Model.CustomSectionBlocks)
+                                                {
+                                                    @Html.Partial("_SummaryBlock", block);
+                                                }
                                             }
-                                        }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-outline-secondary add-block"><i class="fas fa-plus"></i> Agregar un bloque</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>
                     </div>
                 </div>
                 <div id="navigation_buttons_wrapper">
-                    <div id="navigation_buttons" class="row">
-                        <div class="col-lg-7 col-sm-3">
+                    <div id="navigation_buttons" class="row text-center">
+                        <div class="col">
                             <div class="btn-group">
                                 <button id="previous_page" type="button" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Anterior</button>
+                                <a href="/Curriculum/Finished" class="btn btn-default"><i class="fas fa-save"></i> Visualizar CV</a>
                                 <button id="next_page" type="button" class="btn btn-default">Siguiente <i class="fas fa-arrow-alt-circle-right"></i></button>
                             </div>
-                        </div>
-                        <div class="col-lg-5 col-sm-9 text-right">
-                            <a href="/Curriculum/Finished" class="btn btn-default"><i class="fas fa-save"></i> Visualizar CV</a>
                         </div>
                     </div>
                 </div>

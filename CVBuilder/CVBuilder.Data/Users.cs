@@ -14,13 +14,14 @@ namespace CVBuilder.Data
     
     public partial class Users
     {
-        public int UserID { get; set; }
+        public string Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public Nullable<int> IdentityCard { get; set; }
+        public string Profession { get; set; }
         public byte[] Photo { get; set; }
+        public string MimeType { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public Nullable<int> PostalCode { get; set; }
@@ -28,8 +29,6 @@ namespace CVBuilder.Data
         public Nullable<int> LinePhone { get; set; }
         public Nullable<short> AreaCodeMP { get; set; }
         public Nullable<int> MobilePhone { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public string Nationality { get; set; }
-        public string MimeType { get; set; }
+        public string Country { get; set; }
     }
 }

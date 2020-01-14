@@ -29,6 +29,7 @@ namespace CVBuilder.ViewModels.Curriculum
         {
             base.FormId = FormIds.Skills;
             base.Type = FormType.ADD;
+            this.IsVisible = true;
             Levels = LevelsBox();
         }
 

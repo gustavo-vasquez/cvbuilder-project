@@ -24,6 +24,7 @@ namespace CVBuilder.ViewModels.Curriculum
         {
             base.FormId = FormIds.CustomSections;
             base.Type = FormType.ADD;
+            this.IsVisible = true;
         }
     }
 }

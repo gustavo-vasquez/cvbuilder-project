@@ -8,11 +8,16 @@
         @Html.HiddenFor(m => m.WorkExperienceID)
         @Html.HiddenFor(m => m.Type)
         <div class="row">
-            <div class="col">
+            <div class="col-10">
                 <div class="custom-control custom-switch pb-4">
                     @Html.CheckBoxFor(m => m.IsVisible, new { @class = "custom-control-input" })
                     <label class="custom-control-label" for="IsVisible">Bloque visible</label>
                 </div>
+            </div>
+            <div class="col-2 text-right">
+                <button type="button" class="btn btn-sm btn-outline-secondary border-0 close-block" title="Cerrar">
+                    <i class="fas fa-times h4 mb-0"></i>
+                </button>
             </div>
         </div>
 

@@ -457,7 +457,7 @@
     <Content Include="Views\Curriculum\_InterestsForm.cshtml" />
     <Content Include="Views\Curriculum\_PersonalReferencesForm.cshtml" />
     <Content Include="Views\Curriculum\_CustomSectionsForm.cshtml" />
-    <Content Include="Views\Curriculum\_StudyBlock.cshtml" />
+    <Content Include="Views\Curriculum\_SummaryBlock.cshtml" />
     <Content Include="Views\Curriculum\Finished.cshtml" />
     <Content Include="Views\Curriculum\_ClassicTemplate.cshtml" />
     <Content Include="Views\Curriculum\_ElegantTemplate.cshtml" />

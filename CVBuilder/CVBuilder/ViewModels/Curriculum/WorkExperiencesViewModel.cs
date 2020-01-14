@@ -44,6 +44,7 @@ namespace CVBuilder.ViewModels.Curriculum
         {
             base.FormId = FormIds.WorkExperiences;
             base.Type = FormType.ADD;
+            this.IsVisible = true;
         }
     }
 }

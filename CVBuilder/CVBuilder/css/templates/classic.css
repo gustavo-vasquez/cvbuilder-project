@@ -46,7 +46,7 @@
 }
 
 .page .cv-block .block-title, .page .block-title {
-    font-family: 'Century Gothic';
+    font-family: 'Century Gothic', 'Catamaran', 'Arial';
     font-size: 1.1rem;
     overflow-wrap: break-word;
 }

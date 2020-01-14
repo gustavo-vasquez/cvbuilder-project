@@ -18,17 +18,23 @@
                     @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })
                 </div>
+                <div class="form-group">
+                    <label>Profesión</label>
+                    @Html.TextBoxFor(m => m.Profession, new { @class = "form-control" })
+                    <small class="form-text text-muted">¿A qué se dedica?</small>
+                </div>
             </div>
             <div class="col-lg-5">
                 <div class="form-group text-center">
                     @Html.TextBoxFor(m => m.UploadedPhoto, new { type = "file", @class = "d-none" })
-                    <button type="button" class="btn btn-outline-success profile-photo" style="background-image: url(@Model.Photo);"></button>
+                    @if(Model.Photo != null){<button type="button" class="btn btn-outline-success profile-photo" style="background-image: url(@Model.Photo);"></button>}
+                    else{<button type="button" class="btn btn-outline-success profile-photo"></button>}
                 </div>
                 @Html.ValidationMessageFor(m => m.UploadedPhoto, null, new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="row">
+        @*<div class="row">
             <div class="col-lg-7">
                 <div class="form-group">
                     <label>Fecha de nacimiento</label>
@@ -55,7 +61,7 @@
                     <small class="form-text text-muted">¿A qué se dedica?</small>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="row">
             <div class="col">

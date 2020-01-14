@@ -536,9 +536,8 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
 .btn-default {
     color: white;
     background-color: #50b35f;
-    /*background-image: linear-gradient(180deg, #23b355 30%, #5c9a5e 60%, #23b347 90%);*/
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);*/
 }
 
 .btn-default:hover:not(:disabled) {

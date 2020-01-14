@@ -48,7 +48,7 @@
 
 .cv-header {
     background-color: #2b3033;
-    height: 171.58px;
+    max-height: 171.58px;
 }
 
 .cv-header img {
@@ -64,8 +64,13 @@
 
 .cv-legend {
     background-color: #f5f5f5;
-    padding-top: 0.5rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
     text-overflow: ellipsis;
+}
+
+.cv-legend > h4 {
+    margin-bottom: 0;
 }
 
 .highlight {

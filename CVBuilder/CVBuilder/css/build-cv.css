@@ -95,6 +95,10 @@
     pointer-events: none;
 }
 
+.summary-block-wrapper {
+    overflow: hidden;
+}
+
 .contracted-block h5 {
     font-size: 17px;
 	position: relative;
@@ -115,10 +119,10 @@
 }
 
 form[id$=_form] {
-  	animation-name: slideUp;
+  	animation-name: slideDown;
   	animation-duration: 3.5s;
   	animation-iteration-count: 1;
-  	-webkit-animation-name: slideUp;
+  	-webkit-animation-name: slideDown;
   	-webkit-animation-duration: 3.5s;
   	-webkit-animation-iteration-count: 1;
 }

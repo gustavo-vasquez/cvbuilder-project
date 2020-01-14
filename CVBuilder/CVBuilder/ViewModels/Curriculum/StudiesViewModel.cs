@@ -43,6 +43,7 @@ namespace CVBuilder.ViewModels.Curriculum
         {
             base.FormId = FormIds.Studies;
             base.Type = FormType.ADD;
+            this.IsVisible = true;
         }
     }
 }

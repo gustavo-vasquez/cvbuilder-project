@@ -81,7 +81,7 @@ $(document).ready(function () {
 	        type: "GET",
 	        data: { section: section },
 	        success: function (result, status, xhr) {
-	            $('#' + section + ' .contracted-block-group').toggleClass('section-not-visible');
+	            $('#' + section + ' .summary-block-wrapper').toggleClass('section-not-visible');
 	        },
 	        error: function (event, xhr, options, exc) {
 	            alert('Error al intentar cambiar visibilidad de la sección.');
@@ -327,7 +327,11 @@ function profilePicturePreview(e) {
         alert("Tu navegador no soporta File API.");
 }
 
+
 function getSectionForm() {
+    $('form[id$=_form]:not(form[id^=personal_details])').remove();
+    $('.edit-block, .remove-block').removeClass('invisible');
+
     var $addBlockButton = $(this);
     const section = $addBlockButton.closest('section').attr('id');
 
@@ -352,7 +356,7 @@ function getSectionForm() {
                 $('#' + section).on('change', '#InProgress', function () { toggleCertificateYear(section, this); });
             }
             
-            $('.remove-form-block').on('click', { addBlockButton: $addBlockButton }, removeNewBlock);
+            $('#' + section + '_form .remove-form-block, #' + section + '_form .close-block').on('click', { addBlockButton: $addBlockButton }, removeNewBlock);
         },
         complete: function (xhr, status) {
             splashSpinner(false);
@@ -361,7 +365,11 @@ function getSectionForm() {
 }
 
 function editSectionForm() {
-    var $editBlockButton = $(this);
+    $('form[id$=_form]:not(form[id^=personal_details])').remove();
+    $('.edit-block, .remove-block').removeClass('invisible');
+
+    const $editBlockButton = $(this);
+    const $removeBlockButton = $editBlockButton.siblings('.remove-block');
     const section = $editBlockButton.closest('section').attr('id');
 
     $.ajax({
@@ -377,6 +385,7 @@ function editSectionForm() {
             $editBlockButton.closest('.card-body').append(result);
             $.validator.unobtrusive.parse("form");
             $editBlockButton.toggleClass('invisible');
+            $removeBlockButton.toggleClass('invisible');
             $('#' + section + ' form input:text').first().focus();
 
             if (section === "studies" || section === "work_experiences")
@@ -386,7 +395,16 @@ function editSectionForm() {
                 $('#' + section).on('change', '#InProgress', function () { toggleCertificateYear(section, this); });
             }
 
-            $('.remove-form-block').on('click', function () { $editBlockButton.siblings('.remove-block').trigger('click'); });
+            $('#' + section + '_form .close-block').on('click', function () {
+                $(this).closest('form').remove();
+                $editBlockButton.toggleClass('invisible');
+                $removeBlockButton.toggleClass('invisible');
+                $('#' + section + ' .add-block').removeClass('d-none');
+            });
+
+            $('#' + section + '_form .remove-form-block').on('click', function () {
+                $('#' + section + '_form').prev('.row').find('.remove-block').trigger('click');
+            });
         },
         complete: function (xhr, status) {
             splashSpinner(false);
@@ -394,16 +412,36 @@ function editSectionForm() {
     });
 }
 
-function toggleCertificateYear(section, inProgress) {
-    if (inProgress.checked)
-        $('#' + section + ' #Year').addClass('invisible');
-    else
-        $('#' + section + ' #Year').removeClass('invisible');
+function removeBlock() {
+    const $this = $(this);
+    var r = confirm(unescape('%BF') + "Est" + unescape('%E1') + " seguro?");
+
+    if (r) {
+        $.ajax({
+            url: "/Curriculum/RemoveBlock",
+            type: "POST",
+            data: { section: $this.closest('section').attr('id'), id: $this.data('id') },
+            success: function (result, status, xhr) {
+                $this.closest(".contracted-block").fadeOut(function () { $this.closest(".contracted-block").remove(); });
+            },
+            error: function (event, xhr, options, exc) {
+                alert(xhr);
+            }
+        });
+    }
 }
 
 function removeNewBlock(e) {
     $(this).closest('form').remove();
     e.data.addBlockButton.toggleClass('d-none');
+}
+
+
+function toggleCertificateYear(section, inProgress) {
+    if (inProgress.checked)
+        $('#' + section + ' #Year').addClass('invisible');
+    else
+        $('#' + section + ' #Year').removeClass('invisible');
 }
 
 function successfulMessage(result, status, xhr) {
@@ -427,43 +465,25 @@ function onSectionFormSuccessful(result, status, xhr) {
         contentType: "application/x-www-form-urlencoded",
         dataType: "html",
         success: function (vresult, status, xhr) {
-                switch(result.mode) {
-                    case 0:
-                        $form.fadeOut(function () {
-                            $('#' + section + ' .add-block').toggleClass('d-none');
-                            $('#' + section + ' .contracted-block-group').append(vresult);
-                            $form.remove();
-                        });
-                        break;
-                    case 1:
-                        const $block = $form.closest('.contracted-block');
-                        const $nextBlock = $block.next();
-                        $block.remove();
-                        $nextBlock.length > 0 ? $nextBlock.before(vresult) : $('#' + section + ' .contracted-block-group').append(vresult);
-                        break;
-                    default:
-                        break;
-                }
-                
-                
+            switch(result.mode) {
+                case 0:
+                    $form.fadeOut(function () {
+                        $('#' + section + ' .add-block').toggleClass('d-none');
+                        $('#' + section + ' .contracted-block-group').append(vresult);
+                        $form.remove();
+                    });
+                    break;
+                case 1:
+                    const $block = $form.closest('.contracted-block');
+                    const $nextBlock = $block.next();
+                    $block.remove();
+                    $nextBlock.length > 0 ? $nextBlock.before(vresult) : $('#' + section + ' .contracted-block-group').append(vresult);
+                    break;
+                default:
+                    break;
+            }
         }
     });
-}
-
-function removeBlock() {
-    const $this = $(this);
-    var r = confirm(unescape('%BF') + "Est" + unescape('%E1') + " seguro?");
-
-    if (r) {
-        $.ajax({
-            url: "/Curriculum/RemoveBlock",
-            type: "POST",
-            data: { section: $this.closest('section').attr('id'), id: $this.data('id') },
-            success: function (result, status, xhr) {
-                $this.closest(".contracted-block").fadeOut(function () { $this.closest(".contracted-block").remove(); });
-            }
-        });
-    }
 }
 
 function monthBoxActions() {
