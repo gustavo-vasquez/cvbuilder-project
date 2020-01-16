@@ -54,19 +54,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
-                <div class="form-group">
-                    <label>Profesión</label>
-                    @Html.TextBoxFor(m => m.Profession, new { @class = "form-control" })
-                    <small class="form-text text-muted">¿A qué se dedica?</small>
-                </div>
-            </div>
         </div>*@
 
         <div class="row">
             <div class="col">
-                <div class="form-group">
-                    <label>Resumen profesional <a href="#" class="rename-title"><i class="fas fa-pencil-alt"></i> Editar</a></label>
+                <div id="summary_wrapper" class="form-group">
+                    <div id="summary_title">
+                        @if (Model.SummaryCustomTitle == null) {<label>Resumen profesional</label>} else {<label>@Model.SummaryCustomTitle</label>}
+                        <button id="rename_title" type="button" class="btn btn-sm btn-outline-info"><i class="fas fa-pencil-alt"></i> Editar</button>
+                    </div>
                     @Html.TextAreaFor(m => m.Summary, new { @class = "form-control", rows = "3", placeholder = "Máximo 300 caracteres..." })
                     @Html.ValidationMessageFor(m => m.Summary, null, new { @class = "text-danger" })
                     <div class="col-lg-5 custom-control custom-switch">
@@ -208,6 +204,7 @@
             </div>
         </div>
     </fieldset>
+    <hr />
     <div class="row">
         <div class="col text-center">
             <button type="submit" class="btn btn-success">Guardar cambios</button>

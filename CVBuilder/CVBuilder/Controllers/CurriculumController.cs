@@ -67,18 +67,21 @@ namespace CVBuilder.Controllers
                 default: break;
             }
 
-            return Json(new { formid = "#" + model.FormId });
+            //return Json(new { formid = "#" + model.FormId });
+            return Content("successful");
+        }
+
+        [HttpGet]
+        public string SetSummaryCustomTitle(string newTitle)
+        {
+            return _curriculumServices.PersonalDetails.SetNewSummaryTitle(_curriculumServices.GetCurriculumId(User.Identity.GetUserId()), newTitle);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Studies(StudiesViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                //BuildViewModel fullModel = new BuildViewModel();
-                //return PartialView("_StudiesForm");
-            }
+            if (!ModelState.IsValid) { }
             
             StudiesDTO dto = Mapping.Mapper.Map<StudiesViewModel, StudiesDTO>(model);
             switch (model.Type)

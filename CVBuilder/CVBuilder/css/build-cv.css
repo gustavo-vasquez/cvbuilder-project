@@ -82,8 +82,18 @@
 	content: "Subir foto";
 }
 
-.rename-title {
+#summary_wrapper > .input-group {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#rename_title {
     padding: 0 0.5rem;
+    margin-left: 0.5rem;
+}
+
+#change_summary_title, #cancel_summary_title {
+    width: 3rem;
 }
 
 .custom-control-label {
@@ -168,6 +178,20 @@ form[id$=_form] {
     position: absolute;
     right: 0.4rem;
     top: 50%;
+}
+
+#successfulMessage {
+    position: fixed;
+    z-index: 999;
+    top: 8%;
+    right: 0;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    animation-name: slideLeft;
+  	animation-duration: 3.5s;
+  	animation-iteration-count: 1;
+  	-webkit-animation-name: slideLeft;
+  	-webkit-animation-duration: 3.5s;
+  	-webkit-animation-iteration-count: 1;
 }
 
 /*@media (min-width: 576px) {

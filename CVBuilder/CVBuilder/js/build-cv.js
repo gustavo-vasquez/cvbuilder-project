@@ -70,6 +70,7 @@ $(document).ready(function () {
 		}
 	});
 
+	$('#rename_title').on('click', getSummaryCustomTitle);
 	$('.profile-photo').on('click', function () { $('#UploadedPhoto').trigger('click') });
 	$('#UploadedPhoto').on('change', profilePicturePreview);
 
@@ -250,6 +251,24 @@ $.fn.scrollStopped = function (callback) {
 
 function isEmptyOrSpaces(str) {
     return str === null || str.match(/^ *$/) !== null;
+}
+
+function getSummaryCustomTitle() {
+    var $summaryTitle = $('#summary_title > label');
+    $('#summary_title').addClass('d-none');
+    $('#summary_wrapper').prepend('<div id="custom_summary_title" class="col-lg-7 input-group mb-2"><input type="text" class="form-control form-control-sm" id="custom_title" placeholder="Nombre personalizado" value="' + $summaryTitle.text() + '"><div class="input-group-append"><button id="change_summary_title" type="button" class="btn btn-sm btn-success" title="Cambiar"><i class="fas fa-check"></i></button></div><div class="input-group-append"><button id="cancel_summary_title" type="button" class="btn btn-sm btn-danger" title="Cancelar"><i class="fas fa-times"></i></button></div></div>');
+
+    function showSummaryTitle() {
+        $('#custom_summary_title').remove();
+        $('#summary_title').removeClass('d-none');
+    }
+
+    $('#change_summary_title').one('click', function () {
+        $.get("/Curriculum/SetSummaryCustomTitle", { newTitle: $('#custom_title').val() }, showSummaryTitle)
+            .done(function (result) { $summaryTitle.text(result); })
+            .fail(function () { alert("Error al cambiar el nombre."); });
+    });
+    $('#cancel_summary_title').one('click', showSummaryTitle);
 }
 
 $('.btn-wizard-arrow').on('click', function (e) {
@@ -444,10 +463,13 @@ function toggleCertificateYear(section, inProgress) {
         $('#' + section + ' #Year').removeClass('invisible');
 }
 
-function successfulMessage(result, status, xhr) {
-    $form = $(result.formid);
-    $form.append('<div id="successfulMessage" class="alert alert-success text-center mt-3 mb-0 style="display: none;">' + unescape('%A1') + 'Cambios guardados!</div>');
-    $('#successfulMessage').delay(4000).fadeOut('slow', function () { $('#successfulMessage').remove(); });
+function successfulMessage() {
+    messageElement = $('#successfulMessage');
+    if (messageElement.length)
+        messageElement.remove();
+
+    $('.building-cv').prepend('<div id="successfulMessage" class="alert alert-success text-center">' + unescape('%A1') + 'Cambios guardados!</div>');
+    $('#successfulMessage').delay(6000).fadeOut('slow', function () { $('#successfulMessage').remove(); });
 }
 
 function onErrorSubmit(event, xhr, options, exc) {
@@ -472,12 +494,14 @@ function onSectionFormSuccessful(result, status, xhr) {
                         $('#' + section + ' .contracted-block-group').append(vresult);
                         $form.remove();
                     });
+                    successfulMessage();
                     break;
                 case 1:
                     const $block = $form.closest('.contracted-block');
                     const $nextBlock = $block.next();
                     $block.remove();
                     $nextBlock.length > 0 ? $nextBlock.before(vresult) : $('#' + section + ' .contracted-block-group').append(vresult);
+                    successfulMessage();
                     break;
                 default:
                     break;
