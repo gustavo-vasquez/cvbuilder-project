@@ -16,7 +16,7 @@ namespace CVBuilder.automapper
         public MappingWebProfile()
         {
             CreateMap<PersonalDetailsViewModel, PersonalDetailsDTO>()
-                .ForMember(dest => dest.SummaryIsVisible, act => act.UseValue(true))
+                //.ForMember(dest => dest.SummaryIsVisible, act => act.UseValue(true))
                 .ForMember(dest => dest.UploadedPhoto, act => act.ResolveUsing(src => { return PostedFileToByteArray(src.UploadedPhoto); }))
                 .ForMember(dest => dest.MimeType, act => act.ResolveUsing(src => { return src.UploadedPhoto != null ? src.UploadedPhoto.ContentType : null; }))
                 .ForMember(dest => dest.Photo, act => act.Ignore());

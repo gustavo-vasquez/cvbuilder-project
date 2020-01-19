@@ -94,6 +94,7 @@ namespace CVBuilder.ViewModels.Curriculum
         {
             base.FormId = FormIds.PersonalDetails;
             base.Type = FormType.ADD;
+            this.SummaryIsVisible = true;
         }
     }
 }

@@ -254,21 +254,35 @@ function isEmptyOrSpaces(str) {
 }
 
 function getSummaryCustomTitle() {
-    var $summaryTitle = $('#summary_title > label');
-    $('#summary_title').addClass('d-none');
-    $('#summary_wrapper').prepend('<div id="custom_summary_title" class="col-lg-7 input-group mb-2"><input type="text" class="form-control form-control-sm" id="custom_title" placeholder="Nombre personalizado" value="' + $summaryTitle.text() + '"><div class="input-group-append"><button id="change_summary_title" type="button" class="btn btn-sm btn-success" title="Cambiar"><i class="fas fa-check"></i></button></div><div class="input-group-append"><button id="cancel_summary_title" type="button" class="btn btn-sm btn-danger" title="Cancelar"><i class="fas fa-times"></i></button></div></div>');
+    var summaryTitle = document.getElementById("summary_title");
+    var customSummaryTitle = document.getElementById("custom_summary_title");
+    var summaryCustomTitle = document.getElementById("SummaryCustomTitle");
 
-    function showSummaryTitle() {
-        $('#custom_summary_title').remove();
-        $('#summary_title').removeClass('d-none');
+    summaryTitle.classList.add("d-none");
+    customSummaryTitle.classList.remove("d-none");
+
+    function showSummaryTitle(e) {
+        switch (e.data.change) {
+            case true:
+                if ($(summaryCustomTitle).valid())
+                    summaryTitle.getElementsByTagName("label")[0].textContent = summaryCustomTitle.value;
+                else
+                    return;
+                break;
+            case false:
+                summaryCustomTitle.value = summaryTitle.getElementsByTagName("label")[0].textContent;
+                $(summaryCustomTitle).valid();
+                break;
+            default:
+                break;
+        }
+
+        customSummaryTitle.classList.add("d-none");
+        summaryTitle.classList.remove("d-none");
     }
 
-    $('#change_summary_title').one('click', function () {
-        $.get("/Curriculum/SetSummaryCustomTitle", { newTitle: $('#custom_title').val() }, showSummaryTitle)
-            .done(function (result) { $summaryTitle.text(result); })
-            .fail(function () { alert("Error al cambiar el nombre."); });
-    });
-    $('#cancel_summary_title').one('click', showSummaryTitle);
+    $('#change_summary_title').on('click', { change: true }, showSummaryTitle);
+    $('#cancel_summary_title').on('click', { change: false }, showSummaryTitle);
 }
 
 $('.btn-wizard-arrow').on('click', function (e) {
@@ -407,8 +421,11 @@ function editSectionForm() {
             $removeBlockButton.toggleClass('invisible');
             $('#' + section + ' form input:text').first().focus();
 
-            if (section === "studies" || section === "work_experiences")
+            if (section === "studies" || section === "work_experiences") {
+                monthBoxActions(document.getElementById("StartMonth"));
+                monthBoxActions(document.getElementById("EndMonth"));
                 $('#StartMonth, #EndMonth').on('change', monthBoxActions);
+            }   
             else if (section === "certificates") {
                 toggleCertificateYear(section, document.getElementById('InProgress'));
                 $('#' + section).on('change', '#InProgress', function () { toggleCertificateYear(section, this); });
@@ -510,10 +527,17 @@ function onSectionFormSuccessful(result, status, xhr) {
     });
 }
 
-function monthBoxActions() {
-    const selectId = this.id;
-    const optionValue = this.value;
-    var $targetComboBox;
+function monthBoxActions(monthBox) {
+    var selectId, optionValue, $targetComboBox;
+
+    if (monthBox instanceof HTMLElement) {
+        selectId = monthBox.id;
+        optionValue = monthBox.value;
+    }
+    else {
+        selectId = this.id;
+        optionValue = this.value;
+    }
     
     switch(selectId) {
         case "StartMonth":

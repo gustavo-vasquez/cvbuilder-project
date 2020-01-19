@@ -71,12 +71,6 @@ namespace CVBuilder.Controllers
             return Content("successful");
         }
 
-        [HttpGet]
-        public string SetSummaryCustomTitle(string newTitle)
-        {
-            return _curriculumServices.PersonalDetails.SetNewSummaryTitle(_curriculumServices.GetCurriculumId(User.Identity.GetUserId()), newTitle);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Studies(StudiesViewModel model)

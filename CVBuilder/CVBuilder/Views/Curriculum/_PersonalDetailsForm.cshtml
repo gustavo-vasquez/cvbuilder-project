@@ -1,4 +1,5 @@
 ﻿@model CVBuilder.ViewModels.Curriculum.PersonalDetailsViewModel
+@using CVBuilder.Common
 
 @using (Ajax.BeginForm("PersonalDetails", "Curriculum", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "successfulMessage", OnFailure = "onErrorSubmit" }, new { id = Model.FormId, enctype = "multipart/form-data" }))
 {
@@ -59,8 +60,14 @@
         <div class="row">
             <div class="col">
                 <div id="summary_wrapper" class="form-group">
+                    <div id="custom_summary_title" class="col-lg-7 input-group mb-2 d-none">
+                        @Html.TextBoxFor(m => m.SummaryCustomTitle, new { @class = "form-control form-control-sm", placeholder = "Nombre personalizado" })
+                        <div class="input-group-append"><button id="change_summary_title" type="button" class="btn btn-sm btn-success" title="Cambiar"><i class="fas fa-check"></i></button></div>
+                        <div class="input-group-append"><button id="cancel_summary_title" type="button" class="btn btn-sm btn-danger" title="Cancelar"><i class="fas fa-times"></i></button></div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.SummaryCustomTitle, null, new { @class = "text-danger" })
                     <div id="summary_title">
-                        @if (Model.SummaryCustomTitle == null) {<label>Resumen profesional</label>} else {<label>@Model.SummaryCustomTitle</label>}
+                        @if (Model.SummaryCustomTitle == null) {<label>@CurriculumGlobals.DEFAULT_SUMMARY_TITLE</label>} else {<label>@Model.SummaryCustomTitle</label>}
                         <button id="rename_title" type="button" class="btn btn-sm btn-outline-info"><i class="fas fa-pencil-alt"></i> Editar</button>
                     </div>
                     @Html.TextAreaFor(m => m.Summary, new { @class = "form-control", rows = "3", placeholder = "Máximo 300 caracteres..." })
@@ -207,7 +214,7 @@
     <hr />
     <div class="row">
         <div class="col text-center">
-            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            <button type="submit" class="btn btn-block btn-success">Guardar cambios</button>
         </div>
     </div>
 }

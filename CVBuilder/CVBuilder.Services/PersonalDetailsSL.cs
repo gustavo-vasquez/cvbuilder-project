@@ -36,10 +36,5 @@ namespace CVBuilder.Services
 
             return null;
         }
-
-        public string SetNewSummaryTitle(int curriculumId, string newTitle)
-        {
-            return _dataLayer.SetNewSummaryTitle(curriculumId, newTitle);
-        }
     }
 }

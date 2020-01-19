@@ -86,14 +86,5 @@ namespace CVBuilder.Data
         {
             return _db.Context.PersonalDetails.Where(p => p.ID_Curriculum == id).FirstOrDefault();
         }
-
-        public string SetNewSummaryTitle(int curriculumId, string newTitle)
-        {
-            PersonalDetails details = _db.Context.PersonalDetails.Where(p => p.ID_Curriculum == curriculumId).Single();
-            details.SummaryCustomTitle = newTitle;
-            _db.Context.SaveChanges();
-
-            return newTitle;
-        }
     }
 }
