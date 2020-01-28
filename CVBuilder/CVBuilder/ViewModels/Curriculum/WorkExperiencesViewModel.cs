@@ -27,12 +27,18 @@ namespace CVBuilder.ViewModels.Curriculum
         [Required(ErrorMessage = "Completar este campo.")]
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
         public string Company { get; set; }
+
+        [RequiredMonthPeriod]
         public string StartMonth { get; set; }
 
+        [RequiredYearPeriod("StartMonth")]
         [StartYearLessThan("EndYear")]
         public int? StartYear { get; set; }
+
+        [RequiredMonthPeriod]
         public string EndMonth { get; set; }
 
+        [RequiredYearPeriod("EndMonth")]
         [EndYearGreaterThan("StartYear")]
         public int? EndYear { get; set; }
         

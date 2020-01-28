@@ -366,6 +366,8 @@
     <Compile Include="custom_validations\PostedFileExtensionsAttribute.cs" />
     <Compile Include="custom_validations\RequiredFromComboboxAttribute.cs" />
     <Compile Include="custom_validations\RequiredIfNotAttribute.cs" />
+    <Compile Include="custom_validations\RequiredMonthPeriodAttribute.cs" />
+    <Compile Include="custom_validations\RequiredYearPeriodAttribute.cs" />
     <Compile Include="custom_validations\StartYearLessThanAttribute.cs" />
     <Compile Include="enums\DateType.cs" />
     <Compile Include="enums\FormIds.cs" />

@@ -93,3 +93,32 @@ $.validator.addMethod('validaterequiredfromcombobox', function (value, element, 
 
     return true;
 });
+
+$.validator.unobtrusive.adapters.add('validaterequiredmonthperiod', [], function (options) {
+    options.rules['validaterequiredmonthperiod'] = {};
+    options.messages['validaterequiredmonthperiod'] = options.message;
+});
+
+$.validator.addMethod('validaterequiredmonthperiod', function (value, element, params) {
+    if (value === "none")
+        return false;
+
+    return true;
+});
+
+$.validator.unobtrusive.adapters.add('validaterequiredyearperiod', ['monthproperty'], function (options) {
+    var params = {
+        monthProperty: options.params.monthproperty
+    };
+    options.rules['validaterequiredyearperiod'] = params;
+    options.messages['validaterequiredyearperiod'] = options.message;
+});
+
+$.validator.addMethod('validaterequiredyearperiod', function (value, element, params) {
+    const monthValue = document.getElementById(params.monthProperty).value;
+
+    if (value === "0" && monthValue != "not_show" && monthValue != "present")
+        return false;
+
+    return true;
+});
