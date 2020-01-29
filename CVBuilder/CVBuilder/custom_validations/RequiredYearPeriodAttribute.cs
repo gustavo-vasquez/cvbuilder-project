@@ -22,7 +22,7 @@ namespace CVBuilder.custom_validations
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             ErrorMessage = ErrorMessageString;
-            string currentValue = (string)value;
+            int? currentValue = (int?)value;
 
             var comparisonProperty = validationContext.ObjectType.GetProperty(_comparisonProperty);
 
@@ -31,7 +31,7 @@ namespace CVBuilder.custom_validations
 
             var comparisonValue = (string)comparisonProperty.GetValue(validationContext.ObjectInstance);
 
-            if (currentValue == "0" && comparisonValue != MonthOptions.NotShow && comparisonValue != MonthOptions.Present)
+            if (currentValue == 0 && comparisonValue != MonthOptions.NotShow && comparisonValue != MonthOptions.Present)
                 return new ValidationResult(ErrorMessage);
 
             return ValidationResult.Success;

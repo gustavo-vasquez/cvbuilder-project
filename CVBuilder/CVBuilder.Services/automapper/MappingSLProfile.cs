@@ -16,14 +16,10 @@ namespace CVBuilder.Services.automapper
         {
             CreateMap<PersonalDetailsDTO, PersonalDetails>()
                 .ForMember(dest => dest.Photo, act => act.MapFrom(src => src.UploadedPhoto))
-                //.ForMember(dest => dest.BirthDate, act => act.ResolveUsing(src => { return GetBirthdateFromValues(src.Year, src.Month, src.Day); }))
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
 
             CreateMap<PersonalDetails, PersonalDetailsDTO>()
                 .ForMember(dest => dest.Photo, act => act.ResolveUsing(src => { return ByteArrayToBase64(src.Photo, src.MimeType); }));
-                //.ForMember(dest => dest.Year, act => act.ResolveUsing(src => { return src.BirthDate != null ? src.BirthDate.Value.Year : (int?)null; }))
-                //.ForMember(dest => dest.Month, act => act.ResolveUsing(src => { return src.BirthDate != null ? src.BirthDate.Value.ToString("MMMM", System.Globalization.CultureInfo.InvariantCulture).ToLower() : null; }))
-                //.ForMember(dest => dest.Day, act => act.ResolveUsing(src => { return src.BirthDate != null ? src.BirthDate.Value.Day : (int?)null; }));
 
             CreateMap<StudiesDTO, Studies>()
                 .ForMember(dest => dest.Curriculum, act => act.Ignore());
@@ -77,20 +73,5 @@ namespace CVBuilder.Services.automapper
 
             return null;
         }
-
-        //private DateTime? GetBirthdateFromValues(int? year, string month, int? day)
-        //{
-        //    try
-        //    {
-        //        if (year == 0 || month == Common.MonthOptions.None || day == 0)
-        //            return null;
-
-        //        return Convert.ToDateTime(year + "-" + month + "-" + day);
-        //    }
-        //    catch
-        //    {
-        //        return null;
-        //    }
-        //}
     }
 }

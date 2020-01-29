@@ -12,8 +12,6 @@ namespace CVBuilder.ViewModels.Curriculum
 {
     public class PersonalDetailsViewModel : SectionViewModelBase
     {
-        public readonly DateDropdownList BirthDate = new DateDropdownList(DateType.BIRTHDAY);
-
         public int PersonalDetailsID { get; set; }
 
         [Required(ErrorMessage = "Completar este campo.")]

@@ -24,7 +24,9 @@ namespace CVBuilder.automapper
             CreateMap<PersonalDetailsDTO, PersonalDetailsViewModel>()
                 .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
 
-            CreateMap<StudiesViewModel, StudiesDTO>();
+            CreateMap<StudiesViewModel, StudiesDTO>()
+                .ForMember(dest => dest.StartYear, act => act.ResolveUsing(src => { return (src.StartMonth == MonthOptions.NotShow) ? 0 : src.StartYear; }))
+                .ForMember(dest => dest.EndYear, act => act.ResolveUsing(src => { return (src.EndMonth == MonthOptions.NotShow || src.EndMonth == MonthOptions.Present) ? 0 : src.EndYear; }));
 
             CreateMap<StudiesDTO, StudiesViewModel>()
                 .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
@@ -34,7 +36,9 @@ namespace CVBuilder.automapper
             CreateMap<CertificatesDTO, CertificatesViewModel>()
                 .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));
 
-            CreateMap<WorkExperiencesViewModel, WorkExperiencesDTO>();
+            CreateMap<WorkExperiencesViewModel, WorkExperiencesDTO>()
+                .ForMember(dest => dest.StartYear, act => act.ResolveUsing(src => { return (src.StartMonth == MonthOptions.NotShow) ? 0 : src.StartYear; }))
+                .ForMember(dest => dest.EndYear, act => act.ResolveUsing(src => { return (src.EndMonth == MonthOptions.NotShow || src.EndMonth == MonthOptions.Present) ? 0 : src.EndYear; }));
 
             CreateMap<WorkExperiencesDTO, WorkExperiencesViewModel>()
                 .ForMember(dest => dest.Type, act => act.UseValue(FormType.EDIT));

@@ -25,25 +25,9 @@ namespace CVBuilder.ViewModels.Curriculum
 
             if (type != DateType.CERTIFICATE)
             {
-                if (type == DateType.BIRTHDAY)
-                {
-                    // Generación del combo con los dias
-                    IEnumerable<string> days = Enumerable.Range(1, 31).Select(n => n.ToString()).ToList();
-                    Days.Add(new SelectListItem() { Value = "0", Text = "Día", Selected = true });
-
-                    foreach (string day in days)
-                        Days.Add(new SelectListItem() { Value = day, Text = day });
-
-                    // Rango del combo para los años
-                    yearRangeStart = DateTime.Now.Year - 78;
-                    yearRangeCount = (DateTime.Now.Year - 15) - yearRangeStart;
-                }
-                else
-                {
-                    // Rango del combo para los años
-                    yearRangeStart = DateTime.Now.Year - 60;
-                    yearRangeCount = (DateTime.Now.Year - yearRangeStart) + 1;
-                }
+                // Rango del combo para los años
+                yearRangeStart = DateTime.Now.Year - 60;
+                yearRangeCount = (DateTime.Now.Year - yearRangeStart) + 1;
 
                 // Generación del combo con los meses
                 Months.Add(new SelectListItem() { Value = MonthOptions.None, Text = "Mes", Selected = true });
