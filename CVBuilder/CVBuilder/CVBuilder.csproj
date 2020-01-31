@@ -275,6 +275,22 @@
     <Content Include="img\bg-pattern.png" />
     <Content Include="img\demo-screen-1.jpg" />
     <Content Include="img\google-play-badge.svg" />
+    <Content Include="img\previews\1-inicio.png" />
+    <Content Include="img\previews\10-referencias_personales.jpg" />
+    <Content Include="img\previews\11-secciones_personalizadas.jpg" />
+    <Content Include="img\previews\12-cambiar_plantilla.jpg" />
+    <Content Include="img\previews\13-classic.jpg" />
+    <Content Include="img\previews\14-elegant.jpg" />
+    <Content Include="img\previews\15-modern.jpg" />
+    <Content Include="img\previews\16-cv_completado.jpg" />
+    <Content Include="img\previews\2-login_registro.jpg" />
+    <Content Include="img\previews\3-detalles_personales.jpg" />
+    <Content Include="img\previews\4-estudios.jpg" />
+    <Content Include="img\previews\5-certificados_cursos.jpg" />
+    <Content Include="img\previews\6-experiencias_laborales.jpg" />
+    <Content Include="img\previews\7-idiomas.jpg" />
+    <Content Include="img\previews\8-habilidades.jpg" />
+    <Content Include="img\previews\9-intereses.jpg" />
     <Content Include="img\profile.png" />
     <Content Include="img\profile_coat.png" />
     <Content Include="img\spinners\loading.gif" />
@@ -346,6 +362,10 @@
     <Content Include="lib\jspdf.debug.js" />
     <Content Include="lib\simple-line-icons\css\simple-line-icons.css" />
     <Content Include="lib\simple-line-icons\fonts\Simple-Line-Icons.svg" />
+    <Content Include="Sql_script\1-CVBuilder_initialize_database.sql" />
+    <Content Include="Sql_script\2-CVBuilder_Identity_tables.sql" />
+    <Content Include="Sql_script\3-CVBuilder_tables.sql" />
+    <Content Include="Sql_script\4-CVBuilder_stored_procedures.sql" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

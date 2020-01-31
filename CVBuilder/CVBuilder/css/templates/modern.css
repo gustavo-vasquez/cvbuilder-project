@@ -9,10 +9,10 @@
 }
 
 .page > .row:not(:first-child) {
-    height: calc(100% - 171.58px);
-    height: -o-calc(100% - 171.58px); /* opera */
-    height: -webkit-calc(100% - 171.58px); /* google, safari */
-    height: -moz-calc(100% - 171.58px); /* firefox */
+    height: calc(100% - 168.78px);
+    height: -o-calc(100% - 168.78px); /* opera */
+    height: -webkit-calc(100% - 168.78px); /* google, safari */
+    height: -moz-calc(100% - 168.78px); /* firefox */
 }
 
 .page:not(:first-of-type) > .row {
@@ -48,7 +48,7 @@
 
 .cv-header {
     background-color: #2b3033;
-    max-height: 171.58px;
+    max-height: 168.78px;
 }
 
 .cv-header img {
@@ -144,4 +144,8 @@
 .page .right-panel .subtitle {
     color: black;
     margin-bottom: 6px;
+}
+
+.page .right-panel .subtitle > label {
+    margin-bottom: 0;
 }

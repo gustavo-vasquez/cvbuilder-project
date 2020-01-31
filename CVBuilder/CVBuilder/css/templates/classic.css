@@ -41,6 +41,20 @@
     margin-bottom: 0.25rem;
 }
 
+.profession-label {
+    font-size: 13px;
+    color: darkslategray;
+    text-transform: uppercase;
+    position: absolute;
+    right: 1cm;
+    max-width: 200px;
+    text-align: right;
+}
+
+.subtitle > i:not(:first-child) {
+    padding-left: 0.2rem;
+}
+
 .page > .row:not(:first-child) {
     margin-top: 0.5rem;
 }
