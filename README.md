@@ -48,7 +48,7 @@ IMPRIME O DESCARGA COMO PDF
 :-------------------------:
 ![CVBuilder-Tabs](CVBuilder/CVBuilder/img/previews/16-cv_completado.jpg)
 
-| <label>** PLANTILLAS DISPONIBLES **</label> |
+| ** PLANTILLAS DISPONIBLES ** |
 :---------------------------------:
 
 | Classic   |      Elegant      | Modern |
