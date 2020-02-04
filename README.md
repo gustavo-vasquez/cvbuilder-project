@@ -12,7 +12,7 @@ Asistente detallado para la creación de curriculum en línea de forma rápida y
   <li>Imprimir curriculum</li>
 </ul>
 
-## Tecnologías
+## Tecnologías/librerías/plugins
 <ul>
   <li>HTML5</li>
   <li>CSS</li>
@@ -26,6 +26,10 @@ Asistente detallado para la creación de curriculum en línea de forma rápida y
   <li>ASP.NET Identity</li>
   <li>OWIN</li>
   <li>Automapper</li>
+  <li>Font Awesome</li>
+  <li>Jquery Easing</li>
+  <li>dom-to-image</li>
+  <li>jsPDF</li>
 </ul>
 
 PORTADA
