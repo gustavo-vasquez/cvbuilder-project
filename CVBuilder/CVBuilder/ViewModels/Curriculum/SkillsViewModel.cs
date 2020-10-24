@@ -17,11 +17,11 @@ namespace CVBuilder.ViewModels.Curriculum
 
         public int SkillID { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string Name { get; set; }
 
-        [RequiredFromCombobox(ErrorMessage = "Nivel obligatorio.")]
+        [RequiredFromCombobox(ErrorMessage = ValMessages.LEVEL_REQUIRED)]
         public string Level { get; set; }
         public bool IsVisible { get; set; }
 

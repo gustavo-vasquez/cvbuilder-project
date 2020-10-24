@@ -15,16 +15,16 @@ namespace CVBuilder.ViewModels.Curriculum
         public readonly DateDropdownList EndPeriod = new DateDropdownList(DateType.END_PERIOD);
 
         public int StudyID { get; set; }
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string Institute { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string City { get; set; }
 
         [RequiredMonthPeriod]
@@ -41,7 +41,7 @@ namespace CVBuilder.ViewModels.Curriculum
         [EndYearGreaterThan("StartYear")]
         public int? EndYear { get; set; }
 
-        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        [MaxLength(300, ErrorMessage = ValMessages.MAX + "300" + ValMessages.CHARACTERS)]
         public string Description { get; set; }
         public bool IsVisible { get; set; }
 

@@ -53,6 +53,7 @@
 
 .cv-header img {
     width: 100px;
+    height: 100px;
     border: 1px solid lightgray;
 }
 
@@ -63,7 +64,7 @@
 }
 
 .cv-legend {
-    background-color: #f5f5f5;
+    background-color: gainsboro;
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
     text-overflow: ellipsis;
@@ -100,7 +101,6 @@
 
 .page p {
     font-size: 0.85rem;
-    text-align: justify;
     color: #3e3e3e;
     margin-bottom: 0.4rem;
 }

@@ -58,6 +58,7 @@
 
 .left-panel img {
     width: 100px;
+    height: 100px;
     border: 1px solid lightgray;
 }
 
@@ -114,7 +115,6 @@
 
 .page > .row > .right-panel p {
     font-size: 0.85rem;
-    text-align: justify;
     line-height: 1.4;
     margin-bottom: 0;
 }

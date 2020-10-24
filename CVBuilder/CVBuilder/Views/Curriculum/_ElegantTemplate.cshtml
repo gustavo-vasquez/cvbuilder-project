@@ -7,7 +7,7 @@
         <div class="col-4 left-panel">
             <div class="row">
                 <div class="col text-center">
-                    <img class="img-fluid rounded-circle" src="@Model.PersonalDetails.Photo" />
+                    <img class="rounded-circle" src="@Model.PersonalDetails.Photo" />
                 </div>
             </div>
             <div class="row">
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            @if (Model.Skills.Count() > 0)
+            @if (Model.SectionVisibility.SkillsIsVisible && Model.Skills.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -69,7 +69,7 @@
                 }
             }
 
-            @if (Model.Languages.Count() > 0)
+            @if (Model.SectionVisibility.LanguagesIsVisible && Model.Languages.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -156,19 +156,23 @@
                     @if (Model.PersonalDetails.Profession != null) {<h5 class="occupation text-uppercase">@Model.PersonalDetails.Profession</h5>}
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <h1 class="title"><i class="far fa-calendar-check"></i> @(Model.PersonalDetails.SummaryCustomTitle ?? CurriculumGlobals.DEFAULT_SUMMARY_TITLE)</h1>
-                    <hr class="mw-100" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p>@Model.PersonalDetails.Summary</p>
-                </div>
-            </div>
 
-            @if (Model.WorkExperiences.Count() > 0)
+            @if (Model.PersonalDetails.SummaryIsVisible)
+            {
+                <div class="row">
+                    <div class="col">
+                        <h1 class="title"><i class="far fa-calendar-check"></i> @(Model.PersonalDetails.SummaryCustomTitle ?? CurriculumGlobals.DEFAULT_SUMMARY_TITLE)</h1>
+                        <hr class="mw-100" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>@Model.PersonalDetails.Summary</p>
+                    </div>
+                </div>
+            }
+
+            @if (Model.SectionVisibility.WorkExperiencesIsVisible && Model.WorkExperiences.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -192,11 +196,11 @@
                 }
             }
 
-            @if (Model.Certificates.Count() > 0)
+            @if (Model.SectionVisibility.CertificatesIsVisible && Model.Certificates.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
-                        <h1 class="title"><i class="fas fa-graduation-cap"></i> Certificados</h1>
+                        <h1 class="title"><i class="fas fa-graduation-cap"></i> Certificados / Cursos</h1>
                         <hr class="mw-100" />
                     </div>
                 </div>
@@ -231,7 +235,7 @@
                 }
             }
 
-            @if (Model.Studies.Count() > 0)
+            @if (Model.SectionVisibility.StudiesIsVisible && Model.Studies.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -255,7 +259,7 @@
                 }
             }
 
-            @if (Model.PersonalReferences.Count() > 0)
+            @if (Model.SectionVisibility.PersonalReferencesIsVisible && Model.PersonalReferences.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -278,7 +282,7 @@
                 }
             }
 
-            @if (Model.Interests.Count() > 0)
+            @if (Model.SectionVisibility.InterestsIsVisible && Model.Interests.Count() > 0)
             {
                 <div class="row">
                     <div class="col-5">
@@ -299,7 +303,7 @@
                 </div>
             }
 
-            @if (Model.CustomSections.Count() > 0)
+            @if (Model.SectionVisibility.CustomSectionsIsVisible && Model.CustomSections.Count() > 0)
             {
                 foreach (var custom in Model.CustomSections)
                 {

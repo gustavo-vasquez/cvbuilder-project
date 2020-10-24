@@ -12,8 +12,8 @@ namespace CVBuilder.ViewModels.Curriculum
     {
         public int InterestID { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string Name { get; set; }
         public bool IsVisible { get; set; }
 

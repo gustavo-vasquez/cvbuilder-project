@@ -25,12 +25,12 @@
     <!-- Barra de navegación -->
     <nav id="mainNav" class="navbar navbar-expand-lg navbar-light fixed-top navbar-shrink">
         <div class="container justify-content-center">
-            <a class="navbar-brand" href="@Url.Action("Index", "Home")" title="Ir a página principal"><i class="fas fa-pencil-ruler"></i> CVBuilder</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-brand align-middle"><i class="fas fa-pencil-ruler"></i> CVBuilder <i class="fas fa-caret-down"></i></span>
-                <span class="btn btn-sm btn-outline-default btn-myaccount">Acceder <i class="fas fa-sign-in-alt"></i></span>
+                <div class="navbar-brand"><img src="~/img/cvbuilder_icon.png" width="24" alt="cvbuilder_logo" /> CVBuilder</div>
+                @*<span class="btn btn-sm btn-outline-default btn-myaccount">Acceder <i class="fas fa-sign-in-alt"></i></span>*@
             </button>
-            <div id="navbarResponsive" class="collapse navbar-collapse">
+            <div id="navbarResponsive" class="collapse navbar-collapse text-center">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")" title="Ir a página principal"><img src="~/img/cvbuilder_icon.png" width="24" alt="cvbuilder_logo" /> CVBuilder</a>
                 <hr />
                 <ul class="navbar-nav ml-auto text-center">
                     <li class="nav-item">
@@ -49,6 +49,8 @@
                         <a class="nav-link js-scroll-trigger" href="#download">Descargas</a>
                     </li>
                 </ul>
+                <hr />
+                
                 @if (Request.IsAuthenticated)
                 {
                     <div class="btn-group">

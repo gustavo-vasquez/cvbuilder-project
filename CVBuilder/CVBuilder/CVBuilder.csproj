@@ -273,6 +273,7 @@
     <Content Include="img\bg-cta2.jpg" />
     <Content Include="img\bg-pattern-cubes.png" />
     <Content Include="img\bg-pattern.png" />
+    <Content Include="img\cvbuilder_icon.png" />
     <Content Include="img\demo-screen-1.jpg" />
     <Content Include="img\google-play-badge.svg" />
     <Content Include="img\previews\1-inicio.png" />

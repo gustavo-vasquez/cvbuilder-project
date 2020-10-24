@@ -19,6 +19,8 @@ namespace CVBuilder.ViewModels.Account
         public string SurName { get; set; }
 
         public string AvatarUrl { get; set; }
+
+        public string CustomError { get; set; }
     }
 
     public class ExternalLoginListViewModel

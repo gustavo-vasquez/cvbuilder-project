@@ -203,11 +203,7 @@ section h2 {
 }
 
 @media (max-width: 575.98px) {
-    #mainNav > .container > .navbar-brand {
-        display: none;
-    }
-
-    #mainNav > .container > #navbarResponsive > .btn-myaccount {
+    #mainNav > .container > #navbarResponsive > .navbar-brand {
         display: none;
     }
 }

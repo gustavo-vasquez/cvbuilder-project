@@ -6,7 +6,7 @@
     <div class="row cv-header">
         <label class="profession-label">@Model.PersonalDetails.Profession</label>
         <div class="col">
-            <img class="img-fluid rounded-circle" src="@Model.PersonalDetails.Photo" />
+            <img class="rounded-circle" src="@Model.PersonalDetails.Photo" />
             <p class="title">@Model.PersonalDetails.Name @Model.PersonalDetails.LastName</p>
             <p class="subtitle font-weight-bold">@Model.PersonalDetails.Email @if (Model.PersonalDetails.LinePhone != null) {<span> |</span> @Model.PersonalDetails.LinePhone } @if (Model.PersonalDetails.MobilePhone != null) {<span> |</span> @Model.PersonalDetails.MobilePhone }</p>
             <p class="subtitle">
@@ -60,7 +60,7 @@
     {
         <div class="row">
             <div class="col">
-                <h3 class="block-title text-uppercase">Certificados - Cursos</h3>
+                <h3 class="block-title text-uppercase">Certificados / Cursos</h3>
                 <hr class="mw-100 mt-0 mb-0" />
             </div>
         </div>

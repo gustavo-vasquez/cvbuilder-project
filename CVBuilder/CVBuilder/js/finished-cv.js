@@ -9,6 +9,7 @@ $(document).ready(function () {
 });
 
 function analyzePagedCurriculum() {
+    setTimeout(() => {
     var sum = 0;
     var pageBase;
     var heightBase = $('.page').height();
@@ -129,6 +130,7 @@ function analyzePagedCurriculum() {
         default:
             alert("Error, no se pudo analizar el paginado del curriculum.");
     }
+    }, 1000);
 }
 
 function isEmptyOrSpaces(str) {
@@ -192,9 +194,27 @@ async function generatePdfDocument(pageNodes) {
 async function convertToImage(pageNode, imageType) {
     switch (imageType) {
         case "svg":
-            return await(domtoimage.toSvg(pageNode, { style: { 'margin': 0 } }));
+            return await (
+                domtoimage.toSvg(pageNode, {
+                    style: {
+                        'margin': 0,
+                        'margin-block-end': 0,
+                        'margin-block-start': 0,
+                        'margin-inline-end': 0,
+                        'margin-inline-start': 0
+                    }
+                }));
         case "jpeg":
-            return await(domtoimage.toJpeg(pageNode, { style: { 'margin': 0 } }));
+            return await (
+                domtoimage.toJpeg(pageNode, {
+                    style: {
+                        'margin': 0,
+                        'margin-block-end': 0,
+                        'margin-block-start': 0,
+                        'margin-inline-end': 0,
+                        'margin-inline-start': 0
+                    }
+                }));
         default:
             break;
     }

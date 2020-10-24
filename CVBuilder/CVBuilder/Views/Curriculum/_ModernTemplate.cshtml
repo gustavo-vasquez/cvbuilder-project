@@ -8,7 +8,7 @@
             <h1>@Model.PersonalDetails.Name</h1>
         </div>
         <div class="col-2 my-3 text-center">
-            <img class="img-fluid rounded-circle" src="@Model.PersonalDetails.Photo" />
+            <img class="rounded-circle" src="@Model.PersonalDetails.Photo" />
         </div>
         <div class="col-5 justify-content-center align-self-center">
             <h1>@Model.PersonalDetails.LastName</h1>
@@ -22,19 +22,22 @@
     </div>
     <div class="row">
         <div class="col-4 left-panel">
-            <div class="row">
-                <div class="col">
-                    <h5><i class="far fa-calendar-check highlight"></i> @(Model.PersonalDetails.SummaryCustomTitle ?? CurriculumGlobals.DEFAULT_SUMMARY_TITLE)</h5>
-                    <hr />
+            @if (Model.PersonalDetails.SummaryIsVisible)
+            {
+                <div class="row">
+                    <div class="col">
+                        <h5><i class="far fa-calendar-check highlight"></i> @(Model.PersonalDetails.SummaryCustomTitle ?? CurriculumGlobals.DEFAULT_SUMMARY_TITLE)</h5>
+                        <hr />
+                    </div>
                 </div>
-            </div>
-            <div class="row no-gutters justify-content-end">
-                <div class="col-11">
-                    <p>@Model.PersonalDetails.Summary</p>
+                <div class="row no-gutters justify-content-end">
+                    <div class="col-11">
+                        <p>@Model.PersonalDetails.Summary</p>
+                    </div>
                 </div>
-            </div>
+            }
 
-            @if (Model.Skills.Count() > 0)
+            @if (Model.SectionVisibility.SkillsIsVisible && Model.Skills.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -133,7 +136,7 @@
             }
         </div>
         <div class="col-8 right-panel">
-            @if (Model.WorkExperiences.Count() > 0)
+            @if (Model.SectionVisibility.WorkExperiencesIsVisible && Model.WorkExperiences.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -154,7 +157,43 @@
                 }
             }
 
-            @if (Model.Studies.Count() > 0)
+            @if (Model.SectionVisibility.CertificatesIsVisible && Model.Certificates.Count() > 0)
+            {
+                <div class="row">
+                    <div class="col">
+                        <h5><i class="fas fa-briefcase highlight"></i> Certificados / Cursos</h5>
+                        <hr />
+                    </div>
+                </div>
+                foreach (var certificate in Model.Certificates)
+                {
+                    <div class="row no-gutters justify-content-start">
+                        <div class="col-11">
+                            <h5 class="d-inline highlight">@certificate.Institute</h5>
+                            @if (certificate.InProgress)
+                            {
+                                <h5 class="d-inline legend"> | @CurriculumGlobals.CERTIFICATE_INPROGRESS_TEXT</h5>
+                            }
+                            else
+                            {
+                                <h5 class="d-inline legend"> | @certificate.Year</h5>
+                            }
+                            @if (certificate.OnlineMode)
+                            {
+                                <p class="subtitle">@CurriculumGlobals.CERTIFICATE_ONLINE_TEXT</p>
+                            }
+                            else
+                            {
+                                <p class="subtitle">@CurriculumGlobals.CERTIFICATE_CLASS_TEXT</p>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(certificate.Description))
+                            {<p>@certificate.Description</p>}
+                        </div>
+                    </div>
+                }
+            }
+
+            @if (Model.SectionVisibility.StudiesIsVisible && Model.Studies.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -174,28 +213,8 @@
                     </div>
                 }
             }
-            <div class="row">
-                <div class="col">
-                    <h5><i class="fas fa-graduation-cap highlight"></i> Estudios</h5>
-                    <hr />
-                </div>
-            </div>
-            <div class="row no-gutters justify-content-start">
-                <div class="col-11">
-                    <h5 class="d-inline highlight">Diseñador gráfico</h5>
-                    <h5 class="d-inline legend"> | 2011-2016</h5>
-                    <p class="subtitle">Universidad Nacional | Ciudad Autónoma de Buenos Aires</p>
-                </div>
-            </div>
-            <div class="row no-gutters justify-content-start">
-                <div class="col-11">
-                    <h5 class="d-inline highlight">Bachiller en Economía</h5>
-                    <h5 class="d-inline legend"> | 1997-2010</h5>
-                    <p class="subtitle">Escuela Nº111 | Ciudad Autónoma de Buenos Aires</p>
-                </div>
-            </div>
 
-            @if (Model.PersonalReferences.Count() > 0)
+            @if (Model.SectionVisibility.PersonalReferencesIsVisible && Model.PersonalReferences.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -215,7 +234,7 @@
                 }
             }
 
-            @if (Model.Languages.Count() > 0)
+            @if (Model.SectionVisibility.LanguagesIsVisible && Model.Languages.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -226,7 +245,7 @@
                             {
                                 <div class="col-6">
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-auto">
                                             <span>@language.Name</span>
                                         </div>
                                         <div class="col-6 align-self-center">
@@ -242,7 +261,7 @@
                 </div>
             }
 
-            @if (Model.Interests.Count() > 0)
+            @if (Model.SectionVisibility.InterestsIsVisible && Model.Interests.Count() > 0)
             {
                 <div class="row">
                     <div class="col">
@@ -262,7 +281,7 @@
                 </div>
             }
 
-            @if (Model.CustomSections.Count() > 0)
+            @if (Model.SectionVisibility.CustomSectionsIsVisible && Model.CustomSections.Count() > 0)
             {
                 foreach (var custom in Model.CustomSections)
                 {

@@ -60,7 +60,7 @@ namespace CVBuilder
             app.UseMicrosoftAccountAuthentication(new MicrosoftAccountAuthenticationOptions()
             {
                 ClientId = "450b53a8-5f7f-4e66-bd7f-5098e0109208",
-                ClientSecret = "Ud?_DN_4nr8?yRFdIEfNrqT2E1BU?D1n",
+                ClientSecret = "0e0PlK02Fc~6z38K~~sX4mbBFj5G-~J-6U",
                 Provider = new MicrosoftAccountAuthenticationProvider()
                 {
                     OnAuthenticated = (context) =>

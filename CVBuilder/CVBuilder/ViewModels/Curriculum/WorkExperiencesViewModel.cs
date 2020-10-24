@@ -16,16 +16,16 @@ namespace CVBuilder.ViewModels.Curriculum
 
         public int WorkExperienceID { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string Job { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string Company { get; set; }
 
         [RequiredMonthPeriod]
@@ -42,7 +42,7 @@ namespace CVBuilder.ViewModels.Curriculum
         [EndYearGreaterThan("StartYear")]
         public int? EndYear { get; set; }
         
-        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        [MaxLength(300, ErrorMessage = ValMessages.MAX + "300" + ValMessages.CHARACTERS)]
         public string Description { get; set; }
         public bool IsVisible { get; set; }
 

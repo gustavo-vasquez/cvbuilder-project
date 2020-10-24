@@ -57,7 +57,7 @@ namespace CVBuilder.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(SignInViewModel model)
+        public async Task<ActionResult> Register(SignInViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,18 @@ namespace CVBuilder.Controllers
 
                 if (result.Succeeded)
                 {
-                    Services.CurriculumSL.Create(user.Id);
+                    int curriculumId = Services.CurriculumSL.Create(user.Id);
+
+                    new Services.PersonalDetailsSL().Create(new Services.DTOs.PersonalDetailsDTO()
+                    {
+                        Name = string.Empty,
+                        LastName = string.Empty,
+                        Email = model.RegisterModel.Email,
+                        UploadedPhoto = null,
+                        Summary = string.Empty,
+                        SummaryIsVisible = true
+                    }, curriculumId);
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -75,7 +86,10 @@ namespace CVBuilder.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    if(!string.IsNullOrWhiteSpace(returnUrl))
+                        return RedirectToLocal(returnUrl);
+                    else
+                        return RedirectToAction("Index", "Home");
                 }
 
                 AddErrors(result);
@@ -108,6 +122,7 @@ namespace CVBuilder.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.LoginModel.Email, model.LoginModel.Password, model.LoginModel.RememberMe, shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -412,15 +427,19 @@ namespace CVBuilder.Controllers
             {
                 // Get the information about the user from the external login provider
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");
                 }
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
+
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
+
                     if (result.Succeeded)
                     {
                         int curriculumId = Services.CurriculumSL.Create(user.Id);
@@ -446,6 +465,7 @@ namespace CVBuilder.Controllers
                         return RedirectToLocal(returnUrl);
                     }
                 }
+
                 AddErrors(result);
             }
 

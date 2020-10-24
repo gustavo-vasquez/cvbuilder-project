@@ -37,6 +37,10 @@
 	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
+#navbarResponsive.show .btn-myaccount {
+    color: #3ac540;
+}
+
 .btn-myaccount {
   margin-left: 1rem;
   padding-left: 1rem;
@@ -109,6 +113,10 @@ header.masthead .container-content {
     top: 0;
     width: 100%;
     height: 100%;
+}
+
+.custom-control-label {
+    cursor: pointer;
 }
 
 .vh-100 {

@@ -14,16 +14,16 @@ namespace CVBuilder.ViewModels.Curriculum
     {
         public int PersonalDetailsID { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string Email { get; set; }
 
         public string Profession { get; set; }
@@ -34,58 +34,58 @@ namespace CVBuilder.ViewModels.Curriculum
 
         public string Photo { get; set; }
 
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string City { get; set; }
 
         [DataType(DataType.PostalCode)]
-        [Range(1, 99999, ErrorMessage = "Máximo 5 números.")]
+        [Range(1, 99999, ErrorMessage = ValMessages.MAX + "5" + ValMessages.NUMBERS)]
         public int? PostalCode { get; set; }
 
-        [Range(1, 9999, ErrorMessage = "Máximo 4 números.")]
+        [Range(1, 9999, ErrorMessage = ValMessages.MAX + "4" + ValMessages.NUMBERS)]
         public short? AreaCodeLP { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        [Range(1, 9999999999, ErrorMessage = "Máximo 10 números.")]
+        [Range(1, 99999999, ErrorMessage = ValMessages.MAX + "8" + ValMessages.NUMBERS)]
         public int? LinePhone { get; set; }
 
-        [Range(1, 9999, ErrorMessage = "Máximo 4 números.")]
+        [Range(1, 9999, ErrorMessage = ValMessages.MAX + "4" + ValMessages.NUMBERS)]
         public short? AreaCodeMP { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        [Range(1, 9999999999, ErrorMessage = "Máximo 10 números.")]
+        [Range(1, 99999999, ErrorMessage = ValMessages.MAX + "8" + ValMessages.NUMBERS)]
         public int? MobilePhone { get; set; }
         public int? Day { get; set; }
         public string Month { get; set; }
         public int? Year { get; set; }
 
-        [MaxLength(100, ErrorMessage = "Máximo 100 caracteres.")]
+        [MaxLength(100, ErrorMessage = ValMessages.MAX + "100" + ValMessages.CHARACTERS)]
         public string Country { get; set; }
 
-        [Required(ErrorMessage = "Completar este campo.")]
-        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        [Required(ErrorMessage = ValMessages.FIELD_REQUIRED)]
+        [MaxLength(300, ErrorMessage = ValMessages.MAX + "300" + ValMessages.CHARACTERS)]
         public string Summary { get; set; }
 
-        [MaxLength(50, ErrorMessage = "Máximo 50 caracteres.")]
+        [MaxLength(50, ErrorMessage = ValMessages.MAX + "50" + ValMessages.CHARACTERS)]
         public string SummaryCustomTitle { get; set; }
         public bool SummaryIsVisible { get; set; }
 
-        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        [MaxLength(300, ErrorMessage = ValMessages.MAX + "300" + ValMessages.CHARACTERS)]
         public string WebPageUrl { get; set; }
 
-        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        [MaxLength(300, ErrorMessage = ValMessages.MAX + "300" + ValMessages.CHARACTERS)]
         public string LinkedInUrl { get; set; }
 
-        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        [MaxLength(300, ErrorMessage = ValMessages.MAX + "300" + ValMessages.CHARACTERS)]
         public string GithubUrl { get; set; }
 
-        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        [MaxLength(300, ErrorMessage = ValMessages.MAX + "300" + ValMessages.CHARACTERS)]
         public string FacebookUrl { get; set; }
 
-        [MaxLength(300, ErrorMessage = "Máximo 300 caracteres.")]
+        [MaxLength(300, ErrorMessage = ValMessages.MAX + "300" + ValMessages.CHARACTERS)]
         public string TwitterUrl { get; set; }
 
         public PersonalDetailsViewModel()
