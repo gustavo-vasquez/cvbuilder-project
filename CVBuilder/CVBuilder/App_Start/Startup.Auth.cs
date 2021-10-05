@@ -60,7 +60,7 @@ namespace CVBuilder
             app.UseMicrosoftAccountAuthentication(new MicrosoftAccountAuthenticationOptions()
             {
                 ClientId = "450b53a8-5f7f-4e66-bd7f-5098e0109208",
-                ClientSecret = "0e0PlK02Fc~6z38K~~sX4mbBFj5G-~J-6U",
+                ClientSecret = "s7I7Q~DV5P1JEGnCgn7nEBUjl0MkJQKK8Cptu",
                 Provider = new MicrosoftAccountAuthenticationProvider()
                 {
                     OnAuthenticated = (context) =>
@@ -97,7 +97,7 @@ namespace CVBuilder
                         //context.Identity.AddClaim(new Claim(
                         //    "urn:google:accesstoken", context.AccessToken));
                         context.Identity.AddClaim(new Claim(
-                            "urn:google:picture", (string)context.User["picture"]));
+                            "urn:google:picture", context.User["picture"].ToString()));
 
                         return System.Threading.Tasks.Task.FromResult(0);
                     }

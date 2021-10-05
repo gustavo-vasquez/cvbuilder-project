@@ -146,7 +146,10 @@ namespace CVBuilder.automapper
         {
             string timePeriod = CurriculumGlobals.GenerateStateInTimeFormat(startMonth, startYear, endMonth, endYear);
 
-            return timePeriod.Substring(1, timePeriod.Length - 2);
+            if (!string.IsNullOrWhiteSpace(timePeriod))
+                return timePeriod.Substring(1, timePeriod.Length - 2);
+            else
+                return timePeriod;
         }
     }
 }
